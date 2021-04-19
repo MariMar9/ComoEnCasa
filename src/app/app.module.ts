@@ -3,14 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CabeceraComponent } from './cabecera/cabecera.component';
 import { FooterComponent } from './footer/footer.component';
+import { CabeceraComponent } from './cabecera/cabecera.component';
+//AAAAAAAAAAAAAAAAAAA
 
 @NgModule({
   declarations: [
     AppComponent,
-    CabeceraComponent,
-    FooterComponent
+    FooterComponent,
+    CabeceraComponent
   ],
   imports: [
     BrowserModule,
