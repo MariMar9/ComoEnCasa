@@ -14,18 +14,18 @@
                 <ul class="nav navbar-nav navbar-left">
                     <!-- cuando se inicie se mostrará el perfil-->
                     <li>
-                        <a [routerLink]="['/perfilUsuario']" routerLinkActive="active" class="text-dark"><i class="fas fa-user-circle"></i>Profile</a>
+                        <a [routerLink]="['/perfilUsuario']" routerLinkActive="active" class="text-dark"><i class="fas fa-user-circle"></i> Perfil</a>
                     </li>
                     <!--final del perfil-->
                     <!--Inicio menu usuarios-->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-sign-in-alt"></i> Login / Sign Up
+                            <i class="fas fa-sign-in-alt"></i> Iniciar Sesión / Registro
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" [routerLink]="['/iniciarSesion']" routerLinkActive="active">Login</a>
-                            <a class="dropdown-item" [routerLink]="['/registro']" routerLinkActive="active">Sign Up</a>
+                            <a class="dropdown-item" [routerLink]="['/iniciarSesion']" routerLinkActive="active">Iniciar Sesión</a>
+                            <a class="dropdown-item" [routerLink]="['/registro']" routerLinkActive="active">Registro</a>
                         </div>
                     </li>
                     <!--fin menu usuarios-->
