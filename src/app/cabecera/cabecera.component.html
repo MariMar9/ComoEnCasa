@@ -13,20 +13,19 @@
                 <!--menu cabecera-->
                 <ul class="nav navbar-nav navbar-left">
                     <!-- cuando se inicie se mostrará el perfil-->
-                    <li style="display: none;">
-                        <a href="#"><span class="glyphicon glyphicon-user"><i class="fas fa-user-circle"></i></span>
-                            Profile</a>
+                    <li>
+                        <a [routerLink]="['/perfilUsuario']" routerLinkActive="active" class="text-dark"><i class="fas fa-user-circle"></i>Profile</a>
                     </li>
                     <!--final del perfil-->
                     <!--Inicio menu usuarios-->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-sign-in-alt"></i> Login / Sign Up
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Login</a>
-                            <a class="dropdown-item" href="#">Sign Up</a>
+                            <a class="dropdown-item" [routerLink]="['/iniciarSesion']" routerLinkActive="active">Login</a>
+                            <a class="dropdown-item" [routerLink]="['/registro']" routerLinkActive="active">Sign Up</a>
                         </div>
                     </li>
                     <!--fin menu usuarios-->
@@ -41,7 +40,7 @@
 <!--Inicio menu-->
 <nav class="navbar navbar-expand-md navbar-light bg-light">
     <!--Logo de la web-->
-    <a class="navbar-brand" href="#">Como en casa</a>
+    <p class="navbar-brand">Como en casa</p>
     <!--Boton para version movil-->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-principal"
         aria-controls="menu-principal" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +52,7 @@
         <!--Opciones-->
         <ul class="navbar-nav w-50 mr-auto ml-auto justify-content-between">
             <li class="nav-item">
-                <a class="nav-link" href="#">Inicio</a>
+                <a class="nav-link" [routerLink]="['/inicio']" routerLinkActive="active">Inicio</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="recetas-desplegar-categoria" role="button"
@@ -70,7 +69,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Ordenar Alfabéticamente</a>
+                <a class="nav-link" [routerLink]="['/ordenarAlf']" routerLinkActive="active">Ordenar Alfabéticamente</a>
             </li>
         </ul>
         <!--fin de opciones-->

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,21 @@ import { RegistroComponent } from './registro/registro.component';
 import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.component';
 import { SobreNosotrasComponent } from './sobre-nosotras/sobre-nosotras.component';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
+
+const routes: Routes = [
+  { path: 'inicio', component: InicioComponent},
+  { path: 'recetas', component: RecetasComponent},
+  { path: 'ordenarAlf', component: OrdenarAlfComponent},
+  { path: 'buscarReceta', component: BuscarRecetaComponent},
+  { path: 'registro', component: RegistroComponent},
+  { path: 'iniciarSesion', component: IniciarSesionComponent},
+  { path: 'sobreNosotras', component: SobreNosotrasComponent},
+  { path: 'perfilUsuario', component: PerfilUsuarioComponent},
+  { path: '', component:InicioComponent, pathMatch: 'full' },
+  { path: '**', redirectTo: '/', pathMatch: 'full' },
+];
+
+//redirectTo: '/inicio',
 
 @NgModule({
   declarations: [
@@ -30,7 +46,8 @@ import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.componen
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
