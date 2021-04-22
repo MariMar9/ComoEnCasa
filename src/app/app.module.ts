@@ -10,10 +10,10 @@ import { InicioComponent } from './inicio/inicio.component';
 import { RecetasComponent } from './recetas/recetas.component';
 import { OrdenarAlfComponent } from './ordenar-alf/ordenar-alf.component';
 import { BuscarRecetaComponent } from './buscar-receta/buscar-receta.component';
-import { RegistroComponent } from './registro/registro.component';
-import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.component';
+import { RegistroComponent } from './usuario/registro/registro.component';
+import { IniciarSesionComponent } from './usuario/iniciar-sesion/iniciar-sesion.component';
 import { SobreNosotrasComponent } from './sobre-nosotras/sobre-nosotras.component';
-import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
+import { PerfilUsuarioComponent } from './usuario/perfil-usuario/perfil-usuario.component';
 
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent},
