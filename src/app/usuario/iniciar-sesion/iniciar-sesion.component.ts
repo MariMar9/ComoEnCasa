@@ -32,7 +32,7 @@ export class IniciarSesionComponent implements OnInit {
         (<HTMLInputElement>document.getElementById("errorPassword")).innerText="La contraseña es incorrecta.";
         (<HTMLInputElement>document.getElementById("errorEmail")).innerText="";
       }else if (error.message=="There is no user record corresponding to this identifier. The user may have been deleted.") {
-        (<HTMLInputElement>document.getElementById("errorPassword")).innerText="el usuario no existe.";
+        (<HTMLInputElement>document.getElementById("errorPassword")).innerText="El usuario no existe.";
         (<HTMLInputElement>document.getElementById("errorEmail")).innerText="";
       }else if (error.message=="Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.") {
         (<HTMLInputElement>document.getElementById("errorPassword")).innerText="Usuario bloqueado. Puede intentarlo de nuevo más tarde.";
