@@ -16,7 +16,8 @@ import { OrdenarAlfComponent } from './ordenar-alf/ordenar-alf.component';
 import { BuscarRecetaComponent } from './buscar-receta/buscar-receta.component';
 import { SobreNosotrasComponent } from './sobre-nosotras/sobre-nosotras.component';
 import { UsuariosModule } from './usuario/usuarios.module';
-import { from } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire';
 
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent},
@@ -44,6 +45,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     UsuariosModule,
+    AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
     RouterModule.forRoot(routes),
   ],

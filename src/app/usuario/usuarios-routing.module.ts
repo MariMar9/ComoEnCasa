@@ -4,6 +4,7 @@ import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.componen
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 import { RegistroComponent } from './registro/registro.component';
 
+
 const routes: Routes = [
   { path: 'registro', component: RegistroComponent},
   { path: 'iniciarSesion', component: IniciarSesionComponent},

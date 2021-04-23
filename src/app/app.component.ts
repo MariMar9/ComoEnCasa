@@ -15,5 +15,4 @@ export class AppComponent {
     _CargaScripts.carga(["js/ocultar"]);
   }
 
-
 }
