@@ -21,17 +21,19 @@
               <h3 class="login-heading mb-4">Iniciar sesión</h3>
               <form>
                 <div class="form-label-group">
-                  <input type="email" id="email" class="form-control" placeholder="Email" required autofocus>
+                  <input type="email" id="email" [(ngModel)]="email" name="email" class="form-control" placeholder="Email" required autofocus>
                   <label for="email">Email</label>
+                  <p id="errorEmail"></p>
                 </div>
 
                 <div class="form-label-group">
-                  <input type="password" id="password" class="form-control" placeholder="Contraseña" required>
+                  <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control" placeholder="Contraseña" required>
                   <label for="password">Contraseña</label>
+                  <p id="errorPassword"></p>
                 </div>
 
                 <button id="botonInicio" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
-                  type="submit">Iniciar sesión</button>
+                  type="submit" (click)="validarDatos()">Iniciar sesión</button>
                 <hr>
                 <div class="text-center">
                   <p class="small">¿Eres un nuevo usuario?<a href="/registro"> Crear una cuenta</a></p>

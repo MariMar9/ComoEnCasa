@@ -1,0 +1,15 @@
+  @media  (max-height: 450px)  { 
+    #img-fondo {
+        height: 110px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+    #inicio-registro-contenedor {
+        width: 50%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    #logo {
+        margin-top: 0 !important;
+    }
+  }

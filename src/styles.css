@@ -1,5 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-    --input-padding-x: 1.5rem;
-    --input-padding-y: 0.75rem;
-  }
+  --input-padding-x: 1.5rem;
+  --input-padding-y: 0.75rem;
+  overflow-x: hidden;
+}
+header{
+  transition: transform 0.5s;
+}
+
+header svg {
+  transform: rotate(45deg);
+}
+
+.scroll-down header {
+  transform: translate3d(0, -100%, 0);
+}
+
+.scroll-up header {
+  transform: none;
+}
+
