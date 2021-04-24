@@ -14,5 +14,6 @@ export class AppComponent {
     /*ponemos la ruta y el nombre del archico que pasaremos a la función carga de cargar-ScriptsService.ts*/
     _CargaScripts.carga(["js/ocultar"]);
   }
+  
 
 }

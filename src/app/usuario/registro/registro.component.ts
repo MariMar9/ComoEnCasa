@@ -16,16 +16,14 @@ export class RegistroComponent implements OnInit {
   confirmPassword: string="";
 
   constructor(public auth: AngularFireAuth) { }
-
+   
   ngOnInit(): void {
-  }
-
-  /*Mostrar imágenes del fomrulario aleatoriamente*/
-  function(){
-    let imagenes=new Array("../img/imagenesRandom/chocolate2.jpeg", "../img/imagenesRandom/espaguetis.jpeg", "../img/imagenesRandom/helado.jpeg", "../img/imagenesRandom/patatas.jpeg", "../img/imagenesRandom/tortitas.jpeg", "../img/imagenesRandom/pasta.jpeg",);
-    let imagen=imagenes[Math.floor(Math.random() * (6 + 1))];
-    let elemento = (<HTMLInputElement>document.getElementsByClassName('bg-image')[0]);
-    elemento.setAttribute("style", "background-image: url('"+imagen+"'");
+     /*Mostrar imágenes del fomrulario aleatoriamente*/
+     let imagenes=new Array("../../../assets/img/imagenesRandom/chocolate1.jpeg", "../../../assets/img/imagenesRandom/chocolate2.jpeg", "../../../assets/img/imagenesRandom/espaguetis.jpeg", "../../../assets/img/imagenesRandom/helado.jpeg", "../../../assets/img/imagenesRandom/pasta.jpeg","../../../assets/img/imagenesRandom/patatas.jpeg","../../../assets/img/imagenesRandom/tortitas.jpeg");
+     let imagen=imagenes[Math.floor(Math.random() * (6 + 1))];
+     let elemento = (<HTMLInputElement>document.getElementsByClassName('bg-image')[0]);
+     elemento.setAttribute("style", "background-image: url('"+imagen+"'"+")");
+     
   }
 
   validarDatos(){
