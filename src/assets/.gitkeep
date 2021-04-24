@@ -5,7 +5,7 @@ en el constructor(private _CargaScripts:CargarScriptsService)
     modificamos solo el nombre del script
     _CargaScripts.carga(["js/nombre Script"]);
     ej:_CargaScripts.carga(["js/ocultar"]);
-
-
-
-    
+  
+  
+  
+  
