@@ -8,7 +8,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./iniciar-sesion.component.css']
 })
 export class IniciarSesionComponent implements OnInit {
- 
+  
+  /*Variables con los datos del formulario*/
   email: string="";
   password: string="";
  
@@ -18,29 +19,32 @@ export class IniciarSesionComponent implements OnInit {
   }
  
   validarDatos() {
-    console.log(this.password);
+    /*Inicia sesión y si hay errores, los filtra y saca el mensaje correspondiente.*/
     this.auth.signInWithEmailAndPassword(this.email, this.password)
-    .then(resultado => location.href="/inicio")
-    .catch((error) => {
-      if ((<HTMLInputElement>document.getElementById("email")).value=="") {
-        (<HTMLInputElement>document.getElementById("errorEmail")).innerText="Rellene el campo.";
-        (<HTMLInputElement>document.getElementById("errorPassword")).innerText="";
-      } else if (error.message=="The email address is badly formatted.") {
-        (<HTMLInputElement>document.getElementById("errorEmail")).innerText="Formato de correo electrónico erróneo.";
-        (<HTMLInputElement>document.getElementById("errorPassword")).innerText="";
-      }else if (error.message=="The password is invalid or the user does not have a password.") {
-        (<HTMLInputElement>document.getElementById("errorPassword")).innerText="La contraseña es incorrecta.";
-        (<HTMLInputElement>document.getElementById("errorEmail")).innerText="";
-      }else if (error.message=="There is no user record corresponding to this identifier. The user may have been deleted.") {
-        (<HTMLInputElement>document.getElementById("errorPassword")).innerText="El usuario no existe.";
-        (<HTMLInputElement>document.getElementById("errorEmail")).innerText="";
-      }else if (error.message=="Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.") {
-        (<HTMLInputElement>document.getElementById("errorPassword")).innerText="Usuario bloqueado. Puede intentarlo de nuevo más tarde.";
-        (<HTMLInputElement>document.getElementById("errorEmail")).innerText="";
-      }else{
-        alert("Se ha producido un error. Introduzca sus credenciales de nuevo por favor.");
-      }
-    });
+      .then(resultado => location.href="/inicio")   //this.router.navigate(['/inicio'])
+      .catch((error) => {
+        if ((<HTMLInputElement>document.getElementById("email")).value=="") {
+          (<HTMLInputElement>document.getElementById("errorEmail")).innerText="Rellene el campo.";
+          (<HTMLInputElement>document.getElementById("errorPassword")).innerText="";
+        } else if (error.message=="The email address is badly formatted.") {
+          (<HTMLInputElement>document.getElementById("errorEmail")).innerText="Formato de correo electrónico erróneo.";
+          (<HTMLInputElement>document.getElementById("errorPassword")).innerText="";
+        }else if (error.message=="The password is invalid or the user does not have a password.") {
+          (<HTMLInputElement>document.getElementById("errorPassword")).innerText="La contraseña es incorrecta.";
+          (<HTMLInputElement>document.getElementById("errorEmail")).innerText="";
+        }else if (error.message=="There is no user record corresponding to this identifier. The user may have been deleted.") {
+          (<HTMLInputElement>document.getElementById("errorPassword")).innerText="El usuario no existe.";
+          (<HTMLInputElement>document.getElementById("errorEmail")).innerText="";
+        }else if (error.message=="Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.") {
+          (<HTMLInputElement>document.getElementById("errorPassword")).innerText="Usuario bloqueado. Puede intentarlo de nuevo más tarde.";
+          (<HTMLInputElement>document.getElementById("errorEmail")).innerText="";
+        }else if (error.message=="The user account has been disabled by an administrator.") {
+          (<HTMLInputElement>document.getElementById("errorPassword")).innerText="La cuenta ha sido inhabilitada.";
+          (<HTMLInputElement>document.getElementById("errorEmail")).innerText="";
+        }else{
+          alert("Se ha producido un error. Introduzca sus credenciales de nuevo por favor.\nSi el error persiste, póngase en contacto con nosotros.");
+        }
+      });
   }
  
 }
