@@ -4,6 +4,12 @@
   padding: 0.75rem 1rem;
   border-radius: 2rem;
 }
+#img-fondo{
+background-image: url('../../assets/img/cabecera/salmon.png');
+}
+img{
+  height: 20vh;
+}
 
 @media  (max-height: 450px)  { 
     #img-fondo {

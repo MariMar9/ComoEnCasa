@@ -1,11 +1,10 @@
  <!--Inicio cabecera-->
- <header id="background-img-nav" class="p-0 container-fluid d-flex flex-column justify-content-end bg-primary">
+ <header id="background-img-nav" class="p-0 container-fluid d-flex flex-column justify-content-end">
  <!--inicio contenedor img y menu registro -->
     <div id=img-fondo>
     <!--contenedor del logo-->
     <div id="logo" class="row align-items-center justify-content-center flex-column mt-5">
-        <h1>Como en casa</h1>
-        <h6>En ningún sitio</h6>
+        <img src="../../assets/img/logo/logo.png">
     </div>
     <!--fin contenedor del logo-->
     <!--contenedor del menu cabecera-->
@@ -16,7 +15,7 @@
                 <ul class="nav navbar-nav navbar-left">
                     <!-- cuando se inicie se mostrará el perfil-->
                     <li>
-                        <a [routerLink]="['/perfilUsuario']" routerLinkActive="active" class="btn btn-lg btn-info btn-block btn-profile"><i class="fas fa-user-circle"></i> Perfil</a>
+                        <a [routerLink]="['/perfilUsuario']" routerLinkActive="active" class="btn btn-lg btn-info btn-block btn-profile mb-2"><i class="fas fa-user-circle"></i> Perfil</a>
                     </li>
                     <!--final del perfil-->
                     <!--Inicio menu usuarios-->

@@ -2,6 +2,10 @@ footer {
     height: 225px;
 }
 
+img{
+    height: 15vh;
+}
+
 footer .link-info a {
     padding: 3px 0;
     -webkit-transition: .5s all ease;
