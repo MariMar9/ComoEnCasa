@@ -6,6 +6,7 @@ import { RegistroComponent } from './registro/registro.component';
 import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.component';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 import { FormsModule } from '@angular/forms';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     //AngularFireModule.initializeApp(environment.firebase),
     CommonModule,
     FormsModule,
-    UsuariosRoutingModule,  
+    UsuariosRoutingModule,
+    AngularFireAuthModule  
   ]
 })
 export class UsuariosModule { }

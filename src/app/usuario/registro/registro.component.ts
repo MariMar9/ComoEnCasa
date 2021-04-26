@@ -27,6 +27,10 @@ export class RegistroComponent implements OnInit {
   }
 
   validarDatos(){
+    console.log(this.auth)
+    console.log(this.nombre);//cojo el objeto y el nombr
+    console.log(this);//cojo el objeto y el nombr
+    console.log(this.auth.credential);//cojo el objeto y el nombr
     /*Variable para cuando todos los campos estén rellenos y las contraseñas coincidan.*/
     let correcto=true;
     /*Comprobación de que todos los campos estén rellenos y las contraseñas coinciden.*/
@@ -39,7 +43,7 @@ export class RegistroComponent implements OnInit {
     if ((<HTMLInputElement>document.getElementById("email")).value=="") {
       (<HTMLInputElement>document.getElementById("errorEmail")).innerText="Rellene este campo.";
       correcto=false;
-    } else {
+    } else {     
       (<HTMLInputElement>document.getElementById("errorEmail")).innerText="";
     }
     if ((<HTMLInputElement>document.getElementById("password")).value=="") {
@@ -79,3 +83,4 @@ export class RegistroComponent implements OnInit {
   }
 
 }
+
