@@ -50,6 +50,11 @@
 
 
                             </form>
+                            <ul>
+                                <li *ngFor="let usuario of usuarios | async">
+                                    {{usuario.nombre}}
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>

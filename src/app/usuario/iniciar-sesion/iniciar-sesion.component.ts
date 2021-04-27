@@ -12,19 +12,21 @@ export class IniciarSesionComponent implements OnInit {
   /*Variables con los datos del formulario*/
   email: string = '';
   password: string = '';
+  /*Variable para contar los intentos que quedan para que se bloquee la cuenta.*/
+  intentos: number = 5;
 
   constructor(public auth: AngularFireAuth) {}
 
   ngOnInit(): void {
     /*Mostrar imágenes del fomrulario aleatoriamente*/
     let imagenes = new Array(
-      '../../../assets/img/imagenesRandom/chocolate1.jpeg',
-      '../../../assets/img/imagenesRandom/chocolate2.jpeg',
-      '../../../assets/img/imagenesRandom/espaguetis.jpeg',
-      '../../../assets/img/imagenesRandom/helado.jpeg',
-      '../../../assets/img/imagenesRandom/pasta.jpeg',
-      '../../../assets/img/imagenesRandom/patatas.jpeg',
-      '../../../assets/img/imagenesRandom/tortitas.jpeg'
+      '../../../assets/imagenesRandom/chocolate1.jpeg',
+      '../../../assets/imagenesRandom/chocolate2.jpeg',
+      '../../../assets/imagenesRandom/espaguetis.jpeg',
+      '../../../assets/imagenesRandom/helado.jpeg',
+      '../../../assets/imagenesRandom/pasta.jpeg',
+      '../../../assets/imagenesRandom/patatas.jpeg',
+      '../../../assets/imagenesRandom/tortitas.jpeg'
     );
     let imagen = imagenes[Math.floor(Math.random() * (6 + 1))];
     let elemento = <HTMLInputElement>(
@@ -38,8 +40,7 @@ export class IniciarSesionComponent implements OnInit {
 
   validarDatos() {
     /*Inicia sesión y si hay errores, los filtra y saca el mensaje correspondiente.*/
-    this.auth
-      .signInWithEmailAndPassword(this.email, this.password)
+    this.auth.signInWithEmailAndPassword(this.email, this.password)
       .then((resultado) => (location.href = '/inicio')) //this.router.navigate(['/inicio'])
       .catch((error) => {
         if ((<HTMLInputElement>document.getElementById('email')).value == '') {
@@ -58,11 +59,9 @@ export class IniciarSesionComponent implements OnInit {
           error.message ==
           'The password is invalid or the user does not have a password.'
         ) {
-          (<HTMLInputElement>(
-            document.getElementById('errorPassword')
-          )).innerText = 'La contraseña es incorrecta.';
-          (<HTMLInputElement>document.getElementById('errorEmail')).innerText =
-            '';
+          (<HTMLInputElement>(document.getElementById('errorPassword'))).innerText = 'La contraseña es incorrecta.'+ ((this.intentos>0&&this.intentos<=3)?'Le quedan '+this.intentos+' intentos':'');
+          this.intentos=this.intentos-1;
+          (<HTMLInputElement>document.getElementById('errorEmail')).innerText = '';
         } else if (
           error.message ==
           'There is no user record corresponding to this identifier. The user may have been deleted.'
@@ -82,6 +81,7 @@ export class IniciarSesionComponent implements OnInit {
             'Usuario bloqueado. Puede intentarlo de nuevo más tarde.';
           (<HTMLInputElement>document.getElementById('errorEmail')).innerText =
             '';
+            this.intentos=5;
         } else if (
           error.message ==
           'The user account has been disabled by an administrator.'
@@ -93,8 +93,11 @@ export class IniciarSesionComponent implements OnInit {
             '';
         } else {
           alert(
-            'Se ha producido un error. Introduzca sus credenciales de nuevo por favor.\nSi el error persiste, póngase en contacto con nosotros.'
+            'Se ha producido un error. Introduzca sus credenciales de nuevo por favor.\nSi el error persiste, póngase en contacto con nosotras.'
           );
+        }
+        if (new firebase.auth.GoogleAuthProvider()==null) {
+          console.log("error");
         }
       });
   }

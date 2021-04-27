@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 //inicio servicio
 import{ CargarScriptsService } from "./cargar-scripts.service"
@@ -48,6 +49,7 @@ const routes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
     RouterModule.forRoot(routes),
+    AngularFirestoreModule
   ],
   providers: [CargarScriptsService],
   bootstrap: [AppComponent]
