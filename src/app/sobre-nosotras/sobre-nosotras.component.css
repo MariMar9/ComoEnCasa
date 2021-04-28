@@ -1,0 +1,44 @@
+#nosotras {
+    background-image: url('../../assets/img/fondos/paleta2.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: center;
+}
+#nosotras h1{
+    font-family: 'Oswald', sans-serif;
+}
+
+.col-lg-3 {
+    height: 250px;
+}
+
+.col-lg-9 {
+    height: 170px;
+}
+
+img {
+    border-radius: 100%;
+    height: 250px;
+    border: 8px #fec9a1 solid;
+}
+
+#sara h5 {
+    color:  #95b1d8;
+    font-weight: bold;
+}
+
+#mar h5 {
+    color:#a494cb;
+    font-weight: bold;
+}
+
+#sara {
+    text-align: end;
+}
+
+#sara,
+#mar {
+    border-radius: 15px;
+    width: 98%;
+    box-shadow: 10px 5px 5px #0000001f;
+}
