@@ -22,10 +22,7 @@ export class RegistroComponent implements OnInit {
   constructor(public auth: AngularFireAuth, firestore: AngularFirestore, private _GuardarUsuarioService: GuardarUsuarioService) {
     /*Rellena la variable usuarios con una colección de tipo usuarios*/
     this.usuarios = firestore.collection('usuarios').valueChanges();
-<<<<<<< HEAD
-=======
     console.log( this.usuarios+"hola")
->>>>>>> 96183b302dab41f79ad6b66f571dbff17d04f36a
   }
 
   ngOnInit(): void {
