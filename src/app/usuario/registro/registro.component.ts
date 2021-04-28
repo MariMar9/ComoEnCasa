@@ -22,7 +22,6 @@ export class RegistroComponent implements OnInit {
   constructor(public auth: AngularFireAuth, firestore: AngularFirestore, private _GuardarUsuarioService: GuardarUsuarioService) {
     /*Rellena la variable usuarios con una colección de tipo usuarios*/
     this.usuarios = firestore.collection('usuarios').valueChanges();
-    console.log( this.usuarios+"hola")
   }
 
   ngOnInit(): void {
@@ -105,9 +104,12 @@ export class RegistroComponent implements OnInit {
           this._GuardarUsuarioService.agregarUsuario(usuario)
             .then(() => console.log("Usuario registrado con éxito."))
             .catch(error => {console.log(error)});
-        })/*
-        .then(() => (
-          window.location.href = '/inicio'))*/
+        })
+        .then(() => {
+          setTimeout(() => {
+            window.location.href = '/inicio';
+          }, 100);
+        })
         .catch((error) => {
           if (error.message == 'The email address is badly formatted.') {
             (<HTMLInputElement>(
