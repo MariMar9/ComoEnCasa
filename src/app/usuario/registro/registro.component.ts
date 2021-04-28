@@ -95,12 +95,9 @@ export class RegistroComponent implements OnInit {
     }
     /*Crea la cuenta y si hay errores, los filtra y saca el mensaje correspondiente.*/
     if (correcto) {
-      const usuario: any = {
-        nombre: this.nombre,
-        email: this.email
-      }
       this.auth.createUserWithEmailAndPassword(this.email, this.password)
         .then(() => {
+          /*crea un objeto cualquiera (any) y guardamos el valor del nombre y el email*/
           const usuario: any = {
             nombre: this.nombre,
             email: this.email
@@ -149,15 +146,6 @@ export class RegistroComponent implements OnInit {
           }
           if (new firebase.auth.GoogleAuthProvider()==null) {
             console.log("error");
-          }
-          if (correcto) {
-            const usuario: any = {
-              nombre: this.nombre,
-              email: this.email
-            }
-            this._GuardarUsuarioService.agregarUsuario(usuario)
-            .then(() => console.log("Usuario registrado con éxito."))
-            .catch(error => {console.log(error)});
           }
         });
     }
