@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { GuardarUsuarioService } from '../guardar-usuario.service';
+import { GuardarUsuarioService } from '../../services/guardar-usuario.service';
 
 @Component({
   selector: 'app-registro',
@@ -22,7 +22,6 @@ export class RegistroComponent implements OnInit {
   constructor(public auth: AngularFireAuth, firestore: AngularFirestore, private _GuardarUsuarioService: GuardarUsuarioService) {
     /*Rellena la variable usuarios con una colección de tipo usuarios*/
     this.usuarios = firestore.collection('usuarios').valueChanges();
-
   }
 
   ngOnInit(): void {
@@ -106,8 +105,6 @@ export class RegistroComponent implements OnInit {
             .then(() => console.log("Usuario registrado con éxito."))
             .catch(error => {console.log(error)});
         })
-        .then(() => (
-          window.location.href = '/inicio'))
         .catch((error) => {
           if (error.message == 'The email address is badly formatted.') {
             (<HTMLInputElement>(
