@@ -14,6 +14,7 @@ import { CabeceraComponent } from './cabecera/cabecera.component';
 import { UsuariosModule } from './usuario/usuarios.module';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
+import { ContactanosComponent } from './contactanos/contactanos.component';
 
 const routes: Routes = [];
 
@@ -24,6 +25,7 @@ const routes: Routes = [];
     AppComponent,
     FooterComponent,
     CabeceraComponent,
+    ContactanosComponent,
   ],
   imports: [
     BrowserModule,
