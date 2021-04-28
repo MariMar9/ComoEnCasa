@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 //importamos los scripts
-import { CargarScriptsService } from "./cargar-scripts.service";
+import { CargarScriptsService } from "../app/services/cargar-scripts.service";
 
 @Component({
   selector: 'app-root',

@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 //inicio servicio
-import{ CargarScriptsService } from "./cargar-scripts.service";
+import{ CargarScriptsService } from "./services/cargar-scripts.service";
 //fin del servivio
 
 import { AppRoutingModule } from './app-routing.module';
