@@ -1,3 +1,17 @@
+/*menu de inicio sesion/registro*/
+.menu-sesion{
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.sesion{
+    color: white !important;
+}
+.sesion:hover{
+    color: #ffbc70 !important;
+}
+a.text-dark:focus{
+  color: #ffffff !important;
+}
+/*boton de perfil usuario*/
 .btn-profile {
   font-size: 1.1rem;
   letter-spacing: 0.05rem;

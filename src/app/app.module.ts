@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { FormsModule } from '@angular/forms';
 
 //inicio servicio
-import{ CargarScriptsService } from "./services/cargar-scripts.service";
+import { CargarScriptsService } from "./services/cargar-scripts.service";
 //fin del servivio
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +16,7 @@ import { UsuariosModule } from './usuario/usuarios.module';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { ContactanosComponent } from './contactanos/contactanos.component';
+import { from } from 'rxjs';
 
 const routes: Routes = [];
 
@@ -32,6 +34,7 @@ const routes: Routes = [];
     UsuariosModule,
     AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
+    FormsModule,
     RouterModule.forRoot(routes),
     AngularFirestoreModule
   ],

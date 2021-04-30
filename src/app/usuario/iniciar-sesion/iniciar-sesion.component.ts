@@ -9,6 +9,8 @@ import firebase from 'firebase/app';
   styleUrls: ['./iniciar-sesion.component.css'],
 })
 export class IniciarSesionComponent implements OnInit {
+  /*variable para controlar sesion usuario*/
+  estaLogeado = false;
   /*Variables con los datos del formulario*/
   email: string = '';
   password: string = '';
@@ -40,9 +42,23 @@ export class IniciarSesionComponent implements OnInit {
 
   validarDatos() {
     /*Inicia sesión y si hay errores, los filtra y saca el mensaje correspondiente.*/
-    this.auth.signInWithEmailAndPassword(this.email, this.password)
-      .then((resultado) => (location.href = '/inicio')) //this.router.navigate(['/inicio'])
+
+    this.auth
+      .signInWithEmailAndPassword(this.email, this.password)
+      .then(() => {
+        this.auth.onAuthStateChanged((user) => {
+          if (user) {
+            var uid = user.uid;
+            var displayName = user.displayName;
+            localStorage.setItem('usuario',JSON.stringify(user));
+           
+          }
+        });
+        location.href = '/inicio'
+      })
       .catch((error) => {
+        this.estaLogeado = false;
+        localStorage.removeItem('usuario');
         if ((<HTMLInputElement>document.getElementById('email')).value == '') {
           (<HTMLInputElement>document.getElementById('errorEmail')).innerText =
             'Rellene el campo.';
@@ -59,9 +75,16 @@ export class IniciarSesionComponent implements OnInit {
           error.message ==
           'The password is invalid or the user does not have a password.'
         ) {
-          (<HTMLInputElement>(document.getElementById('errorPassword'))).innerText = 'La contraseña es incorrecta.'+ ((this.intentos>0&&this.intentos<=3)?'Le quedan '+this.intentos+' intentos':'');
-          this.intentos=this.intentos-1;
-          (<HTMLInputElement>document.getElementById('errorEmail')).innerText = '';
+          (<HTMLInputElement>(
+            document.getElementById('errorPassword')
+          )).innerText =
+            'La contraseña es incorrecta.' +
+            (this.intentos > 0 && this.intentos <= 3
+              ? 'Le quedan ' + this.intentos + ' intentos'
+              : '');
+          this.intentos = this.intentos - 1;
+          (<HTMLInputElement>document.getElementById('errorEmail')).innerText =
+            '';
         } else if (
           error.message ==
           'There is no user record corresponding to this identifier. The user may have been deleted.'
@@ -81,7 +104,7 @@ export class IniciarSesionComponent implements OnInit {
             'Usuario bloqueado. Puede intentarlo de nuevo más tarde.';
           (<HTMLInputElement>document.getElementById('errorEmail')).innerText =
             '';
-            this.intentos=5;
+          this.intentos = 5;
         } else if (
           error.message ==
           'The user account has been disabled by an administrator.'
@@ -96,12 +119,12 @@ export class IniciarSesionComponent implements OnInit {
             'Se ha producido un error. Introduzca sus credenciales de nuevo por favor.\nSi el error persiste, póngase en contacto con nosotras.'
           );
         }
-        if (new firebase.auth.GoogleAuthProvider()==null) {
-          console.log("error");
+        if (new firebase.auth.GoogleAuthProvider() == null) {
+          console.log('error');
         }
       });
   }
-  
+
   /**funcion para iniciar sesión y registrarse desde google */
   iniciarSesionGoogle() {
     var proveedor = new firebase.auth.GoogleAuthProvider();

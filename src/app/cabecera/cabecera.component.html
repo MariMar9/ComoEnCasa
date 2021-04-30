@@ -18,23 +18,27 @@
                         <a [routerLink]="['/perfilUsuario']" routerLinkActive="active" class="btn btn-lg btn-info btn-block btn-profile mb-2"><i class="fas fa-user-circle"></i> Perfil</a>
                     </li>
                     <!--final del perfil-->
-                    <!--Inicio menu usuarios-->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-sign-in-alt"></i> Iniciar Sesión / Registro
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/iniciarSesion" routerLinkActive="active">Iniciar Sesión</a>
-                            <a class="dropdown-item" href="/registro" routerLinkActive="active">Registro</a>
-                        </div>
-                    </li>
-                    <!--fin menu usuarios-->
                 </ul>
                 <!--fin menu cabecera-->
             </div>
         </div>
+
     </div>
+            
+    <ul class="nav navbar-nav navbar-left align-items-end menu-sesion pr-3">
+        <!--Inicio menu usuarios-->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark sesion" href="#" id="navbarDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-sign-in-alt"></i> Iniciar Sesión / Registro
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/iniciarSesion" routerLinkActive="active">Iniciar Sesión</a>
+                <a class="dropdown-item" href="/registro" routerLinkActive="active">Registro</a>
+            </div>
+        </li>
+        <!--fin menu usuarios-->
+    </ul>
     <!--fin contenedor del menu cabecera-->
 </div>
 <!--fin contenedor img y registro-->

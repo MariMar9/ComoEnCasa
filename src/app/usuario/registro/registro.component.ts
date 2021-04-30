@@ -5,6 +5,7 @@ import firebase from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { GuardarUsuarioService } from '../../services/guardar-usuario.service';
+/*import { userInfo } from 'node:os';*/
 
 @Component({
   selector: 'app-registro',
@@ -19,7 +20,11 @@ export class RegistroComponent implements OnInit {
   confirmPassword: string = '';
   usuarios: Observable<any[]>;
 
-  constructor(public auth: AngularFireAuth, firestore: AngularFirestore, private _GuardarUsuarioService: GuardarUsuarioService) {
+  constructor(
+    public auth: AngularFireAuth,
+    firestore: AngularFirestore,
+    private _GuardarUsuarioService: GuardarUsuarioService
+  ) {
     /*Rellena la variable usuarios con una colección de tipo usuarios*/
     this.usuarios = firestore.collection('usuarios').valueChanges();
   }
@@ -46,10 +51,6 @@ export class RegistroComponent implements OnInit {
   }
 
   validarDatos() {
-    console.log(this.auth);
-    console.log(this.nombre); //cojo el objeto y el nombre
-    console.log(this); //cojo el objeto y el nombre
-    console.log(this.auth.credential); //cojo el objeto y el nombre
     /*Variable para cuando todos los campos estén rellenos y las contraseñas coincidan.*/
     let correcto = true;
     /*Comprobación de que todos los campos estén rellenos y las contraseñas coinciden.*/
@@ -94,21 +95,20 @@ export class RegistroComponent implements OnInit {
     }
     /*Crea la cuenta y si hay errores, los filtra y saca el mensaje correspondiente.*/
     if (correcto) {
-      this.auth.createUserWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-          /*crea un objeto cualquiera (any) y guardamos el valor del nombre y el email*/
-          const usuario: any = {
-            nombre: this.nombre,
-            email: this.email
-          }
-          this._GuardarUsuarioService.agregarUsuario(usuario)
-            .then(() => console.log("Usuario registrado con éxito."))
-            .catch(error => {console.log(error)});
-        })
-        .then(() => {
-          setTimeout(() => {
-            window.location.href = '/inicio';
-          }, 100);
+      this.auth
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then((resultado) => {
+          this.auth.onAuthStateChanged((user) => {
+            if (user) {
+              user.updateProfile({
+                displayName: this.nombre,     
+              });
+              setTimeout(() => {
+                console.log(firebase.auth().currentUser)
+                window.location.href = '/inicio';
+              }, 400); 
+            }
+          });
         })
         .catch((error) => {
           if (error.message == 'The email address is badly formatted.') {
@@ -146,8 +146,8 @@ export class RegistroComponent implements OnInit {
             );
             correcto = false;
           }
-          if (new firebase.auth.GoogleAuthProvider()==null) {
-            console.log("error");
+          if (new firebase.auth.GoogleAuthProvider() == null) {
+            console.log('error');
           }
         });
     }
