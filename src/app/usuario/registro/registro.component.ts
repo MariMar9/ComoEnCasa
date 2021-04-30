@@ -103,8 +103,9 @@ export class RegistroComponent implements OnInit {
               user.updateProfile({
                 displayName: this.nombre,     
               });
+              
               setTimeout(() => {
-                console.log(firebase.auth().currentUser)
+                localStorage.setItem('usuario',JSON.stringify(user));
                 window.location.href = '/inicio';
               }, 400); 
             }

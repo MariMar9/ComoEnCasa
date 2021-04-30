@@ -23,6 +23,7 @@ export class PerfilUsuarioComponent implements OnInit {
   /**Metodo para cerrar la sesion*/
   cerrarSesion() {
     this.firebaseAuth.signOut();
-    localStorage.removeItem('nombreUsuario');
+    localStorage.removeItem('usuario');
+    window.location.href="\inicio";
   }
 }
