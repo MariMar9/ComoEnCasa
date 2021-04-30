@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class CargarScriptsService {
 
+  usuarioConectado=false;
+
   constructor() { }
   /*Para poder tener acceso a todos los js que hemos creado*/
   carga(archivos:string[]){
@@ -17,7 +19,19 @@ export class CargarScriptsService {
       /*Obtenemos el <body></body> para insertar los <sripts></sripts> creados*/
       let body =document.querySelectorAll("body")[0];
       body.appendChild(script);
-      
     }
   }
+
+  conectado() {
+    if(localStorage.usuario!=null){
+      this.usuarioConectado=true;
+      console.log("Hay usuarios conectados");
+      return this.usuarioConectado;
+    }else{
+      this.usuarioConectado=false;
+      console.log("No hay usuarios conectados.");
+      return this.usuarioConectado;
+    }
+  }
+
 }

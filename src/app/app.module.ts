@@ -17,6 +17,10 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { ContactanosComponent } from './contactanos/contactanos.component';
 import { from } from 'rxjs';
+import { RecetasComponent } from './recetas/recetas.component';
+import { InicioComponent } from './inicio/inicio.component';
+import { SobreNosotrasComponent } from './sobre-nosotras/sobre-nosotras.component';
+import { OrdenarAlfComponent } from './ordenar-alf/ordenar-alf.component';
 
 const routes: Routes = [];
 
@@ -28,6 +32,10 @@ const routes: Routes = [];
     FooterComponent,
     CabeceraComponent,
     ContactanosComponent,
+    RecetasComponent,
+    InicioComponent,
+    SobreNosotrasComponent,
+    OrdenarAlfComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +44,7 @@ const routes: Routes = [];
     AppRoutingModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    AngularFirestoreModule
+    AngularFirestoreModule,
   ],
   providers: [CargarScriptsService],
   bootstrap: [AppComponent]

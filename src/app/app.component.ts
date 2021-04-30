@@ -16,7 +16,7 @@ export class AppComponent {
   constructor(private _CargaScripts:CargarScriptsService){
     /*ponemos la ruta y el nombre del archico que pasaremos a la función carga de cargar-ScriptsService.ts*/
     _CargaScripts.carga(["js/ocultar"]);
-
+    _CargaScripts.conectado();
   }
   
 }

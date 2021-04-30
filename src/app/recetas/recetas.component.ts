@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-recetas',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecetasComponent implements OnInit {
 
-  constructor() { }
+  recetas: Observable<any[]>;
+
+  constructor(public firestore: AngularFirestore) {
+    /*Rellena la variable usuarios con una colección de tipo usuarios*/
+    this.recetas = firestore.collection('recetas').valueChanges();
+  }
 
   ngOnInit(): void {
   }

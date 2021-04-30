@@ -1,1 +1,6 @@
-<p>recetas works!</p>
+<div *ngFor="let receta of recetas | async">
+    <div  *ngIf="receta.categoria=='Postre'">
+        {{receta.nombre}}
+    </div>
+</div>
+

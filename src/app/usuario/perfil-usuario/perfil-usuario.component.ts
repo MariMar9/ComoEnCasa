@@ -7,6 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./perfil-usuario.component.css'],
 })
 export class PerfilUsuarioComponent implements OnInit {
+  
   constructor(public firebaseAuth: AngularFireAuth) {}
   ngOnInit(): void {
     var usuario = JSON.parse(localStorage.usuario);

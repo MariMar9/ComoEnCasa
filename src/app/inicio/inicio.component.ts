@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CargarScriptsService } from '../services/cargar-scripts.service';
 
 @Component({
   selector: 'app-inicio',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioComponent implements OnInit {
 
-  constructor() { }
+  usuarioConectado=false;
+  
+  constructor(private _CargaScripts: CargarScriptsService) {
+    this.usuarioConectado = _CargaScripts.conectado();
+  }
 
   ngOnInit(): void {
   }
