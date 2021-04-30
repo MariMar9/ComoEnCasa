@@ -8,7 +8,7 @@
     </div>
     <!--fin contenedor del logo-->
     <!--contenedor del menu cabecera-->
-    <div id="inicio-registro-contenedor" class="mt-4 container-fluid d-flex justify-content-end">
+    <div id="inicio-registro-contenedor" class="mt-4 container-fluid d-flex justify-content-end" *ngIf="usuarioConectado">
         <div class="row">
             <div class="col-lg-12">
                 <!--menu cabecera-->
@@ -25,7 +25,7 @@
 
     </div>
             
-    <ul class="nav navbar-nav navbar-left align-items-end menu-sesion pr-3">
+    <ul class="nav navbar-nav navbar-left align-items-end menu-sesion pr-3" *ngIf="!usuarioConectado">
         <!--Inicio menu usuarios-->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark sesion" href="#" id="navbarDropdown" role="button"
