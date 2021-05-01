@@ -65,12 +65,12 @@
                     Recetas
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" [routerLink]="['/recetas']" routerLinkActive="active">Carnes</a>
-                    <a class="dropdown-item" href="#">Pescados</a>
-                    <a class="dropdown-item" href="#">Legumbres</a>
-                    <a class="dropdown-item" href="#">Pastas</a>
-                    <a class="dropdown-item" href="#">Ensaladas</a>
-                    <a class="dropdown-item" href="#">Postres</a>
+                    <a class="dropdown-item" [routerLink]="['/recetas']" routerLinkActive="active" (click)="pasarCategoria('Carnes')">Carnes</a>
+                    <a class="dropdown-item" [routerLink]="['/recetas']" routerLinkActive="active" (click)="pasarCategoria('Pescados')">Pescados</a>
+                    <a class="dropdown-item" [routerLink]="['/recetas']" routerLinkActive="active" (click)="pasarCategoria('Legumbres')">Legumbres</a>
+                    <a class="dropdown-item" [routerLink]="['/recetas']" routerLinkActive="active" (click)="pasarCategoria('Pastas')">Pastas</a>
+                    <a class="dropdown-item" [routerLink]="['/recetas']" routerLinkActive="active" (click)="pasarCategoria('Ensaladas')">Ensaladas</a>
+                    <a class="dropdown-item" [routerLink]="['/recetas']" routerLinkActive="active" (click)="pasarCategoria('Postres')">Postres</a>
                 </div>
             </li>
             <li class="nav-item">
