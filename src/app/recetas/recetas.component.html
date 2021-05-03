@@ -1,6 +1,7 @@
+<div>lkl</div>
 <div *ngFor="let receta of recetas | async">
-    <div  *ngIf="receta.categoria==categoria">
-        {{receta.foto}}
+    <div  *ngIf="receta.categoria==categoria;">
+        {{receta.foto}}/
         <p>{{receta.nombre}}</p>
         <p>{{receta.duracion}} // {{receta.dificultad}}</p>
     </div>

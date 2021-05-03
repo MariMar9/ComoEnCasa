@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 export class CargarScriptsService {
 
   usuarioConectado=false;
-
+  quitar=false;
+  url = window.location.pathname;
   constructor() { }
   /*Para poder tener acceso a todos los js que hemos creado*/
   carga(archivos:string[]){
@@ -33,5 +34,20 @@ export class CargarScriptsService {
       return this.usuarioConectado;
     }
   }
+
+  quitarCabFoot() {
+    if(this.url=="/iniciarSesion" || this.url=="/registro"){
+      
+      this.quitar=true;
+      console.log("si url"+this.quitar)
+      return this.quitar;
+    }else{
+      
+      this.quitar=false;
+      console.log("no url"+this.quitar)
+      return this.quitar;
+    }
+  }
+
 
 }

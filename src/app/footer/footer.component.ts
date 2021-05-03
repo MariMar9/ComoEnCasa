@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CargarScriptsService } from '../services/cargar-scripts.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  quitar=false;
+  constructor(private _CargaScripts: CargarScriptsService) {
+    this.quitar = _CargaScripts.quitarCabFoot();
+  }
 
   ngOnInit(): void {
   }

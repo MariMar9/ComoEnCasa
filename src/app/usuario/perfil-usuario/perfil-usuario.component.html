@@ -1,7 +1,8 @@
+<!--
 <div class="container-fluid mt-5 mb-5">
     <div class="row flex-column p-5">
         <p id="nombreUsuario"></p>
-        <p id="emailUsuario"></p>
+     
        
     </div>
     <div class="row justify-content-center align-items-center">
@@ -9,9 +10,41 @@
         type="submit" (click)="cerrarSesion()">Cerrar sesión</button>
     </div>
 </div>
+-->
 
-
-
-<p id="nombreUsuario"></p>
-
+<div class="contenedor pt-3">
+    <div class="d-flex justify-content-end align-items-center mr-3">
+        <button id="botonCerrarSesion" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold"
+            type="submit" (click)="cerrarSesion()">Cerrar sesión</button>
+    </div>
+    <div class="container-fluid mt-5 mb-5">
+    
+        <div class="container">
+            <div class="card card-profile shadow mt--300">
+    
+                <div class="px-4">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-3 order-lg-2">
+                            <div class="card-profile-image">
+                                <img class="rounded-circle">
+                            </div>
+                        </div>
+    
+                    </div>
+                    <div class="text-center margen-img">
+                        <h3 id="nombreUsuario"></h3>
+                    </div>
+                    <div class="mt-5 py-5 border-top text-center">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-9">
+                                <p>Recetas publicadas</p>
+                                <a href="#">Mostrar más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
