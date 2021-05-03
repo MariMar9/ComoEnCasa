@@ -17,7 +17,7 @@ export class RecetasComponent implements OnInit {
      /*Con el método "subscribe" recibe el dato que manda la función "mandarCategoria".*/
     this._pasarCategoria.mandarCategoria.subscribe(categoria=>{
     this.categoria=categoria;
-      console.log(categoria)
+      console.log(categoria+" recetas "+ this.categoria)
     });
   }
 
