@@ -25,7 +25,7 @@ export class OrdenarAlfComponent implements OnInit {
         console.log(recetas);
         (<HTMLInputElement>(
             document.getElementById('recetas')
-          )).innerHTML = `<p>${recetas}</p>`;
+          )).innerHTML += `<p>${recetas}</p>`;
       });
     });
   }

@@ -20,7 +20,5 @@ export class RecetasComponent implements OnInit {
       console.log(categoria+" recetas "+ this.categoria)
     });
   }
-
   ngOnInit(): void {};
-
   }
