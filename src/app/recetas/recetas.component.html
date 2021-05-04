@@ -1,59 +1,71 @@
 <div class="container-fluid p-0 mt-5 mb-5" id="body-card">
-  <ng-container *ngFor="let receta of recetas | async">
-    <div *ngIf="receta.categoria==categoria;">
-      <div class="card">
-        <div class="card-image"></div>
-        <div class="card-text p-2 d-flex justify-content-center flex-column align-items-center">
-          <p class="date">04/05/2021</p>
-          <h3 class="mb-3">{{receta.nombre}}</h3>
-          <div class="container-btn"><a href="" class="btn btn-ver">Ver</a></div>
+  <div class="row justify-content-center">
+    <ng-container *ngFor="let receta of recetas | async">
+      <ng-container *ngIf="receta.categoria==categoria;">
+        <div class="container-card">
+          <div class="card m-4">
+            <div class="card-image"></div>
+            <div class="card-text p-2 d-flex justify-content-center flex-column align-items-center">
+              <p class="date">04/05/2021</p>
+              <h3 class="mb-3">{{receta.nombre}}</h3>
+              <div class="container-btn"><a href="" class="btn btn-ver">Ver</a></div>
+            </div>
+            <div class="card-stats">
+              <div class="stats">
+                <div class="value"><i class="fas fa-clock"></i></div>
+                <div class="type">{{receta.duracion}}</div>
+              </div>
+              <div class="stats centro">
+                <div class="value"><i class="fas fa-user-friends"></i></div>
+                <div class="type">{{receta.comensales}}</div>
+              </div>
+              <div class="stats">
+                <i class="fas fa-laugh-beam" *ngIf="receta.dificultad=='Fácil';"></i>
+                <i class="fas fa-meh" *ngIf="receta.dificultad=='Medio';"></i>
+                <i class="fas fa-angry" *ngIf="receta.dificultad=='Dificil';"></i>
+                <div class="type">{{receta.dificultad}}</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="card-stats">
-          <div class="stats">
-            <div class="value"><i class="fas fa-clock"></i></div>
-            <div class="type">{{receta.duracion}}</div>
-          </div>
-          <div class="stats centro">
-            <div class="value"><i class="fas fa-user-friends"></i></div>
-            <div class="type">{{receta.comensales}}</div>
-          </div>
-          <div class="stats">
-            <i class="fas fa-laugh-beam" *ngIf="receta.dificultad=='Fácil';"></i>
-            <i class="fas fa-meh" *ngIf="receta.dificultad=='Medio';"></i>
-            <i class="fas fa-angry" *ngIf="receta.dificultad=='Dificil';"></i>
-            <div class="type">{{receta.dificultad}}</div>
+  
+      </ng-container>
+    </ng-container>
+  
+    <ng-container *ngFor="let receta of recetas | async">
+      <ng-container *ngIf="categoria=='';">
+        <div class="container-card">
+          <div class="card m-4">
+            <div class="card-image"></div>
+            <div class="card-text p-2 d-flex justify-content-center flex-column align-items-center">
+              <p class="date">04/05/2021</p>
+              <h3 class="mb-3">{{receta.nombre}}</h3>
+              <div class="container-btn"><a href="" class="btn btn-ver">Ver</a></div>
+            </div>
+            <div class="card-stats">
+              <div class="stats">
+                <div class="value"><i class="fas fa-clock"></i></div>
+                <div class="type">{{receta.duracion}}</div>
+              </div>
+              <div class="stats centro">
+                <div class="value"><i class="fas fa-user-friends"></i></div>
+                <div class="type">{{receta.comensales}}</div>
+              </div>
+              <div class="stats">
+                <i class="fas fa-laugh-beam" *ngIf="receta.dificultad=='Fácil';"></i>
+                <i class="fas fa-meh" *ngIf="receta.dificultad=='Medio';"></i>
+                <i class="fas fa-angry" *ngIf="receta.dificultad=='Dificil';"></i>
+                <div class="type">{{receta.dificultad}}</div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </ng-container>
+      </ng-container>
+    </ng-container>
 
-  <ng-container *ngFor="let receta of recetas | async">
-    <div *ngIf="categoria=='';">
-      <div class="card">
-        <div class="card-image"></div>
-        <div class="card-text p-2 d-flex justify-content-center flex-column align-items-center">
-          <p class="date">04/05/2021</p>
-          <h3 class="mb-3">{{receta.nombre}}</h3>
-          <div class="container-btn"><a href="" class="btn btn-ver">Ver</a></div>
-        </div>
-        <div class="card-stats">
-          <div class="stats">
-            <div class="value"><i class="fas fa-clock"></i></div>
-            <div class="type">{{receta.duracion}}</div>
-          </div>
-          <div class="stats centro">
-            <div class="value"><i class="fas fa-user-friends"></i></div>
-            <div class="type">{{receta.comensales}}</div>
-          </div>
-          <div class="stats">
-            <i class="fas fa-laugh-beam" *ngIf="receta.dificultad=='Fácil';"></i>
-            <i class="fas fa-meh" *ngIf="receta.dificultad=='Medio';"></i>
-            <i class="fas fa-angry" *ngIf="receta.dificultad=='Dificil';"></i>
-            <div class="type">{{receta.dificultad}}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </ng-container>
+
+
+
+  </div>
+  
 </div>
