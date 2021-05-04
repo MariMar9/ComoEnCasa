@@ -10,21 +10,24 @@ export class PerfilUsuarioComponent implements OnInit {
   
   constructor(public firebaseAuth: AngularFireAuth) {}
   ngOnInit(): void {
-    var usuario = JSON.parse(localStorage.usuario);
+ 
+
     if (localStorage.usuario != null) {
+         var usuario = JSON.parse(localStorage.usuario);
       (<HTMLInputElement>document.getElementById('nombreUsuario')).innerText =
         usuario.displayName;
-   
-        (<HTMLInputElement>document.getElementById('emailUsuario')).innerText =
-        usuario.email;
-   
-   
+      }
+      if(localStorage.usuarioGoogle != null){
+        var usuarioGoogle = JSON.parse(localStorage.usuarioGoogle);
+        (<HTMLInputElement>document.getElementById('nombreUsuarioGoogle')).innerText =
+        usuarioGoogle.displayName;
       }
   }
   /**Metodo para cerrar la sesion*/
   cerrarSesion() {
     this.firebaseAuth.signOut();
-    localStorage.removeItem('usuario');
+      localStorage.removeItem('usuario');
+      localStorage.removeItem('usuarioGoogle');  
     window.location.href="\inicio";
   }
 }

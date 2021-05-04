@@ -28,11 +28,17 @@ export class CargarScriptsService {
       this.usuarioConectado=true;
       console.log("Hay usuarios conectados");
       return this.usuarioConectado;
+    }else if(localStorage.usuarioGoogle!=null){
+      this.usuarioConectado=true;
+      console.log("Hay usuarios conectados");
+      return this.usuarioConectado;
     }else{
       this.usuarioConectado=false;
       console.log("No hay usuarios conectados.");
       return this.usuarioConectado;
     }
+
+
   }
 
   quitarCabFoot() {

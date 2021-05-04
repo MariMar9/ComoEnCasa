@@ -133,8 +133,13 @@ export class IniciarSesionComponent implements OnInit {
     firebase
       .auth()
       .signInWithPopup(proveedor)
-      .then(function (result) {
+      .then(()=>{
+        this.auth.onAuthStateChanged((user)=>{
+          if (user) {
+            localStorage.setItem('usuarioGoogle', JSON.stringify(user));
+          }
+        })
         location.href = '/inicio';
-      });
+      })
   }
 }
