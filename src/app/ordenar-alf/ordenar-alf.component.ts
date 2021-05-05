@@ -9,23 +9,40 @@ import { Observable } from 'rxjs';
   styleUrls: ['./ordenar-alf.component.css'],
 })
 export class OrdenarAlfComponent implements OnInit {
-  arrayRecetasOrd = [''];
-  arrayRecetasOrden: Observable<any[]>;
-  recetas = [''];
+  recetasOrdenadas = [''];
+  recetasFirebase: Observable<any[]>;
+
   constructor(public firestore: AngularFirestore) {
-    this.arrayRecetasOrden = firestore.collection('recetas').valueChanges();
-    this.arrayRecetasOrden.forEach((receta) => {
+    this.recetasFirebase = firestore.collection('recetas').valueChanges();
+    this.recetasFirebase.forEach((receta) => {
       for (let i = 0; i < receta.length; i++) {
         for (let j = receta.length - 1; j > i; j--) {
-          this.arrayRecetasOrd[i] = receta[j].nombre;
+          this.recetasOrdenadas[i] = receta[j].nombre;
         }
       }
-      this.arrayRecetasOrd.sort().map(function (recetas) {
-       
-        console.log(recetas);
-        (<HTMLInputElement>(
+
+      /**ordenamos las recetas con primero las ordemamos con .sort() y con .map() obtenemos ek nuevo array */
+      this.recetasOrdenadas.sort().map(function (recetas) {
+        (<HTMLInputElement>document.getElementById('recetas')).innerHTML += `
+        <div class="my-3 p-3 border border-gray" style="background: #f4f9ff;border-radius: 7px;">
+            <div class="row receta-contenedor d-flex justify-content-between align-items-center">
+                <div class="receta-nombre-icono d-flex align-items-center col-12 col-md-10 col-lg-10">
+                    <div class="icon-fab"><i class="fas fa-book-open" style="color: #fff;background: #757575;padding: 8px;border-radius: 5px;"></i></div>
+                    <div class="nombre">
+                        <p class="text-gray-dark m-0 ml-5">${recetas}</p>
+                    </div>
+                </div>
+  
+                <div class="ver-receta col-12 col-md-2 col-lg-2" style="text-align: center">
+                    <a href="#">Ver receta</a>
+                </div>
+            </div>
+        </div>
+      `;
+
+        /* (<HTMLInputElement>(
             document.getElementById('recetas')
-          )).innerHTML += `<p>${recetas}</p>`;
+          )).innerHTML += `<p class="m-0 pt-4 pb-4 border-top border-bottom"><a href='#' class="">${recetas}</a></p>`;*/
       });
     });
   }

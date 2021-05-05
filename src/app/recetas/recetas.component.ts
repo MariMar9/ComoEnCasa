@@ -11,7 +11,8 @@ import { RecetasService } from '../services/recetas.service';
 export class RecetasComponent implements OnInit {
   categoria:string="";
   recetas: Observable<any[]>;
-
+  fecha=[{}];
+  arrayFecha=['']
   constructor(public firestore: AngularFirestore, private _pasarCategoria: RecetasService) {
     this.recetas = firestore.collection('recetas').valueChanges();
      /*Con el método "subscribe" recibe el dato que manda la función "mandarCategoria".*/
@@ -20,5 +21,6 @@ export class RecetasComponent implements OnInit {
       console.log(categoria+" recetas "+ this.categoria)
     });
   }
+
   ngOnInit(): void {};
   }
