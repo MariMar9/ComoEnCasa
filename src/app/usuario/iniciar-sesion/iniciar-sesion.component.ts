@@ -1,5 +1,5 @@
 import { Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 
@@ -17,9 +17,17 @@ export class IniciarSesionComponent implements OnInit {
   /*Variable para contar los intentos que quedan para que se bloquee la cuenta.*/
   intentos: number = 5;
 
-  constructor(public auth: AngularFireAuth) {}
+  constructor(public auth: AngularFireAuth, private ngZone: NgZone) {}
 
   ngOnInit(): void {
+    this.auth.user.subscribe((user) => {
+      if (user) {
+        this.ngZone.run(() => {
+          window.location.href = 'inicio';
+        });
+      }
+    });
+
     /*Mostrar imágenes del fomrulario aleatoriamente*/
     let imagenes = new Array(
       '../../../assets/imagenesRandom/chocolate1.jpeg',
@@ -50,11 +58,10 @@ export class IniciarSesionComponent implements OnInit {
           if (user) {
             var uid = user.uid;
             var displayName = user.displayName;
-            localStorage.setItem('usuario',JSON.stringify(user));
-           
+            localStorage.setItem('usuario', JSON.stringify(user));
           }
         });
-        location.href = '/inicio'
+        location.href = '/inicio';
       })
       .catch((error) => {
         this.estaLogeado = false;
@@ -133,13 +140,13 @@ export class IniciarSesionComponent implements OnInit {
     firebase
       .auth()
       .signInWithPopup(proveedor)
-      .then(()=>{
-        this.auth.onAuthStateChanged((user)=>{
+      .then(() => {
+        this.auth.onAuthStateChanged((user) => {
           if (user) {
             localStorage.setItem('usuarioGoogle', JSON.stringify(user));
           }
-        })
+        });
         location.href = '/inicio';
-      })
+      });
   }
 }

@@ -1,5 +1,5 @@
 import { Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -21,15 +21,19 @@ export class RegistroComponent implements OnInit {
   usuarios: Observable<any[]>;
 
   constructor(
-    public auth: AngularFireAuth,
-    firestore: AngularFirestore,
-    private _GuardarUsuarioService: GuardarUsuarioService
-  ) {
+    public auth: AngularFireAuth,firestore: AngularFirestore,private _GuardarUsuarioService: GuardarUsuarioService,private ngZone: NgZone) {
     /*Rellena la variable usuarios con una colección de tipo usuarios*/
     this.usuarios = firestore.collection('usuarios').valueChanges();
   }
 
   ngOnInit(): void {
+    this.auth.user.subscribe((user) => {
+      if (user) {
+        this.ngZone.run(() => {
+          window.location.href = 'inicio';
+        });
+      }
+    });
     /*Mostrar imágenes del fomrulario aleatoriamente*/
     let imagenes = new Array(
       '../../../assets/imagenesRandom/chocolate1.jpeg',
