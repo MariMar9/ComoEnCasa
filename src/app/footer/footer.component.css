@@ -1,0 +1,33 @@
+footer {
+    height: 225px;
+}
+
+img{
+    height: 15vh;
+}
+
+footer .link-info a {
+    padding: 3px 0;
+    -webkit-transition: .5s all ease;
+    -moz-transition: .5s all ease;
+    transition: .5s all ease;
+}
+
+footer .link-info a:hover {
+    padding: 3px 0;
+    margin-left:30px;
+    font-weight: 700;
+    
+}
+.btn-social.bg-primary{
+    border: #2a5d95 2px solid;
+}
+.btn-social.bg-danger{
+    border: #79222a 2px solid;
+}
+.btn-social.bg-info{
+    border: #2a8095 2px solid;
+}
+.btn-social.bg-warning{
+    border: #c49509 2px solid;
+}

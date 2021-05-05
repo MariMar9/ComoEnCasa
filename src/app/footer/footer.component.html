@@ -1,0 +1,47 @@
+<!-- Footer -->
+<footer class="footer text-center bg-light d-flex justify-content-center" *ngIf="!quitar">
+    <div class="row w-100">
+        <!--Inicio logo-->
+        <div class="col-md-4 mb-lg-0 d-flex justify-content-center align-items-center flex-column">
+            <img src="../../assets/img/logo/logoFooter.png">
+        </div>
+        <!--Fin logo-->
+        <!--inicio rrss-->
+        <div class="col-md-4 mb-lg-0 d-flex align-items-center justify-content-center">
+            <ul class="list-inline mb-0">
+                <li class="list-inline-item">
+                    <a class="bg-primary pt-2 pb-1 pl-2 pr-2 btn btn-social text-center rounded-circle shadow-sm" href="https://www.facebook.com/" target="_blank">
+                        <i class="fa fa-fw fa-facebook text-white"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="bg-danger pt-2 pb-1 pl-2 pr-2 btn btn-social text-center rounded-circle shadow-sm" href="https://www.youtube.com/" target="_blank">
+                        <i class="fab fa-fw fa-youtube text-white"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="bg-info pt-2 pb-1 pl-2 pr-2 btn btn-social text-center rounded-circle shadow-sm" href="https://twitter.com/" target="_blank">
+                        <i class="fa fa-fw fa-twitter text-white"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="bg-warning pt-2 pb-1 pl-2 pr-2 btn btn-social text-center rounded-circle shadow-sm" href="https://es.linkedin.com/" target="_blank">
+                        <i class="fa fa-fw fa-linkedin text-white"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--Fin rrss-->
+        <!--inicio info-->
+        <div class="col-md-4 d-flex justify-content-center align-items-center flex-column link-info">
+            <a [routerLink]="['/sobreNosotras']" routerLinkActive="active" class="text-dark">Sobre nosotras</a>
+            <a [routerLink]="['/contactanos']" class="text-dark">Contáctanos</a>
+        </div>
+        <!--fin info-->
+    </div>
+</footer>
+<div class="copyright py-3 text-center text-white bg-secondary" *ngIf="!quitar">
+    <div class="container">
+        <small>Copyright &copy; &nbsp;&nbsp;&nbsp; Propiedad de Sara y Mar, no robes *** Bv</small>
+    </div>
+</div>

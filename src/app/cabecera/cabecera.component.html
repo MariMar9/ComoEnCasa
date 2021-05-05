@@ -1,0 +1,99 @@
+ <!--Inicio cabecera-->
+ <header id="background-img-nav" class="p-0 container-fluid d-flex flex-column justify-content-end" *ngIf="!quitar">
+ <!--inicio contenedor img y menu registro -->
+    <div id=img-fondo>
+    <!--contenedor del logo-->
+    <div id="logo" class="row align-items-center justify-content-center flex-column mt-5">
+        <img src="../../assets/img/logo/logo.png">
+    </div>
+    <!--fin contenedor del logo-->
+    <!--contenedor del menu cabecera-->
+    <div id="inicio-registro-contenedor" class="mt-4 container-fluid d-flex justify-content-end" *ngIf="usuarioConectado">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--menu cabecera-->
+                <ul class="nav navbar-nav navbar-left">
+                    <!-- cuando se inicie se mostrará el perfil-->
+                    <li>
+                        <a [routerLink]="['/perfilUsuario']" routerLinkActive="active" class="btn btn-lg btn-info btn-block btn-profile mb-2"><i class="fas fa-user-circle"></i> Perfil</a>
+                    </li>
+                    <!--final del perfil-->
+                </ul>
+                <!--fin menu cabecera-->
+            </div>
+        </div>
+
+    </div>
+            
+    <ul class="nav navbar-nav navbar-left align-items-end menu-sesion pr-3" *ngIf="!usuarioConectado">
+        <!--Inicio menu usuarios-->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark sesion" href="#" id="navbarDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-sign-in-alt"></i> Iniciar Sesión / Registro
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/iniciarSesion" routerLinkActive="active">Iniciar Sesión</a>
+                <a class="dropdown-item" href="/registro" routerLinkActive="active">Registro</a>
+            </div>
+        </li>
+        <!--fin menu usuarios-->
+    </ul>
+    <!--fin contenedor del menu cabecera-->
+</div>
+<!--fin contenedor img y registro-->
+<!--Inicio menu-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!--Logo de la web-->
+    <p class="navbar-brand">Como en casa</p>
+    <!--Boton para version movil-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-principal"
+        aria-controls="menu-principal" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <!--fin boton-->
+    <!--contenedor de los enlaces-->
+    <div class="collapse navbar-collapse" id="menu-principal">
+        <!--Opciones-->
+        <ul class="navbar-nav w-50 mr-auto ml-auto justify-content-between">
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/inicio']" routerLinkActive="active">Inicio</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="recetas-desplegar-categoria" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Recetas
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" [routerLink]="['/recetas']" (click)="pasarCategoria('Carnes')">Carnes</a>
+                    <a class="dropdown-item" [routerLink]="['/recetas']" (click)="pasarCategoria('Pescados')">Pescados</a>
+                    <a class="dropdown-item" [routerLink]="['/recetas']" (click)="pasarCategoria('Legumbres')">Legumbres</a>
+                    <a class="dropdown-item" [routerLink]="['/recetas']" (click)="pasarCategoria('Pastas')">Pastas</a>
+                    <a class="dropdown-item" [routerLink]="['/recetas']" (click)="pasarCategoria('Ensaladas')">Ensaladas</a>
+                    <a class="dropdown-item" [routerLink]="['/recetas']" (click)="pasarCategoria('Postres')">Postres</a>
+                    <a class="dropdown-item" [routerLink]="['/recetas']" (click)="pasarCategoria('')">Mostrar todas</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/ordenarAlf']" routerLinkActive="active">Ordenar Alfabéticamente</a>
+            </li>
+        </ul>
+        <!--fin de opciones-->
+        <!--Cuadro de búsqueda-->
+        <form action="" class="navbar-form">
+            <div class="form-group m-0">
+                <div class="input-group">
+                    <input type="search" name="search" id="buscar-receta" placeholder="Buscar..."
+                        class="form-control">
+                    <button type="button" class="btn btn-secondary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--Fin contenedor de los enlaces-->
+</nav>
+</header>
+<!--fin cabecera-->
+<!--Fin menu-->

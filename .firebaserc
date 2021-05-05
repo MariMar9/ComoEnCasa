@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "comoencasa-website": {
+      "hosting": {
+        "ComoEnCasa": [
+          "comoencasa-website"
+        ]
+      }
+    }
+  }
+}

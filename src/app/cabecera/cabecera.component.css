@@ -1,0 +1,45 @@
+/*menu de inicio sesion/registro*/
+.menu-sesion{
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.sesion{
+    color: white !important;
+}
+.sesion:hover{
+    color: #ffbc70 !important;
+}
+a.text-dark:focus{
+  color: #ffffff !important;
+}
+/*boton de perfil usuario*/
+.btn-profile {
+  font-size: 1.1rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+  border-radius: 2rem;
+}
+#img-fondo{
+  background-image: url('../../assets/img/cabecera/salmon.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+img{
+  height: 20vh;
+}
+
+@media  (max-height: 450px)  { 
+    #img-fondo {
+        height: 110px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+    #inicio-registro-contenedor {
+        width: 50%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    #logo {
+        margin-top: 0 !important;
+    }
+  }
