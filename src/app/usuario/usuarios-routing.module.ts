@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ControlPerfilUsuarioGuard } from '../auth/control-perfil-usuario.guard';
+import { ControlRutaGuard } from '../auth/control-ruta.guard';
 import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.component';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 import { RegistroComponent } from './registro/registro.component';
 
 
 const routes: Routes = [
-  { path: 'registro', component: RegistroComponent},
-  { path: 'iniciarSesion', component: IniciarSesionComponent},
-  { path: 'perfilUsuario', component: PerfilUsuarioComponent},
+  { path: 'registro', component: RegistroComponent, canActivate:[ControlRutaGuard]},
+  { path: 'iniciarSesion', component: IniciarSesionComponent, canActivate:[ControlRutaGuard]},
+  { path: 'perfilUsuario', component: PerfilUsuarioComponent, canActivate:[ControlPerfilUsuarioGuard]},
 ];
 
 @NgModule({

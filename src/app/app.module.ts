@@ -21,6 +21,7 @@ import { RecetasComponent } from './recetasVista/recetas/recetas.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { SobreNosotrasComponent } from './sobre-nosotras/sobre-nosotras.component';
 import { OrdenarAlfComponent } from './recetasVista/ordenar-alf/ordenar-alf.component';
+import { MostrarRecetaComponent } from './recetasVista/mostrar-receta/mostrar-receta.component';
 
 const routes: Routes = [];
 
@@ -35,7 +36,8 @@ const routes: Routes = [];
     RecetasComponent,
     InicioComponent,
     SobreNosotrasComponent,
-    OrdenarAlfComponent
+    OrdenarAlfComponent,
+    MostrarRecetaComponent
   ],
   imports: [
     BrowserModule,

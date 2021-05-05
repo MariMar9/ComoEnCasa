@@ -8,7 +8,7 @@
             <div class="card-text p-2 d-flex justify-content-center flex-column align-items-center">
               <p class="date">{{((receta.fecha).seconds)*1000 | date: 'dd/MM/yyyy'}}</p>
               <h3 class="mb-3">{{receta.nombre}}</h3>
-              <div class="container-btn"><a href="" class="btn btn-ver">Ver</a></div>
+              <div class="container-btn"><a [routerLink]="['/mostrarReceta']" (click)="pasarReceta(receta.id)" class="btn btn-ver">Ver</a></div>
             </div>
             <div class="card-stats">
               <div class="stats">
@@ -40,7 +40,7 @@
             <div class="card-text p-2 d-flex justify-content-center flex-column align-items-center">
               <p class="date">{{((receta.fecha).seconds)*1000 | date: 'dd/MM/yyyy'}}</p>
               <h3 class="mb-3">{{receta.nombre}}</h3>
-              <div class="container-btn"><a href="" class="btn btn-ver">Ver</a></div>
+              <div class="container-btn"><a [routerLink]="['/mostrarReceta']" (click)="pasarReceta(receta.id)" class="btn btn-ver">Ver</a></div>
             </div>
             <div class="card-stats">
               <div class="stats">

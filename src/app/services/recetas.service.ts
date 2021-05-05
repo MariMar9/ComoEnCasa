@@ -6,6 +6,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 export class RecetasService {
   /*Pasa datos del component Cabecera al component Recetas.*/
   @Output() mandarCategoria: EventEmitter<any> = new EventEmitter();
+  @Output() mandarReceta: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 

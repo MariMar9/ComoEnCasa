@@ -41,6 +41,29 @@ export class CargarScriptsService {
 
   }
 
+  controlRutaSesionRegistro() {
+    if(localStorage.usuario!=null){
+      window.location.href="/inicio";
+      return false;
+    }else if(localStorage.usuarioGoogle!=null){
+      window.location.href="/inicio";
+      return false;
+    }else{
+      return true;
+    }
+  }
+
+  controlRutaPerfil(){
+    if(localStorage.usuario!=null){
+      return true;
+    }else if(localStorage.usuarioGoogle!=null){
+      return true;
+    }else{
+      window.location.href="/inicio";
+      return false;
+    }
+  }
+
   quitarCabFoot() {
     if(this.url=="/iniciarSesion" || this.url=="/registro"){
       
