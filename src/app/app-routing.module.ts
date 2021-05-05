@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { BuscarRecetaComponent } from './buscar-receta/buscar-receta.component';
 import { ContactanosComponent } from './contactanos/contactanos.component';
 import { InicioComponent } from './inicio/inicio.component';
-import { OrdenarAlfComponent } from './ordenar-alf/ordenar-alf.component';
-import { RecetasComponent } from './recetas/recetas.component';
+import { OrdenarAlfComponent } from './recetasVista/ordenar-alf/ordenar-alf.component';
+import { RecetasComponent } from './recetasVista/recetas/recetas.component';
 import { SobreNosotrasComponent } from './sobre-nosotras/sobre-nosotras.component';
 
 const routes: Routes = [

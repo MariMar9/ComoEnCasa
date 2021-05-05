@@ -17,10 +17,10 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { ContactanosComponent } from './contactanos/contactanos.component';
 import { from } from 'rxjs';
-import { RecetasComponent } from './recetas/recetas.component';
+import { RecetasComponent } from './recetasVista/recetas/recetas.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { SobreNosotrasComponent } from './sobre-nosotras/sobre-nosotras.component';
-import { OrdenarAlfComponent } from './ordenar-alf/ordenar-alf.component';
+import { OrdenarAlfComponent } from './recetasVista/ordenar-alf/ordenar-alf.component';
 
 const routes: Routes = [];
 
