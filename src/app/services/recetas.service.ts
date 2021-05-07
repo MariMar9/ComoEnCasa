@@ -1,4 +1,5 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
+import { AngularFirestoreCollection,AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,11 @@ export class RecetasService {
   @Output() mandarReceta: EventEmitter<any> = new EventEmitter();
   @Output() mandarRecetaNombre: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(private firestore: AngularFirestore) { }
 
-  
+  getCollectionRecetas<tipo>(path:string, parametro:string){
+    const collectionRecetas:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>(path, ref => ref.orderBy(parametro));
+    return collectionRecetas.valueChanges();
+  }
 
 }
