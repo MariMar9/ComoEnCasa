@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { RecetasService } from 'src/app/services/recetas.service';
+import { map, take } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-ordenar-alf',
@@ -10,29 +11,32 @@ import { RecetasService } from 'src/app/services/recetas.service';
   styleUrls: ['./ordenar-alf.component.css'],
 })
 export class OrdenarAlfComponent implements OnInit {
-  recetasOrdenadas = [''];
+  recetasOrdenadas:Observable<any[]>;
   recetasFirebase: Observable<any[]>;
+    
 
-  constructor(public firestore: AngularFirestore,private _pasarReceta: RecetasService) {
+  constructor(public firestore: AngularFirestore,private _pasarReceta: RecetasService, private _consultarColeccion: RecetasService) {
     this.recetasFirebase = firestore.collection('recetas').valueChanges();
-    //firestore.firestore.collection('recetas').orderBy('nombre')
-    this.recetasFirebase.forEach((receta) => {
-      for (let i = 0; i < receta.length; i++) {
-        for (let j = receta.length - 1; j > i; j--) {
-          this.recetasOrdenadas[i] = receta[j].nombre;;
-        }
-      }
-      /**ordenamos las recetas con primero las ordemamos con .sort() y con .map() obtenemos ek nuevo array */
-      this.recetasOrdenadas.sort()
-    });
+    this.recetasOrdenadas = firestore.collection('recetas').valueChanges();
+    
+    const path= 'recetas/'
+    this._consultarColeccion.getCollectionRecetas<any>(path,'nombre').subscribe(recetas =>{
+      
+    })
+
   }
 
   mandarRecetaNombre(idReceta: string) {
-    console.log("manda"+" "+idReceta)
     setTimeout(() => {
       this._pasarReceta.mandarReceta.emit(idReceta);
     }, 200);
   }
 
+  pasarReceta(idReceta: number) {
+    setTimeout(() => {
+      this._pasarReceta.mandarReceta.emit(idReceta);
+    }, 200);
+  }
+ 
   ngOnInit(): void {}
 }
