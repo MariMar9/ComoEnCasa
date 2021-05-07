@@ -7,6 +7,43 @@
                 nuestra web, ordenadas alfabéticamente para facilitar su búsqueda</p>
         </div>
         <!--fin-->
+        <ng-container *ngFor="let receta of recetasOrdenadas">
+            <div class="my-3 p-3 border border-gray" style="background: #f4f9ff;border-radius: 7px;">
+                <div class="row receta-contenedor d-flex justify-content-between align-items-center">
+                    <div class="receta-nombre-icono d-flex align-items-center col-12 col-md-10 col-lg-10">
+                        <div class="icon-fab"><i class="fas fa-book-open" style="color: #fff;background: #757575;padding: 8px;border-radius: 5px;"></i></div>
+                        <div class="nombre">
+                            <p class="text-gray-dark m-0 ml-5">{{receta}}</p>
+                        </div>
+                    </div>
+      
+                    <div class="ver-receta col-12 col-md-2 col-lg-2" style="text-align: center">
+                        <a [routerLink]="['/mostrarReceta']" (click)="mandarRecetaNombre(receta)">Ver receta</a>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <div style="background-color: cadetblue;">ikuhyi</div>
+        <!--
 
+<ng-container *ngFor="let receta of recetasFirebase | async">
+            <div class="my-3 p-3 border border-gray" style="background: #f4f9ff;border-radius: 7px;">
+                <div class="row receta-contenedor d-flex justify-content-between align-items-center">
+                    <div class="receta-nombre-icono d-flex align-items-center col-12 col-md-10 col-lg-10">
+                        <div class="icon-fab"><i class="fas fa-book-open" style="color: #fff;background: #757575;padding: 8px;border-radius: 5px;"></i></div>
+                        <div class="nombre">
+                            <p class="text-gray-dark m-0 ml-5">{{receta.nombre}}</p>
+                        </div>
+                    </div>
+      
+                    <div class="ver-receta col-12 col-md-2 col-lg-2" style="text-align: center">
+                        <a [routerLink]="['/mostrarReceta']">Ver receta</a>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        -->
+        
     </main>
 </div>
