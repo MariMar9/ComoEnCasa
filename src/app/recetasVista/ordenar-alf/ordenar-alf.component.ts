@@ -11,17 +11,14 @@ import { map, take } from 'rxjs/operators';
   styleUrls: ['./ordenar-alf.component.css'],
 })
 export class OrdenarAlfComponent implements OnInit {
-  recetasOrdenadas:Observable<any[]>;
   recetasFirebase: Observable<any[]>;
     
 
   constructor(public firestore: AngularFirestore,private _pasarReceta: RecetasService, private _consultarColeccion: RecetasService) {
     this.recetasFirebase = firestore.collection('recetas').valueChanges();
-    this.recetasOrdenadas = firestore.collection('recetas').valueChanges();
-    
     const path= 'recetas/'
     this._consultarColeccion.getCollectionRecetas<any>(path,'nombre').subscribe(recetas =>{
-      
+      console.log(recetas)
     })
 
   }
