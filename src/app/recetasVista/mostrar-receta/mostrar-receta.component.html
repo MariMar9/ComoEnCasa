@@ -1,5 +1,17 @@
+<!--Contenedor para recetas por categoria-->
 <ng-container *ngFor="let receta of recetas | async">
         <ng-container *ngIf="receta.id==idReceta;">
+            <p>Id: {{receta.id}}</p>
+            <p>Nombre: {{receta.nombre}}</p>
+            <p>Categoría: {{receta.categoria}}</p>
+            <p>Dificultad: {{receta.dificultad}}</p>
+            <p>Duración: {{receta.duracion}}</p>
+    </ng-container>
+</ng-container>
+
+<!--Contenedor para recetas ordenadas-->
+<ng-container *ngFor="let receta of recetas | async">
+        <ng-container *ngIf="receta.nombre==nomReceta;">
             <p>Id: {{receta.id}}</p>
             <p>Nombre: {{receta.nombre}}</p>
             <p>Categoría: {{receta.categoria}}</p>

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { RecetasService } from 'src/app/services/recetas.service';
 import { map, take } from 'rxjs/operators';
-
 
 @Component({
   selector: 'app-ordenar-alf',
@@ -11,29 +13,39 @@ import { map, take } from 'rxjs/operators';
   styleUrls: ['./ordenar-alf.component.css'],
 })
 export class OrdenarAlfComponent implements OnInit {
-  recetasFirebase: Observable<any[]>;
+  //recetasFirebase: Observable<any[]>;
+  recetas: string[] = [];
+
+  constructor(
+    public firestore: AngularFirestore,
+    private _pasarReceta: RecetasService,
+    private _consultarColeccion: RecetasService,
+    private _pasarNomReceta: RecetasService
     
-
-  constructor(public firestore: AngularFirestore,private _pasarReceta: RecetasService, private _consultarColeccion: RecetasService) {
-    this.recetasFirebase = firestore.collection('recetas').valueChanges();
-    const path= 'recetas/'
-    this._consultarColeccion.getCollectionRecetas<any>(path,'nombre').subscribe(recetas =>{
-      console.log(recetas)
-    })
-
+  ) {
+    //this.recetasFirebase = firestore.collection('recetas').valueChanges();
+    const path = 'recetas/';
+    this._consultarColeccion
+      .getCollectionRecetas<any>(path, 'nombre')
+      .subscribe((recetas) => {
+        for (let i = 0; i < recetas.length; i++) {
+          this.recetas[i] = recetas[i].nombre;
+        //  console.log(this.recetas);
+        }
+      });
   }
 
-  mandarRecetaNombre(idReceta: string) {
+  /**
+   * recibe el nombre de la receta se lo pasa a mandaRecetaNombre()
+   * @param nomReceta 
+   */
+  pasarRecetaNom(nomReceta: string) {
+    
     setTimeout(() => {
-      this._pasarReceta.mandarReceta.emit(idReceta);
-    }, 200);
+      console.log(nomReceta);
+      this._pasarNomReceta.mandarRecetaNombre.emit(nomReceta);
+    }, 300);
   }
 
-  pasarReceta(idReceta: number) {
-    setTimeout(() => {
-      this._pasarReceta.mandarReceta.emit(idReceta);
-    }, 200);
-  }
- 
   ngOnInit(): void {}
 }
