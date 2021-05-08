@@ -29,13 +29,16 @@
                                 <img class="rounded-circle">
                             </div>
                         </div>
-    
                     </div>
                     <div class="text-center margen-img">
                         <h3 id="nombreUsuario"></h3>
                         <h3 id="nombreUsuarioGoogle"></h3>
                     </div>
                     <div class="mt-5 py-5 border-top text-center">
+                        <div class="d-flex justify-content-start align-items-center mr-3">
+                            <button id="botonCerrarSesion" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold"
+                                type="submit" [routerLink]="['/crearReceta']">Añadir receta</button>
+                        </div>
                         <div class="row justify-content-center">
                             <div class="col-lg-9">
                                 <p>Recetas publicadas</p>

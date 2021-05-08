@@ -7,6 +7,7 @@ import { MostrarRecetaComponent } from './recetasVista/mostrar-receta/mostrar-re
 import { OrdenarAlfComponent } from './recetasVista/ordenar-alf/ordenar-alf.component';
 import { RecetasComponent } from './recetasVista/recetas/recetas.component';
 import { SobreNosotrasComponent } from './sobre-nosotras/sobre-nosotras.component';
+import { CrearRecetaComponent } from './recetasVista/crear-receta/crear-receta.component';
 
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'sobreNosotras', component: SobreNosotrasComponent },
   { path: 'contactanos', component: ContactanosComponent },
   { path: 'mostrarReceta', component: MostrarRecetaComponent },
+  { path: 'crearReceta', component: CrearRecetaComponent },
   { path: '', component: InicioComponent, pathMatch: 'full' },
   { path: '**', redirectTo: '/', pathMatch: 'full' },
 ];

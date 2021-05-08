@@ -22,6 +22,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { SobreNosotrasComponent } from './sobre-nosotras/sobre-nosotras.component';
 import { OrdenarAlfComponent } from './recetasVista/ordenar-alf/ordenar-alf.component';
 import { MostrarRecetaComponent } from './recetasVista/mostrar-receta/mostrar-receta.component';
+import { CrearRecetaComponent } from './recetasVista/crear-receta/crear-receta.component';
 
 const routes: Routes = [];
 
@@ -37,7 +38,8 @@ const routes: Routes = [];
     InicioComponent,
     SobreNosotrasComponent,
     OrdenarAlfComponent,
-    MostrarRecetaComponent
+    MostrarRecetaComponent,
+    CrearRecetaComponent
   ],
   imports: [
     BrowserModule,

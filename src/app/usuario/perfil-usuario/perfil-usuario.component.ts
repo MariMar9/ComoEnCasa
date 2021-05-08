@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { GuardarUsuarioService } from 'src/app/services/guardar-usuario.service';
+
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -7,11 +9,21 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./perfil-usuario.component.css'],
 })
 export class PerfilUsuarioComponent implements OnInit {
-  
-  constructor(public firebaseAuth: AngularFireAuth) {}
-  ngOnInit(): void {
- 
 
+  correo: string = "";
+  
+  constructor(public firebaseAuth: AngularFireAuth, private _pasarCorreoUsuario: GuardarUsuarioService) {
+    this.firebaseAuth.onAuthStateChanged((user) => {
+      if (user) {
+        /*La exclamación es para indicar que estamos seguros de que no es null*/
+        this.correo = user.displayName!;
+        console.log(user);
+      }
+    });
+    console.log(this.correo);
+  }
+
+  ngOnInit(): void {
     if (localStorage.usuario != null) {
          var usuario = JSON.parse(localStorage.usuario);
       (<HTMLInputElement>document.getElementById('nombreUsuario')).innerText =
@@ -23,11 +35,11 @@ export class PerfilUsuarioComponent implements OnInit {
         usuarioGoogle.displayName;
       }
   }
-  /**Metodo para cerrar la sesion*/
+  /*Metodo para cerrar la sesion*/
   cerrarSesion() {
     this.firebaseAuth.signOut();
-      localStorage.removeItem('usuario');
-      localStorage.removeItem('usuarioGoogle');  
+    localStorage.removeItem('usuario');
+    localStorage.removeItem('usuarioGoogle');  
     window.location.href="\inicio";
   }
 }
