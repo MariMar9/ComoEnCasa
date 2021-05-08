@@ -1,40 +1,35 @@
-<div class="d-flex justify-content-start align-items-center mr-3">
-    <button id="botonCerrarSesion" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold"
-        type="submit" (click)="volver()">Volver</button>
-</div>
-
-<br><br>
+<!-- <br><br>
 
 <div>
-    <div>
+ <div>
         <p>Imagen: <input type="file" id="imagen"> </p>
-        <p>Nombre: <input type="text" id="nombre" [(ngModel)]="nombre"> </p>
-        <p>Categoría: 
-            <select name="categoria" id="categoria" [(ngModel)]="categoria">
-                <option selected disabled hidden>--Seleccione una--</option>
-                <option>Carnes</option>
-                <option>Pescados</option>
-                <option>Legumbres</option>
-                <option>Pastas</option>
-                <option>Ensaladas</option>
-                <option>Postres</option>
-            </select>
-        </p>
-        <p>Comensales: <input type="number" id="comensales" [(ngModel)]="comensales"> </p>
-        <p>Dificultad: 
-            <select name="dificultad" id="categoria" [(ngModel)]="dificultad">
-                <option selected disabled hidden>--Seleccione una--</option>
-                <option>Fácil</option>
-                <option>Normal</option>
-                <option>Difícil</option>
-            </select>
-        </p>
+      <p>Nombre: <input type="text" id="nombre" [(ngModel)]="nombre"> </p>
+<p>Categoría:
+    <select name="categoria" id="categoria" [(ngModel)]="categoria">
+        <option selected disabled hidden>--Seleccione una--</option>
+        <option>Carnes</option>
+        <option>Pescados</option>
+        <option>Legumbres</option>
+        <option>Pastas</option>
+        <option>Ensaladas</option>
+        <option>Postres</option>
+    </select>
+</p>
+<p>Comensales: <input type="number" id="comensales" [(ngModel)]="comensales"> </p>
+<p>Dificultad:
+    <select name="dificultad" id="categoria" [(ngModel)]="dificultad">
+        <option selected disabled hidden>--Seleccione una--</option>
+        <option>Fácil</option>
+        <option>Normal</option>
+        <option>Difícil</option>
+    </select>
+</p>
         <p>Duración: <input type="text" id="duracion" [(ngModel)]="duracion"> </p>
     </div>
 
 
 
-    <div>
+    <div class="form-group segundo-bloque">
         <h1>Ingredientes</h1>
         <div id="ingredientes">
             <p class="ingrediente">
@@ -59,10 +54,113 @@
     </div>
 
 </div>
+-->
 
 
-<div class="d-flex justify-content-start align-items-center mr-3">
-    <button id="botonCerrarSesion" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold"
-        type="submit" (click)="validarDatos()">Crear receta</button>
-</div>
 
+
+
+
+<div class="container mt-5 mb-5">
+    <!--presentacion-->
+    <h1 id="titulo" class="text-center">Como<span>EnCasa</span></h1>
+    <p id="descripcion" class="text-center">Comparta sus recetas favoritas </p>
+    <!--fin presentacion-->
+
+    <div class="insertar-img">imagen</div>
+
+    <!--primer bloque-->
+    <div class="form-group  primer-bloque">
+        <!--nombre-->
+        <div class="form-group">
+            <input type="text" id="nombre" [(ngModel)]="nombre" class="form-control" placeholder="Nombre" required>
+        </div>
+        <!--fin nombre-->
+
+        <!--categoria-->
+        <div class="form-group">
+            <select id="categoria" [(ngModel)]="categoria" name="categoria" class="form-control" id="dropdown">
+                <option selected disabled hidden>Seleccione una categoría</option>
+                <option>Carnes</option>
+                <option>Pescados</option>
+                <option>Legumbres</option>
+                <option>Pastas</option>
+                <option>Ensaladas</option>
+                <option>Postres</option>
+            </select>
+        </div>
+        <!--fin categoria-->
+
+        <!--comensales-->
+        <div class="form-group comensales">
+            Comensales: <input type="number" id="comensales" [(ngModel)]="comensales" class="form-control ml-3">
+        </div>
+        <!--fincomensales-->
+
+        <!--dificultad-->
+        <div class="form-group">
+            <select id="dificultad" [(ngModel)]="dificultad" name="dificultad" class="form-control" id="dropdown">
+                <option selected disabled hidden>Dificultad</option>
+                <option>Fácil</option>
+                <option>Normal</option>
+                <option>Difícil</option>
+            </select>
+        </div>
+        <!--fin dificultad-->
+
+        <!--duracion-->
+        <div class="form-group">
+            <input type="text" id="duracion" [(ngModel)]="duracion" name="duracion" class="form-control"
+                placeholder="Duración">
+        </div>
+        <!--fin duracion-->
+    </div>
+    <!--fin primer bloque-->
+
+    <!--segundo bloque-->
+    <div class="form-group segundo-bloque">
+        <h3>Ingredientes</h3>
+        <div class="form-group">
+            <div id="ingredientes">
+                <div class="ingrediente form-group">
+                    <input type="text" id="ingrediente1" placeholder="Ingrediente 1"
+                        class="form-control ingrediente-input">
+                    <input type="text" id="cantidad1" placeholder="Cantidad 1" class="form-control ingrediente-input">
+                </div>
+
+            </div>
+        </div>
+        <div class="center-button d-flex justify-content-center">
+             <button (click)="aniadirIngrediente()" class="btn btn-secondary">Añadir ingrediente <i
+                class="fas fa-plus"></i></button>
+        </div>
+       
+    </div>
+    <!--fin segundo bloque-->
+    <!--tercer bloque-->
+    <div class="form-group tercer-bloque">
+        <h3>Pasos</h3>
+        <div class="form-group">
+            <div id="pasos">
+                <div class="paso form-group">
+                    Paso 1: <input type="text" id="paso1" class="form-control">
+                    Imagen: <input type="file" id="imagen1">
+                </div>
+            </div>
+        </div>
+        <div class="center-button d-flex justify-content-center">
+             <button (click)="aniadirPaso()" class="btn btn-secondary">Añadir paso <i class="fas fa-plus"></i></button>
+        </div>
+       
+    </div>
+    <!--fin tercer bloque-->
+    <div class="d-flex justify-content-around align-items-center">
+        <div class="">
+            <button class="btn btn-lg btn-primary btn-block btn-login font-weight-bold boton-estilo" type="submit"
+                (click)="validarDatos()">Crear receta</button>
+        </div>
+        <div class="">
+            <button class="btn btn-lg btn-danger btn-block btn-login font-weight-bold boton-volver" type="submit"
+                [routerLink]="['/perfilUsuario']">Volver</button>
+        </div>
+    </div>

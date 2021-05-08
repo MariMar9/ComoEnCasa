@@ -13,15 +13,11 @@
 -->
 
 <div class="contenedor pt-3">
-    <div class="d-flex justify-content-end align-items-center mr-3">
-        <button id="botonCerrarSesion" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold"
-            type="submit" (click)="cerrarSesion()">Cerrar sesión</button>
-    </div>
     <div class="container-fluid mt-5 mb-5">
-    
+
         <div class="container">
             <div class="card card-profile shadow mt--300">
-    
+
                 <div class="px-4">
                     <div class="row justify-content-center">
                         <div class="col-lg-3 order-lg-2">
@@ -35,10 +31,16 @@
                         <h3 id="nombreUsuarioGoogle"></h3>
                     </div>
                     <div class="mt-5 py-5 border-top text-center">
-                        <div class="d-flex justify-content-start align-items-center mr-3">
-                            <button id="botonCerrarSesion" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold"
+                        <div class="d-flex justify-content-around align-items-center m-0">
+                            <button id="botonAniadirReceta"
+                                class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold boton-estilo"
                                 type="submit" [routerLink]="['/crearReceta']">Añadir receta</button>
+
+                            <button id="botonCerrarSesion"
+                                class="btn btn-lg btn-danger btn-block btn-login text-uppercase font-weight-bold boton-estilo"
+                                type="submit" (click)="cerrarSesion()">Cerrar sesión</button>
                         </div>
+
                         <div class="row justify-content-center">
                             <div class="col-lg-9">
                                 <p>Recetas publicadas</p>
@@ -51,4 +53,3 @@
         </div>
     </div>
 </div>
-

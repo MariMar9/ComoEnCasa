@@ -1,0 +1,78 @@
+.boton-estilo {
+  font-size: 1rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+  border-radius: 15px;
+  width: 200px;
+  margin: 0 !important;
+}
+.boton-volver {
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 15px;
+  width: 100px;
+  margin: 0 !important;
+}
+#titulo {
+  font-family: "Yellowtail", cursive;
+  margin-bottom: 0;
+}
+#descripcion{
+  font-size: 13px;
+  font-weight: 700;
+  color: rgb(98, 98, 98);
+}
+span{
+  color:#ec8001;
+}
+.checkboxlabel {
+  display: flex;
+  justify-content: space-between;
+  text-align: justify;
+}
+.message {
+  display: flex;
+  justify-content: space-between;
+}
+textarea {
+  width: 82%;
+}
+.radiobuttons {
+  display: flex;
+}
+.survey {
+  font-family: "Raleway", sans-serif;
+  margin-top: 25px;
+}
+
+.ingrediente{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ingrediente-input{
+  width: 45%;
+}
+#comensales{
+  width: 7%;
+}
+.comensales{
+  display: flex;
+align-items: center;
+}
+.primer-bloque,.segundo-bloque,.tercer-bloque{
+  padding: 10px;
+background-color: antiquewhite;
+border-radius: 10px;
+}
+input{
+  border:0
+}
+select{
+  border:0
+}
+@media (max-width: 500px) {
+  .checkboxlabel {
+    display: block;
+  }
+}

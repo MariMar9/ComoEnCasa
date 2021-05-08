@@ -1,12 +1,13 @@
 #nombreUsuario{
   text-transform: capitalize;
 }
-#botonCerrarSesion {
+.boton-estilo {
   font-size: 1rem;
   letter-spacing: 0.05rem;
   padding: 0.75rem 1rem;
   border-radius: 15px;
   width: 200px;
+  margin: 0!important;
 }
 .contenedor{
   background-image: url('../../../assets/img/fondos/paleta.svg');

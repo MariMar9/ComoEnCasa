@@ -21,9 +21,9 @@ export class CrearRecetaComponent implements OnInit {
     type: "text/plain",
   });*/
   nombre: string="";
-  categoria: string="--Seleccione una--";
+  categoria: string="Seleccione una categoría";
   comensales: number=0;
-  dificultad: string="--Seleccione una--";
+  dificultad: string="Dificultad";
   duracion: string="";
 
   constructor(public firebaseAuth: AngularFireAuth, public firestore: AngularFirestore, private _CargaScripts: CargarScriptsService, private _recibirCorreoUsuario: GuardarUsuarioService) {
@@ -39,22 +39,31 @@ export class CrearRecetaComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+/*
   volver(){
     window.location.href="\perfilUsuario";
-  }
+  }*/
 
   aniadirIngrediente(){
-    let nuevoIngrediente=document.createElement("p");
-    nuevoIngrediente.setAttribute("class", "ingrediente");
-
-    let texto=document.createTextNode("Ingrediente "+this.numIngrediente+": ");
-    nuevoIngrediente.appendChild(texto);
+    /**crea el contenedor de los ingredientes */
+    let nuevoIngrediente=document.createElement("div");
+ 
+    nuevoIngrediente.setAttribute("style", "display:flex;justify-content: space-between;");
+    nuevoIngrediente.setAttribute("class", "ingrediente form-group");
     
+
+    /**crea los input de los ingredientes*/
     let inputNuevoIngrediente=document.createElement("input");
+    inputNuevoIngrediente.setAttribute("placeholder","ingrediente "+this.numIngrediente)
+    inputNuevoIngrediente.setAttribute("class","form-control ingrediente-input")
+    inputNuevoIngrediente.setAttribute("style","width:45%;border:0")
     inputNuevoIngrediente.setAttribute("id", "ingrediente"+this.numIngrediente);
+    /**crea los input de las cantidades */
     let inputNuevaCantidad=document.createElement("input");
     inputNuevaCantidad.setAttribute("id", "cantidad"+this.numIngrediente);
+    inputNuevaCantidad.setAttribute("placeholder","Cantidad "+this.numIngrediente)
+    inputNuevaCantidad.setAttribute("style","width:45%;border:0")
+    inputNuevaCantidad.setAttribute("class","form-control ingrediente-input")
 
     nuevoIngrediente.appendChild(inputNuevoIngrediente);
     /*Mirar cómo añadir texto2 aquí.
@@ -76,6 +85,8 @@ export class CrearRecetaComponent implements OnInit {
     
     let inputNuevoPaso=document.createElement("input");
     inputNuevoPaso.setAttribute("id", "paso"+this.numPaso);
+    inputNuevoPaso.setAttribute("class", "form-control");
+    inputNuevoPaso.setAttribute("style", "border:0");
     let inputNuevaImagen=document.createElement("input");
     inputNuevaImagen.setAttribute("id", "imagen"+this.numPaso);
     inputNuevaImagen.setAttribute("type", "file");
@@ -98,15 +109,15 @@ export class CrearRecetaComponent implements OnInit {
       console.log("Falta nombre");
       correcto=false;
     }
-    if (this.categoria=="--Seleccione una--") {
+    if (this.categoria=="Seleccione una categoría") {
       console.log("Falta categoría");
       correcto=false;
     }
-    if (this.comensales==0) {
+    if (this.comensales==0 || this.comensales==null) {
       console.log("Falta comensales");
       correcto=false;
     }
-    if (this.dificultad=="--Seleccione una--") {
+    if (this.dificultad=="Dificultad") {
       console.log("Falta dificultad");
       correcto=false;
     }
