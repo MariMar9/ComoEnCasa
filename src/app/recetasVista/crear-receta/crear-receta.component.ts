@@ -35,47 +35,6 @@ export class CrearRecetaComponent implements OnInit {
         this.correo = user.email!;
       }
     });
-
-
-
-
-
-    /*const user = this.firebase.currentUser;
-    this.correoUsuario=user.email;*/
-    
-    /*firebase.onAuthStateChanged((user)=> {
-      if (user) {
-        const user = this.firebase.currentUser;
-    this.correoUsuario=user.email;
-      } else {
-        console.log("No logueado");
-      }
-    });*/
-
-    /*var user = firebase.auth().currentUser;
-    var name, email, photoUrl, uid, emailVerified;
-
-    if (user != null) {
-      name = user.displayName;
-      email = user.email;
-      photoUrl = user.photoURL;
-      emailVerified = user.emailVerified;
-      uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
-                      // this value to authenticate with your backend server, if
-                      // you have one. Use User.getToken() instead.
-    }*/
-    
-    /*
-    UserRecord userRecord = FirebaseAuth.getInstance().getUser(uid);
-    // See the UserRecord reference doc for the contents of userRecord.
-    System.out.println("Successfully fetched user data: " + userRecord.getUid());
-    */
-
-    /*this._recibirCorreoUsuario.mandarCorreoUsuario.subscribe(correoUsuario=>{
-      this.correoUsuario=correoUsuario;
-        console.log(correoUsuario+" /// "+ this.correoUsuario)
-        console.log(correoUsuario);
-      });*/
   }
 
   ngOnInit(): void {
