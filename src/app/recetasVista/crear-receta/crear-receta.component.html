@@ -58,109 +58,121 @@
 
 
 
-
-
-
-<div class="container mt-5 mb-5">
-    <!--presentacion-->
-    <h1 id="titulo" class="text-center">Como<span>EnCasa</span></h1>
-    <p id="descripcion" class="text-center">Comparta sus recetas favoritas </p>
-    <!--fin presentacion-->
-
-    <div class="insertar-img">imagen</div>
-
-    <!--primer bloque-->
-    <div class="form-group  primer-bloque">
-        <!--nombre-->
-        <div class="form-group">
-            <input type="text" id="nombre" [(ngModel)]="nombreReceta" class="form-control" placeholder="Nombre" required>
-        </div>
-        <!--fin nombre-->
-
-        <!--categoria-->
-        <div class="form-group">
-            <select id="categoria" [(ngModel)]="categoria" name="categoria" class="form-control" id="dropdown">
-                <option selected disabled hidden>Seleccione una categoría</option>
-                <option>Carnes</option>
-                <option>Pescados</option>
-                <option>Legumbres</option>
-                <option>Pastas</option>
-                <option>Ensaladas</option>
-                <option>Postres</option>
-            </select>
-        </div>
-        <!--fin categoria-->
-
-        <!--comensales-->
-        <div class="form-group comensales">
-            Comensales: <input type="number" id="comensales" [(ngModel)]="comensales" class="form-control ml-3">
-        </div>
-        <!--fincomensales-->
-
-        <!--dificultad-->
-        <div class="form-group">
-            <select id="dificultad" [(ngModel)]="dificultad" name="dificultad" class="form-control" id="dropdown">
-                <option selected disabled hidden>Dificultad</option>
-                <option>Fácil</option>
-                <option>Medio</option>
-                <option>Difícil</option>
-            </select>
-        </div>
-        <!--fin dificultad-->
-
-        <!--duracion-->
-        <div class="form-group">
-            <input type="text" id="duracion" [(ngModel)]="duracion" name="duracion" class="form-control"
-                placeholder="Duración">
-        </div>
-        <!--fin duracion-->
-    </div>
-    <!--fin primer bloque-->
-
-    <!--segundo bloque-->
-    <div class="form-group segundo-bloque">
-        <h3>Ingredientes</h3>
-        <div class="form-group">
-            <div id="ingredientes">
-                <div class="ingrediente form-group">
-                    <input type="text" id="ingrediente1" placeholder="Ingrediente 1"
-                        class="form-control ingrediente-input">
-                    <input type="text" id="cantidad1" placeholder="Cantidad 1" class="form-control ingrediente-input">
-                </div>
-
+<div class="container-fluid pt-5 pb-5 fondo">
+    <div class="container pt-3 pb-3">
+        <!--presentacion-->
+        <h1 id="titulo" class="text-center">Como<span>EnCasa</span></h1>
+        <p id="descripcion" class="text-center">Comparta sus recetas favoritas </p>
+        <!--fin presentacion-->
+    
+    
+    
+    
+        <!--primer bloque-->
+        <div class="form-group  primer-bloque">
+            <div class="custom-file mb-3">
+                <input type="file" class="custom-file-input" name="filename">
+                <label class="custom-file-label" for="customFile">Seleccione un archivo</label>
             </div>
+    
+    
+            <!--nombre-->
+            <div class="form-group">
+                <input type="text" id="nombre" [(ngModel)]="nombreReceta" class="form-control" placeholder="Nombre"
+                    required>
+            </div>
+            <!--fin nombre-->
+    
+            <!--categoria-->
+            <div class="form-group">
+                <select id="categoria" [(ngModel)]="categoria" name="categoria" class="form-control" id="dropdown">
+                    <option selected disabled hidden>Seleccione una categoría</option>
+                    <option>Carnes</option>
+                    <option>Pescados</option>
+                    <option>Legumbres</option>
+                    <option>Pastas</option>
+                    <option>Ensaladas</option>
+                    <option>Postres</option>
+                </select>
+            </div>
+            <!--fin categoria-->
+    
+            <!--comensales-->
+            <div class="form-group comensales">
+                Comensales: <input type="number" id="comensales" [(ngModel)]="comensales" class="form-control ml-3">
+            </div>
+            <!--fincomensales-->
+    
+            <!--dificultad-->
+            <div class="form-group">
+                <select id="dificultad" [(ngModel)]="dificultad" name="dificultad" class="form-control" id="dropdown">
+                    <option selected disabled hidden>Dificultad</option>
+                    <option>Fácil</option>
+                    <option>Medio</option>
+                    <option>Difícil</option>
+                </select>
+            </div>
+            <!--fin dificultad-->
+    
+            <!--duracion-->
+            <div class="form-group">
+                <input type="text" id="duracion" [(ngModel)]="duracion" name="duracion" class="form-control"
+                    placeholder="Duración">
+            </div>
+            <!--fin duracion-->
         </div>
-        <div class="center-button d-flex justify-content-center">
-             <button (click)="aniadirIngrediente()" class="btn btn-secondary">Añadir ingrediente <i
-                class="fas fa-plus"></i></button>
-        </div>
-       
-    </div>
-    <!--fin segundo bloque-->
-    <!--tercer bloque-->
-    <div class="form-group tercer-bloque">
-        <h3>Pasos</h3>
-        <div class="form-group">
-            <div id="pasos">
-                <div class="paso form-group">
-                    Paso 1: <input type="text" id="paso1" class="form-control">
-                    Imagen: <input type="file" id="imagen1">
+        <!--fin primer bloque-->
+    
+        <!--segundo bloque-->
+        <div class="form-group segundo-bloque">
+            <h3>Ingredientes</h3>
+            <div class="form-group">
+                <div id="ingredientes">
+                    <div class="ingrediente form-group">
+                        <input type="text" id="ingrediente1" placeholder="Ingrediente 1"
+                            class="form-control ingrediente-input">
+                        <input type="text" id="cantidad1" placeholder="Cantidad 1" class="form-control ingrediente-input">
+                    </div>
+    
                 </div>
             </div>
+            <div class="center-button d-flex justify-content-center">
+                <button (click)="aniadirIngrediente()" class="btn btn-secondary">Añadir ingrediente <i
+                        class="fas fa-plus"></i></button>
+            </div>
+    
         </div>
-        <div class="center-button d-flex justify-content-center">
-             <button (click)="aniadirPaso()" class="btn btn-secondary">Añadir paso <i class="fas fa-plus"></i></button>
+        <!--fin segundo bloque-->
+        <!--tercer bloque-->
+        <div class="form-group tercer-bloque">
+            <h3>Pasos</h3>
+            <div class="form-group">
+                <div id="pasos">
+                    <div class="paso form-group">
+                        Paso 1: <input type="text" id="paso1" class="form-control form-group">
+                        <div class="custom-file mb-3">
+                            <input type="file" class="custom-file-input" name="filename">
+                            <label class="custom-file-label" for="customFile" data-content="seleccionar">Seleccione un archivo</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="center-button d-flex justify-content-center">
+                <button (click)="aniadirPaso()" class="btn btn-secondary">Añadir paso <i class="fas fa-plus"></i></button>
+            </div>
+    
         </div>
-       
-    </div>
-    <!--fin tercer bloque-->
-    <div class="d-flex justify-content-around align-items-center">
-        <div class="">
-            <button class="btn btn-lg btn-primary btn-block btn-login font-weight-bold boton-estilo" type="submit"
-                (click)="validarDatos()">Crear receta</button>
+        <!--fin tercer bloque-->
+        <div class="d-flex justify-content-around align-items-center">
+            <div class="">
+                <button class="btn btn-lg btn-primary btn-block btn-login font-weight-bold boton-estilo" type="submit"
+                    (click)="validarDatos()">Crear receta</button>
+            </div>
+            <div class="">
+                <button class="btn btn-lg btn-danger btn-block btn-login font-weight-bold boton-volver" type="submit"
+                    [routerLink]="['/perfilUsuario']">Volver</button>
+            </div>
         </div>
-        <div class="">
-            <button class="btn btn-lg btn-danger btn-block btn-login font-weight-bold boton-volver" type="submit"
-                [routerLink]="['/perfilUsuario']">Volver</button>
-        </div>
-    </div>
+</div>
+
+
