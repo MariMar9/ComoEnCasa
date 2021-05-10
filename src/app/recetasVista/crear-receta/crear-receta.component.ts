@@ -48,6 +48,7 @@ cargaInput: string=''
   ) {
     this.quitar = _CargaScripts.quitarCabFoot();
     _CargaScripts.carga(["js/javaScript"]);
+    _CargaScripts.carga(["js/javaScriptQuitar"]);
     this.firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
         /*La exclamación es para indicar que estamos seguros de que no es null*/
@@ -55,7 +56,7 @@ cargaInput: string=''
       }
     });
   }
-
+  
   ngOnInit(): void {}
 
   aniadirIngrediente() {
@@ -81,14 +82,20 @@ cargaInput: string=''
       'placeholder',
       'Cantidad ' + this.numIngrediente
     );
-
+    let botonQuitarIngrediente = document.createElement('button');
+    botonQuitarIngrediente.setAttribute('class', 'btn btn-secondary quitarIngredienteCantidad');
+    let botonQuitarIngredienteIcono = document.createElement('i');
+    botonQuitarIngredienteIcono.setAttribute('class', 'fas fa-times');
+    botonQuitarIngrediente.appendChild(botonQuitarIngredienteIcono)
 
     nuevoIngrediente.appendChild(inputNuevoIngrediente);
     nuevoIngrediente.appendChild(inputNuevaCantidad);
+    nuevoIngrediente.appendChild(botonQuitarIngrediente);
 
     let ingredientes = document.getElementById('ingredientes');
     ingredientes!.appendChild(nuevoIngrediente);
     this.numIngrediente++;
+    this._CargaScripts.carga(["js/javaScriptQuitar"]);
   }
 
   aniadirPaso() {
@@ -134,11 +141,7 @@ cargaInput: string=''
 
     this.numPaso++;
   }
-  eliminarOpcion(){
-   
-    let eliminarIngredienteCantidad = document.querySelectorAll('.ingrediente'); 
-    console.log(eliminarIngredienteCantidad)
-  }
+
   validarDatos() {
     let correcto = true;
     if (this.nombreReceta == '') {
