@@ -134,7 +134,11 @@ cargaInput: string=''
 
     this.numPaso++;
   }
-
+  eliminarOpcion(){
+   
+    let eliminarIngredienteCantidad = document.querySelectorAll('.ingrediente'); 
+    console.log(eliminarIngredienteCantidad)
+  }
   validarDatos() {
     let correcto = true;
     if (this.nombreReceta == '') {
