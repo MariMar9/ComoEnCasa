@@ -1,3 +1,10 @@
+.fondo{
+  background-image: url('../../../assets/img/fondos/fondo-crear.svg');
+  background-position-x: center;
+background-position-y: center;
+background-size: cover;
+background-repeat: no-repeat;
+}
 .boton-estilo {
   font-size: 1rem;
   letter-spacing: 0.05rem;
@@ -45,17 +52,7 @@ textarea {
   margin-top: 25px;
 }
 
-.ingrediente{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.ingrediente-input{
-  width: 45%;
-}
-#comensales{
-  width: 7%;
-}
+
 .comensales{
   display: flex;
 align-items: center;
@@ -76,9 +73,6 @@ border-radius: 10px;
 
 .custom-file-input{
 cursor: pointer;
-}
-::placeholder {
-  color: #495057;
 }
 
 .container{

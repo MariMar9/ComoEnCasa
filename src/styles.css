@@ -25,6 +25,27 @@ body {
 .nav-link:hover {
   color: #ec8001!important;
 }
+/*atributo especial input imagenes de crear receta*/
 .custom-file-input ~ .custom-file-label::after {
   content: attr(data-content)!important;
+}
+/*input de ingredientes en crear receta*/
+.ingrediente{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ingrediente-input{
+  width: 45%;
+}
+#comensales{
+  width: 7%;
+}
+
+/*color inputs crear receta*/
+.input-crear-receta{
+  color: #495057;
+}
+.input-crear-receta::placeholder {
+ color: #495057;
 }

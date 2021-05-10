@@ -65,13 +65,13 @@ export class CargarScriptsService {
   }
 
   quitarCabFoot() {
-    if(this.url=="/iniciarSesion" || this.url=="/registro"){
-      
+    if(this.url=="/iniciarSesion" || this.url=="/registro" || this.url=="/crearReceta"){
+      console.log("puede pasar")
       this.quitar=true;
       console.log("si url"+this.quitar)
       return this.quitar;
     }else{
-      
+      console.log("no puede pasar")
       this.quitar=false;
       console.log("no url"+this.quitar)
       return this.quitar;

@@ -71,21 +71,21 @@
         <!--primer bloque-->
         <div class="form-group  primer-bloque">
             <div class="custom-file mb-3">
-                <input type="file" class="custom-file-input" name="filename">
-                <label class="custom-file-label" for="customFile">Seleccione un archivo</label>
+                <input type="file" class="custom-file-input input-crear-receta" name="filename">
+                <label class="custom-file-label input-crear-receta" for="customFile">Seleccione un archivo</label>
             </div>
     
     
             <!--nombre-->
             <div class="form-group">
-                <input type="text" id="nombre" [(ngModel)]="nombreReceta" class="form-control" placeholder="Nombre"
+                <input type="text" id="nombre" [(ngModel)]="nombreReceta" class="form-control input-crear-receta" placeholder="Nombre"
                     required>
             </div>
             <!--fin nombre-->
     
             <!--categoria-->
             <div class="form-group">
-                <select id="categoria" [(ngModel)]="categoria" name="categoria" class="form-control" id="dropdown">
+                <select id="categoria" [(ngModel)]="categoria" name="categoria" class="form-control input-crear-receta" id="dropdown">
                     <option selected disabled hidden>Seleccione una categoría</option>
                     <option>Carnes</option>
                     <option>Pescados</option>
@@ -99,13 +99,13 @@
     
             <!--comensales-->
             <div class="form-group comensales">
-                Comensales: <input type="number" id="comensales" [(ngModel)]="comensales" class="form-control ml-3">
+                Comensales: <input type="number" id="comensales" [(ngModel)]="comensales" class="form-control ml-3 input-crear-receta">
             </div>
             <!--fincomensales-->
     
             <!--dificultad-->
             <div class="form-group">
-                <select id="dificultad" [(ngModel)]="dificultad" name="dificultad" class="form-control" id="dropdown">
+                <select id="dificultad" [(ngModel)]="dificultad" name="dificultad" class="form-control input-crear-receta" id="dropdown">
                     <option selected disabled hidden>Dificultad</option>
                     <option>Fácil</option>
                     <option>Medio</option>
@@ -116,7 +116,7 @@
     
             <!--duracion-->
             <div class="form-group">
-                <input type="text" id="duracion" [(ngModel)]="duracion" name="duracion" class="form-control"
+                <input type="text" id="duracion" [(ngModel)]="duracion" name="duracion" class="form-control input-crear-receta"
                     placeholder="Duración">
             </div>
             <!--fin duracion-->
@@ -130,8 +130,8 @@
                 <div id="ingredientes">
                     <div class="ingrediente form-group">
                         <input type="text" id="ingrediente1" placeholder="Ingrediente 1"
-                            class="form-control ingrediente-input">
-                        <input type="text" id="cantidad1" placeholder="Cantidad 1" class="form-control ingrediente-input">
+                            class="form-control ingrediente-input input-crear-receta">
+                        <input type="text" id="cantidad1" placeholder="Cantidad 1" class="form-control ingrediente-input input-crear-receta">
                     </div>
     
                 </div>
@@ -149,10 +149,10 @@
             <div class="form-group">
                 <div id="pasos">
                     <div class="paso form-group">
-                        Paso 1: <input type="text" id="paso1" class="form-control form-group">
+                        Paso 1: <input type="text" id="paso1" class="form-control form-group input-crear-receta">
                         <div class="custom-file mb-3">
                             <input type="file" class="custom-file-input" name="filename">
-                            <label class="custom-file-label" for="customFile" data-content="seleccionar">Seleccione un archivo</label>
+                            <label class="custom-file-label input-crear-receta" for="customFile" data-content="seleccionar">Seleccione un archivo</label>
                         </div>
                     </div>
                 </div>
@@ -164,14 +164,11 @@
         </div>
         <!--fin tercer bloque-->
         <div class="d-flex justify-content-around align-items-center">
-            <div class="">
+   
                 <button class="btn btn-lg btn-primary btn-block btn-login font-weight-bold boton-estilo" type="submit"
                     (click)="validarDatos()">Crear receta</button>
-            </div>
-            <div class="">
-                <button class="btn btn-lg btn-danger btn-block btn-login font-weight-bold boton-volver" type="submit"
-                    [routerLink]="['/perfilUsuario']">Volver</button>
-            </div>
+                <a class="btn btn-lg btn-danger btn-block btn-login font-weight-bold boton-volver" href="/perfilUsuario">Volver</a>
+
         </div>
 </div>
 

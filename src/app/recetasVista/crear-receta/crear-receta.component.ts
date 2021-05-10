@@ -38,7 +38,8 @@ export class CrearRecetaComponent implements OnInit {
   /*imagenPaso: File=new File(["foo"], "foo.txt", {
     type: "text/plain",
   });*/
-
+/**ejecutar script */
+cargaInput: string=''
   constructor(
     public firebaseAuth: AngularFireAuth,
     public firestore: AngularFirestore,
@@ -46,7 +47,7 @@ export class CrearRecetaComponent implements OnInit {
     private _recibirCorreoUsuario: GuardarUsuarioService
   ) {
     this.quitar = _CargaScripts.quitarCabFoot();
-
+    _CargaScripts.carga(["js/javaScript"]);
     this.firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
         /*La exclamación es para indicar que estamos seguros de que no es null*/
@@ -56,10 +57,6 @@ export class CrearRecetaComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-  /*
-  volver(){
-    window.location.href="\perfilUsuario";
-  }*/
 
   aniadirIngrediente() {
     /**crea el contenedor de los ingredientes */
@@ -73,28 +70,18 @@ export class CrearRecetaComponent implements OnInit {
 
     /**crea los input de los ingredientes*/
     let inputNuevoIngrediente = document.createElement('input');
-    inputNuevoIngrediente.setAttribute(
-      'placeholder',
-      'ingrediente ' + this.numIngrediente
-    );
-    inputNuevoIngrediente.setAttribute(
-      'class',
-      'form-control ingrediente-input'
-    );
-    inputNuevoIngrediente.setAttribute('style', 'width:45%;');
-    inputNuevoIngrediente.setAttribute(
-      'id',
-      'ingrediente' + this.numIngrediente
-    );
+    inputNuevoIngrediente.setAttribute('class','form-control ingrediente-input input-crear-receta');
+    inputNuevoIngrediente.setAttribute('placeholder','ingrediente ' + this.numIngrediente);
+    inputNuevoIngrediente.setAttribute('id','ingrediente' + this.numIngrediente);
     /**crea los input de las cantidades */
     let inputNuevaCantidad = document.createElement('input');
+    inputNuevaCantidad.setAttribute('class', 'form-control ingrediente-input input-crear-receta');
     inputNuevaCantidad.setAttribute('id', 'cantidad' + this.numIngrediente);
     inputNuevaCantidad.setAttribute(
       'placeholder',
       'Cantidad ' + this.numIngrediente
     );
-    inputNuevaCantidad.setAttribute('style', 'width:45%;');
-    inputNuevaCantidad.setAttribute('class', 'form-control ingrediente-input');
+
 
     nuevoIngrediente.appendChild(inputNuevoIngrediente);
     nuevoIngrediente.appendChild(inputNuevaCantidad);
@@ -105,6 +92,7 @@ export class CrearRecetaComponent implements OnInit {
   }
 
   aniadirPaso() {
+    this._CargaScripts.carga(["js/javaScript"]);
     let nuevoPaso = document.createElement('div');
     nuevoPaso.setAttribute('class', 'paso form-group');
 
@@ -113,7 +101,7 @@ export class CrearRecetaComponent implements OnInit {
 
     let inputNuevoPaso = document.createElement('input');
     inputNuevoPaso.setAttribute('id', 'paso' + this.numPaso);
-    inputNuevoPaso.setAttribute('class', 'form-control form-group');
+    inputNuevoPaso.setAttribute('class', 'form-control form-group input-crear-receta');
 
     nuevoPaso.appendChild(inputNuevoPaso)
 
@@ -129,8 +117,10 @@ export class CrearRecetaComponent implements OnInit {
     divImg.appendChild(inputNuevaImagen)
 
     let labelNuevaImg = document.createElement('label');
-    labelNuevaImg.setAttribute('class','custom-file-label')
+    labelNuevaImg.setAttribute('class','custom-file-label input-crear-receta')
     labelNuevaImg.setAttribute("data-content","Seleccionar")
+    labelNuevaImg.innerHTML="Seleccione un archivo";
+
     divImg.appendChild(labelNuevaImg)
  
 

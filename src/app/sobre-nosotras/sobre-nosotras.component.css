@@ -1,8 +1,7 @@
 #nosotras {
-    background-image: linear-gradient(-20deg, #ddd6f3 0%, #faaca8 100%, #faaca8 100%);
+    background-image: url('../../assets/img/fondos/fondo-general.svg');
     background-size: cover;
     background-repeat: no-repeat;
-    background-position-x: center;
     border-top: #e3e3e3 1px solid;
   }
   #nosotras h1 {
