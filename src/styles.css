@@ -38,8 +38,17 @@ body {
 .ingrediente-input{
   width: 45%;
 }
-#comensales{
-  width: 7%;
+
+@media (max-width: 360px) {
+    #comensales{
+      width: 100%;
+    }
+}
+
+@media (min-width: 360px) {
+  #comensales{
+    width: 25%;
+  }
 }
 
 /*color inputs crear receta*/
