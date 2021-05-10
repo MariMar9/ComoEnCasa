@@ -1,7 +1,3 @@
-/*for (let i = 0; i < document.querySelectorAll("quitarIngredienteCantidad").length; i++) {
-
-    document.querySelectorAll(".quitarIngredienteCantidad")[i].addEventListener("click",'quitarIngredienteCantidad')
-}*/
 var quita = document.querySelectorAll(".quitarIngredienteCantidad")
 
 for (let i = 0; i < quita.length; i++) {
@@ -16,6 +12,5 @@ function quitarIngredienteCantidad(e) {
             ((e.target).parentElement).parentElement.remove()
         }
     }
-
 }
 

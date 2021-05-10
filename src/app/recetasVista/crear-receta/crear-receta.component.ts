@@ -95,6 +95,7 @@ cargaInput: string=''
     let ingredientes = document.getElementById('ingredientes');
     ingredientes!.appendChild(nuevoIngrediente);
     this.numIngrediente++;
+    
     this._CargaScripts.carga(["js/javaScriptQuitar"]);
   }
 
