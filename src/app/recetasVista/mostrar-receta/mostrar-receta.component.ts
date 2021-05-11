@@ -12,18 +12,21 @@ import {Router} from '@angular/router';
 export class MostrarRecetaComponent implements OnInit {
 
   recetas: Observable<any[]>;
+  ingredientes: Observable<any[]>;
+  pasos: Observable<any[]>;
   idReceta: number=0;
   nomReceta: string='s'
-  constructor(public firestore: AngularFirestore, private _pasarReceta: RecetasService, private router:Router, private _pasarNomReceta: RecetasService) {
+  pasosOrd: string[] = [];
+
+  constructor(public firestore: AngularFirestore, private _pasarReceta: RecetasService, private router:Router, private _pasarNomReceta: RecetasService, private _consultarColeccion: RecetasService) {
+    const path = 'pasos/';
     this.recetas = firestore.collection('recetas').valueChanges();
-     /*Con el método "subscribe" recibe el dato que manda la función "mandarCategoria".*/
+    this.ingredientes = firestore.collection('ingredientes').valueChanges();
+    this.pasos = this._consultarColeccion.getCollectionRecetas<any>(path,'id')
+
+    /*Con el método "subscribe" recibe el dato que manda la función "mandarCategoria".*/
     this._pasarReceta.mandarReceta.subscribe(idReceta=>{
     this.idReceta=idReceta;
-    })
-    /*Con el método "subscribe" recibe el dato que manda la función "mandarRecetaNombre".*/
-    this._pasarNomReceta.mandarRecetaNombre.subscribe(nomReceta=>{
-        console.log(nomReceta+"="+ this.nomReceta)
-      this.nomReceta=nomReceta;
     })
 
     setTimeout(() => {

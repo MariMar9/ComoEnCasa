@@ -15,7 +15,8 @@ import { map, take } from 'rxjs/operators';
 export class OrdenarAlfComponent implements OnInit {
   //recetasFirebase: Observable<any[]>;
   recetas: string[] = [];
-
+  recetasOrden: Observable<any[]>;
+  idReceta: number=0;
   constructor(
     public firestore: AngularFirestore,
     private _pasarReceta: RecetasService,
@@ -23,8 +24,27 @@ export class OrdenarAlfComponent implements OnInit {
     private _pasarNomReceta: RecetasService
     
   ) {
-    //this.recetasFirebase = firestore.collection('recetas').valueChanges();
+    /**
+     * manda la ruta (path) y el nombre del parámetro
+     */
     const path = 'recetas/';
+    this.recetasOrden =  this._consultarColeccion.getCollectionRecetas<any>(path, 'nombre')
+    this._pasarReceta.mandarReceta.subscribe(idReceta=>{
+      this.idReceta=idReceta.id;
+      })
+  }
+
+  pasarReceta(idReceta: number) {
+    setTimeout(() => {
+      this._pasarReceta.mandarReceta.emit(idReceta);
+    }, 200);
+  }
+
+  ngOnInit(): void {}
+}
+
+
+    /*nota de interes: tabajar la coleccion desde un array
     this._consultarColeccion
       .getCollectionRecetas<any>(path, 'nombre')
       .subscribe((recetas) => {
@@ -32,20 +52,4 @@ export class OrdenarAlfComponent implements OnInit {
           this.recetas[i] = recetas[i].nombre;
         //  console.log(this.recetas);
         }
-      });
-  }
-
-  /**
-   * recibe el nombre de la receta se lo pasa a mandaRecetaNombre()
-   * @param nomReceta 
-   */
-  pasarRecetaNom(nomReceta: string) {
-    
-    setTimeout(() => {
-      console.log(nomReceta);
-      this._pasarNomReceta.mandarRecetaNombre.emit(nomReceta);
-    }, 300);
-  }
-
-  ngOnInit(): void {}
-}
+      });*/
