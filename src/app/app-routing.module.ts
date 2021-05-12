@@ -5,7 +5,7 @@ import { ContactanosComponent } from './datosInteresVista/contactanos/contactano
 import { InicioComponent } from './inicioVista/inicio.component';
 import { MostrarRecetaComponent } from './recetasVista/mostrar-receta/mostrar-receta.component';
 import { OrdenarAlfComponent } from './recetasVista/ordenar-alf/ordenar-alf.component';
-import { RecetasComponent } from './recetasVista/recetas/recetas.component';
+import { RecetasComponent } from './recetasVista/recetas-por-categoria/recetas.component';
 import { SobreNosotrasComponent } from './datosInteresVista/sobre-nosotras/sobre-nosotras.component';
 import { CrearRecetaComponent } from './recetasVista/crear-receta/crear-receta.component';
 

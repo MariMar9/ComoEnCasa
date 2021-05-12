@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { ContactanosComponent } from './datosInteresVista/contactanos/contactanos.component';
 import { from } from 'rxjs';
-import { RecetasComponent } from './recetasVista/recetas/recetas.component';
+import { RecetasComponent } from './recetasVista/recetas-por-categoria/recetas.component';
 import { InicioComponent } from './inicioVista/inicio.component';
 import { SobreNosotrasComponent } from './datosInteresVista/sobre-nosotras/sobre-nosotras.component';
 import { OrdenarAlfComponent } from './recetasVista/ordenar-alf/ordenar-alf.component';
