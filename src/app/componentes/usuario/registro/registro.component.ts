@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { GuardarUsuarioService } from '../../core/services/guardar-usuario.service';
+import { GuardarUsuarioService } from '../../../core/services/guardar-usuario.service';
 /*import { userInfo } from 'node:os';*/
 
 @Component({

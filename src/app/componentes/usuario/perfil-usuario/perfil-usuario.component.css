@@ -10,7 +10,7 @@
   margin: 0!important;
 }
 .contenedor{
-  background-image: url('../../../assets/img/fondos/paleta.svg');
+  background-image: url('../../../../assets/img/fondos/paleta.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

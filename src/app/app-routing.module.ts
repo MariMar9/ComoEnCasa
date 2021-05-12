@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BuscarRecetaComponent } from './recetas/buscar-receta/buscar-receta.component';
-import { ContactanosComponent } from './datosInteres/contactanos/contactanos.component';
-import { InicioComponent } from './inicio/inicio.component';
-import { MostrarRecetaComponent } from './recetas/mostrar-receta/mostrar-receta.component';
-import { OrdenarAlfComponent } from './recetas/ordenar-alf/ordenar-alf.component';
-import { RecetasComponent } from './recetas/recetas-por-categoria/recetas.component';
-import { SobreNosotrasComponent } from './datosInteres/sobre-nosotras/sobre-nosotras.component';
-import { CrearRecetaComponent } from './recetas/crear-receta/crear-receta.component';
+import { BuscarRecetaComponent } from './componentes/recetas/buscar-receta/buscar-receta.component';
+import { ContactanosComponent } from './componentes/datosInteres/contactanos/contactanos.component';
+import { InicioComponent } from './componentes/inicio/inicio.component';
+import { MostrarRecetaComponent } from './componentes/recetas/mostrar-receta/mostrar-receta.component';
+import { OrdenarAlfComponent } from './componentes/recetas/ordenar-alf/ordenar-alf.component';
+import { RecetasComponent } from './componentes/recetas/recetas-por-categoria/recetas.component';
+import { SobreNosotrasComponent } from './componentes/datosInteres/sobre-nosotras/sobre-nosotras.component';
+import { CrearRecetaComponent } from './componentes/recetas/crear-receta/crear-receta.component';
 
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent },

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CargarScriptsService } from '../core/services/cargar-scripts.service';
+import { CargarScriptsService } from '../../core/services/cargar-scripts.service';
 
 @Component({
   selector: 'app-inicio',
