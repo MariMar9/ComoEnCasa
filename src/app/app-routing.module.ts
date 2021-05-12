@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BuscarRecetaComponent } from './buscar-receta/buscar-receta.component';
+import { BuscarRecetaComponent } from './recetasVista/buscar-receta/buscar-receta.component';
 import { ContactanosComponent } from './contactanos/contactanos.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { MostrarRecetaComponent } from './recetasVista/mostrar-receta/mostrar-receta.component';
