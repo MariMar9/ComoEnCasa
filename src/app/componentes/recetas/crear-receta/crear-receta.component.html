@@ -1,63 +1,3 @@
-<!-- <br><br>
-
-<div>
- <div>
-        <p>Imagen: <input type="file" id="imagen"> </p>
-      <p>Nombre: <input type="text" id="nombre" [(ngModel)]="nombre"> </p>
-<p>Categoría:
-    <select name="categoria" id="categoria" [(ngModel)]="categoria">
-        <option selected disabled hidden>--Seleccione una--</option>
-        <option>Carnes</option>
-        <option>Pescados</option>
-        <option>Legumbres</option>
-        <option>Pastas</option>
-        <option>Ensaladas</option>
-        <option>Postres</option>
-    </select>
-</p>
-<p>Comensales: <input type="number" id="comensales" [(ngModel)]="comensales"> </p>
-<p>Dificultad:
-    <select name="dificultad" id="categoria" [(ngModel)]="dificultad">
-        <option selected disabled hidden>--Seleccione una--</option>
-        <option>Fácil</option>
-        <option>Normal</option>
-        <option>Difícil</option>
-    </select>
-</p>
-        <p>Duración: <input type="text" id="duracion" [(ngModel)]="duracion"> </p>
-    </div>
-
-
-
-    <div class="form-group segundo-bloque">
-        <h1>Ingredientes</h1>
-        <div id="ingredientes">
-            <p class="ingrediente">
-                Ingrediente 1: <input type="text" id="ingrediente1">
-                Cantidad: <input type="text" id="cantidad1">
-            </p>
-        </div>
-        <button (click)="aniadirIngrediente()">Añadir ingrediente</button>
-    </div>
-
-
-
-    <div>
-        <h1>Pasos</h1>
-        <div id="pasos">
-            <p class="paso">
-                Paso 1: <input type="text" id="paso1">
-                Imagen: <input type="file" id="imagen1">
-            </p>
-        </div>
-        <button (click)="aniadirPaso()">Añadir paso</button>
-    </div>
-
-</div>
--->
-
-
-
 <div class="container-fluid pt-5 pb-5 fondo">
     <div class="container pt-3 pb-3">
         <!--presentacion-->
@@ -108,7 +48,7 @@
                 <select id="dificultad" [(ngModel)]="dificultad" name="dificultad" class="form-control input-crear-receta" id="dropdown">
                     <option selected disabled hidden>Dificultad</option>
                     <option>Fácil</option>
-                    <option>Medio</option>
+                    <option>Media</option>
                     <option>Difícil</option>
                 </select>
             </div>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { GuardarUsuarioService } from 'src/app/core/services/guardar-usuario.service';
 
 
 @Component({
@@ -12,7 +11,7 @@ export class PerfilUsuarioComponent implements OnInit {
 
   correo: string = "";
   
-  constructor(public firebaseAuth: AngularFireAuth, private _pasarCorreoUsuario: GuardarUsuarioService) {
+  constructor(public firebaseAuth: AngularFireAuth) {
     this.firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
         /*La exclamación es para indicar que estamos seguros de que no es null*/

@@ -29,11 +29,11 @@ export class MostrarRecetaComponent implements OnInit {
     this.idReceta=idReceta;
     })
 
-    setTimeout(() => {
+    /*setTimeout(() => {
       if (this.idReceta==0 && this.nomReceta=='s') {
         this.router.navigate(['/recetas']);
       }
-    }, 300);
+    }, 300);*/
   }
 
   ngOnInit(): void {

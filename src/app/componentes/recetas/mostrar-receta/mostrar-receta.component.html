@@ -13,11 +13,13 @@
 <ng-container *ngFor="let ingredientesReceta of ingredientes | async">
     <ng-container *ngIf="ingredientesReceta.idReceta==idReceta;">
         <p>{{ingredientesReceta.nombre}}</p>
+        <p>{{ingredientesReceta.cantidad}}</p>
     </ng-container>
 </ng-container>
 <!--mostrar los pasos de la receta-->
 <ng-container *ngFor="let pasosReceta of pasos | async">
     <ng-container *ngIf="pasosReceta.idReceta==idReceta;">
+        <p>Paso {{pasosReceta.id}}:</p>
         <p>{{pasosReceta.descripcion}}</p>
     </ng-container>
 </ng-container>

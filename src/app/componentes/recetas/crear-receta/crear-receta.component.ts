@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { CargarScriptsService } from 'src/app/core/services/cargar-scripts.service';
-import { GuardarUsuarioService } from 'src/app/core/services/guardar-usuario.service';
 
 @Component({
   selector: 'app-crear-receta',
@@ -43,8 +42,7 @@ cargaInput: string=''
   constructor(
     public firebaseAuth: AngularFireAuth,
     public firestore: AngularFirestore,
-    private _CargaScripts: CargarScriptsService,
-    private _recibirCorreoUsuario: GuardarUsuarioService
+    private _CargaScripts: CargarScriptsService
   ) {
     this.quitar = _CargaScripts.quitarCabFoot();
     _CargaScripts.carga(["js/javaScript"]);
@@ -233,7 +231,7 @@ cargaInput: string=''
       this.firestore
         .collection('ingredientes')
         .add({
-          id: this.idIngrediente,
+          id: i+1,
           nombre: this.nombreIngrediente,
           cantidad: this.cantidad,
           idReceta: this.idReceta,
@@ -253,7 +251,7 @@ cargaInput: string=''
       this.firestore
         .collection('pasos')
         .add({
-          id: this.idPaso,
+          id: i+1,
           descripcion: this.descripcion,
           idReceta: this.idReceta,
         })

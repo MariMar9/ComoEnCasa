@@ -4,7 +4,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { GuardarUsuarioService } from '../../../core/services/guardar-usuario.service';
 /*import { userInfo } from 'node:os';*/
 
 @Component({
@@ -21,7 +20,7 @@ export class RegistroComponent implements OnInit {
   usuarios: Observable<any[]>;
 
   constructor(
-    public auth: AngularFireAuth,firestore: AngularFirestore,private _GuardarUsuarioService: GuardarUsuarioService,private ngZone: NgZone) {
+    public auth: AngularFireAuth,firestore: AngularFirestore,private ngZone: NgZone) {
     /*Rellena la variable usuarios con una colección de tipo usuarios*/
     this.usuarios = firestore.collection('usuarios').valueChanges();
   }
