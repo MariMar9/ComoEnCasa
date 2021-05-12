@@ -15,14 +15,14 @@ import { CabeceraComponent } from './core/cabecera/cabecera.component';
 import { UsuariosModule } from './usuario/usuarios.module';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
-import { ContactanosComponent } from './datosInteresVista/contactanos/contactanos.component';
+import { ContactanosComponent } from './datosInteres/contactanos/contactanos.component';
 import { from } from 'rxjs';
-import { RecetasComponent } from './recetasVista/recetas-por-categoria/recetas.component';
-import { InicioComponent } from './inicioVista/inicio.component';
-import { SobreNosotrasComponent } from './datosInteresVista/sobre-nosotras/sobre-nosotras.component';
-import { OrdenarAlfComponent } from './recetasVista/ordenar-alf/ordenar-alf.component';
-import { MostrarRecetaComponent } from './recetasVista/mostrar-receta/mostrar-receta.component';
-import { CrearRecetaComponent } from './recetasVista/crear-receta/crear-receta.component';
+import { RecetasComponent } from './recetas/recetas-por-categoria/recetas.component';
+import { InicioComponent } from './inicio/inicio.component';
+import { SobreNosotrasComponent } from './datosInteres/sobre-nosotras/sobre-nosotras.component';
+import { OrdenarAlfComponent } from './recetas/ordenar-alf/ordenar-alf.component';
+import { MostrarRecetaComponent } from './recetas/mostrar-receta/mostrar-receta.component';
+import { CrearRecetaComponent } from './recetas/crear-receta/crear-receta.component';
 
 const routes: Routes = [];
 
