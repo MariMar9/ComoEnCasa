@@ -1,33 +1,60 @@
 footer {
-    height: 225px;
+  height: 225px;
 }
 
-img{
-    height: 15vh;
+img {
+  height: 15vw;
+  max-height: 15vh;
+  min-height: 13vh;
 }
 
 footer .link-info a {
-    padding: 3px 0;
-    -webkit-transition: .5s all ease;
-    -moz-transition: .5s all ease;
-    transition: .5s all ease;
+  padding: 3px 0;
+  -webkit-transition: 0.5s all ease;
+  -moz-transition: 0.5s all ease;
+  transition: 0.5s all ease;
 }
 
 footer .link-info a:hover {
-    padding: 3px 0;
-    margin-left:30px;
-    font-weight: 700;
-    
+  padding: 3px 0;
+  margin-left: 30px;
+  font-weight: 700;
 }
-.btn-social.bg-primary{
-    border: #2a5d95 2px solid;
+.rounded-circle{
+  text-decoration: none;
+  width: 35px;
+  height: 35px;
 }
-.btn-social.bg-danger{
-    border: #79222a 2px solid;
+
+.twitter{
+  background: rgb(29,161,242);
+  border: 2px solid rgb(60, 97, 149);
+  transition: 0.5s;
 }
-.btn-social.bg-info{
-    border: #2a8095 2px solid;
+.twitter:hover{
+  background: rgb(12, 123, 192);
 }
-.btn-social.bg-warning{
-    border: #c49509 2px solid;
+.youtube{
+  background: rgb(255,0,0);
+  border: 2px solid rgb(148, 53, 53);
+  transition: 0.5s;
+}
+.youtube:hover{
+  background: rgb(184, 8, 8);
+}
+.facebook{
+  background:rgb(24,119,242);
+  border: 2px solid rgb(33, 82, 144);
+  transition: 0.5s;
+}
+.facebook:hover{
+  background: rgb(20, 92, 185);
+}
+.linkedin{
+  background:rgb(255, 162, 40);
+  border: 2px solid rgb(175, 108, 0);
+  transition: 0.5s;
+}
+.linkedin:hover{
+  background: rgb(202, 128, 31);
 }

@@ -2,11 +2,12 @@
   text-transform: capitalize;
 }
 .boton-estilo {
+  border-radius: 2rem!important;
   font-size: 1rem;
   letter-spacing: 0.05rem;
   padding: 0.75rem 1rem;
   border-radius: 15px;
-  width: 200px;
+  width: 150px;
   margin: 0!important;
 }
 .contenedor{
@@ -31,4 +32,10 @@ img {
 
 .margen-img{
   margin-top: 145px;
+}
+#botonAniadirReceta,#botonCerrarSesion{
+  margin-bottom: 15px!important;
+
+  
+
 }
