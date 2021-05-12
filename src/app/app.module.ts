@@ -5,13 +5,13 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
 
 //inicio servicio
-import { CargarScriptsService } from "./services/cargar-scripts.service";
+import { CargarScriptsService } from "./core/services/cargar-scripts.service";
 //fin del servivio
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FooterComponent } from './footer/footer.component';
-import { CabeceraComponent } from './cabecera/cabecera.component';
+import { FooterComponent } from './core/footer/footer.component';
+import { CabeceraComponent } from './core/cabecera/cabecera.component';
 import { UsuariosModule } from './usuario/usuarios.module';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';

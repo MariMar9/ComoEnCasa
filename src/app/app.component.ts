@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 //importamos los scripts
-import { CargarScriptsService } from "../app/services/cargar-scripts.service";
-import { RecetasService } from './services/recetas.service';
+import { CargarScriptsService } from "./core/services/cargar-scripts.service";
+import { RecetasService } from './core/services/recetas.service';
 
 
 @Component({

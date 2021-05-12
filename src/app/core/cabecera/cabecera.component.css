@@ -19,7 +19,7 @@ a.text-dark:focus{
   border-radius: 2rem;
 }
 #img-fondo{
-  background-image: url('../../assets/img/cabecera/salmon.png');
+  background-image: url('../../../assets/img/cabecera/salmon.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

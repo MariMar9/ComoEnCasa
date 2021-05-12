@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ControlPerfilUsuarioGuard } from '../auth/control-perfil-usuario.guard';
-import { ControlRutaGuard } from '../auth/control-ruta.guard';
+import { ControlPerfilUsuarioGuard } from '../core/guards/control-perfil-usuario.guard';
+import { ControlRutaGuard } from '../core/guards/control-ruta.guard';
 import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.component';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 import { RegistroComponent } from './registro/registro.component';

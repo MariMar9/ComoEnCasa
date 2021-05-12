@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { RecetasService } from '../../services/recetas.service';
+import { RecetasService } from '../../core/services/recetas.service';
 
 @Component({
   selector: 'app-recetas',

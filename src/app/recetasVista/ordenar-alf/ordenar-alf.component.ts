@@ -4,7 +4,7 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { RecetasService } from 'src/app/services/recetas.service';
+import { RecetasService } from 'src/app/core/services/recetas.service';
 import { map, take } from 'rxjs/operators';
 
 @Component({

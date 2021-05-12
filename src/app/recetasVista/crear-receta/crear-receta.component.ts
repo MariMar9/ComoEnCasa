@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { CargarScriptsService } from 'src/app/services/cargar-scripts.service';
-import { GuardarUsuarioService } from 'src/app/services/guardar-usuario.service';
+import { CargarScriptsService } from 'src/app/core/services/cargar-scripts.service';
+import { GuardarUsuarioService } from 'src/app/core/services/guardar-usuario.service';
 
 @Component({
   selector: 'app-crear-receta',
