@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BuscarRecetaComponent } from './recetasVista/buscar-receta/buscar-receta.component';
 import { ContactanosComponent } from './datosInteresVista/contactanos/contactanos.component';
-import { InicioComponent } from './inicio/inicio.component';
+import { InicioComponent } from './inicioVista/inicio.component';
 import { MostrarRecetaComponent } from './recetasVista/mostrar-receta/mostrar-receta.component';
 import { OrdenarAlfComponent } from './recetasVista/ordenar-alf/ordenar-alf.component';
 import { RecetasComponent } from './recetasVista/recetas/recetas.component';

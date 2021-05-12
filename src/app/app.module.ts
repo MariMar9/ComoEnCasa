@@ -18,7 +18,7 @@ import { AngularFireModule } from '@angular/fire';
 import { ContactanosComponent } from './datosInteresVista/contactanos/contactanos.component';
 import { from } from 'rxjs';
 import { RecetasComponent } from './recetasVista/recetas/recetas.component';
-import { InicioComponent } from './inicio/inicio.component';
+import { InicioComponent } from './inicioVista/inicio.component';
 import { SobreNosotrasComponent } from './datosInteresVista/sobre-nosotras/sobre-nosotras.component';
 import { OrdenarAlfComponent } from './recetasVista/ordenar-alf/ordenar-alf.component';
 import { MostrarRecetaComponent } from './recetasVista/mostrar-receta/mostrar-receta.component';
