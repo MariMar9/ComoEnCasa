@@ -81,3 +81,7 @@ cursor: pointer;
   background-color: white;
   box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
 }
+.noQuitarIngredienteCantidad{
+  cursor: unset!important;
+  width: 36.6666px;
+}

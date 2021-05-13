@@ -14,7 +14,7 @@ export class CrearRecetaComponent implements OnInit {
   correo: string = '';
   numIngrediente: number = 2;
   numPaso: number = 2;
-
+  
   /*Variables de las recetas*/
   /*imagenReceta: File=new File(["foo"], "foo.txt", {
     type: "text/plain",
@@ -45,8 +45,7 @@ cargaInput: string=''
     private _CargaScripts: CargarScriptsService
   ) {
     this.quitar = _CargaScripts.quitarCabFoot();
-    _CargaScripts.carga(["js/javaScript"]);
-    _CargaScripts.carga(["js/javaScriptQuitar"]);
+    this._CargaScripts.carga(['js/javaScript'])
     this.firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
         /*La exclamación es para indicar que estamos seguros de que no es null*/
@@ -70,16 +69,13 @@ cargaInput: string=''
     /**crea los input de los ingredientes*/
     let inputNuevoIngrediente = document.createElement('input');
     inputNuevoIngrediente.setAttribute('class','form-control ingrediente-input input-crear-receta');
-    inputNuevoIngrediente.setAttribute('placeholder','ingrediente ' + this.numIngrediente);
+    inputNuevoIngrediente.setAttribute('placeholder','Nuevo ingrediente');
     inputNuevoIngrediente.setAttribute('id','ingrediente' + this.numIngrediente);
     /**crea los input de las cantidades */
     let inputNuevaCantidad = document.createElement('input');
     inputNuevaCantidad.setAttribute('class', 'form-control ingrediente-input input-crear-receta');
     inputNuevaCantidad.setAttribute('id', 'cantidad' + this.numIngrediente);
-    inputNuevaCantidad.setAttribute(
-      'placeholder',
-      'Cantidad ' + this.numIngrediente
-    );
+    inputNuevaCantidad.setAttribute('placeholder','Nueva cantidad');
     let botonQuitarIngrediente = document.createElement('button');
     botonQuitarIngrediente.setAttribute('class', 'btn btn-secondary quitarIngredienteCantidad');
     let botonQuitarIngredienteIcono = document.createElement('i');
@@ -94,11 +90,21 @@ cargaInput: string=''
     ingredientes!.appendChild(nuevoIngrediente);
     this.numIngrediente++;
     
-    this._CargaScripts.carga(["js/javaScriptQuitar"]);
+    botonQuitarIngrediente.addEventListener('click', this.quitarIngrediente);
+  }
+
+  quitarIngrediente(e: Event) {
+    let ingredienteCantidad = <HTMLButtonElement>(
+      document.querySelector('.quitarIngredienteCantidad')
+    );
+
+    ingredienteCantidad.parentElement?.remove();
+
+    this.numIngrediente--;
   }
 
   aniadirPaso() {
-    this._CargaScripts.carga(["js/javaScript"]);
+   
     let nuevoPaso = document.createElement('div');
     nuevoPaso.setAttribute('class', 'paso form-group');
 
@@ -124,7 +130,7 @@ cargaInput: string=''
 
     let labelNuevaImg = document.createElement('label');
     labelNuevaImg.setAttribute('class','custom-file-label input-crear-receta')
-    labelNuevaImg.setAttribute("data-content","Seleccionar")
+    labelNuevaImg.setAttribute("data-content","Abrir")
     labelNuevaImg.innerHTML="Seleccione un archivo";
 
     divImg.appendChild(labelNuevaImg)
@@ -139,6 +145,10 @@ cargaInput: string=''
     pasos!.appendChild(nuevoPaso);
 
     this.numPaso++;
+
+    this._CargaScripts.carga(['js/javaScript'])
+    let quitarScript = (<HTMLScriptElement>document.querySelector('script[src="../assets/js/javaScript.js"]')).remove()
+    console.log(quitarScript)
   }
 
   validarDatos() {
@@ -170,6 +180,7 @@ cargaInput: string=''
     for (let i = 0; i < ingredientes.length; i++) {
       if ((<HTMLInputElement>ingredientes[i].children[0]).value == '') {
         console.log('vacío ingrediente ' + i);
+        correcto = false;
       }
     }
 
@@ -177,6 +188,7 @@ cargaInput: string=''
     for (let i = 0; i < ingredientes.length; i++) {
       if ((<HTMLInputElement>ingredientes[i].children[1]).value == '') {
         console.log('vacía cantidad ' + i);
+        correcto = false;
       }
     }
 
@@ -223,7 +235,7 @@ cargaInput: string=''
 
     /*Añadir los nuevos ingredientes a firebase*/
     var ingredientes = document.getElementsByClassName('ingrediente');
-    for (let i = 0; i < this.numIngrediente - 1; i++) {
+    for (let i = 0; i < ingredientes.length; i++) {
       this.nombreIngrediente = (<HTMLInputElement>(
         ingredientes[i].children[0]
       )).value;

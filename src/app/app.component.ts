@@ -18,8 +18,7 @@ export class AppComponent {
 
   categoria:string="";
   constructor(public firestore: AngularFirestore,private _CargaScripts:CargarScriptsService,private _pasarCategoria: RecetasService){
-    /*ponemos la ruta y el nombre del archico que pasaremos a la función carga de cargar-ScriptsService.ts*/
-    _CargaScripts.carga(["js/javaScript"]);
+    /*ponemos la ruta y el nombre del archico que pasaremos a la función carga de cargar-ScriptsService.ts*/  
 
   }
 
