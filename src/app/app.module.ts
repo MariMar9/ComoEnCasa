@@ -26,6 +26,7 @@ import { CrearRecetaComponent } from './componentes/recetas/crear-receta/crear-r
 import { CookieService } from 'ngx-cookie-service';
 import { CookiesComponent } from './core/cookies/cookies.component';
 
+
 const routes: Routes = [];
 
 //redirectTo: '/inicio',
