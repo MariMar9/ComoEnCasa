@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { CargarScriptsService } from 'src/app/core/services/cargar-scripts.service';
+import { Observable } from 'rxjs';
+import { RecetasService } from 'src/app/core/services/recetas.service';
 
 @Component({
   selector: 'app-crear-receta',
@@ -14,6 +16,7 @@ export class CrearRecetaComponent implements OnInit {
   correo: string = '';
   numIngrediente: number = 2;
   numPaso: number = 2;
+  recetas: Observable<any[]>;
   
   /*Variables de las recetas*/
   /*imagenReceta: File=new File(["foo"], "foo.txt", {
@@ -42,7 +45,8 @@ cargaInput: string=''
   constructor(
     public firebaseAuth: AngularFireAuth,
     public firestore: AngularFirestore,
-    private _CargaScripts: CargarScriptsService
+    private _CargaScripts: CargarScriptsService,
+    private _consultarColeccion: RecetasService
   ) {
     this.quitar = _CargaScripts.quitarCabFoot();
     this._CargaScripts.carga(['js/javaScript'])
@@ -52,6 +56,12 @@ cargaInput: string=''
         this.correo = user.email!;
       }
     });
+    const path = 'recetas/';
+    this.recetas = this._consultarColeccion.getCollectionRecetas<any>(path,'id');
+    this.recetas.forEach((recetas)=>{
+      this.idReceta=recetas.length
+      console.log(this.idReceta)
+    })
   }
   
   ngOnInit(): void {}
@@ -277,7 +287,7 @@ cargaInput: string=''
     /*Añadir los nuevos pasos a firebase*/
     var pasos = document.getElementsByClassName('paso');
     for (let i = 0; i < this.numPaso - 1; i++) {
-      this.descripcion = (<HTMLInputElement>pasos[i].children[0]).value;
+      this.descripcion = (<HTMLInputElement>pasos[i].children[0].children[0]).value;
       this.firestore
         .collection('pasos')
         .add({

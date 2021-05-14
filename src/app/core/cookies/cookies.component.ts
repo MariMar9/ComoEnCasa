@@ -13,7 +13,7 @@ export class CookiesComponent implements OnInit {
       if (_cookieService.check("cookies")) {
         document.getElementById("mensajeCookies")!.setAttribute("style", "display: none");
       }
-    }, 300);
+    }, 500);
     
   }
 
