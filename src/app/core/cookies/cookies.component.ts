@@ -11,7 +11,7 @@ export class CookiesComponent implements OnInit {
   constructor(private _cookieService: CookieService) { 
     setTimeout(() => {
       if (_cookieService.check("cookies")) {
-        document.getElementById("mensajeCookies")!.setAttribute("style", "display: none");
+        document.getElementById("contenedorCookie")!.setAttribute("style", "display: none");
       }
     }, 500);
     
@@ -22,12 +22,14 @@ export class CookiesComponent implements OnInit {
 
   aceptarCookies(){
     this._cookieService.set('cookies', 'true');
-    document.getElementById("mensajeCookies")!.className="ocultar";
+    document.getElementById("contenedorCookie")!.className="ocultar";
+    document.getElementById("contenedorCookie")!.setAttribute("style", "display: none");
   }
 
   rechazarCookies(){
     this._cookieService.set('cookies', 'false');
-    document.getElementById("mensajeCookies")!.className="ocultar";
+    document.getElementById("contenedorCookie")!.className="ocultar";
+    document.getElementById("contenedorCookie")!.setAttribute("style", "display: none");
   }
 
 }

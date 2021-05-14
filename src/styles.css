@@ -60,24 +60,12 @@ body {
 }
 
 .mostrar {/*cuando se muestra la cookie*/
-  width: 100%;
-  display: flex;
-  z-index: 6;
-  align-items: end;
-  justify-content: center;
-  position: fixed;
   animation-name: fadeIn;
   animation-duration: 2s;
   bottom: 0;
 }
 
 .ocultar{
-  width: 100%;
-  display: flex;
-  z-index: 6;
-  align-items: end;
-  justify-content: center;
-  position: fixed;
   animation-name: fadeOut;
   animation-duration: 2s;
 }
@@ -100,3 +88,8 @@ body {
   }
 }
 
+#contenedorCookie{
+  position: fixed;
+  bottom: 0;
+  z-index: 6;
+}

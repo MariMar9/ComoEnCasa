@@ -59,8 +59,7 @@ cargaInput: string=''
     const path = 'recetas/';
     this.recetas = this._consultarColeccion.getCollectionRecetas<any>(path,'id');
     this.recetas.forEach((recetas)=>{
-      this.idReceta=recetas.length
-      console.log(this.idReceta)
+      this.idReceta=(recetas.length)+1;
     })
   }
   
@@ -193,7 +192,6 @@ cargaInput: string=''
       console.log('Falta comensales');
       correcto = false;
     }
-    console.log(this.comensales);
     if (this.dificultad == 'Dificultad') {
       console.log('Falta dificultad');
       correcto = false;
@@ -234,13 +232,6 @@ cargaInput: string=''
   }
 
   aniadirReceta() {
-    /*Contar las recetas que hay para asignar un id a la nueva receta. Y lo mismo con ingredientes y pasos.
-    var recetas = this.firestore.collection('recetas').valueChanges();
-    var idReceta=0;
-    recetas.forEach(receta => {
-      idReceta++;
-    });
-    console.log(idReceta);*/
     /*Añadir la nueva receta a firebase*/
     this.firestore
       .collection('recetas')
