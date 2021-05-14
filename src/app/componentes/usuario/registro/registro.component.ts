@@ -109,8 +109,10 @@ export class RegistroComponent implements OnInit {
               
               setTimeout(() => {
                 localStorage.setItem('usuario',JSON.stringify(user));
-                window.location.href = '/inicio';
-              }, 400); 
+                setTimeout(() => {
+                   window.location.href = '/inicio';
+                }, 400);
+              }, 200); 
             }
           });
         })

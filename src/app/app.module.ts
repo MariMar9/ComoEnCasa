@@ -23,6 +23,8 @@ import { SobreNosotrasComponent } from './componentes/datosInteres/sobre-nosotra
 import { OrdenarAlfComponent } from './componentes/recetas/ordenar-alf/ordenar-alf.component';
 import { MostrarRecetaComponent } from './componentes/recetas/mostrar-receta/mostrar-receta.component';
 import { CrearRecetaComponent } from './componentes/recetas/crear-receta/crear-receta.component';
+import { CookieService } from 'ngx-cookie-service';
+import { CookiesComponent } from './core/cookies/cookies.component';
 
 const routes: Routes = [];
 
@@ -39,7 +41,8 @@ const routes: Routes = [];
     SobreNosotrasComponent,
     OrdenarAlfComponent,
     MostrarRecetaComponent,
-    CrearRecetaComponent
+    CrearRecetaComponent,
+    CookiesComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,7 @@ const routes: Routes = [];
     RouterModule.forRoot(routes),
     AngularFirestoreModule,
   ],
-  providers: [CargarScriptsService],
+  providers: [CargarScriptsService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

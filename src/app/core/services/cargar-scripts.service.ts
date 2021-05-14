@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,13 @@ export class CargarScriptsService {
   usuarioConectado=false;
   quitar=false;
   url = window.location.pathname;
-  constructor() { }
+  constructor( private _cookieService: CookieService ) {
+    if (!_cookieService.check("cookies")) {
+      //this.cookieService.set( 'Test', 'Hello World' );
+      console.log("🍪🍪🍪");
+    }
+      
+  }
 
 /**
 * Para poder tener acceso a todos los js que hemos creado

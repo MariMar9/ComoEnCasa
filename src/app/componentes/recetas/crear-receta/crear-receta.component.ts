@@ -94,47 +94,66 @@ cargaInput: string=''
   }
 
   quitarIngrediente(e: Event) {
-    let ingredienteCantidad = <HTMLButtonElement>(
-      document.querySelector('.quitarIngredienteCantidad')
-    );
-
-    ingredienteCantidad.parentElement?.remove();
-
-    this.numIngrediente--;
+    if(((<HTMLButtonElement>e.target)!=null)){
+      if((<HTMLButtonElement>e.target).parentElement?.className=="ingrediente form-group"){
+        (<HTMLButtonElement>e.target).parentElement?.remove()
+      }else if((<HTMLButtonElement>e.target).parentElement?.className=="btn btn-secondary quitarIngredienteCantidad"){
+        ((<HTMLButtonElement>e.target).parentElement)?.parentElement?.remove()
+      }
+    }
   }
 
   aniadirPaso() {
+    let contenedorPaso= (<HTMLDivElement>document.querySelector('#pasos'))
    
     let nuevoPaso = document.createElement('div');
-    nuevoPaso.setAttribute('class', 'paso form-group');
+    nuevoPaso.setAttribute('class', 'paso form-group d-flex align-items-center');
 
+    let grupoPaso = document.createElement('div');
+    grupoPaso.setAttribute('class','d-inline-flex flex-column w-100');
+    
     let texto = document.createTextNode('Paso ' + this.numPaso + ': ');
-    nuevoPaso.appendChild(texto);
+    contenedorPaso.appendChild(texto);
 
     let inputNuevoPaso = document.createElement('input');
     inputNuevoPaso.setAttribute('id', 'paso' + this.numPaso);
     inputNuevoPaso.setAttribute('class', 'form-control form-group input-crear-receta');
 
-    nuevoPaso.appendChild(inputNuevoPaso)
+    /*let grupoParaInputImg = document.createElement('div')
+    grupoParaInputImg.setAttribute('class','custom-file mb-3');
 
-    let divImg= document.createElement('div');
-    divImg.setAttribute('class','custom-file mb-3')
-    nuevoPaso.appendChild(divImg)
+    nuevoPaso.appendChild(inputNuevoPaso)*/
+
+    let grupoParaInputImg= document.createElement('div');
+    grupoParaInputImg.setAttribute('class','custom-file mb-3')
+ 
 
     let inputNuevaImagen = document.createElement('input');
     inputNuevaImagen.setAttribute('id', 'imagen' + this.numPaso);
     inputNuevaImagen.setAttribute('type', 'file');
     inputNuevaImagen.setAttribute('class', 'custom-file-input');
     inputNuevaImagen.setAttribute('name', 'filename');
-    divImg.appendChild(inputNuevaImagen)
+
 
     let labelNuevaImg = document.createElement('label');
     labelNuevaImg.setAttribute('class','custom-file-label input-crear-receta')
-    labelNuevaImg.setAttribute("data-content","Abrir")
+    labelNuevaImg.setAttribute('data-content','Abrir')
     labelNuevaImg.innerHTML="Seleccione un archivo";
 
-    divImg.appendChild(labelNuevaImg)
- 
+    let botonImg = document.createElement('button');
+    botonImg.setAttribute('class',"btn btn-secondary noQuitarIngredienteCantidad ml-4") 
+
+    let iconoBoton = document.createElement('i');
+    iconoBoton.setAttribute('class','fas fa-times');
+    botonImg.appendChild(iconoBoton);
+    
+    contenedorPaso.appendChild(nuevoPaso);
+    nuevoPaso.appendChild(grupoPaso);
+    nuevoPaso.appendChild(botonImg);
+    grupoPaso.appendChild(inputNuevoPaso);
+    grupoPaso.appendChild(grupoParaInputImg);
+    grupoParaInputImg.appendChild(inputNuevaImagen);
+    grupoParaInputImg.appendChild(labelNuevaImg);
 
     /*Mirar cómo añadir texto2 aquí y en la imagen de los pasos.
     let texto2=document.createTextNode("Imagen: ");
@@ -146,9 +165,8 @@ cargaInput: string=''
 
     this.numPaso++;
 
-    this._CargaScripts.carga(['js/javaScript'])
-    let quitarScript = (<HTMLScriptElement>document.querySelector('script[src="../assets/js/javaScript.js"]')).remove()
-    console.log(quitarScript)
+    this._CargaScripts.carga(['js/javaScript']);
+    (<HTMLScriptElement>document.querySelector('script[src="../assets/js/javaScript.js"]')).remove()
   }
 
   validarDatos() {
