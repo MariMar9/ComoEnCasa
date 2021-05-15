@@ -22,14 +22,18 @@ export class CookiesComponent implements OnInit {
 
   aceptarCookies(){
     this._cookieService.set('cookies', 'true');
-    document.getElementById("contenedorCookie")!.className="ocultar";
-    document.getElementById("contenedorCookie")!.setAttribute("style", "display: none");
+    document.getElementById("contenedorCookie")!.className="container-fluid ocultar";
+    setTimeout(() => {
+      document.getElementById("contenedorCookie")!.setAttribute("style", "display: none");
+    }, 2000);
   }
 
   rechazarCookies(){
     this._cookieService.set('cookies', 'false');
-    document.getElementById("contenedorCookie")!.className="ocultar";
-    document.getElementById("contenedorCookie")!.setAttribute("style", "display: none");
+    document.getElementById("contenedorCookie")!.className="container-fluid ocultar";
+    setTimeout(() => {
+      document.getElementById("contenedorCookie")!.setAttribute("style", "display: none");
+    }, 2000);
   }
 
 }

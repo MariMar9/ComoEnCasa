@@ -78,11 +78,13 @@ cargaInput: string=''
     /**crea los input de los ingredientes*/
     let inputNuevoIngrediente = document.createElement('input');
     inputNuevoIngrediente.setAttribute('class','form-control ingrediente-input input-crear-receta');
+    inputNuevoIngrediente.setAttribute('maxlength','30');
     inputNuevoIngrediente.setAttribute('placeholder','Nuevo ingrediente');
     inputNuevoIngrediente.setAttribute('id','ingrediente' + this.numIngrediente);
     /**crea los input de las cantidades */
     let inputNuevaCantidad = document.createElement('input');
     inputNuevaCantidad.setAttribute('class', 'form-control ingrediente-input input-crear-receta');
+    inputNuevaCantidad.setAttribute('maxlength','20');
     inputNuevaCantidad.setAttribute('id', 'cantidad' + this.numIngrediente);
     inputNuevaCantidad.setAttribute('placeholder','Nueva cantidad');
     let botonQuitarIngrediente = document.createElement('button');
@@ -111,7 +113,7 @@ cargaInput: string=''
       }
     }
   }
-
+  
   aniadirPaso() {
     let contenedorPaso= (<HTMLDivElement>document.querySelector('#pasos'))
    
@@ -120,13 +122,13 @@ cargaInput: string=''
 
     let grupoPaso = document.createElement('div');
     grupoPaso.setAttribute('class','d-inline-flex flex-column w-100');
-    
     let texto = document.createTextNode('Paso ' + this.numPaso + ': ');
-    contenedorPaso.appendChild(texto);
+    grupoPaso.appendChild(texto);
 
     let inputNuevoPaso = document.createElement('input');
     inputNuevoPaso.setAttribute('id', 'paso' + this.numPaso);
     inputNuevoPaso.setAttribute('class', 'form-control form-group input-crear-receta');
+    inputNuevoPaso.setAttribute('maxlength','200');
 
     /*let grupoParaInputImg = document.createElement('div')
     grupoParaInputImg.setAttribute('class','custom-file mb-3');
@@ -135,7 +137,6 @@ cargaInput: string=''
 
     let grupoParaInputImg= document.createElement('div');
     grupoParaInputImg.setAttribute('class','custom-file mb-3')
- 
 
     let inputNuevaImagen = document.createElement('input');
     inputNuevaImagen.setAttribute('id', 'imagen' + this.numPaso);
@@ -150,7 +151,7 @@ cargaInput: string=''
     labelNuevaImg.innerHTML="Seleccione un archivo";
 
     let botonImg = document.createElement('button');
-    botonImg.setAttribute('class',"btn btn-secondary noQuitarIngredienteCantidad ml-4") 
+    botonImg.setAttribute('class',"btn btn-secondary quitarPaso ml-4") 
 
     let iconoBoton = document.createElement('i');
     iconoBoton.setAttribute('class','fas fa-times');
@@ -174,30 +175,43 @@ cargaInput: string=''
 
     this.numPaso++;
 
+    botonImg.addEventListener('click', this.quitarPaso);
+
     this._CargaScripts.carga(['js/javaScript']);
     (<HTMLScriptElement>document.querySelector('script[src="../assets/js/javaScript.js"]')).remove()
   }
 
+  quitarPaso(e: Event) {
+    var elemento=((<HTMLButtonElement>e.target).parentElement);
+    if(((<HTMLButtonElement>e.target)!=null)){
+      if(((<HTMLButtonElement>e.target).parentElement)?.parentElement?.className=="paso form-group d-flex align-items-center"){
+        ((<HTMLButtonElement>e.target).parentElement)?.parentElement?.remove()
+      }else if((<HTMLButtonElement>e.target).className=="btn btn-secondary quitarPaso ml-4"){
+        ((<HTMLButtonElement>e.target).parentElement)?.remove()
+      }
+    }
+  }
+  
   validarDatos() {
     let correcto = true;
     if (this.nombreReceta == '') {
-      console.log('Falta nombre');
+      document.getElementById("faltaNombre")!.innerText="Rellene este campo.";
       correcto = false;
     }
     if (this.categoria == 'Seleccione una categoría') {
-      console.log('Falta categoría');
+      document.getElementById("faltaCategoria")!.innerText="Rellene este campo.";
       correcto = false;
     }
     if (this.comensales <= 0 || this.comensales == null) {
-      console.log('Falta comensales');
+      document.getElementById("faltaComensales")!.innerText="Rellene este campo.";
       correcto = false;
     }
     if (this.dificultad == 'Dificultad') {
-      console.log('Falta dificultad');
+      document.getElementById("faltaDificultad")!.innerText="Rellene este campo.";
       correcto = false;
     }
     if (this.duracion == '') {
-      console.log('Falta duracion');
+      document.getElementById("faltaDuracion")!.innerText="Rellene este campo.";
       correcto = false;
     }
 
@@ -205,15 +219,15 @@ cargaInput: string=''
     var ingredientes = document.getElementsByClassName('ingrediente');
     for (let i = 0; i < ingredientes.length; i++) {
       if ((<HTMLInputElement>ingredientes[i].children[0]).value == '') {
-        console.log('vacío ingrediente ' + i);
+        document.getElementById("faltaIngrediente")!.innerText="Rellene este campo.";
         correcto = false;
       }
     }
 
     /*Cantidades vacías*/
     for (let i = 0; i < ingredientes.length; i++) {
-      if ((<HTMLInputElement>ingredientes[i].children[1]).value == '') {
-        console.log('vacía cantidad ' + i);
+      if ((<HTMLInputElement>ingredientes[i].children[2]).value == '') {
+        document.getElementById("faltaCantidad")!.innerText="Rellene este campo.";
         correcto = false;
       }
     }
@@ -221,8 +235,9 @@ cargaInput: string=''
     /*Pasos vacíos*/
     var pasos = document.getElementsByClassName('paso');
     for (let i = 0; i < pasos.length; i++) {
-      if ((<HTMLInputElement>pasos[i].children[0]).value == '') {
-        console.log('vacío paso ' + i);
+      document.getElementsByClassName('paso')[0].children[0].children[0]
+      if ((((<HTMLInputElement>(pasos[i].children[0]).children[0]))).value == '') {
+        document.getElementById("faltaPaso")!.innerText="Rellene este campo.";
       }
     }
 
@@ -237,7 +252,7 @@ cargaInput: string=''
       .collection('recetas')
       .add({
         id: this.idReceta,
-        correo_usuario: this.correo,
+        correoUsuario: this.correo,
         nombre: this.nombreReceta,
         categoria: this.categoria,
         comensales: this.comensales,

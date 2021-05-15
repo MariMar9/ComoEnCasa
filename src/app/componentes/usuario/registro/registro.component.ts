@@ -112,7 +112,7 @@ export class RegistroComponent implements OnInit {
                 setTimeout(() => {
                    window.location.href = '/inicio';
                 }, 400);
-              }, 200); 
+              }, 400); 
             }
           });
         })
