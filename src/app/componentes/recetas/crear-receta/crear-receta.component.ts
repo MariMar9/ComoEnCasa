@@ -68,34 +68,66 @@ cargaInput: string=''
   aniadirIngrediente() {
     /**crea el contenedor de los ingredientes */
     let nuevoIngrediente = document.createElement('div');
-
-    nuevoIngrediente.setAttribute(
-      'style',
-      'display:flex;justify-content: space-between;'
-    );
     nuevoIngrediente.setAttribute('class', 'ingrediente form-group');
 
+    /**primer grupo de los ingredientes */
+    let grupoInput = document.createElement('div');
+    grupoInput.setAttribute('class', 'row w-100 justify-content-center');
+    /**crea el row */
+    let grupoInputRow = document.createElement('div');
+    grupoInputRow.setAttribute('class', 'row w-100 justify-content-center');
+    /**div anterior al input de ingrediente */
+    let divIngrediente = document.createElement('div');
+    divIngrediente.setAttribute('class', 'col-10 col-md-6 col-lg-6');
     /**crea los input de los ingredientes*/
     let inputNuevoIngrediente = document.createElement('input');
-    inputNuevoIngrediente.setAttribute('class','form-control ingrediente-input input-crear-receta');
+    inputNuevoIngrediente.setAttribute('class','form-control ingrediente-input input-crear-receta w-100');
     inputNuevoIngrediente.setAttribute('maxlength','30');
     inputNuevoIngrediente.setAttribute('placeholder','Nuevo ingrediente');
     inputNuevoIngrediente.setAttribute('id','ingrediente' + this.numIngrediente);
+
+    /**div anterior al input de cantidad*/
+    let divCantidad = document.createElement('div');
+    divCantidad.setAttribute('class', 'col-10 col-md-6 col-lg-6');
     /**crea los input de las cantidades */
     let inputNuevaCantidad = document.createElement('input');
-    inputNuevaCantidad.setAttribute('class', 'form-control ingrediente-input input-crear-receta');
+    inputNuevaCantidad.setAttribute('class', 'form-control ingrediente-input input-crear-receta w-100');
     inputNuevaCantidad.setAttribute('maxlength','20');
     inputNuevaCantidad.setAttribute('id', 'cantidad' + this.numIngrediente);
     inputNuevaCantidad.setAttribute('placeholder','Nueva cantidad');
+    /**crea los campos de los fallos */
+    let falloIngredienteDiv=document.createElement('div');
+    let falloIngredienteP=document.createElement('p');
+    falloIngredienteP.setAttribute('class', 'faltaIngrediente');
+    let ingredienteTexto =falloIngredienteDiv.appendChild(falloIngredienteP);
+    let falloCantidadDiv=document.createElement('div');
+    let falloCantidadP=document.createElement('p');
+    falloCantidadP.setAttribute('class', 'faltaCantidad');
+    let cantidadTexto =falloCantidadDiv.appendChild(falloCantidadP);
+    
+    /**crea los botones */
     let botonQuitarIngrediente = document.createElement('button');
-    botonQuitarIngrediente.setAttribute('class', 'btn btn-secondary quitarIngredienteCantidad');
+    botonQuitarIngrediente.setAttribute('class', 'btn btn-secondary quitarIngredienteCantidad  ml-4 mb-3');
     let botonQuitarIngredienteIcono = document.createElement('i');
     botonQuitarIngredienteIcono.setAttribute('class', 'fas fa-times');
     botonQuitarIngrediente.appendChild(botonQuitarIngredienteIcono)
 
-    nuevoIngrediente.appendChild(inputNuevoIngrediente);
-    nuevoIngrediente.appendChild(inputNuevaCantidad);
+    grupoInputRow.appendChild(grupoInput)
+    grupoInput.appendChild(divIngrediente)
+    grupoInput.appendChild(divCantidad)
+    divIngrediente.appendChild(inputNuevoIngrediente);
+    divCantidad.appendChild(inputNuevaCantidad);
+    divIngrediente.appendChild(ingredienteTexto);
+    divCantidad.appendChild(cantidadTexto);
+    nuevoIngrediente.appendChild(grupoInput);
     nuevoIngrediente.appendChild(botonQuitarIngrediente);
+
+    /*nuevoIngrediente.appendChild(inputNuevoIngrediente);
+    nuevoIngrediente.appendChild(inputNuevaCantidad);
+    nuevoIngrediente.appendChild(botonQuitarIngrediente);*/
+
+    /**textos para los errores de los ingredientes */
+    
 
     let ingredientes = document.getElementById('ingredientes');
     ingredientes!.appendChild(nuevoIngrediente);
@@ -108,7 +140,7 @@ cargaInput: string=''
     if(((<HTMLButtonElement>e.target)!=null)){
       if((<HTMLButtonElement>e.target).parentElement?.className=="ingrediente form-group"){
         (<HTMLButtonElement>e.target).parentElement?.remove()
-      }else if((<HTMLButtonElement>e.target).parentElement?.className=="btn btn-secondary quitarIngredienteCantidad"){
+      }else if((<HTMLButtonElement>e.target).parentElement?.className=="btn btn-secondary quitarIngredienteCantidad  ml-4 mb-3"){
         ((<HTMLButtonElement>e.target).parentElement)?.parentElement?.remove()
       }
     }
@@ -129,6 +161,9 @@ cargaInput: string=''
     inputNuevoPaso.setAttribute('id', 'paso' + this.numPaso);
     inputNuevoPaso.setAttribute('class', 'form-control form-group input-crear-receta');
     inputNuevoPaso.setAttribute('maxlength','200');
+
+    let falloPaso = document.createElement('p');
+    falloPaso.setAttribute('class','faltaPaso');
 
     /*let grupoParaInputImg = document.createElement('div')
     grupoParaInputImg.setAttribute('class','custom-file mb-3');
@@ -161,6 +196,7 @@ cargaInput: string=''
     nuevoPaso.appendChild(grupoPaso);
     nuevoPaso.appendChild(botonImg);
     grupoPaso.appendChild(inputNuevoPaso);
+    grupoPaso.appendChild(falloPaso);
     grupoPaso.appendChild(grupoParaInputImg);
     grupoParaInputImg.appendChild(inputNuevaImagen);
     grupoParaInputImg.appendChild(labelNuevaImg);
@@ -195,53 +231,95 @@ cargaInput: string=''
   validarDatos() {
     let correcto = true;
     if (this.nombreReceta == '') {
+      console.log("nombre vacios")
       document.getElementById("faltaNombre")!.innerText="Rellene este campo.";
       correcto = false;
+    }else{
+      document.getElementById("faltaNombre")!.innerText="";
     }
     if (this.categoria == 'Seleccione una categoría') {
+      console.log("categoria vacios")
       document.getElementById("faltaCategoria")!.innerText="Rellene este campo.";
       correcto = false;
+    }else{
+      document.getElementById("faltaCategoria")!.innerText="";
     }
     if (this.comensales <= 0 || this.comensales == null) {
+      console.log("comensales vacios")
       document.getElementById("faltaComensales")!.innerText="Rellene este campo.";
       correcto = false;
+    }else{
+      document.getElementById("faltaComensales")!.innerText="";
     }
     if (this.dificultad == 'Dificultad') {
+      console.log("dificultad vacios")
       document.getElementById("faltaDificultad")!.innerText="Rellene este campo.";
       correcto = false;
+    }else{
+      document.getElementById("faltaDificultad")!.innerText="";
     }
     if (this.duracion == '') {
+      console.log("catiduracion vacios")
       document.getElementById("faltaDuracion")!.innerText="Rellene este campo.";
       correcto = false;
+    }else{
+      document.getElementById("faltaDuracion")!.innerText="";
     }
 
     /*Ingredientes vacíos*/
     var ingredientes = document.getElementsByClassName('ingrediente');
+    
     for (let i = 0; i < ingredientes.length; i++) {
-      if ((<HTMLInputElement>ingredientes[i].children[0]).value == '') {
-        document.getElementById("faltaIngrediente")!.innerText="Rellene este campo.";
+      
+      if ((<HTMLInputElement>ingredientes[i].children[0].children[0].childNodes[0]).value == '') {
+        console.log("ingrdiente vacios")
+        document.querySelectorAll<HTMLElement>(".faltaIngrediente").forEach((ingrediente)=>{
+          ingrediente.innerHTML="Falta ingrediente"
+        })
         correcto = false;
+      }else{
+        document.querySelectorAll<HTMLElement>(".faltaIngrediente").forEach((ingrediente)=>{
+          ingrediente.innerHTML=""
+        })
       }
     }
 
     /*Cantidades vacías*/
     for (let i = 0; i < ingredientes.length; i++) {
-      if ((<HTMLInputElement>ingredientes[i].children[2]).value == '') {
-        document.getElementById("faltaCantidad")!.innerText="Rellene este campo.";
+      
+      if ((<HTMLInputElement>ingredientes[i].children[0].children[1].childNodes[0]).value == '') {
+        console.log("catidad vacios")
+        document.querySelectorAll<HTMLElement>(".faltaCantidad").forEach((cantidad)=>{
+          cantidad.innerText="Falta la cantidad"
+        });
         correcto = false;
+      }else{
+        document.querySelectorAll<HTMLElement>(".faltaCantidad").forEach((cantidad)=>{
+          cantidad.innerText=""
+        });
       }
     }
 
     /*Pasos vacíos*/
     var pasos = document.getElementsByClassName('paso');
     for (let i = 0; i < pasos.length; i++) {
+     
       document.getElementsByClassName('paso')[0].children[0].children[0]
-      if ((((<HTMLInputElement>(pasos[i].children[0]).children[0]))).value == '') {
-        document.getElementById("faltaPaso")!.innerText="Rellene este campo.";
+      if ((((<HTMLInputElement>(pasos[i].children[0]).children[0]))).value == '') { 
+        console.log("pasos vacios")
+        document.querySelectorAll<HTMLElement>(".faltaPaso").forEach((paso)=>{
+          paso.innerText="Falta el paso"
+        });
+        correcto = false;
+      }else{
+        document.querySelectorAll<HTMLElement>(".faltaPaso").forEach((paso)=>{
+          paso.innerText=""
+        });
       }
     }
 
     if (correcto) {
+      console.log("receta añadida")
       this.aniadirReceta();
     }
   }
@@ -270,10 +348,10 @@ cargaInput: string=''
     /*Añadir los nuevos ingredientes a firebase*/
     var ingredientes = document.getElementsByClassName('ingrediente');
     for (let i = 0; i < ingredientes.length; i++) {
-      this.nombreIngrediente = (<HTMLInputElement>(
-        ingredientes[i].children[0]
-      )).value;
-      this.cantidad = (<HTMLInputElement>ingredientes[i].children[1]).value;
+      this.nombreIngrediente = (<HTMLInputElement>ingredientes[i].children[0].children[0].childNodes[0]).value
+      console.log("this.nombreIngrediente")
+      this.cantidad = (<HTMLInputElement>ingredientes[i].children[0].children[1].childNodes[0]).value;
+      console.log(this.cantidad)
       this.firestore
         .collection('ingredientes')
         .add({
