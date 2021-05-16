@@ -85,7 +85,7 @@
                 <div class="input-group">
                     <input type="search" name="search" id="buscar-receta" placeholder="Buscar..."
                         class="form-control">
-                    <button type="button" class="btn btn-secondary">
+                    <button type="button" class="btn btn-secondary" [routerLink]="['/buscarReceta']" (click)="pasarReceta()">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>

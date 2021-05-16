@@ -232,35 +232,40 @@ cargaInput: string=''
     let correcto = true;
     if (this.nombreReceta == '') {
       console.log("nombre vacios")
-      document.getElementById("faltaNombre")!.innerText="Rellene este campo.";
+      document.getElementById("faltaNombre")!.innerText="Falta nombre.";
       correcto = false;
     }else{
       document.getElementById("faltaNombre")!.innerText="";
     }
     if (this.categoria == 'Seleccione una categoría') {
       console.log("categoria vacios")
-      document.getElementById("faltaCategoria")!.innerText="Rellene este campo.";
+      document.getElementById("faltaCategoria")!.innerText="Falta categoría.";
       correcto = false;
     }else{
       document.getElementById("faltaCategoria")!.innerText="";
     }
-    if (this.comensales <= 0 || this.comensales == null) {
-      console.log("comensales vacios")
-      document.getElementById("faltaComensales")!.innerText="Rellene este campo.";
+    if (!Number.isInteger(this.comensales)) {
+      document.getElementById("faltaComensales")!.innerText="Debe introducir un número.";
+      correcto = false;
+    }else if (this.comensales < 1 || this.comensales > 50){
+      document.getElementById("faltaComensales")!.innerText="Debe introducir un número entre el 1 y el 50.";
+      correcto = false;
+    }else if (this.comensales == null){
+      document.getElementById("faltaComensales")!.innerText="Falta comensales.";
       correcto = false;
     }else{
       document.getElementById("faltaComensales")!.innerText="";
     }
     if (this.dificultad == 'Dificultad') {
       console.log("dificultad vacios")
-      document.getElementById("faltaDificultad")!.innerText="Rellene este campo.";
+      document.getElementById("faltaDificultad")!.innerText="Falta dificultad.";
       correcto = false;
     }else{
       document.getElementById("faltaDificultad")!.innerText="";
     }
     if (this.duracion == '') {
       console.log("catiduracion vacios")
-      document.getElementById("faltaDuracion")!.innerText="Rellene este campo.";
+      document.getElementById("faltaDuracion")!.innerText="Falta duración.";
       correcto = false;
     }else{
       document.getElementById("faltaDuracion")!.innerText="";
@@ -272,15 +277,17 @@ cargaInput: string=''
     for (let i = 0; i < ingredientes.length; i++) {
       
       if ((<HTMLInputElement>ingredientes[i].children[0].children[0].childNodes[0]).value == '') {
-        console.log("ingrdiente vacios")
-        document.querySelectorAll<HTMLElement>(".faltaIngrediente").forEach((ingrediente)=>{
+        console.log("ingrdiente vacios");
+        /*document.querySelectorAll<HTMLElement>(".faltaIngrediente").forEach((ingrediente)=>{
           ingrediente.innerHTML="Falta ingrediente"
-        })
+        })*/
+        (<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = 'Falta ingrediente.';
         correcto = false;
       }else{
-        document.querySelectorAll<HTMLElement>(".faltaIngrediente").forEach((ingrediente)=>{
+        /*document.querySelectorAll<HTMLElement>(".faltaIngrediente").forEach((ingrediente)=>{
           ingrediente.innerHTML=""
-        })
+        })*/
+        (<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = '';
       }
     }
 
@@ -288,15 +295,17 @@ cargaInput: string=''
     for (let i = 0; i < ingredientes.length; i++) {
       
       if ((<HTMLInputElement>ingredientes[i].children[0].children[1].childNodes[0]).value == '') {
-        console.log("catidad vacios")
-        document.querySelectorAll<HTMLElement>(".faltaCantidad").forEach((cantidad)=>{
+        console.log("catidad vacios");
+        /*document.querySelectorAll<HTMLElement>(".faltaCantidad").forEach((cantidad)=>{
           cantidad.innerText="Falta la cantidad"
-        });
+        });*/
+        (<HTMLInputElement>document.getElementsByClassName("faltaCantidad")[i]).innerText = 'Falta cantidad.';
         correcto = false;
       }else{
-        document.querySelectorAll<HTMLElement>(".faltaCantidad").forEach((cantidad)=>{
+        /*document.querySelectorAll<HTMLElement>(".faltaCantidad").forEach((cantidad)=>{
           cantidad.innerText=""
-        });
+        });*/
+        (<HTMLInputElement>document.getElementsByClassName("faltaCantidad")[i]).innerText = '';
       }
     }
 
@@ -306,15 +315,17 @@ cargaInput: string=''
      
       document.getElementsByClassName('paso')[0].children[0].children[0]
       if ((((<HTMLInputElement>(pasos[i].children[0]).children[0]))).value == '') { 
-        console.log("pasos vacios")
-        document.querySelectorAll<HTMLElement>(".faltaPaso").forEach((paso)=>{
+        console.log("pasos vacios");
+        /*document.querySelectorAll<HTMLElement>(".faltaPaso").forEach((paso)=>{
           paso.innerText="Falta el paso"
-        });
+        });*/
+        (<HTMLInputElement>document.getElementsByClassName("faltaPaso")[i]).innerText = 'Falta paso.';
         correcto = false;
       }else{
-        document.querySelectorAll<HTMLElement>(".faltaPaso").forEach((paso)=>{
+        /*document.querySelectorAll<HTMLElement>(".faltaPaso").forEach((paso)=>{
           paso.innerText=""
-        });
+        });*/
+        (<HTMLInputElement>document.getElementsByClassName("faltaPaso")[i]).innerText = '';
       }
     }
 

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { RecetasService } from 'src/app/core/services/recetas.service';
 
 @Component({
   selector: 'app-buscar-receta',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BuscarRecetaComponent implements OnInit {
 
-  constructor() { }
+  nombreReceta: string="";
+  recetas: Observable<any[]>;
+  
+  constructor(public firestore: AngularFirestore, private _pasarReceta: RecetasService) {
+    this._pasarReceta.mandarReceta.subscribe(nombre=>{
+      this.nombreReceta=nombre;
+    });
+    this.recetas = firestore.collection('recetas').valueChanges();
+  }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+  
+  pasarReceta(idReceta: number) {
+    setTimeout(() => {
+      this._pasarReceta.mandarReceta.emit(idReceta);
+    }, 200);
   }
 
 }

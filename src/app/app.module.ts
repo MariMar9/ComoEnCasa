@@ -25,6 +25,7 @@ import { MostrarRecetaComponent } from './componentes/recetas/mostrar-receta/mos
 import { CrearRecetaComponent } from './componentes/recetas/crear-receta/crear-receta.component';
 import { CookieService } from 'ngx-cookie-service';
 import { CookiesComponent } from './core/cookies/cookies.component';
+import { BuscarRecetaComponent } from './componentes/recetas/buscar-receta/buscar-receta.component';
 
 
 const routes: Routes = [];
@@ -43,7 +44,8 @@ const routes: Routes = [];
     OrdenarAlfComponent,
     MostrarRecetaComponent,
     CrearRecetaComponent,
-    CookiesComponent
+    CookiesComponent,
+    BuscarRecetaComponent
   ],
   imports: [
     BrowserModule,

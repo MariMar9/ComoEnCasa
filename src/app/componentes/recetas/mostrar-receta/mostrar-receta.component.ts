@@ -15,7 +15,7 @@ export class MostrarRecetaComponent implements OnInit {
   ingredientes: Observable<any[]>;
   pasos: Observable<any[]>;
   idReceta: number=0;
-  nomReceta: string='s'
+  nomReceta: string='s';
   pasosOrd: string[] = [];
 
   constructor(public firestore: AngularFirestore, private _pasarReceta: RecetasService, private router:Router, private _pasarNomReceta: RecetasService, private _consultarColeccion: RecetasService) {
@@ -26,8 +26,8 @@ export class MostrarRecetaComponent implements OnInit {
 
     /*Con el método "subscribe" recibe el dato que manda la función "mandarCategoria".*/
     this._pasarReceta.mandarReceta.subscribe(idReceta=>{
-    this.idReceta=idReceta;
-    })
+      this.idReceta=idReceta;
+    });
 
     /*setTimeout(() => {
       if (this.idReceta==0 && this.nomReceta=='s') {

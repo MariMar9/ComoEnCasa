@@ -15,15 +15,24 @@ export class CabeceraComponent implements OnInit {
   pasa = true;
   categoria: string = '';
   constructor(
-    public firestore: AngularFirestore,private _CargaScripts: CargarScriptsService, private _pasarCategoria: RecetasService) {
+    public firestore: AngularFirestore,private _CargaScripts: CargarScriptsService, private _pasarCategoria: RecetasService, private _pasarReceta: RecetasService) {
     this.quitar = _CargaScripts.quitarCabFoot();
     this.usuarioConectado = _CargaScripts.conectado();
   }
+  
+  ngOnInit(): void {}
+  
   pasarCategoria(categoria: string) {
     setTimeout(() => {
       this._pasarCategoria.mandarCategoria.emit(categoria);
       this.categoria = categoria;
     }, 200);
   }
-  ngOnInit(): void {}
+
+  pasarReceta() {
+    var nombre=(<HTMLInputElement>document.getElementById("buscar-receta"))!.value;
+    setTimeout(() => {
+      this._pasarReceta.mandarReceta.emit(nombre);
+    }, 200);
+  }
 }
