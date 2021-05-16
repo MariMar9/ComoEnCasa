@@ -235,6 +235,8 @@ cargaInput: string=''
       document.getElementById("faltaNombre")!.innerText="Falta nombre.";
       correcto = false;
     }else{
+     var primeraLetra =(<HTMLInputElement>document.getElementById('nombre')).value.charAt(0).toUpperCase()
+      this.nombreReceta = primeraLetra +(<HTMLInputElement>document.getElementById('nombre')).value.substring(1).toLocaleLowerCase();
       document.getElementById("faltaNombre")!.innerText="";
     }
     if (this.categoria == 'Seleccione una categoría') {

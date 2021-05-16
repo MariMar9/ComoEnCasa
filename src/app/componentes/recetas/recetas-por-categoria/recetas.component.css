@@ -1,6 +1,6 @@
 #body-card {
-    width: 100%;
-   /* display: flex;
+  width: 100%;
+  /* display: flex;
     align-items: center;
     justify-content: space-evenly;
     flex-direction: row;
@@ -26,12 +26,13 @@
 }
 .card-image {
   grid-area: image;
-  background-image: url("https://www.hola.com/imagenes/cocina/recetas/20200130159337/mousse-chocolate-postre-facil/0-776-92/mousse-chocolate-facil-rapido-teka-m.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
+}
+.card-image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 .card-text {
   grid-area: text;
@@ -46,53 +47,53 @@
   grid-template-rows: 1fr;
 }
 
-.card-stats .stats{
-    color: white;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+.card-stats .stats {
+  color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.card-stats .type{
-    font-size: 12px;
+.card-stats .type {
+  font-size: 12px;
 }
-.card-stats .centro{
-   border-right: 2px #ac5c00 solid;
-   border-left: 2px #ac5c00 solid;
-   border-left: 2px #ac5c00 solid;
+.card-stats .centro {
+  border-right: 2px #ac5c00 solid;
+  border-left: 2px #ac5c00 solid;
+  border-left: 2px #ac5c00 solid;
 }
 
-.card:hover{
-    transform: scale(1.05);
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
 }
 
 /*botones*/
-.container-btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    width: 50%;
+.container-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 50%;
 }
 
-.btn{
-    color: white;
-    flex: 1 1 auto;
-    padding: 10px;
-    text-align: center;
-    text-transform: capitalize;
-    transition: 0.5s;
-    background-size: 200% auto;
-    border-radius: 10px;
+.btn {
+  color: white;
+  flex: 1 1 auto;
+  padding: 10px;
+  text-align: center;
+  text-transform: capitalize;
+  transition: 0.5s;
+  background-size: 200% auto;
+  border-radius: 10px;
 }
-.btn:hover{
-    background-position: right center;
+.btn:hover {
+  background-position: right center;
 }
 
-.btn-ver{
-    background-image: linear-gradient(to right, #ffbb1d, #ec8001, #ffbb1d);
+.btn-ver {
+  background-image: linear-gradient(to right, #ffbb1d, #ec8001, #ffbb1d);
 }
-i{
+i {
   font-size: 20px;
 }

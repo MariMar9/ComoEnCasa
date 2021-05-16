@@ -1,30 +1,62 @@
-<!--pagina para recetas por categoria-->
-<!--mostrar la receta principal-->
 <ng-container *ngFor="let receta of recetas | async">
     <ng-container *ngIf="receta.id==idReceta;">
-        <p>Id: {{receta.id}}</p>
-        <p>Nombre: {{receta.nombre}}</p>
-        <p>Categoría: {{receta.categoria}}</p>
-        <p>Dificultad: {{receta.dificultad}}</p>
-        <p>Duración: {{receta.duracion}}</p>
+        <div class="container-fluid contenedorReceta">
+            <!--recetas-->
+            <ng-container *ngFor="let receta of recetas | async">
+                <ng-container *ngIf="receta.id==idReceta;">
+                    <!--titulo y fecha-->
+                    <h1 class="mt-3">Nombre: {{receta.nombre}}</h1>
+                    <p class="date">{{((receta.fecha).seconds)*1000 | date: 'dd/MM/yyyy'}} | <b>{{receta.categoria}}</b>
+                    </p>
+                    <!--fin titulo y fecha-->
+
+                    <!--imagen y datos-->
+                    <!--<img src="{{receta.foto}}">-->
+                    <img class="img-receta"
+                        src="https://www.hola.com/imagenes/cocina/recetas/20200130159337/mousse-chocolate-postre-facil/0-776-92/mousse-chocolate-facil-rapido-teka-m.jpg">
+                    <!--datos-->
+                    <div class="card-stats mb-3">
+                        <div class="stats">
+                            <div class="value"><i class="fas fa-clock"></i></div>
+                            <div class="type">{{receta.duracion}}</div>
+                        </div>
+                        <div class="stats centro">
+                            <div class="value"><i class="fas fa-user-friends"></i></div>
+                            <div class="type">{{receta.comensales}}</div>
+                        </div>
+                        <div class="stats">
+                            <i class="fas fa-laugh-beam" *ngIf="receta.dificultad=='Fácil';"></i>
+                            <i class="fas fa-meh" *ngIf="receta.dificultad=='Media';"></i>
+                            <i class="fas fa-angry" *ngIf="receta.dificultad=='Difícil';"></i>
+                            <div class="type">{{receta.dificultad}}</div>
+                        </div>
+                    </div>
+                    <!--fin datos-->
+                    <!--fin imagen y datos--->
+                </ng-container>
+            </ng-container>
+            <!--fin recetas-->
+            <h3>Ingredientes</h3>
+            <!--ingredientes-->
+            <ng-container *ngFor="let ingredientesReceta of ingredientes | async">
+                <ng-container *ngIf="ingredientesReceta.idReceta==idReceta;">
+                    <p>{{ingredientesReceta.nombre}} {{ingredientesReceta.cantidad}}</p>
+                </ng-container>
+            </ng-container>
+            <!--fin ingredientes-->
+            <h3>Pasos</h3>
+            <!--Pasos-->
+            <ng-container *ngFor="let pasosReceta of pasos | async">
+                <ng-container *ngIf="pasosReceta.idReceta==idReceta;">
+                    <div class="d-flex flex-wrap align-items-center">
+                        <div class="num-paso">{{pasosReceta.id}}</div>
+                        <p class="m-0 ml-5">{{pasosReceta.descripcion}}</p>
+                    </div>
+                    <hr>
+                </ng-container>
+            </ng-container>
+            <!--fin pasos-->
+        </div>
     </ng-container>
+
 </ng-container>
-<!--mostrar los ingredientes-->
-<ng-container *ngFor="let ingredientesReceta of ingredientes | async">
-    <ng-container *ngIf="ingredientesReceta.idReceta==idReceta;">
-        <p>{{ingredientesReceta.nombre}}</p>
-        <p>{{ingredientesReceta.cantidad}}</p>
-    </ng-container>
-</ng-container>
-<!--mostrar los pasos de la receta-->
-<ng-container *ngFor="let pasosReceta of pasos | async">
-    <ng-container *ngIf="pasosReceta.idReceta==idReceta;">
-        <p>Paso {{pasosReceta.id}}:</p>
-        <p>{{pasosReceta.descripcion}}</p>
-    </ng-container>
-</ng-container>
-<!--fin de pagina para recetas por categoria-->
-
-
-
-

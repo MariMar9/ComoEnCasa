@@ -84,7 +84,7 @@
             <div class="form-group m-0">
                 <div class="input-group">
                     <input type="search" name="search" id="buscar-receta" placeholder="Buscar..."
-                        class="form-control">
+                        class="form-control" (keyup)="buscar($event)">
                     <button type="button" class="btn btn-secondary" [routerLink]="['/buscarReceta']" (click)="pasarReceta()">
                         <i class="fas fa-search"></i>
                     </button>

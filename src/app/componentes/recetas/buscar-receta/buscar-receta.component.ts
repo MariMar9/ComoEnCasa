@@ -14,13 +14,16 @@ export class BuscarRecetaComponent implements OnInit {
   recetas: Observable<any[]>;
   
   constructor(public firestore: AngularFirestore, private _pasarReceta: RecetasService) {
+    const path = 'recetas/'
     this._pasarReceta.mandarReceta.subscribe(nombre=>{
       this.nombreReceta=nombre;
     });
-    this.recetas = firestore.collection('recetas').valueChanges();
+    this.recetas = this._pasarReceta.getCollectionRecetas<any>(path,'id');
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    
+  }
   
   pasarReceta(idReceta: number) {
     setTimeout(() => {
