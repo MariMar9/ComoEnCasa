@@ -67,8 +67,8 @@ export class CabeceraComponent implements OnInit {
     var cuerpo = '';
     var primeraLetra = '';
     var array = ['']
-    if(e.key=="Enter"){
 
+    if(e.key=="Enter"){
       primeraLetra =(<HTMLInputElement>document.getElementById('buscar-receta'))!.value.charAt(0).toUpperCase()
       cuerpo = (<HTMLInputElement>document.getElementById('buscar-receta'))!.value.substring(1).toLocaleLowerCase();
       this.route.navigate(['/buscarReceta'])
@@ -83,10 +83,11 @@ export class CabeceraComponent implements OnInit {
         }  
       })
       nombre=primeraLetra+cuerpo
-    }
-   
-    setTimeout(() => {
+    
+      setTimeout(() => {
       this._pasarReceta.mandarReceta.emit(nombre);
     }, 200);
+
+    }
   }
 }
