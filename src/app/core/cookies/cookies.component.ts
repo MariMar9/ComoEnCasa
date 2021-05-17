@@ -8,7 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class CookiesComponent implements OnInit {
 
-  constructor(private _cookieService: CookieService) { 
+  constructor(private _cookieService: CookieService) {
     setTimeout(() => {
       if (_cookieService.check("cookies")) {
         document.getElementById("contenedorCookie")!.setAttribute("style", "display: none");
@@ -21,7 +21,7 @@ export class CookiesComponent implements OnInit {
   }
 
   aceptarCookies(){
-    this._cookieService.set('cookies', 'true');
+    this._cookieService.set('cookies', 'true', 365);
     document.getElementById("contenedorCookie")!.className="container-fluid ocultar";
     setTimeout(() => {
       document.getElementById("contenedorCookie")!.setAttribute("style", "display: none");
