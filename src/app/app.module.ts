@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
+import { from } from 'rxjs';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import {ToastrModule} from 'ngx-toastr'
 
 //inicio servicio
 import { CargarScriptsService } from "./core/services/cargar-scripts.service";
@@ -16,7 +19,7 @@ import { UsuariosModule } from './componentes/usuario/usuarios.module';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { ContactanosComponent } from './componentes/datosInteres/contactanos/contactanos.component';
-import { from } from 'rxjs';
+
 import { RecetasComponent } from './componentes/recetas/recetas-por-categoria/recetas.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { SobreNosotrasComponent } from './componentes/datosInteres/sobre-nosotras/sobre-nosotras.component';
@@ -55,6 +58,8 @@ const routes: Routes = [];
     FormsModule,
     RouterModule.forRoot(routes),
     AngularFirestoreModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [CargarScriptsService, CookieService],
   bootstrap: [AppComponent]
