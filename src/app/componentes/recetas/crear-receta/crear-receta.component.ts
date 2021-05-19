@@ -4,6 +4,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { CargarScriptsService } from 'src/app/core/services/cargar-scripts.service';
 import { Observable } from 'rxjs';
 import { RecetasService } from 'src/app/core/services/recetas.service';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr'
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-crear-receta',
@@ -46,7 +49,10 @@ cargaInput: string=''
     public firebaseAuth: AngularFireAuth,
     public firestore: AngularFirestore,
     private _CargaScripts: CargarScriptsService,
-    private _consultarColeccion: RecetasService
+    private _consultarColeccion: RecetasService,
+    private router:Router,
+    private toast: ToastrService,
+    private location: Location
   ) {
     this.quitar = _CargaScripts.quitarCabFoot();
     this._CargaScripts.carga(['js/javaScript'])
@@ -399,5 +405,41 @@ cargaInput: string=''
           console.error('Se ha producido un error al crear el paso.');
         });
     }
+    this.router.navigate(['/perfilUsuario']).then(() => {
+      this.toast.show('message');
+    });
+  }
+
+  mostrarToast(){
+    /*this.location.back()
+    .then(() => {
+      this.toast.success('message');
+    });*/
+    
+    /*
+    this.toast.success(
+  'Have fun!',
+  'Miracle Max Says',
+  {
+    timeOut: 1000,
+    fadeOut: 1000,
+    onHidden: function () {
+        window.location.reload();
+      }
+  }
+);
+    */
+    /*this.router.navigate(["/perfilUsuario"])
+    .then(() => {
+      
+      this.toast.success('message');
+    });*/
+
+
+ this.location.onUrlChange(()=>{
+   this.location.back();
+ });
+    /*this.router.routeReuseStrategy.shouldReuseRoute = () => true;
+    this.router.navigate(["/perfilUsuario"]);*/
   }
 }
