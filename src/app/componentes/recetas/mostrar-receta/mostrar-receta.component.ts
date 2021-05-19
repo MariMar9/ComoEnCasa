@@ -21,7 +21,7 @@ export class MostrarRecetaComponent implements OnInit {
   constructor(public firestore: AngularFirestore, private _pasarReceta: RecetasService, private router:Router, private _pasarNomReceta: RecetasService, private _consultarColeccion: RecetasService) {
     const path = 'pasos/';
     this.recetas = firestore.collection('recetas').valueChanges();
-    this.ingredientes = firestore.collection('ingredientes').valueChanges();
+    this.ingredientes =  this._consultarColeccion.getCollectionRecetas<any>('ingredientes','id')
     this.pasos = this._consultarColeccion.getCollectionRecetas<any>(path,'id')
 
     /*Con el método "subscribe" recibe el dato que manda la función "mandarCategoria".*/

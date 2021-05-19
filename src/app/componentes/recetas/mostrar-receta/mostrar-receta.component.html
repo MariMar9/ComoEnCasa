@@ -1,6 +1,6 @@
 <ng-container *ngFor="let receta of recetas | async">
     <ng-container *ngIf="receta.id==idReceta;">
-        <div class="container-fluid contenedorReceta">
+        <div class="container-fluid contenedorRecetaMostrada pr-5 pl-5 mt-5">
             <!--recetas-->
             <ng-container *ngFor="let receta of recetas | async">
                 <ng-container *ngIf="receta.id==idReceta;">
@@ -38,25 +38,40 @@
             <!--fin recetas-->
             <h3>Ingredientes</h3>
             <!--ingredientes-->
-            <ng-container *ngFor="let ingredientesReceta of ingredientes | async">
-                <ng-container *ngIf="ingredientesReceta.idReceta==idReceta;">
-                    <p>{{ingredientesReceta.nombre}} {{ingredientesReceta.cantidad}}</p>
+            <div id="checklist" class="contenedorIngrediente mb-3">
+                <ng-container *ngFor="let ingredientesReceta of ingredientes | async">
+                    <ng-container *ngIf="ingredientesReceta.idReceta==idReceta;">
+                        <input id="{{ingredientesReceta.id}}" type="checkbox" name="r" value="{{ingredientesReceta.id}}"
+                            class="m-2">
+                        <label for="{{ingredientesReceta.id}}"><b>{{ingredientesReceta.nombre}}</b><span>
+                                <div class="vertical"></div>
+                            </span>{{ingredientesReceta.cantidad}}</label>
+                        <span></span>
+                    </ng-container>
                 </ng-container>
-            </ng-container>
+            </div>
             <!--fin ingredientes-->
+
             <h3>Pasos</h3>
             <!--Pasos-->
-            <ng-container *ngFor="let pasosReceta of pasos | async">
-                <ng-container *ngIf="pasosReceta.idReceta==idReceta;">
-                    <div class="d-flex flex-wrap align-items-center">
-                        <div class="num-paso">{{pasosReceta.id}}</div>
-                        <p class="m-0 ml-5">{{pasosReceta.descripcion}}</p>
-                    </div>
-                    <hr>
-                </ng-container>
-            </ng-container>
+            <main>
+                <ol class="gradient-list">
+                    <ng-container *ngFor="let pasosReceta of pasos | async">
+                        <ng-container *ngIf="pasosReceta.idReceta==idReceta;">
+                            <li class="button">
+                                <span>
+                                <p>{{pasosReceta.descripcion}}</p>
+                                <div class="img-contenedor"> <img
+                                        src="https://cdn.mercadoflotante.com/blog/wp-content/uploads/2017/01/yakisoba-e1485510522582-768x483.jpg">
+                                </div>
+                            </span>
+                            </li>
+                        </ng-container>
+                    </ng-container>
+                </ol>
+            </main>
             <!--fin pasos-->
         </div>
-    </ng-container>
 
+    </ng-container>
 </ng-container>
