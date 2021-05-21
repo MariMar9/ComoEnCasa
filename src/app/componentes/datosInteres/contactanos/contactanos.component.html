@@ -6,37 +6,38 @@
             </div>
 
             <form class="contact formulario" [formGroup]="form" method="post" (ngSubmit)="onSubmit()">
-                    <span class="titulo">
+                    <span class="titulo pb-1">
                         Contáctanos
                     </span>
-
+                    <p *ngIf="form.controls['message'].hasError('required') && form.controls['email'].hasError('required') && form.controls['name'].hasError('required')">Recuerde que debe rellenar todos los campos obligarorios</p>
                     <div class="inputContenedor">
-                        <input class="input" type="text" name="nombre" [formControl]="name" required placeholder="Nombre">
+                        <input class="input" type="text" name="nombre" formControlName="name" required placeholder="Nombre*">
                         <span class="click-input"></span>
                         <span class="icono">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
                     </div>
-                    <div *ngIf="name.invalid">Please enter your name</div>
+                    <div *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched">Introduzca su Nombre</div>
 
                     <div class="inputContenedor">
-                        <input class="input" type="text" name="email" [formControl]="email" required placeholder="Email">
+                        <input class="input" type="text" name="email" formControlName="email" required placeholder="Email*">
                         <span class="click-input"></span>
                         <span class="icono">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                         </span>
                     </div>
-                    <div *ngIf="email.invalid">Please enter a valid email</div>
+                    <div *ngIf="form.controls['email'].hasError('email') && form.controls['email'].touched">Introduzca un correo válido</div>
+                    <div *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched">Introzuca un correo</div>
 
                     <div class="inputContenedor">
-                        <textarea class="input" name="mensaje" [formControl]="message" maxlength="256" required placeholder="Mensaje"></textarea>
+                        <textarea class="input" name="mensaje" formControlName="message" maxlength="256" required placeholder="Mensaje*"></textarea>
                     </div>
-                    <div *ngIf="message.invalid">Please enter a message</div>
+                    <div *ngIf="form.controls['message'].hasError('required') && form.controls['message'].touched">Introduzca un mensaje</div>
                     <div [ngClass]="!submitted? 'hidden' : 'visible'" class="center-text">
                         <span>{{responseMessage}}</span>
                     </div>
                     <div class="contenedorBoton">
-                        <button class="btn-estilos submit" [disabled]="isLoading" type="submit">
+                        <button class="btn-estilos submit"[disabled]="isLoading ? true : null" type="submit">
                             <span class="mr-2">Enviar</span>&#32;<i class="fas fa-paper-plane"></i>
                         </button>
                     </div>
