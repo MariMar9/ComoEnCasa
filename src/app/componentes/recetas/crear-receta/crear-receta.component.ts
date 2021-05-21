@@ -389,11 +389,7 @@ cargaInput: string=''
           console.error('Se ha producido un error al crear el paso.');
         });
     }
-    
-   
-  }
-  aaa(){
-    setTimeout(() => {
+   setTimeout(() => {
       localStorage.setItem("toast", "true");
        location.href="/perfilUsuario";
     }, 2000);
