@@ -5,37 +5,68 @@
                 <img src="../../../../assets/img/logo//2582280521600459967.svg" alt="IMG">
             </div>
 
-            <div class="formulario">
-                <span class="titulo">
-                    Contáctanos
-                </span>
-
-                <div class="inputContenedor">
-                    <input class="input" type="text" name="nombre" placeholder="Nombre">
-                    <span class="click-input"></span>
-                    <span class="icono">
-                        <i class="fa fa-user" aria-hidden="true"></i>
+            <form class="contact formulario" [formGroup]="form" method="post" (ngSubmit)="onSubmit()">
+                    <span class="titulo">
+                        Contáctanos
                     </span>
-                </div>
 
-                <div class="inputContenedor">
-                    <input class="input" type="text" name="email" placeholder="Email">
-                    <span class="click-input"></span>
-                    <span class="icono">
-                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                    </span>
-                </div>
+                    <div class="inputContenedor">
+                        <input class="input" type="text" name="nombre" [formControl]="name" required placeholder="Nombre">
+                        <span class="click-input"></span>
+                        <span class="icono">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div *ngIf="name.invalid">Please enter your name</div>
 
-                <div class="inputContenedor">
-                    <textarea class="input" name="mensaje" placeholder="Mensaje"></textarea>
-                </div>
+                    <div class="inputContenedor">
+                        <input class="input" type="text" name="email" [formControl]="email" required placeholder="Email">
+                        <span class="click-input"></span>
+                        <span class="icono">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div *ngIf="email.invalid">Please enter a valid email</div>
 
-                <div class="contenedorBoton">
-                    <button class="btn-estilos">
-                        <span class="mr-2">Enviar</span>&#32;<i class="fas fa-paper-plane"></i>
-                    </button>
-                </div>
-            </div>
+                    <div class="inputContenedor">
+                        <textarea class="input" name="mensaje" [formControl]="message" maxlength="256" required placeholder="Mensaje"></textarea>
+                    </div>
+                    <div *ngIf="message.invalid">Please enter a message</div>
+                    <div [ngClass]="!submitted? 'hidden' : 'visible'" class="center-text">
+                        <span>{{responseMessage}}</span>
+                    </div>
+                    <div class="contenedorBoton">
+                        <button class="btn-estilos submit" [disabled]="isLoading" type="submit">
+                            <span class="mr-2">Enviar</span>&#32;<i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+            </form>
         </div>
     </div>
 </div>
+
+
+
+<!--<form class="contact" [formGroup]="form" method="post" (ngSubmit)="onSubmit()">
+    <div>
+      <div>Name</div>
+      <input [formControl]="name" required>
+      <div *ngIf="name.invalid">Please enter your name</div>
+    </div>
+    <div>
+      <div>Email</div>
+      <input [formControl]="email" placeholder="email@example.com" required>
+      <div *ngIf="email.invalid">Please enter a valid email</div>
+    </div>
+    <div>
+      <div>Message</div>
+      <textarea [formControl]="message" maxlength="256" placeholder="I'm interested in..." required></textarea>
+      <div>{{message.value?.length || 0}}/256</div>
+      <div *ngIf="message.invalid">Please enter a message</div>
+    </div>
+    <button [disabled]="isLoading" class="submit" type="submit">Submit</button>
+    <input [formControl]="honeypot" class="hidden" type="text" />
+    <div [ngClass]="!submitted? 'hidden' : 'visible'" class="center-text">
+      <span>{{responseMessage}}</span>
+    </div>
+  </form>-->

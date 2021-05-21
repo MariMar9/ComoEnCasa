@@ -6,6 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { from } from 'rxjs';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
+import { ReactiveFormsModule }  from  '@angular/forms';
+import { HttpClientModule }  from  '@angular/common/http';
+import { NoopAnimationsModule }  from  '@angular/platform-browser/animations';
+//import { MatInputModule }  from  '@angular/material/input';
 
 //inicio servicio
 import { CargarScriptsService } from "./core/services/cargar-scripts.service";
@@ -66,6 +70,10 @@ const routes: Routes = [];
       preventDuplicates: true,
       progressBar: true
     }),
+    ReactiveFormsModule,
+    HttpClientModule,
+    NoopAnimationsModule,
+    //MatInputModule
   ],
   providers: [CargarScriptsService, CookieService],
   bootstrap: [AppComponent]
