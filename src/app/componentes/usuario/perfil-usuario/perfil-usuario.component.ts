@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { RecetasService } from 'src/app/core/services/recetas.service';
 
@@ -16,7 +17,7 @@ export class PerfilUsuarioComponent implements OnInit {
   correo: string = "";
   recetas: Observable<any[]>;
   
-  constructor(public firebaseAuth: AngularFireAuth, public firestore: AngularFirestore,  private _pasarReceta: RecetasService) {
+  constructor(public firebaseAuth: AngularFireAuth, public firestore: AngularFirestore, private _pasarReceta: RecetasService, private _toast: ToastrService) {
     this.firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
         /*La exclamación es para indicar que estamos seguros de que no es null*/
@@ -24,6 +25,12 @@ export class PerfilUsuarioComponent implements OnInit {
         this.correo=user.email!;
       }
     });
+
+    if (localStorage.getItem("toast")) {
+      this._toast.success("Receta creada con éxito.");
+      localStorage.removeItem("toast");
+    }
+
     this.recetas=this.firestore.collection("recetas").valueChanges();
   }
 

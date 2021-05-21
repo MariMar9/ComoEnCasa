@@ -4,8 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
 import { from } from 'rxjs';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
-import {ToastrModule} from 'ngx-toastr'
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
 
 //inicio servicio
 import { CargarScriptsService } from "./core/services/cargar-scripts.service";
@@ -29,6 +29,7 @@ import { CrearRecetaComponent } from './componentes/recetas/crear-receta/crear-r
 import { CookieService } from 'ngx-cookie-service';
 import { CookiesComponent } from './core/cookies/cookies.component';
 import { BuscarRecetaComponent } from './componentes/recetas/buscar-receta/buscar-receta.component';
+import { PerfilUsuarioComponent } from './componentes/usuario/perfil-usuario/perfil-usuario.component';
 
 
 const routes: Routes = [];
@@ -59,7 +60,12 @@ const routes: Routes = [];
     RouterModule.forRoot(routes),
     AngularFirestoreModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      progressBar: true
+    }),
   ],
   providers: [CargarScriptsService, CookieService],
   bootstrap: [AppComponent]
