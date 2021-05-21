@@ -50,9 +50,7 @@ cargaInput: string=''
     public firestore: AngularFirestore,
     private _CargaScripts: CargarScriptsService,
     private _consultarColeccion: RecetasService,
-    private router:Router,
-    private toast: ToastrService,
-    private location: Location
+    private router:Router
   ) {
     this.quitar = _CargaScripts.quitarCabFoot();
     this._CargaScripts.carga(['js/javaScript'])
@@ -285,16 +283,9 @@ cargaInput: string=''
     for (let i = 0; i < ingredientes.length; i++) {
       
       if ((<HTMLInputElement>ingredientes[i].children[0].children[0].childNodes[0]).value == '') {
-        console.log("ingrdiente vacios");
-        /*document.querySelectorAll<HTMLElement>(".faltaIngrediente").forEach((ingrediente)=>{
-          ingrediente.innerHTML="Falta ingrediente"
-        })*/
         (<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = 'Falta ingrediente.';
         correcto = false;
       }else{
-        /*document.querySelectorAll<HTMLElement>(".faltaIngrediente").forEach((ingrediente)=>{
-          ingrediente.innerHTML=""
-        })*/
         (<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = '';
       }
     }
@@ -303,16 +294,9 @@ cargaInput: string=''
     for (let i = 0; i < ingredientes.length; i++) {
       
       if ((<HTMLInputElement>ingredientes[i].children[0].children[1].childNodes[0]).value == '') {
-        console.log("catidad vacios");
-        /*document.querySelectorAll<HTMLElement>(".faltaCantidad").forEach((cantidad)=>{
-          cantidad.innerText="Falta la cantidad"
-        });*/
         (<HTMLInputElement>document.getElementsByClassName("faltaCantidad")[i]).innerText = 'Falta cantidad.';
         correcto = false;
       }else{
-        /*document.querySelectorAll<HTMLElement>(".faltaCantidad").forEach((cantidad)=>{
-          cantidad.innerText=""
-        });*/
         (<HTMLInputElement>document.getElementsByClassName("faltaCantidad")[i]).innerText = '';
       }
     }
@@ -405,41 +389,9 @@ cargaInput: string=''
           console.error('Se ha producido un error al crear el paso.');
         });
     }
-    this.router.navigate(['/perfilUsuario']).then(() => {
-      this.toast.show('message');
-    });
-  }
-
-  mostrarToast(){
-    /*this.location.back()
-    .then(() => {
-      this.toast.success('message');
-    });*/
-    
-    /*
-    this.toast.success(
-  'Have fun!',
-  'Miracle Max Says',
-  {
-    timeOut: 1000,
-    fadeOut: 1000,
-    onHidden: function () {
-        window.location.reload();
-      }
-  }
-);
-    */
-    /*this.router.navigate(["/perfilUsuario"])
-    .then(() => {
-      
-      this.toast.success('message');
-    });*/
-
-
- this.location.onUrlChange(()=>{
-   this.location.back();
- });
-    /*this.router.routeReuseStrategy.shouldReuseRoute = () => true;
-    this.router.navigate(["/perfilUsuario"]);*/
+    setTimeout(() => {
+       location.href="/perfilUsuario";
+    }, 2000);
+   
   }
 }
