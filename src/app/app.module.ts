@@ -4,11 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
 import { from } from 'rxjs';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ToastrModule} from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule }  from  '@angular/forms';
 import { HttpClientModule }  from  '@angular/common/http';
 import { NoopAnimationsModule }  from  '@angular/platform-browser/animations';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 //import { MatInputModule }  from  '@angular/material/input';
 
 //inicio servicio
@@ -34,6 +36,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { CookiesComponent } from './core/cookies/cookies.component';
 import { BuscarRecetaComponent } from './componentes/recetas/buscar-receta/buscar-receta.component';
 import { PerfilUsuarioComponent } from './componentes/usuario/perfil-usuario/perfil-usuario.component';
+import { FormUploadComponent } from './componentes/recetas/upload/form-upload/form-upload.component';
+import { ListUploadComponent } from './componentes/recetas/upload/list-upload/list-upload.component';
+import { DetailsUploadComponent } from './componentes/recetas/upload/details-upload/details-upload.component';
 
 
 const routes: Routes = [];
@@ -53,7 +58,10 @@ const routes: Routes = [];
     MostrarRecetaComponent,
     CrearRecetaComponent,
     CookiesComponent,
-    BuscarRecetaComponent
+    BuscarRecetaComponent,
+    FormUploadComponent,
+    ListUploadComponent,
+    DetailsUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -73,6 +81,8 @@ const routes: Routes = [];
     ReactiveFormsModule,
     HttpClientModule,
     NoopAnimationsModule,
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
     //MatInputModule
   ],
   providers: [CargarScriptsService, CookieService],
