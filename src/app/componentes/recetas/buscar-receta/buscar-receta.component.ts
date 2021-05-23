@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { RecetasService } from 'src/app/core/services/recetas.service';
 
@@ -13,7 +12,7 @@ export class BuscarRecetaComponent implements OnInit {
   nombreReceta: string="";
   recetas: Observable<any[]>;
   
-  constructor(public firestore: AngularFirestore, private _pasarReceta: RecetasService) {
+  constructor(private _pasarReceta: RecetasService) {
     const path = 'recetas/'
     this._pasarReceta.mandarReceta.subscribe(nombre=>{
       this.nombreReceta=nombre;

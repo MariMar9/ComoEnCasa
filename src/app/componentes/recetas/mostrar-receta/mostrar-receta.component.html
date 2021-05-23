@@ -5,7 +5,7 @@
             <ng-container *ngFor="let receta of recetas | async">
                 <ng-container *ngIf="receta.id==idReceta;">
                     <!--titulo y fecha-->
-                    <h1 class="mt-3">Nombre: {{receta.nombre}}</h1>
+                    <h1 class="mt-3">{{receta.nombre}}</h1>
                     <p class="date">{{((receta.fecha).seconds)*1000 | date: 'dd/MM/yyyy'}} | <b>{{receta.categoria}}</b>
                     </p>
                     <!--fin titulo y fecha-->

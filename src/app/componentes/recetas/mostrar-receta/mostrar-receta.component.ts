@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { RecetasService } from '../../../core/services/recetas.service';
 import {Router} from '@angular/router';
@@ -18,10 +17,10 @@ export class MostrarRecetaComponent implements OnInit {
   nomReceta: string='s';
   pasosOrd: string[] = [];
 
-  constructor(public firestore: AngularFirestore, private _pasarReceta: RecetasService, private router:Router, private _pasarNomReceta: RecetasService, private _consultarColeccion: RecetasService) {
+  constructor(private _pasarReceta: RecetasService, private router:Router, private _pasarNomReceta: RecetasService, private _consultarColeccion: RecetasService) {
     const path = 'pasos/';
-    this.recetas = firestore.collection('recetas').valueChanges();
-    this.ingredientes =  this._consultarColeccion.getCollectionRecetas<any>('ingredientes','id')
+    this.recetas =  this._consultarColeccion.getCollection<any>('recetas/')
+    this.ingredientes =  this._consultarColeccion.getCollectionRecetas<any>('ingredientes/','id')
     this.pasos = this._consultarColeccion.getCollectionRecetas<any>(path,'id')
 
     /*Con el método "subscribe" recibe el dato que manda la función "mandarCategoria".*/

@@ -5,8 +5,6 @@ import { CargarScriptsService } from 'src/app/core/services/cargar-scripts.servi
 import { Observable } from 'rxjs';
 import { RecetasService } from 'src/app/core/services/recetas.service';
 import {Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr'
-import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-crear-receta',
@@ -68,7 +66,9 @@ cargaInput: string=''
   }
   
   ngOnInit(): void {}
-
+/**
+ * método para crear los inputs de los ingredientes
+ */
   aniadirIngrediente() {
     /**crea el contenedor de los ingredientes */
     let nuevoIngrediente = document.createElement('div');
@@ -139,7 +139,10 @@ cargaInput: string=''
     
     botonQuitarIngrediente.addEventListener('click', this.quitarIngrediente);
   }
-
+  /**
+   * metodo que permite borrar un input de los ingredientes
+   * @param e: evento de pulsar el boron borrar ingrediente 
+   */
   quitarIngrediente(e: Event) {
     if(((<HTMLButtonElement>e.target)!=null)){
       if((<HTMLButtonElement>e.target).parentElement?.className=="ingrediente form-group"){
@@ -149,7 +152,9 @@ cargaInput: string=''
       }
     }
   }
-  
+  /**
+   * método para añadir el input de un paso y su intut de la imagen
+   */
   aniadirPaso() {
     let contenedorPaso= (<HTMLDivElement>document.querySelector('#pasos'))
    
@@ -169,11 +174,6 @@ cargaInput: string=''
     let falloPaso = document.createElement('p');
     falloPaso.setAttribute('class','faltaPaso');
 
-    /*let grupoParaInputImg = document.createElement('div')
-    grupoParaInputImg.setAttribute('class','custom-file mb-3');
-
-    nuevoPaso.appendChild(inputNuevoPaso)*/
-
     let grupoParaInputImg= document.createElement('div');
     grupoParaInputImg.setAttribute('class','custom-file mb-3')
 
@@ -182,7 +182,6 @@ cargaInput: string=''
     inputNuevaImagen.setAttribute('type', 'file');
     inputNuevaImagen.setAttribute('class', 'custom-file-input');
     inputNuevaImagen.setAttribute('name', 'filename');
-
 
     let labelNuevaImg = document.createElement('label');
     labelNuevaImg.setAttribute('class','custom-file-label input-crear-receta')
@@ -204,11 +203,6 @@ cargaInput: string=''
     grupoPaso.appendChild(grupoParaInputImg);
     grupoParaInputImg.appendChild(inputNuevaImagen);
     grupoParaInputImg.appendChild(labelNuevaImg);
-
-    /*Mirar cómo añadir texto2 aquí y en la imagen de los pasos.
-    let texto2=document.createTextNode("Imagen: ");
-    divImg.appendChild(inputNuevaImagen);
-    nuevoPaso.appendChild(inputNuevaImagen);*/
 
     let pasos = document.getElementById('pasos');
     pasos!.appendChild(nuevoPaso);
