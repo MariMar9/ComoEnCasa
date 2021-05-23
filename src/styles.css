@@ -89,3 +89,17 @@ body {
   bottom: 0;
   z-index: 6;
 }
+.btn-ver1 {
+  transition: 1s;
+  background-image: linear-gradient(to right, #ffbb1d, #ec8001, #ffbb1d);
+}
+.btn-ver2 {
+  transition: 1s;
+  background-image: linear-gradient(to right, #1db7ff, #487bce, #1db7ff);
+}
+.btn-ver3 {
+  background-image: linear-gradient(to right, #50c840, #42904c, #50c840);
+}
+.btn-ver4 {
+  background-image: linear-gradient(to right, #dd5757, #ac3939, #dd5757);
+}

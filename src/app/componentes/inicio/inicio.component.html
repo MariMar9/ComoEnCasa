@@ -21,7 +21,8 @@
                     <h4 class="mb-3">{{receta.nombre}}</h4>
                     <p>Comensales: {{receta.comensales}}, duración: {{receta.duracion}}, dificultad: {{receta.dificultad}}</p>
                   </div>
-                  <div class="container-btn"><a [routerLink]="['/mostrarReceta']" (click)="pasarReceta(receta.id)"
+
+                  <div class="container-btn"><a  (click)="pasarReceta(receta.id)"
                     class="btn btn-ver">Ver</a></div>
                 </div>
               </div>
