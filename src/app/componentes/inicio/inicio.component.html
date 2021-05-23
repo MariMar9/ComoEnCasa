@@ -2,7 +2,31 @@
     <div class="row">
         <div id="presentacion" class="d-flex justify-content-around align-items-center w-100 flex-column h-100 pb-5 pt-5">
             <h1 class="m-0 mb-3">Bienvenido</h1>
-            <p class="w-75 m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            <p class="w-75 m-0"><b>¿Te gusta cocinar y comer comida rica?</b> Pues estás en el lugar indicado, <b>ComoEnCasa</b> es una web creada especialmente para gente que le gusta la comida y que además quiera compartir sus platos favoritos con todo el mundo. No olvidéis comentar sobre que os han parecido las recetas y si tenéis ganas ayudad a seguir mejorando esta comunidad. <br><span class="gracias">¡Gracias por vuestro apoyo!</span></p>
         </div>
     </div>
 </div>
+<div class="container-fluid p-0 mt-5 mb-5" id="body-card">
+    <h2 class="ml-5">Últimas publicaciones</h2>
+    <div class="row justify-content-center">
+      <ng-container *ngFor="let receta of recetas | async">
+        <ng-container *ngIf="(receta.nombre).includes(nombreReceta);">
+            <div class="container-card">
+                <div class="card m-4">
+                  <div class="card-image"> <img class="card-image"
+                      src="https://www.hola.com/imagenes/cocina/recetas/20200130159337/mousse-chocolate-postre-facil/0-776-92/mousse-chocolate-facil-rapido-teka-m.jpg">
+                  </div>
+                  <div class="card-text p-2 d-flex justify-content-center flex-column align-items-center">
+                    <p class="date">{{((receta.fecha).seconds)*1000 | date: 'dd/MM/yyyy'}}</p>
+                    <h4 class="mb-3">{{receta.nombre}}</h4>
+                    <p>Comensales: {{receta.comensales}}, duración: {{receta.duracion}}, dificultad: {{receta.dificultad}}</p>
+                  </div>
+                  <div class="container-btn"><a [routerLink]="['/mostrarReceta']" (click)="pasarReceta(receta.id)"
+                    class="btn btn-ver">Ver</a></div>
+                </div>
+              </div>
+        </ng-container>
+      </ng-container>
+    </div>
+</div>
+

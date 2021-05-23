@@ -20,6 +20,10 @@ export class RecetasService {
     const collectionRecetas:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>(path, ref => ref.orderBy(parametro));
     return collectionRecetas.valueChanges();
   }
+  getCollectionRecientes<tipo>(path:string, parametro:string){
+    const collectionRecetas:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>(path, ref => ref.orderBy(parametro, "desc").limit(4));
+    return collectionRecetas.valueChanges();
+  }
   getCollection<tipo>(path:string){
     const collectionRecetas:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>(path, ref => ref);
     return collectionRecetas.valueChanges();

@@ -4,11 +4,14 @@
       <ng-container *ngIf="receta.categoria==categoria;">
         <div class="container-card">
           <div class="card m-4">
-            <div class="card-image">  <img class="card-image" src="https://www.hola.com/imagenes/cocina/recetas/20200130159337/mousse-chocolate-postre-facil/0-776-92/mousse-chocolate-facil-rapido-teka-m.jpg"></div>
+            <div class="card-image"> <img class="card-image"
+                src="https://www.hola.com/imagenes/cocina/recetas/20200130159337/mousse-chocolate-postre-facil/0-776-92/mousse-chocolate-facil-rapido-teka-m.jpg">
+            </div>
             <div class="card-text p-2 d-flex justify-content-center flex-column align-items-center">
               <p class="date">{{((receta.fecha).seconds)*1000 | date: 'dd/MM/yyyy'}}</p>
               <h3 class="mb-3">{{receta.nombre}}</h3>
-              <div class="container-btn"><a [routerLink]="['/mostrarReceta']" (click)="pasarReceta(receta.id)" class="btn btn-ver">Ver</a></div>
+              <div class="container-btn"><a [routerLink]="['/mostrarReceta']" (click)="pasarReceta(receta.id)"
+                  class="btn btn-ver">Ver</a></div>
             </div>
             <div class="card-stats">
               <div class="stats">
@@ -28,19 +31,22 @@
             </div>
           </div>
         </div>
-  
+
       </ng-container>
     </ng-container>
-  
+
     <ng-container *ngFor="let receta of recetas | async">
       <ng-container *ngIf="categoria=='';">
         <div class="container-card">
           <div class="card m-4">
-            <div class="card-image"> <img class="card-image" src="https://www.hola.com/imagenes/cocina/recetas/20200130159337/mousse-chocolate-postre-facil/0-776-92/mousse-chocolate-facil-rapido-teka-m.jpg"></div>
+            <div class="card-image"> <img class="card-image"
+                src="https://www.hola.com/imagenes/cocina/recetas/20200130159337/mousse-chocolate-postre-facil/0-776-92/mousse-chocolate-facil-rapido-teka-m.jpg">
+            </div>
             <div class="card-text p-2 d-flex justify-content-center flex-column align-items-center">
               <p class="date">{{((receta.fecha).seconds)*1000 | date: 'dd/MM/yyyy'}}</p>
               <h3 class="mb-3">{{receta.nombre}}</h3>
-              <div class="container-btn"><a [routerLink]="['/mostrarReceta']" (click)="pasarReceta(receta.id)" class="btn btn-ver">Ver</a></div>
+              <div class="container-btn"><a [routerLink]="['/mostrarReceta']" (click)="pasarReceta(receta.id)"
+                  class="btn btn-ver">Ver</a></div>
             </div>
             <div class="card-stats">
               <div class="stats">

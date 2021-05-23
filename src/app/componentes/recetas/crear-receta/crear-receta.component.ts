@@ -241,7 +241,7 @@ cargaInput: string=''
       document.getElementById("faltaNombre")!.innerText="Falta nombre.";
       correcto = false;
     }else{
-     var primeraLetra =(<HTMLInputElement>document.getElementById('nombre')).value.charAt(0).toUpperCase()
+     let primeraLetra =(<HTMLInputElement>document.getElementById('nombre')).value.charAt(0).toUpperCase()
       this.nombreReceta = primeraLetra +(<HTMLInputElement>document.getElementById('nombre')).value.substring(1).toLocaleLowerCase();
       document.getElementById("faltaNombre")!.innerText="";
     }
@@ -288,6 +288,9 @@ cargaInput: string=''
         (<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = 'Falta ingrediente.';
         correcto = false;
       }else{
+        /*
+        var primeraLetra =(<HTMLInputElement>document.getElementById('nombre')).value.charAt(0).toUpperCase()
+        this.nombreIngrediente = primeraLetra +(<HTMLInputElement>document.getElementById('nombre')).value.substring(1).toLocaleLowerCase();*/
         (<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = '';
       }
     }
