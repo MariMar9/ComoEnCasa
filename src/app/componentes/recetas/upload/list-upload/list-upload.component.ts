@@ -15,7 +15,6 @@ export class ListUploadComponent implements OnInit {
   constructor(private uploadService: UploadFileService) { }
 
   ngOnInit() {
-    // Use snapshotChanges().pipe(map()) to store the key
     this.uploadService.getFileUploads(6).snapshotChanges().pipe(
       map(changes =>
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))

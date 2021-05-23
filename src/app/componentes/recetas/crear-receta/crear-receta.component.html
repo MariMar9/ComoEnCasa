@@ -11,7 +11,7 @@
         <!--primer bloque-->
         <div class="form-group  primer-bloque">
             <div class="custom-file mb-3">
-                <input type="file" class="custom-file-input input-crear-receta" name="filename">
+                <input type="file" class="custom-file-input input-crear-receta" name="filename" (change)="selectFile($event)">
                 <label class="custom-file-label input-crear-receta" for="customFile" data-content="Abrir">Seleccione un
                     archivo</label>
             </div>
@@ -113,7 +113,7 @@
                                 maxlength="200">
                             <p class="faltaPaso"></p>
                             <div class="custom-file mb-3">
-                                <input type="file" class="custom-file-input" name="filename">
+                                <input type="file" class="custom-file-input" name="filename" (change)="selectFile($event)">
                                 <label class="custom-file-label input-crear-receta" for="customFile"
                                     data-content="Abrir">Seleccione un archivo</label>
                             </div>
@@ -134,7 +134,7 @@
         <div class="d-flex justify-content-around align-items-center">
 
             <button class="btn btn-lg btn-primary btn-block btn-login font-weight-bold boton-estilo" type="submit"
-                (click)="validarDatos()">Crear receta</button>
+                (click)="aaa()">Crear receta</button>
             <a class="btn btn-lg btn-danger btn-block btn-login font-weight-bold boton-volver"
                 href="/perfilUsuario">Volver</a>
 

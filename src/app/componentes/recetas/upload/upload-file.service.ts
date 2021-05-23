@@ -27,10 +27,10 @@ export class UploadFileService {
           fileUpload.url = downloadURL;
           fileUpload.name = fileUpload.file.name;
           this.saveFileData(fileUpload);
+          localStorage.setItem("urlImagen", downloadURL);
         });
       })
     ).subscribe();
-
     return uploadTask.percentageChanges();
   }
 
