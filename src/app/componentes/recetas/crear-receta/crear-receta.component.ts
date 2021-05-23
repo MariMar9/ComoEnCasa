@@ -4,9 +4,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { CargarScriptsService } from 'src/app/core/services/cargar-scripts.service';
 import { Observable } from 'rxjs';
 import { RecetasService } from 'src/app/core/services/recetas.service';
-import {Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr'
-import { Location } from '@angular/common'
+import { UploadFileService } from '../upload/upload-file.service';
+import { FileUpload } from '../upload/file-upload';
 
 @Component({
   selector: 'app-crear-receta',
@@ -43,6 +42,13 @@ export class CrearRecetaComponent implements OnInit {
   /*imagenPaso: File=new File(["foo"], "foo.txt", {
     type: "text/plain",
   });*/
+
+  /*Variables de las imágenes*/
+  numImagenes: number=0;
+  selectedFile: FileList=null!;
+  selectedFiles: FileList[]=null!;
+  currentFileUpload: FileUpload=new FileUpload(new File(["foo"], "foo.txt", {type: "text/plain"}));
+  percentage: number=0;
 /**ejecutar script */
 cargaInput: string=''
   constructor(
@@ -50,7 +56,7 @@ cargaInput: string=''
     public firestore: AngularFirestore,
     private _CargaScripts: CargarScriptsService,
     private _consultarColeccion: RecetasService,
-    private router:Router
+    private uploadService: UploadFileService
   ) {
     this.quitar = _CargaScripts.quitarCabFoot();
     this._CargaScripts.carga(['js/javaScript'])
@@ -64,7 +70,7 @@ cargaInput: string=''
     this.recetas = this._consultarColeccion.getCollectionRecetas<any>(path,'id');
     this.recetas.forEach((recetas)=>{
       this.idReceta=(recetas.length)+1;
-    })
+    });
   }
   
   ngOnInit(): void {}
@@ -182,7 +188,6 @@ cargaInput: string=''
     inputNuevaImagen.setAttribute('type', 'file');
     inputNuevaImagen.setAttribute('class', 'custom-file-input');
     inputNuevaImagen.setAttribute('name', 'filename');
-
 
     let labelNuevaImg = document.createElement('label');
     labelNuevaImg.setAttribute('class','custom-file-label input-crear-receta')
@@ -328,6 +333,20 @@ cargaInput: string=''
   }
 
   aniadirReceta() {
+    /*Añadir la imagen principal a firebase*/
+    var file = this.selectedFile.item(0);
+    this.selectedFile = undefined!;
+
+    this.currentFileUpload = new FileUpload(file!);
+    this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
+      percentage => {
+        this.percentage = Math.round(percentage);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+
     /*Añadir la nueva receta a firebase*/
     this.firestore
       .collection('recetas')
@@ -389,9 +408,67 @@ cargaInput: string=''
           console.error('Se ha producido un error al crear el paso.');
         });
     }
+
+    /*Añadir las imágenes de los pasos a firebase*/
+    //var files=this.selectedFiles;
+    for (let i = 0; i < this.numImagenes; i++) {
+      file = this.selectedFiles[i].item(0);
+      if (file!=null) {
+      //this.selectedFile = undefined!;
+        this.currentFileUpload = new FileUpload(file!);
+        this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
+          percentage => {
+            this.percentage = Math.round(percentage);
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      }
+    }
+    localStorage.removeItem("urlImagen");
+
    setTimeout(() => {
       localStorage.setItem("toast", "true");
        location.href="/perfilUsuario";
     }, 2000);
   }
+
+  selectFile(event: Event) {
+    this.selectedFile = (<HTMLInputElement>event.target).files!;
+  }
+
+
+
+
+
+  selectFiles(event:Event){
+    this.selectedFiles[this.numImagenes] = (<HTMLInputElement>event.target).files!;
+    this.numImagenes++;
+  }
+
+
+
+aaa(){
+  /*Añadir las imágenes de los pasos a firebase*/
+    //var files=this.selectedFiles;
+    console.log(this.selectedFiles[0].item(0));
+    var file;
+    for (let i = 0; i < this.numImagenes+1; i++) {
+      file = this.selectedFiles[i].item(0);
+      if (file!=null) {
+      //this.selectedFile = undefined!;
+        this.currentFileUpload = new FileUpload(file!);
+        this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
+          percentage => {
+            this.percentage = Math.round(percentage);
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      }
+    }
+}
+
 }
