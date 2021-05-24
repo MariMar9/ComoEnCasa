@@ -14,54 +14,55 @@ body {
   font-size: 29px;
 }
 /*menu detalles de hover*/
-.nav-link.active{
+.nav-link.active {
   color: rgb(36, 36, 36);
   font-weight: 700;
 }
 .nav-link:hover {
-  color: #ec8001!important;
+  color: #ec8001 !important;
 }
 /*atributo especial input imagenes de crear receta*/
 .custom-file-input ~ .custom-file-label::after {
-  content: attr(data-content)!important;
+  content: attr(data-content) !important;
 }
 /*input de ingredientes en crear receta*/
-.ingrediente{
+.ingrediente {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.ingrediente-input{
+.ingrediente-input {
   width: 45%;
 }
 
 @media (max-width: 360px) {
-    #comensales{
-      width: 100%;
-    }
+  #comensales {
+    width: 100%;
+  }
 }
 
 @media (min-width: 360px) {
-  #comensales{
+  #comensales {
     width: 25%;
   }
 }
 
 /*color inputs crear receta*/
-.input-crear-receta{
+.input-crear-receta {
   color: #495057;
 }
 .input-crear-receta::placeholder {
- color: #495057;
+  color: #495057;
 }
 
-.mostrar {/*cuando se muestra la cookie*/
+.mostrar {
+  /*cuando se muestra la cookie*/
   animation-name: fadeIn;
   animation-duration: 2s;
   bottom: 0;
 }
 
-.ocultar{
+.ocultar {
   animation-name: fadeOut;
   animation-duration: 2s;
 }
@@ -84,22 +85,76 @@ body {
   }
 }
 
-#contenedorCookie{
+#contenedorCookie {
   position: fixed;
   bottom: 0;
   z-index: 6;
 }
+.container-btn {
+  -webkit-animation: fadeInFromNone 0.7s ease-out;
+  -moz-animation: fadeInFromNone 0.7s ease-out;
+  -o-animation: fadeInFromNone 0.7s ease-out;
+  animation: fadeInFromNone 0.7s ease-out;
+}
+@-webkit-keyframes fadeInFromNone {
+  0% {
+
+      opacity: 0;
+  }
+
+  100% {
+
+      opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeInFromNone {
+  0% {
+
+      opacity: 0;
+  }
+
+
+  100% {
+
+      opacity: 1;
+  }
+}
+
+@-o-keyframes fadeInFromNone {
+  0% {
+
+      opacity: 0;
+  }
+
+
+  100% {
+
+      opacity: 1;
+  }
+}
+
+@keyframes fadeInFromNone {
+  0% {
+
+      opacity: 0;
+  }
+
+  100% {
+
+      opacity: 1;
+  }
+}
+
 .btn-ver1 {
-  transition: 1s;
-  background-image: linear-gradient(to right, #ffbb1d, #ec8001, #ffbb1d);
+  background-image: linear-gradient(to right, #e6a071, #da874f, #e6a071);
 }
 .btn-ver2 {
-  transition: 1s;
-  background-image: linear-gradient(to right, #1db7ff, #487bce, #1db7ff);
+  background-image: linear-gradient(to right, #ffbb1d, #ce9d2a, #ffbb1d);
 }
 .btn-ver3 {
-  background-image: linear-gradient(to right, #50c840, #42904c, #50c840);
+  background-image: linear-gradient(to right, #bbd26b, #9fb15d, #bbd26b);
 }
 .btn-ver4 {
-  background-image: linear-gradient(to right, #dd5757, #ac3939, #dd5757);
+  background-image: linear-gradient(to right, #92d0b8, #7bb19c, #92d0b8);
 }
