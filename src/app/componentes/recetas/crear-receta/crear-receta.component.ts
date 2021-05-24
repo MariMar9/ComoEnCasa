@@ -50,6 +50,7 @@ export class CrearRecetaComponent implements OnInit {
   currentFileUpload: FileUpload=new FileUpload(new File(["foo"], "foo.txt", {type: "text/plain"}));
   percentage: number=0;
 /**ejecutar script */
+tmp_files :File[] = [] ;
 cargaInput: string=''
   constructor(
     public firebaseAuth: AngularFireAuth,
@@ -74,9 +75,7 @@ cargaInput: string=''
   }
   
   ngOnInit(): void {}
-/**
- * método para crear los inputs de los ingredientes
- */
+
   aniadirIngrediente() {
     /**crea el contenedor de los ingredientes */
     let nuevoIngrediente = document.createElement('div');
@@ -147,10 +146,7 @@ cargaInput: string=''
     
     botonQuitarIngrediente.addEventListener('click', this.quitarIngrediente);
   }
-  /**
-   * metodo que permite borrar un input de los ingredientes
-   * @param e: evento de pulsar el boron borrar ingrediente 
-   */
+
   quitarIngrediente(e: Event) {
     if(((<HTMLButtonElement>e.target)!=null)){
       if((<HTMLButtonElement>e.target).parentElement?.className=="ingrediente form-group"){
@@ -160,9 +156,7 @@ cargaInput: string=''
       }
     }
   }
-  /**
-   * método para añadir el input de un paso y su intut de la imagen
-   */
+  
   aniadirPaso() {
     let contenedorPaso= (<HTMLDivElement>document.querySelector('#pasos'))
    
@@ -182,13 +176,18 @@ cargaInput: string=''
     let falloPaso = document.createElement('p');
     falloPaso.setAttribute('class','faltaPaso');
 
+    /*let grupoParaInputImg = document.createElement('div')
+    grupoParaInputImg.setAttribute('class','custom-file mb-3');
+
+    nuevoPaso.appendChild(inputNuevoPaso)*/
+
     let grupoParaInputImg= document.createElement('div');
     grupoParaInputImg.setAttribute('class','custom-file mb-3')
 
     let inputNuevaImagen = document.createElement('input');
-    inputNuevaImagen.setAttribute('id', 'imagen' + this.numPaso);
+    inputNuevaImagen.setAttribute('id', 'imagen' + (this.numPaso));
     inputNuevaImagen.setAttribute('type', 'file');
-    inputNuevaImagen.setAttribute('class', 'custom-file-input');
+    inputNuevaImagen.setAttribute('class', 'custom-file-input imagen');
     inputNuevaImagen.setAttribute('name', 'filename');
 
     let labelNuevaImg = document.createElement('label');
@@ -212,12 +211,20 @@ cargaInput: string=''
     grupoParaInputImg.appendChild(inputNuevaImagen);
     grupoParaInputImg.appendChild(labelNuevaImg);
 
+    /*Mirar cómo añadir texto2 aquí y en la imagen de los pasos.
+    let texto2=document.createTextNode("Imagen: ");
+    divImg.appendChild(inputNuevaImagen);
+    nuevoPaso.appendChild(inputNuevaImagen);*/
+
     let pasos = document.getElementById('pasos');
     pasos!.appendChild(nuevoPaso);
 
     this.numPaso++;
 
     botonImg.addEventListener('click', this.quitarPaso);
+    inputNuevaImagen.addEventListener('change', (event) => {
+      this.fileChange(event);
+    });
 
     this._CargaScripts.carga(['js/javaScript']);
     (<HTMLScriptElement>document.querySelector('script[src="../assets/js/javaScript.js"]')).remove()
@@ -241,7 +248,7 @@ cargaInput: string=''
       document.getElementById("faltaNombre")!.innerText="Falta nombre.";
       correcto = false;
     }else{
-     let primeraLetra =(<HTMLInputElement>document.getElementById('nombre')).value.charAt(0).toUpperCase()
+     var primeraLetra =(<HTMLInputElement>document.getElementById('nombre')).value.charAt(0).toUpperCase()
       this.nombreReceta = primeraLetra +(<HTMLInputElement>document.getElementById('nombre')).value.substring(1).toLocaleLowerCase();
       document.getElementById("faltaNombre")!.innerText="";
     }
@@ -288,9 +295,8 @@ cargaInput: string=''
         (<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = 'Falta ingrediente.';
         correcto = false;
       }else{
-        /*
         var primeraLetra =(<HTMLInputElement>document.getElementById('nombre')).value.charAt(0).toUpperCase()
-        this.nombreIngrediente = primeraLetra +(<HTMLInputElement>document.getElementById('nombre')).value.substring(1).toLocaleLowerCase();*/
+        this.nombreIngrediente = primeraLetra +(<HTMLInputElement>document.getElementById('nombre')).value.substring(1).toLocaleLowerCase();
         (<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = '';
       }
     }
@@ -409,7 +415,7 @@ cargaInput: string=''
         });
     }
 
-    /*Añadir las imágenes de los pasos a firebase*/
+    /*Añadir las imágenes de los pasos a firebase*/ //MIRAR
     //var files=this.selectedFiles;
     for (let i = 0; i < this.numImagenes; i++) {
       file = this.selectedFiles[i].item(0);
@@ -435,7 +441,7 @@ cargaInput: string=''
   }
 
   selectFile(event: Event) {
-    this.selectedFile = (<HTMLInputElement>event.target).files!;
+    this.selectedFile[0] = (<HTMLInputElement>event.target).files![1];
   }
 
 
@@ -443,18 +449,61 @@ cargaInput: string=''
 
 
   selectFiles(event:Event){
-    this.selectedFiles[this.numImagenes] = (<HTMLInputElement>event.target).files!;
+    setTimeout(() => {
+      var file = (<HTMLInputElement>document.getElementById('fileItem')!).files![0];
+    console.log(file);
+    }, 1000);
+    
+    //this.selectedFiles[0] = (<HTMLInputElement>document.getElementById('fileItem'))!.files![0];
+    //this.selectedFiles[this.numImagenes] = (<HTMLInputElement>event.target).files![0];
     this.numImagenes++;
   }
 
 
 
-aaa(){
+
+
+  fileChange(event: Event) {
+    //this.tmp_files.push((<HTMLInputElement>event.target)!.files![0]);
+    var posicion=Number((<HTMLInputElement>event.target).id.substring(6,7));
+    this.tmp_files[posicion]=((<HTMLInputElement>event.target)!.files![0]);
+    /*for (let i = 1; i < this.tmp_files.length; i++) {
+      console.log(this.tmp_files[i]+" "+i);
+    }*/
+    this.numImagenes++;
+  }
+
+
+  aaa(){
+    var file;
+    for (let i = 1; i < this.tmp_files.length; i++) {
+      file = this.tmp_files[i];
+      if (file!=undefined) {
+        this.currentFileUpload = new FileUpload(file!);
+        this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
+          percentage => {
+            this.percentage = Math.round(percentage);
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      }
+    }
+
   /*Añadir las imágenes de los pasos a firebase*/
     //var files=this.selectedFiles;
-    console.log(this.selectedFiles[0].item(0));
-    var file;
-    for (let i = 0; i < this.numImagenes+1; i++) {
+    //console.log(this.selectedFiles[0].item(1));
+    /*if ((<HTMLInputElement><unknown>document.querySelectorAll(".imagen")).files==null) {
+      console.log("1");
+      console.log((<HTMLInputElement><unknown>document.querySelectorAll(".imagen")).files);//.files![1]);
+    } else {
+      console.log("2");
+      this.selectedFiles[0]=(<HTMLInputElement>document.querySelector(".imagen")).files!;
+      console.log(this.selectedFiles);
+    }*/
+    
+    /*for (let i = 0; i < this.numImagenes+1; i++) {
       file = this.selectedFiles[i].item(0);
       if (file!=null) {
       //this.selectedFile = undefined!;
@@ -468,7 +517,7 @@ aaa(){
           }
         );
       }
-    }
-}
+    }*/
+  }
 
 }

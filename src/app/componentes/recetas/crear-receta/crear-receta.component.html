@@ -113,7 +113,7 @@
                                 maxlength="200">
                             <p class="faltaPaso"></p>
                             <div class="custom-file mb-3">
-                                <input type="file" class="custom-file-input" name="filename" (change)="selectFile($event)">
+                                <input id="imagen1" type="file" class="custom-file-input" name="filename" (change)="fileChange($event)"> <!--(change)="selectFile($event)"-->
                                 <label class="custom-file-label input-crear-receta" for="customFile"
                                     data-content="Abrir">Seleccione un archivo</label>
                             </div>
