@@ -525,6 +525,35 @@ ol.gradient-list > li.button span {
   border-radius: 18px;
 }
 
+/*comentarios*/
+.media-list .media img {
+  width: 64px;
+  height: 64px;
+  border: 2px solid #e5e7e8;
+  margin-bottom: 1rem;
+}
+
+.nombreComentario {
+  max-width: 300px;
+}
+
+.media-list .media {
+  border-bottom: 1px dashed #efefef;
+  margin-bottom: 25px;
+}
+
+.media-list {
+  padding-left: 0 !important;
+}
+
+.media {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  list-style: none;
+}
+
 /*responsive*/
 @media (min-width: 400px) {
   .contenedorRecetaMostrada {

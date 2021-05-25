@@ -73,22 +73,74 @@
             <!--fin pasos-->
         </div>
 
-        <!--pruebas comentarios-->
-    
-        <ng-container  *ngIf="!usuarioConectado">
+        <!--Comentarios-->
+        <hr>
+        <h3 class="ml-5">Comentarios</h3>
+        <!--Formulario comentarios-->
+        <div class="formulario-comentarios mb-4">
+            <div class="row pl-5 pr-5">
+                <div class="col-md-8 col-sm-12">
+                    <div class="panel-body">
+                        <ng-container *ngIf="!usuarioConectado">
+                            <input id="nombre" class="form-control mb-3 nombreComentario" placeholder="Su nombre..." rows="3"
+                                maxlength="25">
+                        </ng-container>
+                        <textarea id="mensaje" class="form-control" placeholder="Escriba un comentario..." rows="3"></textarea>
+                        <br>
+                        <button type="button" class="btn btn-info pull-right"
+                            (click)="publicarComentario()">Publicar</button>
+                        <p class="falloComentario mt-3"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--fin Formulario comentarios-->
+
+        <div class="row pl-5 pr-5 justify-content-center">
+            <div class="col-md-8 col-sm-12">
+                <hr>
+                <div class="panel-body">
+                    <ul class="media-list">
+                        <ng-container *ngFor="let comentario of comentarios | async">
+                            <ng-container *ngIf="receta.id==comentario.idReceta;">
+                                <li class="media">
+                                    <div class="pull-left">
+                                        <img src="https://bootdey.com/img/Content/user_2.jpg" alt="" class="img-circle">
+                                    </div>
+                                    <div class="media-body">
+                                        <strong class="text-info">{{comentario.nombre}} </strong>
+                                        <span class="text-muted pull-right">
+                                            <small class="text-muted">{{((comentario.fecha).seconds)*1000 | date: 'dd/MM/yyyy'}}</small>
+                                        </span>
+                                        <p>{{comentario.mensaje}}</p>
+                                    </div>
+                                </li>
+                            </ng-container>
+                        </ng-container>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--fin comentarios-->
+
+
+
+
+        <!--pruebas comentarios
+        <ng-container *ngIf="!usuarioConectado">
             <div>Nombre<input type="text" id="nombre"></div>
         </ng-container>
-        
         <div>escriba comentario<input type="text" id="mensaje"></div>
         <button class="push" (click)="publicarComentario()">Comentar</button>
         <p class="falloComentario"></p>
+
         <ng-container *ngFor="let comentario of comentarios | async">
             <ng-container *ngIf="receta.id==comentario.idReceta;">
                 <p>{{comentario.fecha}}</p>
                 <p>{{comentario.nombre}}</p>
                 <p>{{comentario.mensaje}}</p>
             </ng-container>
-        </ng-container>
+        </ng-container>-->
         <!--fin pruebas comentarios-->
 
     </ng-container>
