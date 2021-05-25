@@ -35,8 +35,10 @@ export class MostrarRecetaComponent implements OnInit {
       'id'
     );
     this.pasos = this._consultarColeccion.getCollectionRecetas<any>(path, 'id');
-    this.comentarios =
-      this._consultarColeccion.getcomentarios<any>('comentarios/','fecha');
+    this.comentarios = this._consultarColeccion.getcomentarios<any>(
+      'comentarios/',
+      'fecha'
+    );
 
     /*Con el método "subscribe" recibe el dato que manda la función "mandarCategoria".*/
     this._pasarReceta.mandarReceta.subscribe((idReceta) => {
@@ -53,40 +55,59 @@ export class MostrarRecetaComponent implements OnInit {
   ngOnInit(): void {}
 
   publicarComentario() {
-    console.log('comentario publicado');
     this.crearComentario();
   }
 
   crearComentario() {
     let nombreUsuario = '';
-    let mensajeUsuario = (<HTMLInputElement>document.querySelector('#mensaje')).value;
-    console.log(nombreUsuario);
+    let mensajeUsuario = '';
+    let fallo = <HTMLElement>document.querySelector('.falloComentario');
+    let correcto = false;
+    let correctoNR = false;
     if (this.usuarioConectado == true) {
       if (localStorage.getItem('usuarioGoogle') != null) {
         let usuarioGoogle = JSON.parse(localStorage.usuarioGoogle);
         nombreUsuario = usuarioGoogle.displayName;
-      }else if(localStorage.getItem('usuario') != null){
-         let usuarioMail = JSON.parse(localStorage.usuario);
-         nombreUsuario = usuarioMail.displayName;
-      }
-      let fallo = <HTMLElement>document.querySelector('.falloComentario');
+        mensajeUsuario = (<HTMLInputElement>document.querySelector('#mensaje'))
+          .value;
         fallo.innerHTML = 'Escriba un mensaje por favor';
-    } else {
-      nombreUsuario = (<HTMLInputElement>document.querySelector('#nombre')).value;
-      if(nombreUsuario="" && mensajeUsuario==""){
-        let fallo = <HTMLElement>document.querySelector('.falloComentario');
-        fallo.innerHTML = 'Debe rellenar todos los campos';
+        correcto = true;
+      } else if (localStorage.getItem('usuario') != null) {
+        let usuarioMail = JSON.parse(localStorage.usuario);
+        nombreUsuario = usuarioMail.displayName;
+        mensajeUsuario = (<HTMLInputElement>document.querySelector('#mensaje'))
+          .value;
+        fallo.innerHTML = 'Escriba un mensaje por favor';
+        correcto = true;
       }
-    }
+      if (mensajeUsuario == '') {
+        fallo.innerHTML = 'Escriba un mensaje por favor';
+        correcto = false;
+      }
+    } else if (this.usuarioConectado == false) {
+      
 
-   this.firestore.collection('comentarios').add({
-      idReceta: this.idReceta,
-      nombre: nombreUsuario,
-      mensaje: mensajeUsuario,
-      fecha: new Date(),
-    });
+        nombreUsuario = (<HTMLInputElement>document.querySelector('#nombre'))
+          .value;
+        mensajeUsuario = (<HTMLInputElement>document.querySelector('#mensaje'))
+          .value;
+          if(nombreUsuario==""){
+            fallo.innerHTML = 'Introduzca su nombre';
+          }else if(mensajeUsuario==""){
+            fallo.innerHTML = 'Ponga un comentario';
+          }else{
+            correctoNR = true;
+          }
+    } 
+    
+    if (correcto == true || correctoNR==true) {
+      console.log('hecho');
+      this.firestore.collection('comentarios').add({
+        idReceta: this.idReceta,
+        nombre: nombreUsuario,
+        mensaje: mensajeUsuario,
+        fecha: new Date(),
+      });
+    }
   }
 }
-
-
-
