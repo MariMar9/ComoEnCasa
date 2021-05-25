@@ -28,5 +28,9 @@ export class RecetasService {
     const collectionRecetas:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>(path, ref => ref);
     return collectionRecetas.valueChanges();
   }
-
+  getcomentarios<tipo>(path:string, parametro:string){
+    const collectionRecetas:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>(path, ref => ref.orderBy(parametro, "desc"));
+    return collectionRecetas.valueChanges();
+  }
+  
 }

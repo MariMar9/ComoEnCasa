@@ -60,11 +60,11 @@
                         <ng-container *ngIf="pasosReceta.idReceta==idReceta;">
                             <li class="button">
                                 <span>
-                                <p>{{pasosReceta.descripcion}}</p>
-                                <div class="img-contenedor"> <img
-                                        src="https://cdn.mercadoflotante.com/blog/wp-content/uploads/2017/01/yakisoba-e1485510522582-768x483.jpg">
-                                </div>
-                            </span>
+                                    <p>{{pasosReceta.descripcion}}</p>
+                                    <div class="img-contenedor"> <img
+                                            src="https://cdn.mercadoflotante.com/blog/wp-content/uploads/2017/01/yakisoba-e1485510522582-768x483.jpg">
+                                    </div>
+                                </span>
                             </li>
                         </ng-container>
                     </ng-container>
@@ -72,6 +72,24 @@
             </main>
             <!--fin pasos-->
         </div>
+
+        <!--pruebas comentarios-->
+    
+        <ng-container  *ngIf="!usuarioConectado">
+            <div>Nombre<input type="text" id="nombre"></div>
+        </ng-container>
+        
+        <div>escriba comentario<input type="text" id="mensaje"></div>
+        <button class="push" (click)="publicarComentario()">Comentar</button>
+        <p class="falloComentario"></p>
+        <ng-container *ngFor="let comentario of comentarios | async">
+            <ng-container *ngIf="receta.id==comentario.idReceta;">
+                <p>{{comentario.fecha}}</p>
+                <p>{{comentario.nombre}}</p>
+                <p>{{comentario.mensaje}}</p>
+            </ng-container>
+        </ng-container>
+        <!--fin pruebas comentarios-->
 
     </ng-container>
 </ng-container>

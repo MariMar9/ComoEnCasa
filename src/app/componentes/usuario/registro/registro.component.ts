@@ -20,19 +20,15 @@ export class RegistroComponent implements OnInit {
   usuarios: Observable<any[]>;
 
   constructor(
-    public auth: AngularFireAuth,firestore: AngularFirestore,private ngZone: NgZone) {
+    public auth: AngularFireAuth,
+    firestore: AngularFirestore,
+    private ngZone: NgZone
+  ) {
     /*Rellena la variable usuarios con una colección de tipo usuarios*/
     this.usuarios = firestore.collection('usuarios').valueChanges();
   }
 
   ngOnInit(): void {
-    this.auth.user.subscribe((user) => {
-      if (user) {
-        this.ngZone.run(() => {
-          window.location.href = 'inicio';
-        });
-      }
-    });
     /*Mostrar imágenes del fomrulario aleatoriamente*/
     let imagenes = new Array(
       '../../../assets/imagenesRandom/chocolate1.jpeg',
@@ -104,15 +100,19 @@ export class RegistroComponent implements OnInit {
           this.auth.onAuthStateChanged((user) => {
             if (user) {
               user.updateProfile({
-                displayName: this.nombre,     
+                displayName: this.nombre,
               });
-              
               setTimeout(() => {
-                localStorage.setItem('usuario',JSON.stringify(user));
-                setTimeout(() => {
-                   window.location.href = '/inicio';
-                }, 400);
-              }, 400); 
+                localStorage.setItem('usuario', JSON.stringify(user));
+
+                this.auth.user.subscribe((user) => {
+                  if (user) {
+                    this.ngZone.run(() => {
+                      window.location.href = 'inicio';
+                    });
+                  }
+                });
+              }, 500);
             }
           });
         })

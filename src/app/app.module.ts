@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { FormsModule } from '@angular/forms';
 import { from } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -71,6 +72,7 @@ const routes: Routes = [];
     FormsModule,
     RouterModule.forRoot(routes),
     AngularFirestoreModule,
+    AngularFireAnalyticsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 3000,
