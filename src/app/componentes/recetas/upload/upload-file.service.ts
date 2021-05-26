@@ -23,11 +23,22 @@ export class UploadFileService {
     uploadTask.snapshotChanges().pipe(
       finalize(() => {
         storageRef.getDownloadURL().subscribe(downloadURL => {
-          localStorage.setItem("downloadURL", downloadURL);
-          console.log("downloadURL del service: "+downloadURL);
-          fileUpload.url = downloadURL;
-          fileUpload.name = fileUpload.file.name;
-          this.saveFileData(fileUpload);
+          if (localStorage.getItem("imagenesLocalStorage")) {
+            var imagenesLocalStorage=localStorage.getItem("imagenesLocalStorage");
+            imagenesLocalStorage=imagenesLocalStorage!.concat(";"+downloadURL)!;
+            localStorage.setItem("imagenesLocalStorage", imagenesLocalStorage);
+            console.log("imagenesLocalStorage del service: "+imagenesLocalStorage);
+            fileUpload.url = downloadURL;
+            fileUpload.name = fileUpload.file.name;
+            this.saveFileData(fileUpload);
+          } else {
+            localStorage.setItem("imagenesLocalStorage", downloadURL);
+            console.log("downloadURL del service: "+downloadURL);
+            fileUpload.url = downloadURL;
+            fileUpload.name = fileUpload.file.name;
+            this.saveFileData(fileUpload);
+          }
+          
         });
       })
     ).subscribe();
