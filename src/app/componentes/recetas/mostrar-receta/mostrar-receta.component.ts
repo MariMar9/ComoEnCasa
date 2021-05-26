@@ -83,6 +83,8 @@ export class MostrarRecetaComponent implements OnInit {
       if (mensajeUsuario == '') {
         fallo.innerHTML = 'Escriba un mensaje por favor';
         correcto = false;
+      }else{
+        fallo.innerHTML = '';
       }
     } else if (this.usuarioConectado == false) {
       

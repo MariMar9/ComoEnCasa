@@ -13,7 +13,14 @@ export class ControlPerfilUsuarioGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this._controlRuta.controlRutaPerfil();
+      if (localStorage.usuario == null && localStorage.usuarioGoogle == null) {
+        window.location.href = '/iniciarSesion';
+        return false;
+        /*como la anterior pero para usuarios de gmail */
+        /*si no esta conectado no redirige */
+      } else {
+        return true;
+      }
   }
   
 }

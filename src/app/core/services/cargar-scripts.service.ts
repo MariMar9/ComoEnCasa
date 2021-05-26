@@ -9,13 +9,7 @@ export class CargarScriptsService {
   usuarioConectado=false;
   quitar=false;
   url = window.location.pathname;
-  constructor( private _cookieService: CookieService ) {
-    if (!_cookieService.check("cookies")) {
-      //this.cookieService.set( 'Test', 'Hello World' );
-      console.log("🍪🍪🍪");
-    }
-      
-  }
+  constructor( private _cookieService: CookieService ) {}
 
 /**
 * Para poder tener acceso a todos los js que hemos creado
@@ -56,39 +50,6 @@ export class CargarScriptsService {
 
   }
 
-/**
- * Función para evitar que un usuario pueda acceder a ciertas rutas estando conectado o no conectado
- * @returns devuelve un booleano para redirigir al usuario conectado si intenta acceder
- */
-  controlRutaSesionRegistro() {
-    /*si el usuario registrado está conectado e intenta acceder al inicio de sesión o registro redirige al inicio*/
-    if(localStorage.usuario!=null){
-      window.location.href="/inicio";
-      return false;
-    /*como la anterior pero para usuarios de gmail */
-    }else if(localStorage.usuarioGoogle!=null){
-      window.location.href="/inicio";
-      return false;
-    /*si no esta conectado no redirige */
-    }else{
-      return true;
-    }
-  }
-
-/**
- * Como el caso anterior (controlRutaSesionRegistro()) pero para que los usuarios desconectados no puedan acceder a la ruta del perfilUsuario
- * @returns devuelve un booleano para redirigir al usuario desconectado si intenta acceder
- */
-  controlRutaPerfil(){
-    if(localStorage.usuario!=null){
-      return true;
-    }else if(localStorage.usuarioGoogle!=null){
-      return true;
-    }else{
-      window.location.href="/inicio";
-      return false;
-    }
-  }
 /**
  * Quita o muestra la cabecera ey el footer en determinadas rutas (iniciarSesion,registro,crearReceta)
  * @returns this.quitar: booleano enviado a la cabecera y al footer

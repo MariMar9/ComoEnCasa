@@ -13,7 +13,7 @@
                     <!--imagen y datos-->
                     <!--<img src="{{receta.foto}}">-->
                     <img class="img-receta"
-                        src="https://www.hola.com/imagenes/cocina/recetas/20200130159337/mousse-chocolate-postre-facil/0-776-92/mousse-chocolate-facil-rapido-teka-m.jpg">
+                        src={{receta.imagen}}>
                     <!--datos-->
                     <div class="card-stats mb-3">
                         <div class="stats">
@@ -61,10 +61,13 @@
                             <li class="button">
                                 <span>
                                     <p>{{pasosReceta.descripcion}}</p>
-                                    <div class="img-contenedor"> <img
-                                            src="https://cdn.mercadoflotante.com/blog/wp-content/uploads/2017/01/yakisoba-e1485510522582-768x483.jpg">
+                                    <div *ngIf="pasosReceta.urlImagen!='';">
+                                    <div class="img-contenedor">
+                                        <img src={{pasosReceta.urlImagen}}>
                                     </div>
+                                </div>
                                 </span>
+                                
                             </li>
                         </ng-container>
                     </ng-container>
@@ -110,7 +113,7 @@
                                     <div class="media-body">
                                         <strong class="text-info">{{comentario.nombre}} </strong>
                                         <span class="text-muted pull-right">
-                                            <small class="text-muted">{{((comentario.fecha).seconds)*1000 | date: 'dd/MM/yyyy'}}</small>
+                                            <small class="text-muted">{{((comentario.fecha).seconds)*1000 | date: 'dd/MM/yyyy hh:mm a'}}</small>
                                         </span>
                                         <p>{{comentario.mensaje}}</p>
                                     </div>

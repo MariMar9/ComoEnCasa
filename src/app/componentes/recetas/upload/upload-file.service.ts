@@ -23,11 +23,11 @@ export class UploadFileService {
     uploadTask.snapshotChanges().pipe(
       finalize(() => {
         storageRef.getDownloadURL().subscribe(downloadURL => {
-          console.log('File available at', downloadURL);
+          localStorage.setItem("downloadURL", downloadURL);
+          console.log(downloadURL);
           fileUpload.url = downloadURL;
           fileUpload.name = fileUpload.file.name;
           this.saveFileData(fileUpload);
-          localStorage.setItem("urlImagen", downloadURL);
         });
       })
     ).subscribe();

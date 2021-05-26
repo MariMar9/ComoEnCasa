@@ -104,7 +104,7 @@ export class RegistroComponent implements OnInit {
               });
               setTimeout(() => {
                 localStorage.setItem('usuario', JSON.stringify(user));
-
+                localStorage.setItem("toastRegistro", "true");
                 this.auth.user.subscribe((user) => {
                   if (user) {
                     this.ngZone.run(() => {

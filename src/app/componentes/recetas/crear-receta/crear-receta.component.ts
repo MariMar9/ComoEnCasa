@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { CargarScriptsService } from 'src/app/core/services/cargar-scripts.service';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { RecetasService } from 'src/app/core/services/recetas.service';
 import { UploadFileService } from '../upload/upload-file.service';
 import { FileUpload } from '../upload/file-upload';
+import { isEmpty } from 'rxjs/operators';
 
 @Component({
   selector: 'app-crear-receta',
@@ -39,19 +40,18 @@ export class CrearRecetaComponent implements OnInit {
   /*Variables de los pasos*/
   idPaso: number = 0;
   descripcion: string = '';
-  /*imagenPaso: File=new File(["foo"], "foo.txt", {
-    type: "text/plain",
-  });*/
+  imagenesPasos: string[]=[];
 
   /*Variables de las imágenes*/
   numImagenes: number=0;
   selectedFile: FileList=null!;
-  selectedFiles: FileList[]=null!;
   currentFileUpload: FileUpload=new FileUpload(new File(["foo"], "foo.txt", {type: "text/plain"}));
-  percentage: number=0;
+  tmp_file: File=new File(["foo"], "foo.txt", {type: "text/plain"});
+  tmp_files: File[]=new Array(new File(["foo"], "foo.txt", {type: "text/plain"}));
+
 /**ejecutar script */
-tmp_files :File[] = [] ;
-cargaInput: string=''
+  cargaInput: string='';
+
   constructor(
     public firebaseAuth: AngularFireAuth,
     public firestore: AngularFirestore,
@@ -243,6 +243,13 @@ cargaInput: string=''
   
   validarDatos() {
     let correcto = true;
+    if (this.tmp_files[0]) {
+      console.log("imagen principal vacia")
+      document.getElementById("faltaImagen")!.innerText="Falta imagen.";
+      //correcto = false;
+    }else{
+      document.getElementById("faltaImagen")!.innerText="";
+    }
     if (this.nombreReceta == '') {
       console.log("nombre vacios")
       document.getElementById("faltaNombre")!.innerText="Falta nombre.";
@@ -333,27 +340,28 @@ cargaInput: string=''
     }
 
     if (correcto) {
-      console.log("receta añadida")
       this.aniadirReceta();
     }
   }
 
   aniadirReceta() {
     /*Añadir la imagen principal a firebase*/
-    var file = this.selectedFile.item(0);
-    this.selectedFile = undefined!;
-
-    this.currentFileUpload = new FileUpload(file!);
+    var urlImagenPrincipal: string="";
+    this.tmp_file=this.tmp_files[0]; //poner 1
+    console.log(this.tmp_file);
+    this.currentFileUpload = new FileUpload(this.tmp_file);
     this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
-      percentage => {
-        this.percentage = Math.round(percentage);
+      urlImagen => {
+        urlImagenPrincipal=localStorage.getItem("downloadURL")!;
+        console.log(urlImagenPrincipal);
+        console.log(localStorage.getItem("downloadURL"));
       },
       error => {
         console.log(error);
       }
     );
-
-    /*Añadir la nueva receta a firebase*/
+      setTimeout(() => {
+        /*Añadir la nueva receta a firebase*/
     this.firestore
       .collection('recetas')
       .add({
@@ -365,6 +373,7 @@ cargaInput: string=''
         dificultad: this.dificultad,
         duracion: this.duracion,
         fecha: new Date(),
+        imagen: urlImagenPrincipal
       })
       .then((recetaCreada) => {
         console.log('Se ha creado la receta.');
@@ -372,12 +381,13 @@ cargaInput: string=''
       .catch((error) => {
         console.error('Se ha producido un error al crear la receta.');
       });
-
-    /*Añadir los nuevos ingredientes a firebase*/
+      }, 3000);
+    
+setTimeout(() => {
+  /*Añadir los nuevos ingredientes a firebase*/
     var ingredientes = document.getElementsByClassName('ingrediente');
     for (let i = 0; i < ingredientes.length; i++) {
       this.nombreIngrediente = (<HTMLInputElement>ingredientes[i].children[0].children[0].childNodes[0]).value
-      console.log("this.nombreIngrediente")
       this.cantidad = (<HTMLInputElement>ingredientes[i].children[0].children[1].childNodes[0]).value;
       console.log(this.cantidad)
       this.firestore
@@ -395,101 +405,113 @@ cargaInput: string=''
           console.error('Se ha producido un error al crear el ingrediente.');
         });
     }
-
-    /*Añadir los nuevos pasos a firebase*/
-    var pasos = document.getElementsByClassName('paso');
-    for (let i = 0; i < this.numPaso - 1; i++) {
-      this.descripcion = (<HTMLInputElement>pasos[i].children[0].children[0]).value;
-      this.firestore
-        .collection('pasos')
-        .add({
-          id: i+1,
-          descripcion: this.descripcion,
-          idReceta: this.idReceta,
-        })
-        .then((pasoCreado) => {
-          console.log('Se ha creado el paso.');
-        })
-        .catch((error) => {
-          console.error('Se ha producido un error al crear el paso.');
-        });
-    }
-
-    /*Añadir las imágenes de los pasos a firebase*/ //MIRAR
-    //var files=this.selectedFiles;
-    for (let i = 0; i < this.numImagenes; i++) {
-      file = this.selectedFiles[i].item(0);
-      if (file!=null) {
-      //this.selectedFile = undefined!;
-        this.currentFileUpload = new FileUpload(file!);
+}, 6000);
+    
+setTimeout(() => {
+  /*Añadir las imágenes de los pasos a firebase*/
+    for (let i = 1; i < this.tmp_files.length; i++) {
+      if (this.tmp_files[i] && this.tmp_files[i]!=null && this.tmp_files[i]!=undefined) {
+        this.currentFileUpload = new FileUpload(this.tmp_files[i]!);
         this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
-          percentage => {
-            this.percentage = Math.round(percentage);
+          urlImagen => {
+            this.imagenesPasos[i]=localStorage.getItem("downloadURL")!;
+            console.log(this.imagenesPasos[i]);   //¿Por qué entra tantas veces por aquí?
           },
           error => {
             console.log(error);
           }
         );
+      }  
+        console.log(this.tmp_files[i]);
+    }
+}, 9000);
+    
+setTimeout(() => {
+  /*Añadir los nuevos pasos a firebase*/
+    var pasos = document.getElementsByClassName('paso');
+    for (let i = 0, j=1; i < pasos.length/*this.numPaso-1*/; i++, j++) {
+      if (this.tmp_files[j] && this.tmp_files[j]!=null && this.tmp_files[j]!=undefined) {
+        this.descripcion = (<HTMLInputElement>pasos[i].children[0].children[0]).value;
+        console.log(this.descripcion);
+        this.firestore
+          .collection('pasos')
+          .add({
+            id: i+1,
+            descripcion: this.descripcion,
+            idReceta: this.idReceta,
+            urlImagen: this.imagenesPasos[j]
+          })
+          .then((pasoCreado) => {
+            console.log('Se ha creado el paso.');
+          })
+          .catch((error) => {
+            console.error('Se ha producido un error al crear el paso.');
+          });
+      }else{
+        this.descripcion = (<HTMLInputElement>pasos[i].children[0].children[0]).value;
+        console.log(this.descripcion);
+        this.firestore
+          .collection('pasos')
+          .add({
+            id: i+1,
+            descripcion: this.descripcion,
+            idReceta: this.idReceta,
+            urlImagen: ""
+          })
+          .then((pasoCreado) => {
+            console.log('Se ha creado el paso.');
+          })
+          .catch((error) => {
+            console.error('Se ha producido un error al crear el paso.');
+          });
       }
     }
-    localStorage.removeItem("urlImagen");
+}, 12000);
+    setTimeout(() => {
+      //console.log(urlImagenPrincipal);
+    console.log(this.imagenesPasos);
+    }, 15000);
+    
 
    setTimeout(() => {
       localStorage.setItem("toast", "true");
        location.href="/perfilUsuario";
-    }, 2000);
+    }, 2147483647);
   }
 
   selectFile(event: Event) {
-    this.selectedFile[0] = (<HTMLInputElement>event.target).files![1];
+    this.tmp_file=((<HTMLInputElement>event.target)!.files![0]);
   }
-
-
-
-
-
-  selectFiles(event:Event){
-    setTimeout(() => {
-      var file = (<HTMLInputElement>document.getElementById('fileItem')!).files![0];
-    console.log(file);
-    }, 1000);
-    
-    //this.selectedFiles[0] = (<HTMLInputElement>document.getElementById('fileItem'))!.files![0];
-    //this.selectedFiles[this.numImagenes] = (<HTMLInputElement>event.target).files![0];
-    this.numImagenes++;
-  }
-
-
-
-
 
   fileChange(event: Event) {
+    
     //this.tmp_files.push((<HTMLInputElement>event.target)!.files![0]);
     var posicion=Number((<HTMLInputElement>event.target).id.substring(6,7));
     this.tmp_files[posicion]=((<HTMLInputElement>event.target)!.files![0]);
-    /*for (let i = 1; i < this.tmp_files.length; i++) {
-      console.log(this.tmp_files[i]+" "+i);
-    }*/
+    console.log(this.tmp_files);
+    console.log(this.tmp_files[0]);
     this.numImagenes++;
+    /*var posicion=Number((<HTMLInputElement>event.target).id.substring(6,7));
+    var imagenes=document.querySelectorAll(".imagen")!;
+    this.tmp_files[posicion]=imagenes[posicion];
+    console.log(this.tmp_files);
+    this.numImagenes++;*/
+
+
   }
 
 
+
+
   aaa(){
-    var file;
-    for (let i = 1; i < this.tmp_files.length; i++) {
-      file = this.tmp_files[i];
-      if (file!=undefined) {
-        this.currentFileUpload = new FileUpload(file!);
-        this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
-          percentage => {
-            this.percentage = Math.round(percentage);
-          },
-          error => {
-            console.log(error);
-          }
-        );
-      }
-    }
+    this.tmp_file=this.tmp_files[0];
+    var file=this.tmp_files[0].name;
+    console.log(this.tmp_file);
+    console.log(file);
+    console.log(this.tmp_files[0]);
+  }
+
+
 
   /*Añadir las imágenes de los pasos a firebase*/
     //var files=this.selectedFiles;
@@ -520,4 +542,4 @@ cargaInput: string=''
     }*/
   }
 
-}
+
