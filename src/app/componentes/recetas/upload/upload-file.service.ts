@@ -24,7 +24,7 @@ export class UploadFileService {
       finalize(() => {
         storageRef.getDownloadURL().subscribe(downloadURL => {
           localStorage.setItem("downloadURL", downloadURL);
-          console.log(downloadURL);
+          console.log("downloadURL del service: "+downloadURL);
           fileUpload.url = downloadURL;
           fileUpload.name = fileUpload.file.name;
           this.saveFileData(fileUpload);

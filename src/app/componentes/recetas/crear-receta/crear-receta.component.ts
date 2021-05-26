@@ -43,11 +43,9 @@ export class CrearRecetaComponent implements OnInit {
   imagenesPasos: string[]=[];
 
   /*Variables de las imágenes*/
-  numImagenes: number=0;
-  selectedFile: FileList=null!;
   currentFileUpload: FileUpload=new FileUpload(new File(["foo"], "foo.txt", {type: "text/plain"}));
   tmp_file: File=new File(["foo"], "foo.txt", {type: "text/plain"});
-  tmp_files: File[]=new Array(new File(["foo"], "foo.txt", {type: "text/plain"}));
+  tmp_files: File[]=new Array(/*new File(["foo"], "foo.txt", {type: "text/plain"})*/);
 
 /**ejecutar script */
   cargaInput: string='';
@@ -211,11 +209,6 @@ export class CrearRecetaComponent implements OnInit {
     grupoParaInputImg.appendChild(inputNuevaImagen);
     grupoParaInputImg.appendChild(labelNuevaImg);
 
-    /*Mirar cómo añadir texto2 aquí y en la imagen de los pasos.
-    let texto2=document.createTextNode("Imagen: ");
-    divImg.appendChild(inputNuevaImagen);
-    nuevoPaso.appendChild(inputNuevaImagen);*/
-
     let pasos = document.getElementById('pasos');
     pasos!.appendChild(nuevoPaso);
 
@@ -243,10 +236,10 @@ export class CrearRecetaComponent implements OnInit {
   
   validarDatos() {
     let correcto = true;
-    if (this.tmp_files[0]) {
+    if (!this.tmp_files[0] && this.tmp_files[0]==null && this.tmp_files[0]==undefined) {
       console.log("imagen principal vacia")
       document.getElementById("faltaImagen")!.innerText="Falta imagen.";
-      //correcto = false;
+      correcto = false;
     }else{
       document.getElementById("faltaImagen")!.innerText="";
     }
@@ -347,44 +340,25 @@ export class CrearRecetaComponent implements OnInit {
   aniadirReceta() {
     /*Añadir la imagen principal a firebase*/
     var urlImagenPrincipal: string="";
-    this.tmp_file=this.tmp_files[0]; //poner 1
-    console.log(this.tmp_file);
-    this.currentFileUpload = new FileUpload(this.tmp_file);
+    this.currentFileUpload = new FileUpload(this.tmp_files[0]);
     this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
       urlImagen => {
-        urlImagenPrincipal=localStorage.getItem("downloadURL")!;
-        console.log(urlImagenPrincipal);
-        console.log(localStorage.getItem("downloadURL"));
+        setTimeout(() => {
+          if (localStorage.getItem("downloadURL")) {
+            urlImagenPrincipal=localStorage.getItem("downloadURL")!;
+            console.log("urlImagenPrincipal: "+urlImagenPrincipal);
+            console.log("urlImagenLocalStorage: "+localStorage.getItem("downloadURL"));
+          }
+        }, 1000);
       },
       error => {
         console.log(error);
       }
     );
-      setTimeout(() => {
-        /*Añadir la nueva receta a firebase*/
-    this.firestore
-      .collection('recetas')
-      .add({
-        id: this.idReceta,
-        correoUsuario: this.correo,
-        nombre: this.nombreReceta,
-        categoria: this.categoria,
-        comensales: this.comensales,
-        dificultad: this.dificultad,
-        duracion: this.duracion,
-        fecha: new Date(),
-        imagen: urlImagenPrincipal
-      })
-      .then((recetaCreada) => {
-        console.log('Se ha creado la receta.');
-      })
-      .catch((error) => {
-        console.error('Se ha producido un error al crear la receta.');
-      });
-      }, 3000);
     
 setTimeout(() => {
   /*Añadir los nuevos ingredientes a firebase*/
+  console.log("Id receta ingredientes: "+this.idReceta);
     var ingredientes = document.getElementsByClassName('ingrediente');
     for (let i = 0; i < ingredientes.length; i++) {
       this.nombreIngrediente = (<HTMLInputElement>ingredientes[i].children[0].children[0].childNodes[0]).value
@@ -405,7 +379,7 @@ setTimeout(() => {
           console.error('Se ha producido un error al crear el ingrediente.');
         });
     }
-}, 6000);
+}, 3000);
     
 setTimeout(() => {
   /*Añadir las imágenes de los pasos a firebase*/
@@ -415,41 +389,41 @@ setTimeout(() => {
         this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
           urlImagen => {
             this.imagenesPasos[i]=localStorage.getItem("downloadURL")!;
-            console.log(this.imagenesPasos[i]);   //¿Por qué entra tantas veces por aquí?
+            console.log("imagenPaso "+i+": "+this.imagenesPasos[i]);   //¿Por qué entra tantas veces por aquí?
           },
           error => {
             console.log(error);
           }
         );
-      }  
-        console.log(this.tmp_files[i]);
+      }
     }
-}, 9000);
-    
+}, 6000);
+
 setTimeout(() => {
+  console.log("Id receta pasos: "+this.idReceta);
   /*Añadir los nuevos pasos a firebase*/
     var pasos = document.getElementsByClassName('paso');
-    for (let i = 0, j=1; i < pasos.length/*this.numPaso-1*/; i++, j++) {
-      if (this.tmp_files[j] && this.tmp_files[j]!=null && this.tmp_files[j]!=undefined) {
+    console.log("Longitud pasos: "+pasos.length);
+    console.log("Número de pasos: "+(this.numPaso-1));
+    for (let i = 0; i < pasos.length/*this.numPaso-1*/; i++) {
+      if (this.tmp_files[i+1] && this.tmp_files[i+1]!=null && this.tmp_files[i+1]!=undefined) {
         this.descripcion = (<HTMLInputElement>pasos[i].children[0].children[0]).value;
-        console.log(this.descripcion);
         this.firestore
           .collection('pasos')
           .add({
             id: i+1,
             descripcion: this.descripcion,
             idReceta: this.idReceta,
-            urlImagen: this.imagenesPasos[j]
+            urlImagen: this.imagenesPasos[i+1]
           })
           .then((pasoCreado) => {
-            console.log('Se ha creado el paso.');
+            console.log("número de paso: "+i+", número de imagen: "+(i+1)+", url: "+this.imagenesPasos[i+1]);
           })
           .catch((error) => {
             console.error('Se ha producido un error al crear el paso.');
           });
       }else{
         this.descripcion = (<HTMLInputElement>pasos[i].children[0].children[0]).value;
-        console.log(this.descripcion);
         this.firestore
           .collection('pasos')
           .add({
@@ -459,14 +433,41 @@ setTimeout(() => {
             urlImagen: ""
           })
           .then((pasoCreado) => {
-            console.log('Se ha creado el paso.');
+            console.log("número de paso: "+i+", número de imagen: "+(i+1));
           })
           .catch((error) => {
             console.error('Se ha producido un error al crear el paso.');
           });
       }
     }
-}, 12000);
+}, 9000);
+
+    setTimeout(() => {
+      /*Añadir la nueva receta a firebase*/
+      console.log("Id receta: "+this.idReceta);
+    this.firestore
+    .collection('recetas')
+    .add({
+      id: this.idReceta,
+      correoUsuario: this.correo,
+      nombre: this.nombreReceta,
+      categoria: this.categoria,
+      comensales: this.comensales,
+      dificultad: this.dificultad,
+      duracion: this.duracion,
+      fecha: new Date(),
+      imagen: urlImagenPrincipal
+    })
+    .then((recetaCreada) => {
+      console.log('crear imagen principal: '+urlImagenPrincipal);
+      localStorage.removeItem("downloadURL");
+    })
+    .catch((error) => {
+      console.error('Se ha producido un error al crear la receta.');
+      localStorage.removeItem("downloadURL");
+    });
+    }, 12000);
+
     setTimeout(() => {
       //console.log(urlImagenPrincipal);
     console.log(this.imagenesPasos);
@@ -479,9 +480,9 @@ setTimeout(() => {
     }, 2147483647);
   }
 
-  selectFile(event: Event) {
+  /*selectFile(event: Event) {
     this.tmp_file=((<HTMLInputElement>event.target)!.files![0]);
-  }
+  }*/
 
   fileChange(event: Event) {
     
@@ -490,14 +491,6 @@ setTimeout(() => {
     this.tmp_files[posicion]=((<HTMLInputElement>event.target)!.files![0]);
     console.log(this.tmp_files);
     console.log(this.tmp_files[0]);
-    this.numImagenes++;
-    /*var posicion=Number((<HTMLInputElement>event.target).id.substring(6,7));
-    var imagenes=document.querySelectorAll(".imagen")!;
-    this.tmp_files[posicion]=imagenes[posicion];
-    console.log(this.tmp_files);
-    this.numImagenes++;*/
-
-
   }
 
 

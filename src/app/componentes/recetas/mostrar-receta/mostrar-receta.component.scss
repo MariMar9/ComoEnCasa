@@ -316,7 +316,7 @@ ol.gradient-list {
     }
     .img-contenedor {
       display: flex;
-      // justify-content: center;
+      height: 300px;
     }
     &.button {
       background: linear-gradient(90deg, $amarillo 0%, $naranja 26%, rgba(252,234,214,1) 68%, $blanco 100%);

@@ -16,7 +16,6 @@ export class ControlPerfilUsuarioGuard implements CanActivate {
       if (localStorage.usuario == null && localStorage.usuarioGoogle == null) {
         window.location.href = '/iniciarSesion';
         return false;
-        /*como la anterior pero para usuarios de gmail */
         /*si no esta conectado no redirige */
       } else {
         return true;
