@@ -356,18 +356,20 @@ export class CrearRecetaComponent implements OnInit {
       }
     );*/
     var urlImagenPrincipal: string="";
+    var array: FileUpload [] = []
     for (let i = 0; i < this.tmp_files.length; i++) {
       if (this.tmp_files[i] && this.tmp_files[i]!=null && this.tmp_files[i]!=undefined) {
         this.currentFileUpload = new FileUpload(this.tmp_files[i]!);
+        console.log( "archivo subido")
+        console.log( this.currentFileUpload)
+ 
+        array[i] = this.currentFileUpload
+        console.log(array[i].url)
+ 
         this.uploadService.pushFileToStorage(this.currentFileUpload)
       }
     }
 
-    var arrayImagenesLocalStorage=new Array();
-    setTimeout(() => {
-        arrayImagenesLocalStorage=localStorage.getItem("imagenesLocalStorage")!.split(";");
-        console.log(arrayImagenesLocalStorage);
-    }, 3000);
 
     
 setTimeout(() => {
@@ -395,8 +397,8 @@ setTimeout(() => {
     }
 }, 3000);
     
-setTimeout(() => {
-  /*Añadir las imágenes de los pasos a firebase*/
+/*setTimeout(() => {
+  Añadir las imágenes de los pasos a firebase*/
     /*for (let i = 1; i < this.tmp_files.length; i++) {
       if (this.tmp_files[i] && this.tmp_files[i]!=null && this.tmp_files[i]!=undefined) {
         this.currentFileUpload = new FileUpload(this.tmp_files[i]!);
@@ -426,10 +428,18 @@ setTimeout(() => {
         );
       }
       i++;
-    });*/
-}, 6000);
+    });
+}, 6000);*/
+ /* var arrayImagenesLocalStorage=new Array();
+  setTimeout(() => {
+      arrayImagenesLocalStorage=localStorage.getItem("imagenesLocalStorage")!.split(";");
+      console.log(arrayImagenesLocalStorage);
+  }, 8000);
+*/
 
 setTimeout(() => {
+
+
   console.log("Id receta pasos: "+this.idReceta);
   /*Añadir los nuevos pasos a firebase*/
     var pasos = document.getElementsByClassName('paso');
@@ -444,7 +454,7 @@ setTimeout(() => {
             id: i+1,
             descripcion: this.descripcion,
             idReceta: this.idReceta,
-            urlImagen: arrayImagenesLocalStorage![i+1]
+            urlImagen: array[i+1].url
           })
           .then((pasoCreado) => {
             console.log("número de paso: "+i+", número de imagen: "+(i+1)+", url: "+this.imagenesPasos[i+1]);
@@ -486,7 +496,7 @@ setTimeout(() => {
       dificultad: this.dificultad,
       duracion: this.duracion,
       fecha: new Date(),
-      imagen: arrayImagenesLocalStorage![0]
+      foto: array[0].url
     })
     .then((recetaCreada) => {
       console.log('crear imagen principal: '+urlImagenPrincipal);
@@ -499,7 +509,6 @@ setTimeout(() => {
     }, 12000);
 
     setTimeout(() => {
-      //console.log(urlImagenPrincipal);
     console.log(this.imagenesPasos);
     }, 15000);
     
@@ -515,12 +524,12 @@ setTimeout(() => {
   }*/
 
   fileChange(event: Event) {
-    
     //this.tmp_files.push((<HTMLInputElement>event.target)!.files![0]);
     var posicion=Number((<HTMLInputElement>event.target).id.substring(6,7));
     this.tmp_files[posicion]=((<HTMLInputElement>event.target)!.files![0]);
     console.log(this.tmp_files);
     console.log(this.tmp_files[0]);
+    
   }
 
 

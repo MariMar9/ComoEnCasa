@@ -16,30 +16,41 @@ export class UploadFileService {
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
 
   pushFileToStorage(fileUpload: FileUpload): Observable<any> {
+    console.log("--------ENTRA EN PUSH FILE----------")
     const filePath = `${this.basePath}/${fileUpload.file.name}`;
     const storageRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, fileUpload.file);
 
+
     uploadTask.snapshotChanges().pipe(
       finalize(() => {
-        storageRef.getDownloadURL().subscribe(downloadURL => {
+        console.log("--------ENTRA EN PUSH snapshotChanges----------")
+        storageRef.getDownloadURL().subscribe(downloadURL => {    
+         /* console.log("downloadURL: ")
+          console.log(downloadURL)
           if (localStorage.getItem("imagenesLocalStorage")) {
+            console.log("---soy el if")
             var imagenesLocalStorage=localStorage.getItem("imagenesLocalStorage");
             imagenesLocalStorage=imagenesLocalStorage!.concat(";"+downloadURL)!;
             localStorage.setItem("imagenesLocalStorage", imagenesLocalStorage);
-            console.log("imagenesLocalStorage del service: "+imagenesLocalStorage);
+            console.log("imagenesLocalStorage del service: "+imagenesLocalStorage);*/
             fileUpload.url = downloadURL;
             fileUpload.name = fileUpload.file.name;
-            this.saveFileData(fileUpload);
-          } else {
+            this.saveFileData(fileUpload);  
+            
+          /*} else {
+            console.log("---soy el else")
             localStorage.setItem("imagenesLocalStorage", downloadURL);
-            console.log("downloadURL del service: "+downloadURL);
             fileUpload.url = downloadURL;
             fileUpload.name = fileUpload.file.name;
             this.saveFileData(fileUpload);
-          }
+          }*/
           
         });
+        
+    
+           
+
       })
     ).subscribe();
     return uploadTask.percentageChanges();
