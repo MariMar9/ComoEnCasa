@@ -509,7 +509,7 @@ ol.gradient-list > li .img-contenedor {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 300px;
+  max-height: 300px;
 }
 
 ol.gradient-list > li.button {
