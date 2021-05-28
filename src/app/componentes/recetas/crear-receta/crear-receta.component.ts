@@ -474,7 +474,7 @@ setTimeout(() => {
     console.log("Número de pasos: "+(this.numPaso-1));
     for (let i = 0; i < pasos.length/*this.numPaso-1*/; i++) {
       if (this.tmp_files[i+1] && this.tmp_files[i+1]!=null && this.tmp_files[i+1]!=undefined) {
-        this.descripcion = (<HTMLInputElement>pasos[i].children[0].children[0]).value;
+        this.descripcion = (<HTMLInputElement>pasos[i].children[0].children[1]).value;
         this.firestore
           .collection('pasos')
           .add({
@@ -490,7 +490,7 @@ setTimeout(() => {
             console.error('Se ha producido un error al crear el paso.');
           });
       }else{
-        this.descripcion = (<HTMLInputElement>pasos[i].children[0].children[0]).value;
+        this.descripcion = (<HTMLInputElement>pasos[i].children[0].children[1]).value;
         this.firestore
           .collection('pasos')
           .add({
