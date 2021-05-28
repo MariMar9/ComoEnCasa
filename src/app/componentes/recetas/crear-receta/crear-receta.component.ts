@@ -45,7 +45,7 @@ export class CrearRecetaComponent implements OnInit {
   /*Variables de las imágenes*/
   currentFileUpload: FileUpload=new FileUpload(new File(["foo"], "foo.txt", {type: "text/plain"}));
   tmp_file: File=new File(["foo"], "foo.txt", {type: "text/plain"});
-  tmp_files: File[]=new Array(/*new File(["foo"], "foo.txt", {type: "text/plain"})*/);
+  tmp_files: File[]=new Array(new File(["foo"], "foo.txt", {type: "text/plain"}));
 
 /**ejecutar script */
   cargaInput: string='';
@@ -163,8 +163,11 @@ export class CrearRecetaComponent implements OnInit {
 
     let grupoPaso = document.createElement('div');
     grupoPaso.setAttribute('class','d-inline-flex flex-column w-100');
+    let spanNuevoPaso = document.createElement('span');
+    spanNuevoPaso.setAttribute('class', 'textoPaso');
     let texto = document.createTextNode('Paso ' + this.numPaso + ': ');
-    grupoPaso.appendChild(texto);
+    spanNuevoPaso.appendChild(texto);
+    grupoPaso.appendChild(spanNuevoPaso);
 
     let inputNuevoPaso = document.createElement('input');
     inputNuevoPaso.setAttribute('id', 'paso' + this.numPaso);
@@ -213,30 +216,54 @@ export class CrearRecetaComponent implements OnInit {
     pasos!.appendChild(nuevoPaso);
 
     this.numPaso++;
-
-    botonImg.addEventListener('click', this.quitarPaso);
     inputNuevaImagen.addEventListener('change', (event) => {
       this.fileChange(event);
     });
+    botonImg.addEventListener('click', (event) => {
+      this.quitarPaso(event, this.tmp_files);
+    });
+    console.log("Longitud: "+this.tmp_files.length)
 
     this._CargaScripts.carga(['js/javaScript']);
     (<HTMLScriptElement>document.querySelector('script[src="../assets/js/javaScript.js"]')).remove()
   }
 
-  quitarPaso(e: Event) {
+  quitarPaso(e: Event, tmp_files: File[]) {
+    var posicion=0;
     var elemento=((<HTMLButtonElement>e.target).parentElement);
     if(((<HTMLButtonElement>e.target)!=null)){
       if(((<HTMLButtonElement>e.target).parentElement)?.parentElement?.className=="paso form-group d-flex align-items-center"){
-        ((<HTMLButtonElement>e.target).parentElement)?.parentElement?.remove()
+        ((<HTMLButtonElement>e.target).parentElement)?.parentElement?.remove();
+        posicion=Number(((((<HTMLButtonElement>e.target).parentElement!).parentElement!).firstElementChild!).children[0].id.substring(4,5));
       }else if((<HTMLButtonElement>e.target).className=="btn btn-secondary quitarPaso ml-4"){
-        ((<HTMLButtonElement>e.target).parentElement)?.remove()
+        ((<HTMLButtonElement>e.target).parentElement)?.remove();
+        posicion=Number((((<HTMLButtonElement>e.target).parentElement!).firstElementChild!).children[0].id.substring(4,5));
       }
     }
+    /*for (let i = 0, j=0; i < tmp_files.length; i++) {
+      if (tmp_files[i] && tmp_files[i]!=null && tmp_files[i]!=undefined) {
+        copia[j]=tmp_files[i];
+        j++;
+      }
+    }*/
+    console.log("Posición: "+posicion);
+    this.tmp_files.splice(posicion+2, 1);
+    console.log("Copia con un igual:");
+    console.log(this.tmp_files);
+    var longitud=document.getElementsByClassName("textoPaso").length;
+    for (let i = 0; i < longitud; i++) {
+      console.log(i);
+      (<HTMLInputElement>document.getElementsByClassName("textoPaso")[i]).innerText="Paso "+(i+2)+": ";
+      (<HTMLInputElement>document.getElementsByClassName("textoPaso")[i]).setAttribute('id', 'paso' + (i+2));
+      ((<HTMLInputElement>document.getElementsByClassName("textoPaso")[i]).nextElementSibling)!.setAttribute('id', 'paso' + (i+2));;
+      (((((<HTMLInputElement>document.getElementsByClassName("textoPaso")[i]).nextElementSibling)!.nextElementSibling)!.nextElementSibling)!.children[0]).setAttribute('id', 'paso' + (i+2));
+    }
+    this.numPaso--;
   }
   
   validarDatos() {
     let correcto = true;
-    if (!this.tmp_files[0] && this.tmp_files[0]==null && this.tmp_files[0]==undefined) {
+    if (this.tmp_files[0].name=="foo.txt") {
       console.log("imagen principal vacia")
       document.getElementById("faltaImagen")!.innerText="Falta imagen.";
       correcto = false;
@@ -525,7 +552,11 @@ setTimeout(() => {
 
   fileChange(event: Event) {
     //this.tmp_files.push((<HTMLInputElement>event.target)!.files![0]);
-    var posicion=Number((<HTMLInputElement>event.target).id.substring(6,7));
+    if ((<HTMLInputElement>event.target).id.length<8) {
+      var posicion=Number((<HTMLInputElement>event.target).id.substring(6,7));
+    }else{
+      var posicion=Number((<HTMLInputElement>event.target).id.substring(6,8));
+    }
     this.tmp_files[posicion]=((<HTMLInputElement>event.target)!.files![0]);
     console.log(this.tmp_files);
     console.log(this.tmp_files[0]);
