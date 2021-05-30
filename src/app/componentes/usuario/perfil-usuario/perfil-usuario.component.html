@@ -20,9 +20,14 @@
 
                 <div class="px-4">
                     <div class="row justify-content-center">
-                        <div class="col-lg-3 order-lg-2">
-                            <div class="card-profile-image">
-                                <img class="rounded-circle">
+                        <div class="contenedor-img-no-ovf">
+                            <a id="guardar" class="btn btn-lg btn-danger btn-block btn-login boton-guardarImg p-2"
+                                type="submit" (click)="guardarImagen(inputCambio)"><i class="fas fa-save"></i></a>
+                            <div class="card-profile-image contenedor-img" (mouseenter)="muestra()"
+                                (mouseleave)="oculta()">
+                                <img id="image">
+                                <input type="file" id="file" (change)="fileChange($event)">
+                                <label for="file" id="upload-btn"><i class="fas fa-camera"></i></label>
                             </div>
                         </div>
                     </div>
@@ -33,11 +38,11 @@
                     <div class="mt-5 py-5 border-top text-center">
                         <div class="row d-flex justify-content-around align-items-center m-0">
                             <a id="botonAniadirReceta"
-                                class="btn btn-lg btn-primary btn-block btn-login boton-estilo p-2"
-                                type="submit" href="/crearReceta">Añadir receta</a>
+                                class="btn btn-lg btn-primary btn-block btn-login boton-estilo p-2" type="submit"
+                                href="/crearReceta">Añadir receta</a>
 
-                            <a id="botonCerrarSesion"
-                                class="btn btn-lg btn-danger btn-block btn-login boton-estilo p-2"
+
+                            <a id="botonCerrarSesion" class="btn btn-lg btn-danger btn-block btn-login boton-estilo p-2"
                                 type="submit" (click)="cerrarSesion()">Cerrar sesión</a>
                         </div>
 
@@ -46,28 +51,28 @@
                                 <p>Recetas publicadas</p>
                                 <ng-container *ngFor="let receta of recetas | async">
                                     <ng-container *ngIf="receta.correoUsuario==correo">
-                                        
-                                        <div class="my-3 p-3 border border-gray" style="background: #f4f9ff; border-radius: 7px">
-                                            <div class="row receta-contenedor d-flex justify-content-between align-items-center">
-                                              <div class="receta-nombre-icono d-flex align-items-center col-12 col-md-10 col-lg-10">
-                                                <div class="icon-fab">
-                                                  <i class="fas fa-book-open" style="
-                                                      color: #fff;
-                                                      background: #757575;
-                                                      padding: 8px;
-                                                      border-radius: 5px;
-                                                    "></i>
+
+                                        <div class="my-3 p-3 border border-gray"
+                                            style="background: #f4f9ff; border-radius: 7px">
+                                            <div
+                                                class="row receta-contenedor d-flex justify-content-between align-items-center">
+                                                <div
+                                                    class="receta-nombre-icono d-flex align-items-center col-12 col-md-10 col-lg-10">
+                                                    <div class="icon-fab">
+                                                        <i class="fas fa-book-open" style="color: #fff; background: #757575;padding: 8px; border-radius: 5px;"></i>
+                                                    </div>
+                                                    <div class="nombre">
+                                                        <p class="text-gray-dark m-0 ml-5">{{ receta.nombre }}</p>
+                                                    </div>
                                                 </div>
-                                                <div class="nombre">
-                                                  <p class="text-gray-dark m-0 ml-5">{{ receta.nombre }}</p>
+
+                                                <div class="ver-receta col-12 col-md-2 col-lg-2"
+                                                    style="text-align: center">
+                                                    <a [routerLink]="['/mostrarReceta']"
+                                                        (click)="pasarReceta(receta.id)">Ver receta</a>
                                                 </div>
-                                              </div>
-                                    
-                                              <div class="ver-receta col-12 col-md-2 col-lg-2" style="text-align: center">
-                                                <a [routerLink]="['/mostrarReceta']" (click)="pasarReceta(receta.id)">Ver receta</a>
-                                              </div>
                                             </div>
-                                          </div>
+                                        </div>
                                     </ng-container>
                                 </ng-container>
 

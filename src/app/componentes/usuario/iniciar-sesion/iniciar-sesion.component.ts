@@ -61,7 +61,7 @@ export class IniciarSesionComponent implements OnInit {
             localStorage.setItem('usuario', JSON.stringify(user));
           }
         });
-        location.href = '/inicio';
+        window.location.href = 'inicio';
       })
       .catch((error) => {
         this.estaLogeado = false;
@@ -146,7 +146,7 @@ export class IniciarSesionComponent implements OnInit {
             localStorage.setItem('usuarioGoogle', JSON.stringify(user));
           }
         });
-        location.href = '/inicio';
+        window.location.href = 'inicio';
       });
   }
 }
