@@ -131,13 +131,6 @@ export class CrearRecetaComponent implements OnInit {
     nuevoIngrediente.appendChild(grupoInput);
     nuevoIngrediente.appendChild(botonQuitarIngrediente);
 
-    /*nuevoIngrediente.appendChild(inputNuevoIngrediente);
-    nuevoIngrediente.appendChild(inputNuevaCantidad);
-    nuevoIngrediente.appendChild(botonQuitarIngrediente);*/
-
-    /**textos para los errores de los ingredientes */
-    
-
     let ingredientes = document.getElementById('ingredientes');
     ingredientes!.appendChild(nuevoIngrediente);
     this.numIngrediente++;
@@ -176,11 +169,6 @@ export class CrearRecetaComponent implements OnInit {
 
     let falloPaso = document.createElement('p');
     falloPaso.setAttribute('class','faltaPaso');
-
-    /*let grupoParaInputImg = document.createElement('div')
-    grupoParaInputImg.setAttribute('class','custom-file mb-3');
-
-    nuevoPaso.appendChild(inputNuevoPaso)*/
 
     let grupoParaInputImg= document.createElement('div');
     grupoParaInputImg.setAttribute('class','custom-file mb-3')
@@ -230,33 +218,41 @@ export class CrearRecetaComponent implements OnInit {
 
   quitarPaso(e: Event, tmp_files: File[]) {
     var posicion=0;
-    var elemento=((<HTMLButtonElement>e.target).parentElement);
     if(((<HTMLButtonElement>e.target)!=null)){
       if(((<HTMLButtonElement>e.target).parentElement)?.parentElement?.className=="paso form-group d-flex align-items-center"){
         ((<HTMLButtonElement>e.target).parentElement)?.parentElement?.remove();
-        posicion=Number(((((<HTMLButtonElement>e.target).parentElement!).parentElement!).firstElementChild!).children[0].id.substring(4,5));
+        if (((((<HTMLButtonElement>e.target).parentElement!).parentElement!).firstElementChild!).children[1].id.length<6) {
+          posicion=Number(((((<HTMLButtonElement>e.target).parentElement!).parentElement!).firstElementChild!).children[1].id.charAt(4));
+          console.log("Posición 1: "+posicion);
+        } else {
+          posicion=Number(((((<HTMLButtonElement>e.target).parentElement!).parentElement!).firstElementChild!).children[1].id.substring(4,6));
+          console.log("Posición 2: "+posicion);
+        }
+        
       }else if((<HTMLButtonElement>e.target).className=="btn btn-secondary quitarPaso ml-4"){
         ((<HTMLButtonElement>e.target).parentElement)?.remove();
-        posicion=Number((((<HTMLButtonElement>e.target).parentElement!).firstElementChild!).children[0].id.substring(4,5));
+        if ((((<HTMLButtonElement>e.target).parentElement!).firstElementChild!).children[1].id.length<6) {
+          posicion=Number((((<HTMLButtonElement>e.target).parentElement!).firstElementChild!).children[1].id.charAt(4));
+          
+        } else {
+          posicion=Number((((<HTMLButtonElement>e.target).parentElement!).firstElementChild!).children[1].id.substring(4,6));
+          console.log("Posición 4: "+posicion);
+        }
       }
     }
-    /*for (let i = 0, j=0; i < tmp_files.length; i++) {
-      if (tmp_files[i] && tmp_files[i]!=null && tmp_files[i]!=undefined) {
-        copia[j]=tmp_files[i];
-        j++;
-      }
-    }*/
     console.log("Posición: "+posicion);
-    this.tmp_files.splice(posicion+2, 1);
-    console.log("Copia con un igual:");
+    this.tmp_files.splice(posicion, 1);
+    console.log("Array de imágenes:");
     console.log(this.tmp_files);
     var longitud=document.getElementsByClassName("textoPaso").length;
     for (let i = 0; i < longitud; i++) {
       console.log(i);
       (<HTMLInputElement>document.getElementsByClassName("textoPaso")[i]).innerText="Paso "+(i+2)+": ";
       (<HTMLInputElement>document.getElementsByClassName("textoPaso")[i]).setAttribute('id', 'paso' + (i+2));
-      ((<HTMLInputElement>document.getElementsByClassName("textoPaso")[i]).nextElementSibling)!.setAttribute('id', 'paso' + (i+2));;
-      (((((<HTMLInputElement>document.getElementsByClassName("textoPaso")[i]).nextElementSibling)!.nextElementSibling)!.nextElementSibling)!.children[0]).setAttribute('id', 'paso' + (i+2));
+      ((<HTMLInputElement>document.getElementsByClassName("textoPaso")[i]).nextElementSibling)!.setAttribute('id', 'paso' + (i+2));
+      console.log(((<HTMLInputElement>document.getElementsByClassName("textoPaso")[i]).nextElementSibling));
+      (((((<HTMLInputElement>document.getElementsByClassName("textoPaso")[i]).nextElementSibling)!.nextElementSibling)!.nextElementSibling)!.children[0]).setAttribute('id', 'imagen' + (i+2));
+      console.log((((((<HTMLInputElement>document.getElementsByClassName("textoPaso")[i]).nextElementSibling)!.nextElementSibling)!.nextElementSibling)!.children[0]));
     }
     this.numPaso--;
   }
@@ -546,62 +542,14 @@ setTimeout(() => {
     }, 2147483647);
   }
 
-  /*selectFile(event: Event) {
-    this.tmp_file=((<HTMLInputElement>event.target)!.files![0]);
-  }*/
-
   fileChange(event: Event) {
-    //this.tmp_files.push((<HTMLInputElement>event.target)!.files![0]);
     if ((<HTMLInputElement>event.target).id.length<8) {
-      var posicion=Number((<HTMLInputElement>event.target).id.substring(6,7));
+      var posicion=Number((<HTMLInputElement>event.target).id.charAt(6));
     }else{
       var posicion=Number((<HTMLInputElement>event.target).id.substring(6,8));
     }
     this.tmp_files[posicion]=((<HTMLInputElement>event.target)!.files![0]);
-    console.log(this.tmp_files);
-    console.log(this.tmp_files[0]);
-    
-  }
-
-
-
-
-  aaa(){
-    var imagenesLocalStorage=localStorage.getItem("imagenesLocalStorage");
-    imagenesLocalStorage=imagenesLocalStorage!.concat(";"+"hola")!;
-    localStorage.setItem("imagenesLocalStorage", imagenesLocalStorage);
-    console.log("imagenesLocalStorage del service: "+imagenesLocalStorage);
-  }
-
-
-
-  /*Añadir las imágenes de los pasos a firebase*/
-    //var files=this.selectedFiles;
-    //console.log(this.selectedFiles[0].item(1));
-    /*if ((<HTMLInputElement><unknown>document.querySelectorAll(".imagen")).files==null) {
-      console.log("1");
-      console.log((<HTMLInputElement><unknown>document.querySelectorAll(".imagen")).files);//.files![1]);
-    } else {
-      console.log("2");
-      this.selectedFiles[0]=(<HTMLInputElement>document.querySelector(".imagen")).files!;
-      console.log(this.selectedFiles);
-    }*/
-    
-    /*for (let i = 0; i < this.numImagenes+1; i++) {
-      file = this.selectedFiles[i].item(0);
-      if (file!=null) {
-      //this.selectedFile = undefined!;
-        this.currentFileUpload = new FileUpload(file!);
-        this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
-          percentage => {
-            this.percentage = Math.round(percentage);
-          },
-          error => {
-            console.log(error);
-          }
-        );
-      }
-    }*/
-  }
+    }
+}
 
 

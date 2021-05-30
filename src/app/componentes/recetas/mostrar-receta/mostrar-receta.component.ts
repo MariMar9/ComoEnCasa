@@ -4,6 +4,7 @@ import { RecetasService } from '../../../core/services/recetas.service';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { CargarScriptsService } from 'src/app/core/services/cargar-scripts.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-mostrar-receta',
@@ -17,6 +18,7 @@ export class MostrarRecetaComponent implements OnInit {
   pasos: Observable<any[]>;
   idReceta: number = 0;
   nomReceta: string = 's';
+  emailUsuario: string="";
 
   usuarioConectado = false;
 
@@ -26,7 +28,8 @@ export class MostrarRecetaComponent implements OnInit {
     private router: Router,
     private _pasarNomReceta: RecetasService,
     private _consultarColeccion: RecetasService,
-    private _CargaScripts: CargarScriptsService
+    private _CargaScripts: CargarScriptsService,
+    public firebaseAuth: AngularFireAuth
   ) {
     const path = 'pasos/';
     this.recetas = this._consultarColeccion.getCollection<any>('recetas/');
@@ -103,13 +106,32 @@ export class MostrarRecetaComponent implements OnInit {
     } 
     
     if (correcto == true || correctoNR==true) {
-      console.log('hecho');
-      this.firestore.collection('comentarios').add({
-        idReceta: this.idReceta,
-        nombre: nombreUsuario,
-        mensaje: mensajeUsuario,
-        fecha: new Date(),
-      });
+      if (localStorage.usuario != null || localStorage.usuarioGoogle != null) {
+        let imagenUsuario="";
+        this.firebaseAuth.onAuthStateChanged((user) => {
+          if (user) {
+            imagenUsuario = user.photoURL!;
+          }
+        })
+        .then(()=>{
+          console.log('hecho');
+          this.firestore.collection('comentarios').add({
+            idReceta: this.idReceta,
+            nombre: nombreUsuario,
+            mensaje: mensajeUsuario,
+            imagenUsuario: imagenUsuario,
+            fecha: new Date(),
+          });
+        });
+      }else{
+        console.log('hecho');
+        this.firestore.collection('comentarios').add({
+          idReceta: this.idReceta,
+          nombre: nombreUsuario,
+          mensaje: mensajeUsuario,
+          fecha: new Date(),
+        });
+      }
     }
   }
 }

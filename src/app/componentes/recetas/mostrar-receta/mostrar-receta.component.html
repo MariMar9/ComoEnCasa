@@ -108,7 +108,12 @@
                             <ng-container *ngIf="receta.id==comentario.idReceta;">
                                 <li class="media">
                                     <div class="pull-left">
-                                        <img src="https://bootdey.com/img/Content/user_2.jpg" alt="" class="img-circle">
+                                        <ng-container *ngIf="comentario.imagenUsuario">
+                                            <img src={{comentario.imagenUsuario}} alt="" class="img-circle">
+                                        </ng-container>
+                                        <ng-container *ngIf="!comentario.imagenUsuario">
+                                            <img src="https://firebasestorage.googleapis.com/v0/b/comoencasa-website.appspot.com/o/defaults%2Fperfil.png?alt=media&token=2892f74c-eb87-476b-91b3-39d6c8925dda" alt="" class="img-circle">
+                                        </ng-container>
                                     </div>
                                     <div class="media-body">
                                         <strong class="text-info">{{comentario.nombre}} </strong>

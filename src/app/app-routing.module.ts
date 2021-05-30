@@ -8,6 +8,7 @@ import { OrdenarAlfComponent } from './componentes/recetas/ordenar-alf/ordenar-a
 import { RecetasComponent } from './componentes/recetas/recetas-por-categoria/recetas.component';
 import { SobreNosotrasComponent } from './componentes/datosInteres/sobre-nosotras/sobre-nosotras.component';
 import { CrearRecetaComponent } from './componentes/recetas/crear-receta/crear-receta.component';
+import { ControlPerfilUsuarioGuard } from './core/guards/control-perfil-usuario.guard';
 
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent },
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'sobreNosotras', component: SobreNosotrasComponent },
   { path: 'contactanos', component: ContactanosComponent },
   { path: 'mostrarReceta', component: MostrarRecetaComponent },
-  { path: 'crearReceta', component: CrearRecetaComponent },
+  { path: 'crearReceta', component: CrearRecetaComponent, canActivate:[ControlPerfilUsuarioGuard] },
   { path: '', component: InicioComponent, pathMatch: 'full' },
   { path: '**', redirectTo: '/', pathMatch: 'full' },
 ];
