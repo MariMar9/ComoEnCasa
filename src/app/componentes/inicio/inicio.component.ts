@@ -34,14 +34,7 @@ export class InicioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      var num = 1;
-      let boton = document.querySelectorAll<HTMLElement>('.btn-ver');
-      boton.forEach((bot) => {
-        bot.setAttribute('class', 'btn btn-ver' +num);
-        num++;
-      });
-    }, 500);
+
   }
   pasarReceta(idReceta: number) {
     setTimeout(() => {
