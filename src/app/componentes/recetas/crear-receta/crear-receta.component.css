@@ -85,3 +85,36 @@ cursor: pointer;
   cursor: unset!important;
   width: 36.6666px;
 }
+
+#pantallaCarga{
+  display: flex;
+  width: 1500px; 
+  height: 700px;
+  background-image: linear-gradient(rgba(0, 255, 179, 0.247), rgba(177, 137, 182, 0.349), rgb(177, 137, 182));
+  align-items: center;
+  justify-content: center;
+}
+
+#mensajePantallaCarga{
+  display: flex;
+  width: 500px;
+  height: 400px;
+  align-items:flex-end;
+  justify-content: center;
+}
+
+#imagenPantallaCargaTransparente{
+  width: 200px;
+  position: absolute;
+  opacity: 50%;
+  z-index: 0;
+}
+
+#imagenPantallaCargaColor{
+  width: 200px;
+  position: absolute;
+  clip-path: inset(236px 0px 0px 0px); /*236 a 0*/
+  z-index: 1;
+}
+
+

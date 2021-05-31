@@ -1,4 +1,3 @@
-import { Lexer, ReadVarExpr } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -7,7 +6,6 @@ import { Observable } from 'rxjs';
 import { RecetasService } from 'src/app/core/services/recetas.service';
 import { UploadFileService } from '../../recetas/upload/upload-file.service';
 import { FileUpload } from '../../recetas/upload/file-upload';
-import { UserTrackingService } from '@angular/fire/analytics';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -31,12 +29,20 @@ export class PerfilUsuarioComponent implements OnInit {
     private _pasarReceta: RecetasService,
     private _toast: ToastrService
   ) {
-    let imagen = <HTMLImageElement>document.getElementById('image');
-    this.firebaseAuth.onAuthStateChanged((user) => {
+    this.firebaseAuth.authState.subscribe((user) => {
       if (user) {
-        /*La exclamación es para indicar que estamos seguros de que no es null*/
-        this.nombre = user.displayName!;
-        this.correo = user.email!;
+        let nombre = <HTMLInputElement>document.getElementById('nombreUsuario');
+        let img = <HTMLImageElement>document.getElementById('image');
+        this.correo = user!.email!;
+        this.nombre = user!.displayName!;
+        /**mostrar los datos */
+        nombre.innerHTML = this.nombre;
+        if (user!.photoURL == null) {
+          img.src =
+            'https://firebasestorage.googleapis.com/v0/b/comoencasa-website.appspot.com/o/defaults%2Fperfil.png?alt=media&token=2892f74c-eb87-476b-91b3-39d6c8925dda';
+        } else {
+          img.src = user!.photoURL!;
+        }
       }
     });
 
@@ -51,53 +57,13 @@ export class PerfilUsuarioComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
-    let img = <HTMLImageElement>document.getElementById('image');
-    if (localStorage.usuario != null) {
-      var usuario = JSON.parse(localStorage.usuario);
-      (<HTMLInputElement>document.getElementById('nombreUsuario')).innerText =
-        usuario.displayName;
-      this.firebaseAuth.onAuthStateChanged((user) => {
-        if (user) {
-          /*La exclamación es para indicar que estamos seguros de que no es null*/
-          this.nombre = user.displayName!;
-          this.correo = user.email!;
-        }
-        if (user?.photoURL == null) {
-          img.src =
-            'https://firebasestorage.googleapis.com/v0/b/comoencasa-website.appspot.com/o/defaults%2Fperfil.png?alt=media&token=2892f74c-eb87-476b-91b3-39d6c8925dda';
-        } else {
-          img.src = user?.photoURL + '';
-        }
-      });
-    }
-    if (localStorage.usuarioGoogle != null) {
-      var usuarioGoogle = JSON.parse(localStorage.usuarioGoogle);
-      (<HTMLInputElement>(
-        document.getElementById('nombreUsuarioGoogle')
-      )).innerText = usuarioGoogle.displayName;
-
-      this.firebaseAuth.onAuthStateChanged((user) => {
-        if (user) {
-          /*La exclamación es para indicar que estamos seguros de que no es null*/
-          this.nombre = user.displayName!;
-          this.correo = user.email!;
-        }
-        if (user?.photoURL == null) {
-          img.src =
-            'https://firebasestorage.googleapis.com/v0/b/comoencasa-website.appspot.com/o/defaults%2Fperfil.png?alt=media&token=2892f74c-eb87-476b-91b3-39d6c8925dda';
-        } else {
-          img.src = user?.photoURL + '';
-        }
-      });
-    }
-  }
+  ngOnInit(): void {}
   /*Metodo para cerrar la sesion*/
   cerrarSesion() {
-    this.firebaseAuth.signOut();
     localStorage.removeItem('usuario');
     localStorage.removeItem('usuarioGoogle');
     setTimeout(() => {
+      this.firebaseAuth.signOut();
       window.location.href = 'inicio';
     }, 200);
   }
@@ -131,7 +97,7 @@ export class PerfilUsuarioComponent implements OnInit {
     let preview = <HTMLImageElement>document.getElementById('image');
     let src = URL.createObjectURL((<HTMLInputElement>event.target)!.files![0]);
     preview.src = src;
-    return this.inputCambio=true;
+    return (this.inputCambio = true);
   }
 
   guardarImagen(elegir: Boolean) {
@@ -154,7 +120,7 @@ export class PerfilUsuarioComponent implements OnInit {
           timeOut: 6000,
         });
 
-        this.usuarioActual.onAuthStateChanged((user) => {
+        this.firebaseAuth.onAuthStateChanged((user) => {
           if (user) {
             /*La exclamación es para indicar que estamos seguros de que no es null*/
             user.updateProfile({
@@ -166,5 +132,3 @@ export class PerfilUsuarioComponent implements OnInit {
     }
   }
 }
-
-/*nuevaImg.setAttribute('src', user!.photoURL!);*/

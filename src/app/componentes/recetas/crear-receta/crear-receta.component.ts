@@ -47,6 +47,12 @@ export class CrearRecetaComponent implements OnInit {
   tmp_file: File=new File(["foo"], "foo.txt", {type: "text/plain"});
   tmp_files: File[]=new Array(new File(["foo"], "foo.txt", {type: "text/plain"}));
 
+  /*Variables de la pantalla de carga*/
+  frases: string[]=new Array("Se está lavando las manos...", "Se están preparando los ingredientes...", "Se está cocinando...", "Se están colocando los platos...", "¡Comida servida!");
+  percentage: Number=new Number();
+  pararIntervalo: boolean=false;
+  relleno: number=236;
+
 /**ejecutar script */
   cargaInput: string='';
 
@@ -378,6 +384,16 @@ export class CrearRecetaComponent implements OnInit {
         console.log(error);
       }
     );*/
+
+    let tiempo=0;
+    for (let i = 0; i < this.tmp_files.length; i++) {
+      if (this.tmp_files[i] && this.tmp_files[i]!=null && this.tmp_files[i]!=undefined) {
+        tiempo++;
+      }
+    }
+    tiempo=(tiempo+3)*1000;
+
+    document.getElementById("mensajePantallaCarga")!.innerText=this.frases[0];
     var urlImagenPrincipal: string="";
     var array: FileUpload [] = []
     for (let i = 0; i < this.tmp_files.length; i++) {
@@ -389,15 +405,30 @@ export class CrearRecetaComponent implements OnInit {
         array[i] = this.currentFileUpload
         console.log(array[i].url)
  
-        this.uploadService.pushFileToStorage(this.currentFileUpload)
+        this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
+          percentage => {
+            this.percentage = Math.round(percentage);
+            console.log(this.percentage);
+          }
+        );
       }
     }
+
+    var cont=236;
+    var intervalo=setInterval(()=>{
+      this.rellenarImagen(this.relleno);
+      cont--;
+      if (cont==189) {
+        clearInterval(intervalo);
+      }
+    }, 100);
 
 
     
 setTimeout(() => {
   /*Añadir los nuevos ingredientes a firebase*/
   console.log("Id receta ingredientes: "+this.idReceta);
+  document.getElementById("mensajePantallaCarga")!.innerText=this.frases[1];
     var ingredientes = document.getElementsByClassName('ingrediente');
     for (let i = 0; i < ingredientes.length; i++) {
       this.nombreIngrediente = (<HTMLInputElement>ingredientes[i].children[0].children[0].childNodes[0]).value
@@ -418,7 +449,14 @@ setTimeout(() => {
           console.error('Se ha producido un error al crear el ingrediente.');
         });
     }
-}, 3000);
+    var intervalo=setInterval(()=>{
+    this.rellenarImagen(this.relleno);
+    cont--;
+    if (cont==142) {
+      clearInterval(intervalo);
+    }
+    }, 100);
+}, tiempo);
     
 /*setTimeout(() => {
   Añadir las imágenes de los pasos a firebase*/
@@ -464,6 +502,7 @@ setTimeout(() => {
 
 
   console.log("Id receta pasos: "+this.idReceta);
+  document.getElementById("mensajePantallaCarga")!.innerText=this.frases[2];
   /*Añadir los nuevos pasos a firebase*/
     var pasos = document.getElementsByClassName('paso');
     console.log("Longitud pasos: "+pasos.length);
@@ -503,11 +542,19 @@ setTimeout(() => {
           });
       }
     }
-}, 9000);
+    var intervalo=setInterval(()=>{
+    this.rellenarImagen(this.relleno);
+    cont--;
+    if (cont==95) {
+      clearInterval(intervalo);
+    }
+    }, 100);
+}, (tiempo+6000));
 
     setTimeout(() => {
       /*Añadir la nueva receta a firebase*/
       console.log("Id receta: "+this.idReceta);
+      document.getElementById("mensajePantallaCarga")!.innerText=this.frases[3];
     this.firestore
     .collection('recetas')
     .add({
@@ -529,17 +576,32 @@ setTimeout(() => {
       console.error('Se ha producido un error al crear la receta.');
       localStorage.removeItem("downloadURL");
     });
-    }, 12000);
+    var intervalo=setInterval(()=>{
+    this.rellenarImagen(this.relleno);
+    cont--;
+    if (cont==48) {
+      clearInterval(intervalo);
+    }
+    }, 100);
+    }, (tiempo+12000));
 
     setTimeout(() => {
     console.log(this.imagenesPasos);
-    }, 15000);
+    document.getElementById("mensajePantallaCarga")!.innerText=this.frases[4];
+    var intervalo=setInterval(()=>{
+    this.rellenarImagen(this.relleno);
+    cont--;
+    if (cont==0) {
+      clearInterval(intervalo);
+    }
+    }, 100);
+    }, (tiempo+15000));
     
 
    setTimeout(() => {
       localStorage.setItem("toast", "true");
        location.href="/perfilUsuario";
-    }, 2147483647);
+    }, (tiempo+20000));
   }
 
   fileChange(event: Event) {
@@ -549,6 +611,13 @@ setTimeout(() => {
       var posicion=Number((<HTMLInputElement>event.target).id.substring(6,8));
     }
     this.tmp_files[posicion]=((<HTMLInputElement>event.target)!.files![0]);
+  }
+
+    rellenarImagen(num: number){
+      document.getElementById("imagenPantallaCargaColor")!.setAttribute("style", "clip-path: inset("+num+"px 0px 0px 0px)");
+      console.log(num);
+      num--;
+      this.relleno=num;
     }
 }
 
