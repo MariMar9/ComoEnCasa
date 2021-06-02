@@ -10,10 +10,10 @@ export class CookiesComponent implements OnInit {
 
   constructor(private _cookieService: CookieService) {
     setTimeout(() => {
-      if (_cookieService.check("cookies")) {
-        document.getElementById("contenedorCookie")!.setAttribute("style", "display: none");
+      if (!_cookieService.check("cookies")) {
+        document.getElementById("contenedorCookie")!.setAttribute("style", "display: block");
       }
-    }, 500);
+    }, 1000);
     
   }
 
@@ -25,7 +25,7 @@ export class CookiesComponent implements OnInit {
     document.getElementById("contenedorCookie")!.className="container-fluid ocultar";
     setTimeout(() => {
       document.getElementById("contenedorCookie")!.setAttribute("style", "display: none");
-    }, 2000);
+    }, 1900);
   }
 
   rechazarCookies(){
@@ -33,7 +33,7 @@ export class CookiesComponent implements OnInit {
     document.getElementById("contenedorCookie")!.className="container-fluid ocultar";
     setTimeout(() => {
       document.getElementById("contenedorCookie")!.setAttribute("style", "display: none");
-    }, 2000);
+    }, 1900);
   }
 
 }

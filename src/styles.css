@@ -81,7 +81,7 @@ body {
     bottom: 0px;
   }
   100% {
-    bottom: -200px;
+    bottom: -250px;
   }
 }
 
@@ -89,8 +89,8 @@ body {
   position: fixed;
   bottom: 0;
   z-index: 6;
+  display: none;
 }
-
 
 .btn-ver {
   background-image: linear-gradient(to right,#6f8db4, #80b6a1,#6f8db4);

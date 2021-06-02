@@ -20,6 +20,7 @@ export class CrearRecetaComponent implements OnInit {
   numIngrediente: number = 2;
   numPaso: number = 2;
   recetas: Observable<any[]>;
+  correcto: boolean=false;
   
   /*Variables de las recetas*/
   /*imagenReceta: File=new File(["foo"], "foo.txt", {
@@ -48,7 +49,7 @@ export class CrearRecetaComponent implements OnInit {
   tmp_files: File[]=new Array(new File(["foo"], "foo.txt", {type: "text/plain"}));
 
   /*Variables de la pantalla de carga*/
-  frases: string[]=new Array("Se está lavando las manos...", "Se están preparando los ingredientes...", "Se está cocinando...", "Se están colocando los platos...", "¡Comida servida!");
+  frases: string[]=new Array("Tiene que lavarse las manos...", "Preparando los ingredientes...", "Se está cocinando...", "Ya casi está...", "¡Listo para comer!");
   percentage: Number=new Number();
   pararIntervalo: boolean=false;
   relleno: number=236;
@@ -264,18 +265,18 @@ export class CrearRecetaComponent implements OnInit {
   }
   
   validarDatos() {
-    let correcto = true;
+    this.correcto=true;
     if (this.tmp_files[0].name=="foo.txt") {
       console.log("imagen principal vacia")
       document.getElementById("faltaImagen")!.innerText="Falta imagen.";
-      correcto = false;
+      this.correcto = false;
     }else{
       document.getElementById("faltaImagen")!.innerText="";
     }
     if (this.nombreReceta == '') {
       console.log("nombre vacios")
       document.getElementById("faltaNombre")!.innerText="Falta nombre.";
-      correcto = false;
+      this.correcto = false;
     }else{
      var primeraLetra =(<HTMLInputElement>document.getElementById('nombre')).value.charAt(0).toUpperCase()
       this.nombreReceta = primeraLetra +(<HTMLInputElement>document.getElementById('nombre')).value.substring(1).toLocaleLowerCase();
@@ -284,33 +285,33 @@ export class CrearRecetaComponent implements OnInit {
     if (this.categoria == 'Seleccione una categoría') {
       console.log("categoria vacios")
       document.getElementById("faltaCategoria")!.innerText="Falta categoría.";
-      correcto = false;
+      this.correcto = false;
     }else{
       document.getElementById("faltaCategoria")!.innerText="";
     }
     if (!Number.isInteger(this.comensales)) {
       document.getElementById("faltaComensales")!.innerText="Debe introducir un número.";
-      correcto = false;
+      this.correcto = false;
     }else if (this.comensales < 1 || this.comensales > 50){
       document.getElementById("faltaComensales")!.innerText="Debe introducir un número entre el 1 y el 50.";
-      correcto = false;
+      this.correcto = false;
     }else if (this.comensales == null){
       document.getElementById("faltaComensales")!.innerText="Falta comensales.";
-      correcto = false;
+      this.correcto = false;
     }else{
       document.getElementById("faltaComensales")!.innerText="";
     }
     if (this.dificultad == 'Dificultad') {
       console.log("dificultad vacios")
       document.getElementById("faltaDificultad")!.innerText="Falta dificultad.";
-      correcto = false;
+      this.correcto = false;
     }else{
       document.getElementById("faltaDificultad")!.innerText="";
     }
     if (this.duracion == '') {
       console.log("catiduracion vacios")
       document.getElementById("faltaDuracion")!.innerText="Falta duración.";
-      correcto = false;
+      this.correcto = false;
     }else{
       document.getElementById("faltaDuracion")!.innerText="";
     }
@@ -322,7 +323,7 @@ export class CrearRecetaComponent implements OnInit {
       
       if ((<HTMLInputElement>ingredientes[i].children[0].children[0].childNodes[0]).value == '') {
         (<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = 'Falta ingrediente.';
-        correcto = false;
+        this.correcto = false;
       }else{
         var primeraLetra =(<HTMLInputElement>document.getElementById('nombre')).value.charAt(0).toUpperCase()
         this.nombreIngrediente = primeraLetra +(<HTMLInputElement>document.getElementById('nombre')).value.substring(1).toLocaleLowerCase();
@@ -332,10 +333,9 @@ export class CrearRecetaComponent implements OnInit {
 
     /*Cantidades vacías*/
     for (let i = 0; i < ingredientes.length; i++) {
-      
       if ((<HTMLInputElement>ingredientes[i].children[0].children[1].childNodes[0]).value == '') {
         (<HTMLInputElement>document.getElementsByClassName("faltaCantidad")[i]).innerText = 'Falta cantidad.';
-        correcto = false;
+        this.correcto = false;
       }else{
         (<HTMLInputElement>document.getElementsByClassName("faltaCantidad")[i]).innerText = '';
       }
@@ -344,15 +344,13 @@ export class CrearRecetaComponent implements OnInit {
     /*Pasos vacíos*/
     var pasos = document.getElementsByClassName('paso');
     for (let i = 0; i < pasos.length; i++) {
-     
-      document.getElementsByClassName('paso')[0].children[0].children[0]
-      if ((((<HTMLInputElement>(pasos[i].children[0]).children[0]))).value == '') { 
+      if ((((<HTMLInputElement>(pasos[i].children[0]).children[1]))).value == '') { 
         console.log("pasos vacios");
         /*document.querySelectorAll<HTMLElement>(".faltaPaso").forEach((paso)=>{
           paso.innerText="Falta el paso"
         });*/
         (<HTMLInputElement>document.getElementsByClassName("faltaPaso")[i]).innerText = 'Falta paso.';
-        correcto = false;
+        this.correcto = false;
       }else{
         /*document.querySelectorAll<HTMLElement>(".faltaPaso").forEach((paso)=>{
           paso.innerText=""
@@ -361,8 +359,10 @@ export class CrearRecetaComponent implements OnInit {
       }
     }
 
-    if (correcto) {
-      this.aniadirReceta();
+    if (this.correcto) {
+      setTimeout(() => {
+        this.aniadirReceta();
+      }, 2500);
     }
   }
 
@@ -393,7 +393,7 @@ export class CrearRecetaComponent implements OnInit {
     }
     tiempo=(tiempo+3)*1000;
 
-    document.getElementById("mensajePantallaCarga")!.innerText=this.frases[0];
+    document.getElementById("mensajeLoading")!.innerText=this.frases[0];
     var urlImagenPrincipal: string="";
     var array: FileUpload [] = []
     for (let i = 0; i < this.tmp_files.length; i++) {
@@ -428,7 +428,7 @@ export class CrearRecetaComponent implements OnInit {
 setTimeout(() => {
   /*Añadir los nuevos ingredientes a firebase*/
   console.log("Id receta ingredientes: "+this.idReceta);
-  document.getElementById("mensajePantallaCarga")!.innerText=this.frases[1];
+  document.getElementById("mensajeLoading")!.innerText=this.frases[1];
     var ingredientes = document.getElementsByClassName('ingrediente');
     for (let i = 0; i < ingredientes.length; i++) {
       this.nombreIngrediente = (<HTMLInputElement>ingredientes[i].children[0].children[0].childNodes[0]).value
@@ -502,7 +502,7 @@ setTimeout(() => {
 
 
   console.log("Id receta pasos: "+this.idReceta);
-  document.getElementById("mensajePantallaCarga")!.innerText=this.frases[2];
+  document.getElementById("mensajeLoading")!.innerText=this.frases[2];
   /*Añadir los nuevos pasos a firebase*/
     var pasos = document.getElementsByClassName('paso');
     console.log("Longitud pasos: "+pasos.length);
@@ -554,7 +554,7 @@ setTimeout(() => {
     setTimeout(() => {
       /*Añadir la nueva receta a firebase*/
       console.log("Id receta: "+this.idReceta);
-      document.getElementById("mensajePantallaCarga")!.innerText=this.frases[3];
+      document.getElementById("mensajeLoading")!.innerText=this.frases[3];
     this.firestore
     .collection('recetas')
     .add({
@@ -586,15 +586,15 @@ setTimeout(() => {
     }, (tiempo+12000));
 
     setTimeout(() => {
-    console.log(this.imagenesPasos);
-    document.getElementById("mensajePantallaCarga")!.innerText=this.frases[4];
-    var intervalo=setInterval(()=>{
-    this.rellenarImagen(this.relleno);
-    cont--;
-    if (cont==0) {
-      clearInterval(intervalo);
-    }
-    }, 100);
+      console.log(this.imagenesPasos);
+      document.getElementById("mensajeLoading")!.innerText=this.frases[4];
+      var intervalo=setInterval(()=>{
+        this.rellenarImagen(this.relleno);
+        cont--;
+        if (cont==0) {
+          clearInterval(intervalo);
+        }
+      }, 100);
     }, (tiempo+15000));
     
 
@@ -613,12 +613,12 @@ setTimeout(() => {
     this.tmp_files[posicion]=((<HTMLInputElement>event.target)!.files![0]);
   }
 
-    rellenarImagen(num: number){
-      document.getElementById("imagenPantallaCargaColor")!.setAttribute("style", "clip-path: inset("+num+"px 0px 0px 0px)");
-      console.log(num);
-      num--;
-      this.relleno=num;
-    }
+  rellenarImagen(num: number){
+    document.getElementById("imagenLoadingColor")!.setAttribute("style", "clip-path: inset("+num+"px 0px 0px 0px)");
+    console.log(num);
+    num--;
+    this.relleno=num;
+  }
 }
 
 

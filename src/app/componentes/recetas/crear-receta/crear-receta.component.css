@@ -88,33 +88,95 @@ cursor: pointer;
 
 #pantallaCarga{
   display: flex;
-  width: 1500px; 
-  height: 700px;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.445);
+  z-index: 3;
+  position: fixed;
+  animation-name: mostrarPantallaCarga;
+  animation-duration: 2s;
+  width: 100%;
+}
+
+@keyframes mostrarPantallaCarga {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 100;
+  }
+}
+
+#loading{
+  display: flex;
+  width: 50%;
+  max-width: 400px;
   background-image: linear-gradient(rgba(0, 255, 179, 0.247), rgba(177, 137, 182, 0.349), rgb(177, 137, 182));
   align-items: center;
   justify-content: center;
+  animation-name: mostrarLoading;
+  animation-duration: 1.5s;
+  z-index: 3;
 }
 
-#mensajePantallaCarga{
+@keyframes mostrarLoading{
+  0%{
+    transform: translateY(-500px);
+  }
+  40%{
+    transform: translateY(0px);
+  }
+  55%{
+    transform: translateY(-30px);
+  }
+  65%{
+    transform: translateY(0px);
+  }
+  75%{
+    transform: translateY(-15px);
+  }
+  85%{
+    transform: translateY(0px);
+  }
+  93%{
+    transform: translateY(-7px);
+  }
+  100%{
+    transform: translateY(0px);
+  }
+}
+
+#mensajeLoading{
   display: flex;
   width: 500px;
   height: 400px;
   align-items:flex-end;
   justify-content: center;
+  z-index: 3;
+  text-align: center;
 }
 
-#imagenPantallaCargaTransparente{
-  width: 200px;
+#imagenLoadingTransparente{
+  max-width: 200px;
+  min-width: 200px;
   position: absolute;
-  opacity: 50%;
-  z-index: 0;
+  opacity: 15%;
+  z-index: 3;
+  width: 30%;
 }
 
-#imagenPantallaCargaColor{
-  width: 200px;
+#imagenLoadingColor{
+  max-width: 200px;
+  min-width: 200px;
   position: absolute;
+  width: 30%;
   clip-path: inset(236px 0px 0px 0px); /*236 a 0*/
-  z-index: 1;
+  z-index: 4;
 }
 
-
+@media (min-width: 200px) and (max-width: 550px) {
+  #loading{
+    margin: 0.5rem !important;
+    width: 90%;
+    min-width: 162px;
+  }
+}

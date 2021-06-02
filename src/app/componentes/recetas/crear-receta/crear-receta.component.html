@@ -1,14 +1,12 @@
-<div id="pantallaCarga">
-    <img src="../../../../assets/img/logo/ramen.png" id="imagenPantallaCargaTransparente">
-    <img src="../../../../assets/img/logo/ramen.png" id="imagenPantallaCargaColor">
-    <div id="mensajePantallaCarga"></div>
-</div>
-
-
-
-
-
-
+<ng-container *ngIf="correcto">
+    <div id="pantallaCarga" class="d-flex justify-content-center pt-5 pb-5">
+        <div id="loading" class="container pt-3 pb-3">
+            <img src="../../../../assets/img/logo/ramen.png" id="imagenLoadingTransparente">
+            <img src="../../../../assets/img/logo/ramen.png" id="imagenLoadingColor">
+            <div id="mensajeLoading"></div>
+        </div>
+    </div>
+</ng-container>
 
 <div class="container-fluid pt-5 pb-5 fondo">
     <div class="container pt-3 pb-3">
