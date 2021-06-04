@@ -34,30 +34,38 @@ export class RecetasService {
     return collectionRecetas.valueChanges();
   }
   eliminarReceta<tipo>(path:string, id: number){
-    //this.firestore.collection('recetas').doc(id).delete();
-    /*console.log("BORRAR RECETA: "+id);
-    this.firestore.collection('pasos', ref => ref.where('idReceta', '==', id)).doc().delete().then(()=>{
-      console.log("RECETA BORRADA.");
-    });*/
-    //this.firestore.collection('pasos', ref => ref.where('idReceta', '==', id)).doc().delete();
+    console.log(id);
+    var collectionRecetas:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>("recetas", ref => ref.where('id', '==', id));
+      collectionRecetas.get().toPromise()
+      .then((db)=>{
+        db.forEach((doc)=>{ 
+        collectionRecetas.doc(doc.id).delete()
+        });
+      });
 
-
-    /*const collectionRecetas:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>(path, ref => ref.where('idReceta', '==', id));
-    console.log(collectionRecetas.valueChanges())
-    collectionRecetas.doc("doc_id").delete();
-    return collectionRecetas.valueChanges();*/
-
-    var documento=""
-    var collectionRecetas:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>(path, ref => ref.where('idReceta', '==', id));
-    collectionRecetas.get().toPromise()
+    var collectionPasos:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>("pasos", ref => ref.where('idReceta', '==', id));
+    collectionPasos.get().toPromise()
     .then((db)=>{
-      db.forEach((doc)=>{
-       documento=doc.id    
-       collectionRecetas.doc(documento).delete()
-      })
-    console.log(documento)
+      db.forEach((doc)=>{  
+       collectionPasos.doc(doc.id).delete()
+      });
+    });
 
-    })
+    var collectionIngredientes:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>("ingredientes", ref => ref.where('idReceta', '==', id));
+    collectionIngredientes.get().toPromise()
+    .then((db)=>{
+      db.forEach((doc)=>{   
+       collectionIngredientes.doc(doc.id).delete()
+      });
+    });
+
+    var collectionComentarios:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>("comentarios", ref => ref.where('idReceta', '==', id));
+    collectionComentarios.get().toPromise()
+    .then((db)=>{
+      db.forEach((doc)=>{  
+       collectionComentarios.doc(doc.id).delete()
+      });
+    });
     return collectionRecetas.valueChanges();
   }
   
