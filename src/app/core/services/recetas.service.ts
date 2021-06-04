@@ -32,5 +32,23 @@ export class RecetasService {
     const collectionRecetas:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>(path, ref => ref.orderBy(parametro, "desc"));
     return collectionRecetas.valueChanges();
   }
+  eliminarReceta<tipo>(path:string, id: number){
+    //this.firestore.collection('recetas').doc(id).delete();
+    /*console.log("BORRAR RECETA: "+id);
+    this.firestore.collection('pasos', ref => ref.where('idReceta', '==', id)).doc().delete().then(()=>{
+      console.log("RECETA BORRADA.");
+    });*/
+    //this.firestore.collection('pasos', ref => ref.where('idReceta', '==', id)).doc().delete();
+
+
+    /*const collectionRecetas:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>(path, ref => ref.where('idReceta', '==', id));
+    console.log(collectionRecetas.valueChanges())
+    collectionRecetas.doc("doc_id").delete();
+    return collectionRecetas.valueChanges();*/
+
+
+    var collectionRecetas:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>(path, ref => ref.where('idReceta', '==', id));
+    return collectionRecetas.valueChanges();
+  }
   
 }

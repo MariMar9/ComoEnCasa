@@ -74,6 +74,29 @@ export class PerfilUsuarioComponent implements OnInit {
     }, 200);
   }
 
+  eliminarReceta(idReceta: number){
+    var confirmarBorrado=confirm("¿Estás seguro de que quieres eliminar la receta?");
+    if (confirmarBorrado) {
+      console.log("Borrar.");
+      var eliminar=this._pasarReceta.eliminarReceta("pasos", idReceta);
+      /*eliminar.subscribe(element => {
+        console.log(element);
+      });*/
+
+      eliminar.forEach(element => {
+        console.log(Object.entries(element)[0][0][0]);
+        
+      });
+      /*eliminar.forEach(element => {
+        console.log(Object.entries(element)[0][0][0]);
+        
+      });*/
+      
+    } else {
+      console.log("No borrar.");
+    }
+  }
+
   /**muestra y oculta el input para subir la imagen */
   muestra() {
     let contenedorImg = <HTMLDivElement>(

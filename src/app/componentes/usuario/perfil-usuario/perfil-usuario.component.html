@@ -57,7 +57,7 @@
                                             <div
                                                 class="row receta-contenedor d-flex justify-content-between align-items-center">
                                                 <div
-                                                    class="receta-nombre-icono d-flex align-items-center col-12 col-md-10 col-lg-10">
+                                                    class="receta-nombre-icono d-flex align-items-center col-12 col-md-8 col-lg-8">
                                                     <div class="icon-fab">
                                                         <i class="fas fa-book-open" style="color: #fff; background: #757575;padding: 8px; border-radius: 5px;"></i>
                                                     </div>
@@ -70,6 +70,11 @@
                                                     style="text-align: center">
                                                     <a [routerLink]="['/mostrarReceta']"
                                                         (click)="pasarReceta(receta.id)">Ver receta</a>
+                                                </div>
+                                                <div class="eliminar-receta col-12 col-md-2 col-lg-2"
+                                                    style="text-align: center">
+                                                    <a [routerLink]="['/perfilUsuario']"
+                                                        (click)="eliminarReceta(receta.id)">Borrar receta</a>
                                                 </div>
                                             </div>
                                         </div>
