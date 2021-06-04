@@ -79,18 +79,6 @@ export class PerfilUsuarioComponent implements OnInit {
     if (confirmarBorrado) {
       console.log("Borrar.");
       var eliminar=this._pasarReceta.eliminarReceta("pasos", idReceta);
-      /*eliminar.subscribe(element => {
-        console.log(element);
-      });*/
-
-      eliminar.forEach(element => {
-        console.log(Object.entries(element)[0][0][0]);
-        
-      });
-      /*eliminar.forEach(element => {
-        console.log(Object.entries(element)[0][0][0]);
-        
-      });*/
       
     } else {
       console.log("No borrar.");

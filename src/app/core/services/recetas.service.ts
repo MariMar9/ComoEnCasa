@@ -1,5 +1,6 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { AngularFirestoreCollection,AngularFirestore } from '@angular/fire/firestore';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -46,8 +47,17 @@ export class RecetasService {
     collectionRecetas.doc("doc_id").delete();
     return collectionRecetas.valueChanges();*/
 
-
+    var documento=""
     var collectionRecetas:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>(path, ref => ref.where('idReceta', '==', id));
+    collectionRecetas.get().toPromise()
+    .then((db)=>{
+      db.forEach((doc)=>{
+       documento=doc.id    
+       collectionRecetas.doc(documento).delete()
+      })
+    console.log(documento)
+
+    })
     return collectionRecetas.valueChanges();
   }
   
