@@ -77,7 +77,7 @@ export class UploadFileService {
     return this.db.list(this.basePath).remove(key);
   }
 
-  private deleteFileStorage(name: string) {
+  deleteFileStorage(name: string) {
     const storageRef = this.storage.ref(this.basePath);
     storageRef.child(name).delete();
   }
