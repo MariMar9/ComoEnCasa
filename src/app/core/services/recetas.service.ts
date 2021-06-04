@@ -38,8 +38,46 @@ export class RecetasService {
   eliminarReceta<tipo>(path:string, id: number){
     console.log(id);
 
+    var collectionRecetasImg:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>("recetas", ref => ref.where('id', '==', id));
+    collectionRecetasImg.get().toPromise()
+    .then((db)=>{
+      db.forEach((receta) => {
+        var collectionImagen = this.storage.ref("/uploads").listAll();
+        collectionImagen.forEach(element => {
+          element.items.map((a)=>{
+              var img=receta.get("foto");
+              a.getDownloadURL().then((url)=>{
+                if (url==img) {
+                  console.log("bieeeen");
+                  this.uploadService.deleteFileStorage(a.name);
+                }
+              });
+          });
+        });
+      });
+    });
     
-    var collectionRecetas:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>("recetas", ref => ref.where('id', '==', id));
+    var collectionPasoImg:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>("pasos", ref => ref.where('idReceta', '==', id));
+    collectionPasoImg.get().toPromise()
+    .then((db)=>{
+      db.forEach((receta) => {
+        var collectionPasoImagenes = this.storage.ref("/uploads").listAll();
+        console.log(collectionPasoImagenes)
+        collectionPasoImagenes.forEach(element => {
+          element.items.map((a)=>{
+              var img=receta.get("urlImagen");
+              a.getDownloadURL().then((url)=>{
+                if (url==img) {
+                  console.log("bieeeen");
+                  this.uploadService.deleteFileStorage(a.name);
+                }
+              });
+          });
+        });
+      });
+    })
+    .then(()=>{
+      var collectionRecetas:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>("recetas", ref => ref.where('id', '==', id));
       collectionRecetas.get().toPromise()
       .then((db)=>{
         db.forEach((doc)=>{ 
@@ -70,7 +108,10 @@ export class RecetasService {
        collectionComentarios.doc(doc.id).delete()
       });
     });
-    return collectionRecetas.valueChanges();
+    });
+
+    
+    //return collectionRecetas.valueChanges();
 
 
    /* var receta:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>("recetas", ref => ref.where('id', '==', id));
@@ -81,7 +122,7 @@ export class RecetasService {
         //console.log(img);
       });
     });
-    por si, pero no creo*/
+    por si, pero no creo
     
 
     var collectionRecetasImg:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>("recetas", ref => ref.where('id', '==', id));
@@ -127,7 +168,7 @@ export class RecetasService {
           });
         });
       });
-    });
+    });*/
 
   }
   
