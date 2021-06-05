@@ -47,7 +47,9 @@ export class PerfilUsuarioComponent implements OnInit {
     });
 
     if (localStorage.getItem('toast')) {
-      this._toast.success('Receta creada con éxito.');
+      this._toast.success('Receta creada con éxito.', '', {
+        progressBar: false,
+      });
       localStorage.removeItem('toast');
     }
     this.usuarioActual = this.firebaseAuth;
@@ -77,8 +79,7 @@ export class PerfilUsuarioComponent implements OnInit {
   eliminarReceta(idReceta: number){
     var confirmarBorrado=confirm("¿Estás seguro de que quieres eliminar la receta?");
     if (confirmarBorrado) {
-      console.log("Borrar.");
-      var eliminar=this._pasarReceta.eliminarReceta("pasos", idReceta);
+      this._pasarReceta.eliminarReceta("pasos", idReceta);
       
     } else {
       console.log("No borrar.");

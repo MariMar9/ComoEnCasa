@@ -91,3 +91,21 @@ border: 2px black solid;
 #botonCerrarSesion {
   margin-bottom: 15px !important;
 }
+
+.eliminar-receta{
+  border-radius: 100%;
+  max-width: 40px;
+  max-height: 40px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.eliminar-receta i{
+font-size: 17px;
+}
+.eliminar-receta a{
+ color: white!important;
+}

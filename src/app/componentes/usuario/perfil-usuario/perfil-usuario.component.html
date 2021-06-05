@@ -55,15 +55,19 @@
                                         <div class="my-3 p-3 border border-gray"
                                             style="background: #f4f9ff; border-radius: 7px">
                                             <div
-                                                class="row receta-contenedor d-flex justify-content-between align-items-center">
+                                                class="row receta-contenedor d-flex justify-content-center align-items-center">
                                                 <div
-                                                    class="receta-nombre-icono d-flex align-items-center col-12 col-md-8 col-lg-8">
-                                                    <div class="icon-fab">
-                                                        <i class="fas fa-book-open" style="color: #fff; background: #757575;padding: 8px; border-radius: 5px;"></i>
+                                                    class="receta-nombre-icono d-flex justify-content-center align-items-center col-12 col-md-8 col-lg-8">
+                                                    <div class="row w-100 justify-content-center">
+                                                        <div class="icon-fab col-12 col-md-1 col-lg-1">
+                                                            <i class="fas fa-book-open"
+                                                                style="color: #fff; background: #757575;padding: 8px; border-radius: 5px;"></i>
+                                                        </div>
+                                                        <div class="nombre col-12 col-md-11 col-lg-11">
+                                                            <p class="text-gray-dark m-0">{{ receta.nombre }}</p>
+                                                        </div>
                                                     </div>
-                                                    <div class="nombre">
-                                                        <p class="text-gray-dark m-0 ml-5">{{ receta.nombre }}</p>
-                                                    </div>
+
                                                 </div>
 
                                                 <div class="ver-receta col-12 col-md-2 col-lg-2"
@@ -71,10 +75,11 @@
                                                     <a [routerLink]="['/mostrarReceta']"
                                                         (click)="pasarReceta(receta.id)">Ver receta</a>
                                                 </div>
-                                                <div class="eliminar-receta col-12 col-md-2 col-lg-2"
+                                                <div class="eliminar-receta col-12 col-md-1 col-lg-1 btn-danger"
                                                     style="text-align: center">
                                                     <a [routerLink]="['/perfilUsuario']"
-                                                        (click)="eliminarReceta(receta.id)">Borrar receta</a>
+                                                        (click)="eliminarReceta(receta.id)"><i
+                                                            class="fas fa-trash-alt"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -89,3 +94,4 @@
         </div>
     </div>
 </div>
+
