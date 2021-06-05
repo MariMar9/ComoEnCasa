@@ -1,19 +1,24 @@
+/*index.html*/
+/*reseteo inputs*/
 :root {
   --input-padding-x: 1.5rem;
   --input-padding-y: 0.75rem;
   overflow-x: hidden;
 }
-
+/*tipografia base de la página*/
 body {
   font-family: "Roboto", sans-serif;
 }
+/*fin index.html*/
+
+/*cabecera.html*/
 /*logotipo*/
 .navbar-brand {
   font-family: "Yellowtail", cursive;
   margin: 0;
   font-size: 29px;
 }
-/*menu detalles de hover*/
+/*customización del nabvar de la web*/
 .nav-link.active {
   color: rgb(36, 36, 36);
   font-weight: 700;
@@ -21,6 +26,9 @@ body {
 .nav-link:hover {
   color: #ec8001 !important;
 }
+/*fin cabecera.html*/
+
+/*crear-receta.html*/
 /*atributo especial input imagenes de crear receta*/
 .custom-file-input ~ .custom-file-label::after {
   content: attr(data-content) !important;
@@ -54,7 +62,9 @@ body {
 .input-crear-receta::placeholder {
   color: #495057;
 }
+/*fin crear-receta.html*/
 
+/*cookies.html*/
 .mostrar {
   /*cuando se muestra la cookie*/
   animation-name: fadeIn;
@@ -66,7 +76,7 @@ body {
   animation-name: fadeOut;
   animation-duration: 2s;
 }
-
+/*animación cookies*/
 @keyframes fadeIn {
   0% {
     bottom: -200px;
@@ -91,10 +101,13 @@ body {
   z-index: 6;
   display: none;
 }
+/*fin cookies.html*/
 
+/*inicio.html*/
 .btn-ver {
-  background-image: linear-gradient(to right,#6f8db4, #80b6a1,#6f8db4);
+  background-image: linear-gradient(to right,#6f8db4, #da874f,#eea216,#6f8db4);
 }
+/*fin inicio.html*/
 
 /*para evitar el padding del sweet alert*/
 .swal2-shown {

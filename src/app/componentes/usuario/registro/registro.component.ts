@@ -48,7 +48,9 @@ export class RegistroComponent implements OnInit {
       "background-image: url('" + imagen + "'" + ')'
     );
   }
-
+  /**
+   * @description registra un usuario y si hay errores, los filtra y saca el mensaje correspondiente.
+   */
   validarDatos() {
     /*Variable para cuando todos los campos estén rellenos y las contraseñas coincidan.*/
     let correcto = true;

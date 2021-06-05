@@ -4,15 +4,16 @@ import { CookieService } from 'ngx-cookie-service';
 @Injectable({
   providedIn: 'root'
 })
-export class CargarScriptsService {
 
+export class CargarScriptsService {
+  /**variables */
   usuarioConectado=false;
   quitar=false;
   url = window.location.pathname;
   constructor( private _cookieService: CookieService ) {}
 
 /**
-* Para poder tener acceso a todos los js que hemos creado
+* @description Para poder tener acceso a todos los js que hemos creado
 * 
 * @param archivos: el nombre del archivo .js hubicado en assets 
 */
@@ -28,8 +29,9 @@ export class CargarScriptsService {
       body.appendChild(script);
     }
   }
+  
 /**
- * Método para saber si hay usuarios conectados
+ * @description Método para saber si hay usuarios conectados
  * @returns devuelve un booleano para saber si el usuario está conectado
  */
   conectado() {
@@ -46,13 +48,11 @@ export class CargarScriptsService {
       this.usuarioConectado=false;
       return this.usuarioConectado;
     }
-
-
   }
 
 /**
- * Quita o muestra la cabecera ey el footer en determinadas rutas (iniciarSesion,registro,crearReceta)
- * @returns this.quitar: booleano enviado a la cabecera y al footer
+ * @description Quita o muestra la cabecera y el footer en determinadas rutas (iniciarSesion,registro,crearReceta)
+ * @returns this.quitar: booleano enviado a la cabecera y al footer, para mostrarlos u ocultarlos
  */
   quitarCabFoot() {
     if(this.url=="/iniciarSesion" || this.url=="/registro" || this.url=="/crearReceta"){

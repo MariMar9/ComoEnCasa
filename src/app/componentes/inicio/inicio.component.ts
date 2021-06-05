@@ -10,10 +10,17 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./inicio.component.css'],
 })
 export class InicioComponent implements OnInit {
+  /*variables*/
   nombreReceta: string = '';
   recetas: Observable<any[]>;
   usuarioConectado = false;
-  color: string = '';
+  
+  /**
+   *
+   * @param _CargaScripts: service para ver que usuario ha iniciado la sesión
+   * @param _pasarReceta: service de recetas para pasar los datos de las colecciones de firestore
+   * @param _toast: service para llamar a la biblioteca de toastr
+   */
   constructor(
     private _CargaScripts: CargarScriptsService,
     private _pasarReceta: RecetasService,
@@ -27,15 +34,18 @@ export class InicioComponent implements OnInit {
     this._pasarReceta.mandarReceta.subscribe((nombre) => {
       this.nombreReceta = nombre;
     });
-    if (localStorage.getItem("toastRegistro")) {
-      this._toast.success("Registro completado.");
-      localStorage.removeItem("toastRegistro");
+    if (localStorage.getItem('toastRegistro')) {
+      this._toast.success('Registro completado.');
+      localStorage.removeItem('toastRegistro');
     }
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-  }
+  /**
+   * @description recibe el id de la receta, para mandárselo al componente mostrar-receta.ts
+   * @param idReceta: id de la receta
+   */
   pasarReceta(idReceta: number) {
     setTimeout(() => {
       this._pasarReceta.mandarReceta.emit(idReceta);

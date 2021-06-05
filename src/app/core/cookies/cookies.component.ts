@@ -4,36 +4,50 @@ import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-cookies',
   templateUrl: './cookies.component.html',
-  styleUrls: ['./cookies.component.css']
+  styleUrls: ['./cookies.component.css'],
 })
 export class CookiesComponent implements OnInit {
-
+  /**
+   *
+   * @param _cookieService: service cookie
+   */
   constructor(private _cookieService: CookieService) {
     setTimeout(() => {
-      if (!_cookieService.check("cookies")) {
-        document.getElementById("contenedorCookie")!.setAttribute("style", "display: block");
+      //verifica si exinten cookies, si no existen y no se ha aceptado o rechazado las muestra
+      if (!_cookieService.check('cookies')) {
+        document
+          .getElementById('contenedorCookie')!
+          .setAttribute('style', 'display: block');
       }
     }, 1000);
-    
   }
 
-  ngOnInit(): void {
-  }
-
-  aceptarCookies(){
+  ngOnInit(): void {}
+  /**
+   * @description crea la cookie y la oculta en caso de pulsar aceptar 
+   */
+  aceptarCookies() {
     this._cookieService.set('cookies', 'true', 365);
-    document.getElementById("contenedorCookie")!.className="container-fluid ocultar";
+    document.getElementById('contenedorCookie')!.className =
+      'container-fluid ocultar';
     setTimeout(() => {
-      document.getElementById("contenedorCookie")!.setAttribute("style", "display: none");
+      document
+        .getElementById('contenedorCookie')!
+        .setAttribute('style', 'display: none');
     }, 1900);
   }
 
-  rechazarCookies(){
+  /**
+   * @description no crea la cookie y la oculta en caso de pulsar rechazar 
+   */
+  rechazarCookies() {
     this._cookieService.set('cookies', 'false');
-    document.getElementById("contenedorCookie")!.className="container-fluid ocultar";
+    document.getElementById('contenedorCookie')!.className =
+      'container-fluid ocultar';
     setTimeout(() => {
-      document.getElementById("contenedorCookie")!.setAttribute("style", "display: none");
+      document
+        .getElementById('contenedorCookie')!
+        .setAttribute('style', 'display: none');
     }, 1900);
   }
-
 }

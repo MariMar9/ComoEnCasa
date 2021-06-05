@@ -8,13 +8,15 @@ import { AngularFireStorage } from '@angular/fire/storage';
   providedIn: 'root'
 })
 export class RecetasService {
-  /*Pasa datos del component Cabecera al component Recetas.*/
+  /**
+   * @description Pasa datos del component Cabecera al component Recetas.
+   * */
   @Output() mandarCategoria: EventEmitter<any> = new EventEmitter();
   @Output() mandarReceta: EventEmitter<any> = new EventEmitter();
 
   constructor(private firestore: AngularFirestore, private uploadService: UploadFileService, private storage: AngularFireStorage) { }
   /**
-   * Función para obtener el array ordenado de la colección de recetas
+   * @description Función para obtener el array ordenado de la colección de recetas
    * @param path ruta base datos "recetas/"
    * @param parametro campo nombre de recetas
    * @returns colección de recetas
@@ -23,18 +25,41 @@ export class RecetasService {
     const collectionRecetas:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>(path, ref => ref.orderBy(parametro));
     return collectionRecetas.valueChanges();
   }
+  /**
+   * @description Ordena de forma descendente con un límite de 5 documentos
+   * @param path: ruta de la coleción 
+   * @param parametro: nombre del parámetro de la colección de firestore 
+   * @returns: devuelve la colección en ordes descendente, con un límite de 5 documentos 
+   */
   getCollectionRecientes<tipo>(path:string, parametro:string){
     const collectionRecetas:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>(path, ref => ref.orderBy(parametro, "desc").limit(5));
     return collectionRecetas.valueChanges();
   }
+  /**
+   * @description Accede a una colección
+   * @param path: ruta de la coleción 
+   * @returns: devuelve una colección de firestore sin ninguna query
+   */
   getCollection<tipo>(path:string){
     const collectionRecetas:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>(path, ref => ref);
     return collectionRecetas.valueChanges();
   }
+  /**
+   * @description Ordena de forma descendente sin límite de documentos
+   * @param path: ruta de la coleción  
+   * @param parametro: nombre del parámetro de la colección de firestore  
+   * @returns 
+   */
   getcomentarios<tipo>(path:string, parametro:string){
     const collectionRecetas:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>(path, ref => ref.orderBy(parametro, "desc"));
     return collectionRecetas.valueChanges();
   }
+
+  /**
+   * @description borra una receta y sus imágenes
+   * @param path: ruta de la coleción   
+   * @param id: id de la receta que el usuario decide borrar
+   */
   eliminarReceta<tipo>(path:string, id: number){
 
     var collectionRecetasImg:AngularFirestoreCollection<tipo> = this.firestore.collection<tipo>("recetas", ref => ref.where('id', '==', id));
@@ -105,7 +130,5 @@ export class RecetasService {
       });
     });
     });
-
   }
-  
 }

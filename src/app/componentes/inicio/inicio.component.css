@@ -1,3 +1,4 @@
+/*introducción para usuarios no rehistrados*/
 #presentacion{
   background: #e0e0e0;
 }
@@ -6,6 +7,8 @@
   text-align: center;
   display: block;
 }
+
+/*estilos de las cartas de las recetas recientes*/
 #body-card {
   width: 100%;
 }
@@ -76,21 +79,3 @@ i {
   font-size: 20px;
 }
 
-/*
-.btn-ver1 {
-  background-image: linear-gradient(to right, #e6a071, #da874f, #e6a071);
-}
-.btn-ver2 {
-  background-image: linear-gradient(to right, #ffbb1d, #ce9d2a, #ffbb1d);
-}
-.btn-ver3 {
-  background-image: linear-gradient(to right, #bbd26b, #9fb15d, #bbd26b);
-}
-.btn-ver {
-  background-image: linear-gradient(to right, #92d0b8, #7bb19c, #92d0b8);
-}
-
-.btn-ver5 {
-  background-image: linear-gradient(to right, #85a7d3, #7189a8, #85a7d3);
-}
-*/

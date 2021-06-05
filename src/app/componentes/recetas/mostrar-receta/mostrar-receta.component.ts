@@ -12,6 +12,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./mostrar-receta.component.css'],
 })
 export class MostrarRecetaComponent implements OnInit {
+  /**variables */
   recetas: Observable<any[]>;
   ingredientes: Observable<any[]>;
   comentarios: Observable<any[]>;
@@ -56,17 +57,23 @@ export class MostrarRecetaComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-
+/**
+ * @description accede al método crear comentario, para poder mostrarlo en el html al pulsar el botón
+ */
   publicarComentario() {
     this.crearComentario();
   }
-
+ 
+  /**
+   * @description crea un comentario 
+   */
   crearComentario() {
     let nombreUsuario = '';
     let mensajeUsuario = '';
     let fallo = <HTMLElement>document.querySelector('.falloComentario');
     let correcto = false;
     let correctoNR = false;
+    /**si el usuario esta conectado muestra el nombre del perfil */
     if (this.usuarioConectado == true) {
       if (localStorage.getItem('usuarioGoogle') != null) {
         let usuarioGoogle = JSON.parse(localStorage.usuarioGoogle);
@@ -75,6 +82,7 @@ export class MostrarRecetaComponent implements OnInit {
           .value;
         fallo.innerHTML = 'Escriba un mensaje por favor';
         correcto = true;
+       /**si no muestra el nombre que introduzca el usuario */ 
       } else if (localStorage.getItem('usuario') != null) {
         let usuarioMail = JSON.parse(localStorage.usuario);
         nombreUsuario = usuarioMail.displayName;
@@ -89,9 +97,8 @@ export class MostrarRecetaComponent implements OnInit {
       }else{
         fallo.innerHTML = '';
       }
+      /**si el usuario no esta registrado debe introducir un nombre */
     } else if (this.usuarioConectado == false) {
-      
-
         nombreUsuario = (<HTMLInputElement>document.querySelector('#nombre'))
           .value;
         mensajeUsuario = (<HTMLInputElement>document.querySelector('#mensaje'))
@@ -105,6 +112,7 @@ export class MostrarRecetaComponent implements OnInit {
           }
     } 
     
+    /**muestra la imagen por defecto o la del perfil de usuario si se ha cmbiado la imagen */
     if (correcto == true || correctoNR==true) {
       if (localStorage.usuario != null || localStorage.usuarioGoogle != null) {
         let imagenUsuario="";
@@ -114,7 +122,6 @@ export class MostrarRecetaComponent implements OnInit {
           }
         })
         .then(()=>{
-          console.log('hecho');
           this.firestore.collection('comentarios').add({
             idReceta: this.idReceta,
             nombre: nombreUsuario,
@@ -124,7 +131,6 @@ export class MostrarRecetaComponent implements OnInit {
           });
         });
       }else{
-        console.log('hecho');
         this.firestore.collection('comentarios').add({
           idReceta: this.idReceta,
           nombre: nombreUsuario,

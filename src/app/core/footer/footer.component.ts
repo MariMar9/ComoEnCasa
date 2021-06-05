@@ -13,7 +13,6 @@ export class FooterComponent implements OnInit {
     this.quitar = _CargaScripts.quitarCabFoot();
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

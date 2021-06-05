@@ -23,7 +23,10 @@ export class BuscarRecetaComponent implements OnInit {
   ngOnInit(): void { 
     
   }
-  
+  /**
+   * @description pasa el id de la receta que elige el usuario para mostrar buscar-receta.html
+   * @param idReceta: id de la receta 
+   */
   pasarReceta(idReceta: number) {
     setTimeout(() => {
       this._pasarReceta.mandarReceta.emit(idReceta);

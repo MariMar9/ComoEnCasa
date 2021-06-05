@@ -9,7 +9,6 @@ export class SobreNosotrasComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

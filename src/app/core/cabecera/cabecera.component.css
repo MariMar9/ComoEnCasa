@@ -11,6 +11,7 @@
 a.text-dark:focus {
   color: #ffffff !important;
 }
+
 /*boton de perfil usuario*/
 .btn-profile {
   font-size: 1.1rem;
@@ -18,6 +19,8 @@ a.text-dark:focus {
   padding: 0.75rem 1rem;
   border-radius: 2rem;
 }
+
+/*fondo del header*/
 #img-fondo {
   background-image: url('../../../assets/img/cabecera/salmon3.png');
   background-repeat: no-repeat;

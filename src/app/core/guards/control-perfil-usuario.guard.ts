@@ -9,7 +9,12 @@ import { CargarScriptsService } from '../services/cargar-scripts.service';
 export class ControlPerfilUsuarioGuard implements CanActivate {
 
   constructor(private _controlRuta: CargarScriptsService){}
-  
+  /**
+   * @description comprueba si se ha iniciado una sesión, para permitir el acceso al perfil del usuario
+   * @param route: información de la ruta  asociada a un componente  
+   * @param state:  estado de la ruta 
+   * @returns: booleano, para comrobar si se ha iniciado una sesión y que tipo de usuario la ha iniciado
+   */
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {

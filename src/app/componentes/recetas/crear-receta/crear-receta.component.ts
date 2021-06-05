@@ -14,6 +14,7 @@ import { isEmpty } from 'rxjs/operators';
   styleUrls: ['./crear-receta.component.css'],
 })
 export class CrearRecetaComponent implements OnInit {
+  /*variables generales */
   usuarioConectado: boolean = false;
   quitar: boolean = false;
   correo: string = '';
@@ -23,9 +24,6 @@ export class CrearRecetaComponent implements OnInit {
   correcto: boolean=false;
   
   /*Variables de las recetas*/
-  /*imagenReceta: File=new File(["foo"], "foo.txt", {
-    type: "text/plain",
-  });*/
   idReceta: number = 0;
   nombreReceta: string = '';
   categoria: string = 'Seleccione una categoría';
@@ -80,7 +78,9 @@ export class CrearRecetaComponent implements OnInit {
   }
   
   ngOnInit(): void {}
-
+ /**
+  * @description crea un div de un ingrediente y cantidad
+  */
   aniadirIngrediente() {
     /**crea el contenedor de los ingredientes */
     let nuevoIngrediente = document.createElement('div');
@@ -144,7 +144,11 @@ export class CrearRecetaComponent implements OnInit {
     
     botonQuitarIngrediente.addEventListener('click', this.quitarIngrediente);
   }
-
+  
+  /**
+   * @description quita un div de un ingrediente y cantidad
+   * @param e evento click  
+   */
   quitarIngrediente(e: Event) {
     if(((<HTMLButtonElement>e.target)!=null)){
       if((<HTMLButtonElement>e.target).parentElement?.className=="ingrediente form-group"){
@@ -155,49 +159,56 @@ export class CrearRecetaComponent implements OnInit {
     }
   }
   
+  /**
+   * @description crea un div de un paso con un input para texto y para imagen
+   */
   aniadirPaso() {
+    /*crea el contenedor del paso completo*/
     let contenedorPaso= (<HTMLDivElement>document.querySelector('#pasos'))
-   
+    /*crea el contenedor que contiene los dos input y el botón*/
     let nuevoPaso = document.createElement('div');
     nuevoPaso.setAttribute('class', 'paso form-group d-flex align-items-center');
-
+    /*crea el contenedor de los inputs*/
     let grupoPaso = document.createElement('div');
     grupoPaso.setAttribute('class','d-inline-flex flex-column w-100');
+    /**crea el espan para el texto*/
     let spanNuevoPaso = document.createElement('span');
     spanNuevoPaso.setAttribute('class', 'textoPaso');
     let texto = document.createTextNode('Paso ' + this.numPaso + ': ');
+    /**añade el texto al span */
     spanNuevoPaso.appendChild(texto);
+    /**añade el span al contenedor de los inputs*/
     grupoPaso.appendChild(spanNuevoPaso);
-
+    /** crea el input text*/
     let inputNuevoPaso = document.createElement('input');
     inputNuevoPaso.setAttribute('id', 'paso' + this.numPaso);
     inputNuevoPaso.setAttribute('class', 'form-control form-group input-crear-receta');
     inputNuevoPaso.setAttribute('maxlength','200');
-
+    /**crea el párrafo para arrojar el error del input text */
     let falloPaso = document.createElement('p');
     falloPaso.setAttribute('class','faltaPaso');
-
+    /**crea el div del input file */
     let grupoParaInputImg= document.createElement('div');
     grupoParaInputImg.setAttribute('class','custom-file mb-3')
-
+    /**crea el input file */
     let inputNuevaImagen = document.createElement('input');
     inputNuevaImagen.setAttribute('id', 'imagen' + (this.numPaso));
     inputNuevaImagen.setAttribute('type', 'file');
     inputNuevaImagen.setAttribute('class', 'custom-file-input imagen');
     inputNuevaImagen.setAttribute('name', 'filename');
-
+    /**crea el label del input file */
     let labelNuevaImg = document.createElement('label');
     labelNuevaImg.setAttribute('class','custom-file-label input-crear-receta')
     labelNuevaImg.setAttribute('data-content','Abrir')
     labelNuevaImg.innerHTML="Seleccione un archivo";
-
+    /**crea el botón para borrar el paso */
     let botonImg = document.createElement('button');
     botonImg.setAttribute('class',"btn btn-secondary quitarPaso ml-4") 
-
+    /**crea el icono del botón */
     let iconoBoton = document.createElement('i');
     iconoBoton.setAttribute('class','fas fa-times');
     botonImg.appendChild(iconoBoton);
-    
+    /**añadimos todos los create elements al contenedor del paso:*/
     contenedorPaso.appendChild(nuevoPaso);
     nuevoPaso.appendChild(grupoPaso);
     nuevoPaso.appendChild(botonImg);
@@ -211,18 +222,24 @@ export class CrearRecetaComponent implements OnInit {
     pasos!.appendChild(nuevoPaso);
 
     this.numPaso++;
+    /**añade el evento del input leer los cambios del file input */
     inputNuevaImagen.addEventListener('change', (event) => {
       this.fileChange(event);
     });
+    /**añade el evento del botoón para poder borrar un paso */
     botonImg.addEventListener('click', (event) => {
       this.quitarPaso(event, this.tmp_files);
     });
     console.log("Longitud: "+this.tmp_files.length)
-
+    /**permite cambiar el nombre del label del input */
     this._CargaScripts.carga(['js/javaScript']);
     (<HTMLScriptElement>document.querySelector('script[src="../assets/js/javaScript.js"]')).remove()
   }
-
+ /**
+  * @description borra el paso al pulsar el botón de eliminar
+  * @param e evento change del input file 
+  * @param tmp_files datos del archivo temporal 
+  */
   quitarPaso(e: Event, tmp_files: File[]) {
     var posicion=0;
     if(((<HTMLButtonElement>e.target)!=null)){
@@ -263,7 +280,9 @@ export class CrearRecetaComponent implements OnInit {
     }
     this.numPaso--;
   }
-  
+  /**
+   * @description valida los datos que introduce el usuario
+   */
   validarDatos() {
     this.correcto=true;
     if (this.tmp_files[0].name=="foo.txt") {
@@ -278,6 +297,7 @@ export class CrearRecetaComponent implements OnInit {
       document.getElementById("faltaNombre")!.innerText="Falta nombre.";
       this.correcto = false;
     }else{
+      /**formatea el texto para que siempre la promera letra sea mayúscula y el resto minúscula */
      var primeraLetra =(<HTMLInputElement>document.getElementById('nombre')).value.charAt(0).toUpperCase()
       this.nombreReceta = primeraLetra +(<HTMLInputElement>document.getElementById('nombre')).value.substring(1).toLocaleLowerCase();
       document.getElementById("faltaNombre")!.innerText="";
@@ -325,6 +345,7 @@ export class CrearRecetaComponent implements OnInit {
         (<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = 'Falta ingrediente.';
         this.correcto = false;
       }else{
+        /**formatea el texto para que siempre la promera letra sea mayúscula y el resto minúscula */
         var primeraLetra =(<HTMLInputElement>document.getElementById('nombre')).value.charAt(0).toUpperCase()
         this.nombreIngrediente = primeraLetra +(<HTMLInputElement>document.getElementById('nombre')).value.substring(1).toLocaleLowerCase();
         (<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = '';
@@ -365,25 +386,10 @@ export class CrearRecetaComponent implements OnInit {
       }, 2500);
     }
   }
-
+  /**
+   * @description añade la receta a firestore si los datos son correctos
+   */
   aniadirReceta() {
-    /*Añadir la imagen principal a firebase*/
-    /*var urlImagenPrincipal: string="";
-    this.currentFileUpload = new FileUpload(this.tmp_files[0]);
-    this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
-      urlImagen => {
-        setTimeout(() => {
-          if (localStorage.getItem("downloadURL")) {
-            urlImagenPrincipal=localStorage.getItem("downloadURL")!;
-            console.log("urlImagenPrincipal: "+urlImagenPrincipal);
-            console.log("urlImagenLocalStorage: "+localStorage.getItem("downloadURL"));
-          }
-        }, 1000);
-      },
-      error => {
-        console.log(error);
-      }
-    );*/
 
     let tiempo=0;
     for (let i = 0; i < this.tmp_files.length; i++) {
@@ -423,8 +429,6 @@ export class CrearRecetaComponent implements OnInit {
       }
     }, 100);
 
-
-    
 setTimeout(() => {
   /*Añadir los nuevos ingredientes a firebase*/
   console.log("Id receta ingredientes: "+this.idReceta);
@@ -499,8 +503,6 @@ setTimeout(() => {
 */
 
 setTimeout(() => {
-
-
   console.log("Id receta pasos: "+this.idReceta);
   document.getElementById("mensajeLoading")!.innerText=this.frases[2];
   /*Añadir los nuevos pasos a firebase*/
@@ -603,7 +605,10 @@ setTimeout(() => {
        location.href="/perfilUsuario";
     }, (tiempo+20000));
   }
-
+/**
+ * @description 
+ * @param event evento change
+ */
   fileChange(event: Event) {
     if ((<HTMLInputElement>event.target).id.length<8) {
       var posicion=Number((<HTMLInputElement>event.target).id.charAt(6));
@@ -612,7 +617,10 @@ setTimeout(() => {
     }
     this.tmp_files[posicion]=((<HTMLInputElement>event.target)!.files![0]);
   }
-
+/**
+ * @description rellena la imagen según el porcentaje de carga dde la receta
+ * @param num: porcentaje de carga 
+ */
   rellenarImagen(num: number){
     document.getElementById("imagenLoadingColor")!.setAttribute("style", "clip-path: inset("+num+"px 0px 0px 0px)");
     console.log(num);

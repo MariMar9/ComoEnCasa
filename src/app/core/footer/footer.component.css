@@ -1,13 +1,14 @@
 footer {
   height: 225px;
 }
-
+/*logo de comoEnCasa*/
 img {
   height: 15vw;
   max-height: 15vh;
   min-height: 13vh;
 }
 
+/*animación y estilo de contactanos y sobreNosotras*/
 footer .link-info a {
   padding: 3px 0;
   -webkit-transition: 0.5s all ease;
@@ -20,6 +21,8 @@ footer .link-info a:hover {
   margin-left: 30px;
   font-weight: 700;
 }
+
+/*estilos de los botones de rrss*/
 .rounded-circle{
   text-decoration: none;
   width: 35px;

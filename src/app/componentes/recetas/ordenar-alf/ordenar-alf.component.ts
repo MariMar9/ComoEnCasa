@@ -42,14 +42,3 @@ export class OrdenarAlfComponent implements OnInit {
 
   ngOnInit(): void {}
 }
-
-
-    /*nota de interes: tabajar la coleccion desde un array
-    this._consultarColeccion
-      .getCollectionRecetas<any>(path, 'nombre')
-      .subscribe((recetas) => {
-        for (let i = 0; i < recetas.length; i++) {
-          this.recetas[i] = recetas[i].nombre;
-        //  console.log(this.recetas);
-        }
-      });*/

@@ -1,10 +1,12 @@
-.fondo{
-  background-image: url('../../../../assets/img/fondos/fondo-crear.svg');
+.fondo {
+  background-image: url("../../../../assets/img/fondos/fondo-crear.svg");
   background-position-x: center;
-background-position-y: center;
-background-size: cover;
-background-repeat: no-repeat;
+  background-position-y: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
+
+/*estilo del botón Crear receta*/
 .boton-estilo {
   font-size: 1rem;
   letter-spacing: 0.05rem;
@@ -13,6 +15,7 @@ background-repeat: no-repeat;
   width: 200px;
   margin: 0 !important;
 }
+
 .boton-volver {
   font-size: 1rem;
   padding: 0.75rem 1rem;
@@ -20,18 +23,23 @@ background-repeat: no-repeat;
   width: 100px;
   margin: 0 !important;
 }
+
+/*logo ComoEncasa*/
 #titulo {
   font-family: "Yellowtail", cursive;
   margin-bottom: 0;
 }
-#descripcion{
+/*color del span del logo ComoEncasa*/
+.casa {
+  color: #ec8001;
+}
+
+#descripcion {
   font-size: 13px;
   font-weight: 700;
   color: rgb(98, 98, 98);
 }
-span casa{
-  color:#ec8001;
-}
+/*
 .checkboxlabel {
   display: flex;
   justify-content: space-between;
@@ -41,26 +49,28 @@ span casa{
   display: flex;
   justify-content: space-between;
 }
+.survey {
+  font-family: "Raleway", sans-serif;
+  margin-top: 25px;
+}
 textarea {
   width: 82%;
 }
 .radiobuttons {
   display: flex;
 }
-.survey {
-  font-family: "Raleway", sans-serif;
-  margin-top: 25px;
-}
+*/
 
-
-.comensales{
+.comensales {
   display: flex;
-align-items: center;
+  align-items: center;
 }
-.primer-bloque,.segundo-bloque,.tercer-bloque{
+.primer-bloque,
+.segundo-bloque,
+.tercer-bloque {
   padding: 10px;
-background-color: antiquewhite;
-border-radius: 10px;
+  background-color: antiquewhite;
+  border-radius: 10px;
 }
 
 @media (max-width: 500px) {
@@ -68,25 +78,25 @@ border-radius: 10px;
     display: block;
   }
 }
+
 /*.custom-file-input ~ .custom-file-label::after para editarolo esta en style css*/
 
-
-.custom-file-input{
-cursor: pointer;
+.custom-file-input {
+  cursor: pointer;
 }
 
-.container{
+.container {
   border: #a4a4a4 1px solid;
   border-radius: 10px;
   background-color: white;
-  box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
 }
-.noQuitarIngredienteCantidad{
-  cursor: unset!important;
+.noQuitarIngredienteCantidad {
+  cursor: unset !important;
   width: 36.6666px;
 }
 
-#pantallaCarga{
+#pantallaCarga {
   display: flex;
   min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.445);
@@ -97,20 +107,27 @@ cursor: pointer;
   width: 100%;
 }
 
+/*estilos para la pantalla de carga*/
+/*animación de opacidad img*/
 @keyframes mostrarPantallaCarga {
-  0%{
+  0% {
     opacity: 0;
   }
-  100%{
+  100% {
     opacity: 100;
   }
 }
 
-#loading{
+/*fondo del div que contiene la imagen*/
+#loading {
   display: flex;
   width: 50%;
   max-width: 400px;
-  background-image: linear-gradient(rgba(0, 255, 179, 0.247), rgba(177, 137, 182, 0.349), rgb(177, 137, 182));
+  background-image: linear-gradient(
+    rgba(0, 255, 179, 0.247),
+    rgba(177, 137, 182, 0.349),
+    rgb(177, 137, 182)
+  );
   align-items: center;
   justify-content: center;
   animation-name: mostrarLoading;
@@ -118,44 +135,46 @@ cursor: pointer;
   z-index: 3;
 }
 
-@keyframes mostrarLoading{
-  0%{
+/*animacion al aparecer la oantalla de carga*/
+@keyframes mostrarLoading {
+  0% {
     transform: translateY(-500px);
   }
-  40%{
+  40% {
     transform: translateY(0px);
   }
-  55%{
+  55% {
     transform: translateY(-30px);
   }
-  65%{
+  65% {
     transform: translateY(0px);
   }
-  75%{
+  75% {
     transform: translateY(-15px);
   }
-  85%{
+  85% {
     transform: translateY(0px);
   }
-  93%{
+  93% {
     transform: translateY(-7px);
   }
-  100%{
+  100% {
     transform: translateY(0px);
   }
 }
 
-#mensajeLoading{
+/*estilos de los mensajes*/
+#mensajeLoading {
   display: flex;
   width: 500px;
   height: 400px;
-  align-items:flex-end;
+  align-items: flex-end;
   justify-content: center;
   z-index: 3;
   text-align: center;
 }
 
-#imagenLoadingTransparente{
+#imagenLoadingTransparente {
   max-width: 200px;
   min-width: 200px;
   position: absolute;
@@ -164,7 +183,7 @@ cursor: pointer;
   width: 30%;
 }
 
-#imagenLoadingColor{
+#imagenLoadingColor {
   max-width: 200px;
   min-width: 200px;
   position: absolute;
@@ -174,7 +193,7 @@ cursor: pointer;
 }
 
 @media (min-width: 200px) and (max-width: 550px) {
-  #loading{
+  #loading {
     margin: 0.5rem !important;
     width: 90%;
     min-width: 162px;

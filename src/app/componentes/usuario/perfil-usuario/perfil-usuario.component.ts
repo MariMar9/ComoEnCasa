@@ -62,7 +62,10 @@ export class PerfilUsuarioComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-  /*Metodo para cerrar la sesion*/
+
+  /**
+   * @description Metodo para cerrar la sesion
+   */
   cerrarSesion() {
     localStorage.removeItem('usuario');
     localStorage.removeItem('usuarioGoogle');
@@ -77,7 +80,10 @@ export class PerfilUsuarioComponent implements OnInit {
       this._pasarReceta.mandarReceta.emit(idReceta);
     }, 200);
   }
-
+  /**
+   *  @description borra una receta
+   * @param idReceta id de la receta
+   */
   eliminarReceta(idReceta: number) {
     var confirmarBorrado = confirm(
       '¿Estás seguro de que quieres eliminar la receta?'
@@ -89,7 +95,9 @@ export class PerfilUsuarioComponent implements OnInit {
     }
   }
 
-  /**muestra y oculta el input para subir la imagen */
+  /**
+   *  @description muestra el input para subir la imagen
+   */
   muestra() {
     let contenedorImg = <HTMLDivElement>(
       document.querySelector('.contenedor-img')
@@ -98,6 +106,9 @@ export class PerfilUsuarioComponent implements OnInit {
     let labelImg = <HTMLLabelElement>document.getElementById('upload-btn');
     labelImg.style.display = 'flex';
   }
+  /**
+   *  @description oculta el input para subir la imagen
+   */
   oculta() {
     let contenedorImg = <HTMLDivElement>(
       document.querySelector('.contenedor-img')
@@ -114,7 +125,10 @@ export class PerfilUsuarioComponent implements OnInit {
     preview.src = src;
     return (this.inputCambio = true);
   }
-
+  /**
+   * @description guarda la imagen del perfil
+   * @param elegir booleano (variable inputCambio)
+   */
   guardarImagen(elegir: Boolean) {
     if (elegir == false) {
       Swal.fire({
@@ -125,11 +139,7 @@ export class PerfilUsuarioComponent implements OnInit {
     } else {
       this.currentFileUpload = new FileUpload(this.tmp_file!);
       this.uploadService.pushFileToStorage(this.currentFileUpload);
-      /*
-      this._toast.info('Guardando imagen', 'Procesando...', {
-        timeOut: 5000,
-      });
-*/
+
       Swal.fire({
         position: 'top-right',
         icon: 'info',

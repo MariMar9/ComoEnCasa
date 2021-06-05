@@ -20,6 +20,7 @@ export class IniciarSesionComponent implements OnInit {
   constructor(public auth: AngularFireAuth, private ngZone: NgZone) {}
 
   ngOnInit(): void {
+    /**al iniciar sesion redirige a la página de inicio */
     this.auth.user.subscribe((user) => {
       if (user) {
         this.ngZone.run(() => {
@@ -47,10 +48,10 @@ export class IniciarSesionComponent implements OnInit {
       "background-image: url('" + imagen + "'" + ')'
     );
   }
-
+ /**
+  * @description Inicia sesión y si hay errores, los filtra y saca el mensaje correspondiente.
+  */
   validarDatos() {
-    /*Inicia sesión y si hay errores, los filtra y saca el mensaje correspondiente.*/
-
     this.auth
       .signInWithEmailAndPassword(this.email, this.password)
       .then(() => {
@@ -63,6 +64,7 @@ export class IniciarSesionComponent implements OnInit {
         });
         window.location.href = 'inicio';
       })
+      /**si hay errores muestra los mensajes de aviso*/
       .catch((error) => {
         this.estaLogeado = false;
         localStorage.removeItem('usuario');
@@ -132,7 +134,9 @@ export class IniciarSesionComponent implements OnInit {
       });
   }
 
-  /**funcion para iniciar sesión y registrarse desde google */
+  /**
+   * @description funcion para iniciar sesión y registrarse desde google
+   */
   iniciarSesionGoogle() {
     var proveedor = new firebase.auth.GoogleAuthProvider();
     proveedor.addScope('profile');
