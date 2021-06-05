@@ -95,3 +95,8 @@ body {
 .btn-ver {
   background-image: linear-gradient(to right,#6f8db4, #80b6a1,#6f8db4);
 }
+
+/*para evitar el padding del sweet alert*/
+.swal2-shown {
+  padding-right: 0!important;
+  }

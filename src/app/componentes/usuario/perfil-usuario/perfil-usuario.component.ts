@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { RecetasService } from 'src/app/core/services/recetas.service';
 import { UploadFileService } from '../../recetas/upload/upload-file.service';
 import { FileUpload } from '../../recetas/upload/file-upload';
+// ES6 Modules or TypeScript
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -76,13 +78,14 @@ export class PerfilUsuarioComponent implements OnInit {
     }, 200);
   }
 
-  eliminarReceta(idReceta: number){
-    var confirmarBorrado=confirm("¿Estás seguro de que quieres eliminar la receta?");
+  eliminarReceta(idReceta: number) {
+    var confirmarBorrado = confirm(
+      '¿Estás seguro de que quieres eliminar la receta?'
+    );
     if (confirmarBorrado) {
-      this._pasarReceta.eliminarReceta("pasos", idReceta);
-      
+      this._pasarReceta.eliminarReceta('pasos', idReceta);
     } else {
-      console.log("No borrar.");
+      console.log('No borrar.');
     }
   }
 
@@ -114,23 +117,29 @@ export class PerfilUsuarioComponent implements OnInit {
 
   guardarImagen(elegir: Boolean) {
     if (elegir == false) {
-      this._toast.error('Debe elegir una imagen', 'Error', {
-        timeOut: 2000,
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Debe elegir una imagen antes de guardar',
       });
     } else {
       this.currentFileUpload = new FileUpload(this.tmp_file!);
       this.uploadService.pushFileToStorage(this.currentFileUpload);
-
-      console.log('service' + this.uploadService);
+      /*
       this._toast.info('Guardando imagen', 'Procesando...', {
         timeOut: 5000,
       });
+*/
+      Swal.fire({
+        position: 'top-right',
+        icon: 'info',
+        text: 'Guardando imagen',
+        showConfirmButton: false,
+        timer: 5000,
+        timerProgressBar: true,
+      });
 
       setTimeout(() => {
-        this._toast.success('Imagen guardada', 'Éxito', {
-          progressBar: false,
-          timeOut: 6000,
-        });
 
         this.firebaseAuth.onAuthStateChanged((user) => {
           if (user) {
@@ -140,6 +149,23 @@ export class PerfilUsuarioComponent implements OnInit {
             });
           }
         });
+
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 1500,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: 'Imagen guardada'
+        })
+
       }, 5000);
     }
   }
