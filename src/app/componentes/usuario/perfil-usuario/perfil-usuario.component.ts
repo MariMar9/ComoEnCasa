@@ -85,6 +85,27 @@ export class PerfilUsuarioComponent implements OnInit {
    * @param idReceta id de la receta
    */
   eliminarReceta(idReceta: number) {
+
+    Swal.fire({
+      title: '¿Está seguro?',
+      text: "No podrá deshacer los cambios",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Borrar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._pasarReceta.eliminarReceta('pasos', idReceta);
+        Swal.fire(
+          'Borrado',
+          'La receta se ha eliminado',
+          'success'
+        )
+      }
+    })
+    /*
     var confirmarBorrado = confirm(
       '¿Estás seguro de que quieres eliminar la receta?'
     );
@@ -92,7 +113,7 @@ export class PerfilUsuarioComponent implements OnInit {
       this._pasarReceta.eliminarReceta('pasos', idReceta);
     } else {
       console.log('No borrar.');
-    }
+    }*/
   }
 
   /**
@@ -147,6 +168,7 @@ export class PerfilUsuarioComponent implements OnInit {
         showConfirmButton: false,
         timer: 5000,
         timerProgressBar: true,
+        allowOutsideClick:false
       });
 
       setTimeout(() => {
@@ -164,7 +186,7 @@ export class PerfilUsuarioComponent implements OnInit {
           toast: true,
           position: 'top-end',
           showConfirmButton: false,
-          timer: 1500,
+          timer: 2000,
           didOpen: (toast) => {
             toast.addEventListener('mouseenter', Swal.stopTimer)
             toast.addEventListener('mouseleave', Swal.resumeTimer)

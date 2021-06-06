@@ -7,6 +7,7 @@ import { RecetasService } from 'src/app/core/services/recetas.service';
 import { UploadFileService } from '../upload/upload-file.service';
 import { FileUpload } from '../upload/file-upload';
 import { isEmpty } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-receta',
@@ -73,7 +74,10 @@ export class CrearRecetaComponent implements OnInit {
     const path = 'recetas/';
     this.recetas = this._consultarColeccion.getCollectionRecetas<any>(path,'id');
     this.recetas.forEach((recetas)=>{
-      this.idReceta=(recetas.length)+1;
+      recetas.forEach((receta)=>{
+        this.idReceta=(receta.id)+1; 
+      })
+
     });
   }
   
@@ -284,18 +288,19 @@ export class CrearRecetaComponent implements OnInit {
    * @description valida los datos que introduce el usuario
    */
   validarDatos() {
+    var textoErrorSwap =""
     this.correcto=true;
     if (this.tmp_files[0].name=="foo.txt") {
-      console.log("imagen principal vacia")
       document.getElementById("faltaImagen")!.innerText="Falta imagen.";
       this.correcto = false;
+      textoErrorSwap +="La imagen del emcabezado es obligatoria<br><hr>";
     }else{
       document.getElementById("faltaImagen")!.innerText="";
     }
     if (this.nombreReceta == '') {
-      console.log("nombre vacios")
       document.getElementById("faltaNombre")!.innerText="Falta nombre.";
       this.correcto = false;
+      textoErrorSwap += "Debe poner un nombre<br><hr>";
     }else{
       /**formatea el texto para que siempre la promera letra sea mayúscula y el resto minúscula */
      var primeraLetra =(<HTMLInputElement>document.getElementById('nombre')).value.charAt(0).toUpperCase()
@@ -303,33 +308,36 @@ export class CrearRecetaComponent implements OnInit {
       document.getElementById("faltaNombre")!.innerText="";
     }
     if (this.categoria == 'Seleccione una categoría') {
-      console.log("categoria vacios")
       document.getElementById("faltaCategoria")!.innerText="Falta categoría.";
+      textoErrorSwap += "Debe elegir una categoría<br><hr>";
       this.correcto = false;
     }else{
       document.getElementById("faltaCategoria")!.innerText="";
     }
     if (!Number.isInteger(this.comensales)) {
+      textoErrorSwap += "El campo de comensales sólo admite números<br>";
       document.getElementById("faltaComensales")!.innerText="Debe introducir un número.";
       this.correcto = false;
     }else if (this.comensales < 1 || this.comensales > 50){
       document.getElementById("faltaComensales")!.innerText="Debe introducir un número entre el 1 y el 50.";
+      textoErrorSwap += "El número de comensales debe estar entre 1 y 50<br><hr>";
       this.correcto = false;
     }else if (this.comensales == null){
+      textoErrorSwap += "Debe rellenar el campo de comensales<br>";
       document.getElementById("faltaComensales")!.innerText="Falta comensales.";
       this.correcto = false;
     }else{
       document.getElementById("faltaComensales")!.innerText="";
     }
     if (this.dificultad == 'Dificultad') {
-      console.log("dificultad vacios")
+      textoErrorSwap += "Eliga una de las opciones de dificultad<br><hr>";
       document.getElementById("faltaDificultad")!.innerText="Falta dificultad.";
       this.correcto = false;
     }else{
       document.getElementById("faltaDificultad")!.innerText="";
     }
     if (this.duracion == '') {
-      console.log("catiduracion vacios")
+      textoErrorSwap += "Debe poner la duración<br>";
       document.getElementById("faltaDuracion")!.innerText="Falta duración.";
       this.correcto = false;
     }else{
@@ -340,9 +348,11 @@ export class CrearRecetaComponent implements OnInit {
     var ingredientes = document.getElementsByClassName('ingrediente');
     
     for (let i = 0; i < ingredientes.length; i++) {
-      
+     
       if ((<HTMLInputElement>ingredientes[i].children[0].children[0].childNodes[0]).value == '') {
+        textoErrorSwap += "Debe poner el nombre del ingrediente<br><hr>";
         (<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = 'Falta ingrediente.';
+
         this.correcto = false;
       }else{
         /**formatea el texto para que siempre la promera letra sea mayúscula y el resto minúscula */
@@ -355,6 +365,7 @@ export class CrearRecetaComponent implements OnInit {
     /*Cantidades vacías*/
     for (let i = 0; i < ingredientes.length; i++) {
       if ((<HTMLInputElement>ingredientes[i].children[0].children[1].childNodes[0]).value == '') {
+        textoErrorSwap += "Debe poner la cantidad del ingrediente<br><hr>";
         (<HTMLInputElement>document.getElementsByClassName("faltaCantidad")[i]).innerText = 'Falta cantidad.';
         this.correcto = false;
       }else{
@@ -366,16 +377,10 @@ export class CrearRecetaComponent implements OnInit {
     var pasos = document.getElementsByClassName('paso');
     for (let i = 0; i < pasos.length; i++) {
       if ((((<HTMLInputElement>(pasos[i].children[0]).children[1]))).value == '') { 
-        console.log("pasos vacios");
-        /*document.querySelectorAll<HTMLElement>(".faltaPaso").forEach((paso)=>{
-          paso.innerText="Falta el paso"
-        });*/
+        textoErrorSwap += "No ha puesto la descripción del paso<br><hr>";
         (<HTMLInputElement>document.getElementsByClassName("faltaPaso")[i]).innerText = 'Falta paso.';
         this.correcto = false;
       }else{
-        /*document.querySelectorAll<HTMLElement>(".faltaPaso").forEach((paso)=>{
-          paso.innerText=""
-        });*/
         (<HTMLInputElement>document.getElementsByClassName("faltaPaso")[i]).innerText = '';
       }
     }
@@ -384,6 +389,12 @@ export class CrearRecetaComponent implements OnInit {
       setTimeout(() => {
         this.aniadirReceta();
       }, 2500);
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        html: textoErrorSwap,
+      });
     }
   }
   /**
@@ -405,7 +416,6 @@ export class CrearRecetaComponent implements OnInit {
     for (let i = 0; i < this.tmp_files.length; i++) {
       if (this.tmp_files[i] && this.tmp_files[i]!=null && this.tmp_files[i]!=undefined) {
         this.currentFileUpload = new FileUpload(this.tmp_files[i]!);
-        console.log( "archivo subido")
         console.log( this.currentFileUpload)
  
         array[i] = this.currentFileUpload
@@ -414,7 +424,7 @@ export class CrearRecetaComponent implements OnInit {
         this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
           percentage => {
             this.percentage = Math.round(percentage);
-            console.log(this.percentage);
+            //console.log(this.percentage);
           }
         );
       }
@@ -571,7 +581,6 @@ setTimeout(() => {
       foto: array[0].url
     })
     .then((recetaCreada) => {
-      console.log('crear imagen principal: '+urlImagenPrincipal);
       localStorage.removeItem("downloadURL");
     })
     .catch((error) => {
@@ -623,7 +632,7 @@ setTimeout(() => {
  */
   rellenarImagen(num: number){
     document.getElementById("imagenLoadingColor")!.setAttribute("style", "clip-path: inset("+num+"px 0px 0px 0px)");
-    console.log(num);
+    //console.log(num);
     num--;
     this.relleno=num;
   }
