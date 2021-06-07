@@ -77,7 +77,6 @@ export class CrearRecetaComponent implements OnInit {
       recetas.forEach((receta)=>{
         this.idReceta=(receta.id)+1; 
       })
-
     });
   }
   

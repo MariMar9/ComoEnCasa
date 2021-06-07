@@ -3,13 +3,15 @@
         <div class="subcontenedorContacto">
             <div class="imagen" data-tilt>
                 <img src="../../../../assets/img/logo//2582280521600459967.svg" alt="IMG">
+                <p class="m-0">C/Patatas con chocolate,</p>
+                <p class="m-0">Muffin(46002), Foodtopia</p>
             </div>
             <form class="contact formulario" [formGroup]="form" method="post" (ngSubmit)="onSubmit()">
                 <span class="titulo pb-1">
                     Contáctanos
                 </span>
                 <p *ngIf="form.controls['message'].hasError('required') && form.controls['email'].hasError('required') && form.controls['name'].hasError('required')">
-                    Recuerde que debe rellenar todos los campos obligarorios</p>
+                    Recuerde que debe rellenar todos los campos obligatorios</p>
                 <div class="inputContenedor">
                     <input class="input" type="text" name="nombre" formControlName="name" required
                         placeholder="Nombre*">

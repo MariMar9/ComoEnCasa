@@ -93,7 +93,6 @@ iframe {
 
 .contenedorContacto {
   width: 100vw;
-  min-height: 80vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -110,6 +109,8 @@ iframe {
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 50px 6vw 50px 6vw;
+  margin-top: 60px;
+  margin-bottom: 60px;
 }
 
 .fondo {
@@ -136,6 +137,7 @@ iframe {
   max-width: 200px;
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 .imagen img {
@@ -172,7 +174,6 @@ textarea.input {
 
  /*para evitar problemas de animaciones en los navegadores*/
 .icono {
- 
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
