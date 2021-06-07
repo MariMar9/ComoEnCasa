@@ -96,27 +96,48 @@ export class RegistroComponent implements OnInit {
     }
     /*Crea la cuenta y si hay errores, los filtra y saca el mensaje correspondiente.*/
     if (correcto) {
-      /*this.auth
+      this.auth
         .createUserWithEmailAndPassword(this.email, this.password)
         .then((resultado) => {
-          this.auth.onAuthStateChanged((user) => {
-            if (user) {
-              user.updateProfile({
-                displayName: this.nombre,
-              });
-              setTimeout(() => {
-                localStorage.setItem('usuario', JSON.stringify(user));
-                localStorage.setItem("toastRegistro", "true");
-                this.auth.user.subscribe((user) => {
-                  if (user) {
-                    this.ngZone.run(() => {
-                      window.location.href = 'inicio';
+          var actionCodeSettings = {
+            // URL you want to redirect back to. The domain (www.example.com) for this
+            // URL must be in the authorized domains list in the Firebase Console.
+            url: 'https://comoencasa-website.firebaseapp.com',
+            // This must be true.
+            handleCodeInApp: true,
+          };
+          this.auth
+            .sendSignInLinkToEmail(this.email, actionCodeSettings)
+            .then(() => {
+              // The link was successfully sent. Inform the user.
+              // Save the email locally so you don't need to ask the user for it again
+              // if they open the link on the same device.
+              //window.localStorage.setItem('emailForSignIn', this.email);
+              // ...
+              this.auth.onAuthStateChanged((user) => {
+                if (user) {
+                  user.updateProfile({
+                    displayName: this.nombre,
+                  });
+                  setTimeout(() => {
+                    localStorage.setItem('usuario', JSON.stringify(user));
+                    localStorage.setItem('toastRegistro', 'true');
+                    this.auth.user.subscribe((user) => {
+                      if (user) {
+                        this.ngZone.run(() => {
+                          window.location.href = 'inicio';
+                        });
+                      }
                     });
-                  }
-                });
-              }, 500);
-            }
-          });
+                  }, 500);
+                }
+              });
+            })
+            .catch((error) => {
+              console.log(error);
+              var errorCode = error.code;
+              var errorMessage = error.message;
+            });
         })
         .catch((error) => {
           if (error.message == 'The email address is badly formatted.') {
@@ -157,30 +178,6 @@ export class RegistroComponent implements OnInit {
           if (new firebase.auth.GoogleAuthProvider() == null) {
             console.log('error');
           }
-        });*/
-        var actionCodeSettings = {
-          // URL you want to redirect back to. The domain (www.example.com) for this
-          // URL must be in the authorized domains list in the Firebase Console.
-          url: 'https://comoencasa-website.firebaseapp.com',
-          // This must be true.
-          handleCodeInApp: true,
-        };
-        this.auth.sendSignInLinkToEmail(this.email, actionCodeSettings)
-        .then(() => {
-          // The link was successfully sent. Inform the user.
-          // Save the email locally so you don't need to ask the user for it again
-          // if they open the link on the same device.
-          //window.localStorage.setItem('emailForSignIn', this.email);
-          // ...
-          console.log("guayyyy");
-        })
-        .catch((error) => {
-          console.log(error);
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // ...
-          console.log(errorCode);
-          console.log(errorMessage);
         });
     }
   }
