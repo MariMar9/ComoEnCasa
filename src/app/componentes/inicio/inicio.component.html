@@ -6,6 +6,82 @@
         </div>
     </div>
 </div>
+
+
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <a [routerLink]="['/mostrarReceta']" (click)="pasarReceta(1)"> <img class="d-block w-100 h-10 carrusel1"> </a>
+      <div class="carousel-caption d-md-block">
+        <h5>Macarrones con tomate</h5>
+        <div class="card-stats">
+          <div class="stats">
+            <div class="value"><i class="fas fa-clock"></i></div>
+            <div class="type">15 min</div>
+          </div>
+          <div class="stats centro">
+            <div class="value"><i class="fas fa-user-friends"></i></div>
+            <div class="type">2</div>
+          </div>
+          <div class="stats">
+            <i class="fas fa-laugh-beam"></i>
+            <div class="type">Fácil</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <a [routerLink]="['/mostrarReceta']" (click)="pasarReceta(4)"> <img class="d-block w-100 h-10 carrusel2"> </a>
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Lentejas de la yaya</h5>
+        <div class="card-stats">
+          <div class="stats">
+            <div class="value"><i class="fas fa-clock"></i></div>
+            <div class="type">1 hora</div>
+          </div>
+          <div class="stats centro">
+            <div class="value"><i class="fas fa-user-friends"></i></div>
+            <div class="type">4</div>
+          </div>
+          <div class="stats">
+            <i class="fas fa-meh"></i>
+            <div class="type">Media</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <a [routerLink]="['/mostrarReceta']" (click)="pasarReceta(8)"> <img class="d-block w-100 h-10 carrusel3"> </a>
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Yakisoba</h5>
+        <div class="card-stats">
+          <div class="stats">
+            <div class="value"><i class="fas fa-clock"></i></div>
+            <div class="type">30 min</div>
+          </div>
+          <div class="stats centro">
+            <div class="value"><i class="fas fa-user-friends"></i></div>
+            <div class="type">2</div>
+          </div>
+          <div class="stats">
+            <i class="fas fa-laugh-beam"></i>
+            <div class="type">Fácil</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+
+
 <div class="container-fluid p-0 mt-5 mb-5" id="body-card">
     <h2 class="ml-5">Últimas publicaciones</h2>
     <div class="row justify-content-center">

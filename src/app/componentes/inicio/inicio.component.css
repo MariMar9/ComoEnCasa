@@ -79,3 +79,73 @@ i {
   font-size: 20px;
 }
 
+.carousel .carousel-item {
+  height: 500px;
+}
+
+.carousel-item img {
+    position: absolute;
+    object-fit:cover;
+    top: 0;
+    left: 0;
+    min-height: 500px;
+}
+
+
+.card-stats {
+  height: 50px;
+  grid-area: stats;
+  background-color: #ec8001;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+
+.card-stats .stats {
+  color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.card-stats .type {
+  font-size: 12px;
+}
+.card-stats .centro {
+  border-right: 2px #ac5c00 solid;
+  border-left: 2px #ac5c00 solid;
+  border-left: 2px #ac5c00 solid;
+}
+
+.carrusel1, .carrusel2, .carrusel3{
+  background-size: cover;
+  background-position-y: center;
+  background-position-x: center;
+}
+
+.carrusel1{
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/comoencasa-website.appspot.com/o/defaults%2Fdish-food-produce-gourmet-cuisine-pasta-surface-noodles-penne-spaghetti-vegetarian-food-italian-food-carbonara-european-food-bucatini-pici-bolognese-sauce-pen-tube-surface-884204.jpg?alt=media&token=ccac659a-7e20-4d77-9d28-ff47b8e8aada");
+}
+
+.carrusel2{
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/comoencasa-website.appspot.com/o/defaults%2Fuploads-frederic-dupont-KoiRJFKYqR4-unsplash.jpg?alt=media&token=493aba4b-afe0-4025-b77c-d84a3b370a8c");
+}
+
+.carrusel3{
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/comoencasa-website.appspot.com/o/defaults%2Fuploads-chopsticks-1008868_1280.jpg?alt=media&token=b70d0770-08f2-4bba-a2a8-713632a9deda");
+}
+
+.carousel-caption{
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  bottom: -20px;
+}
+
+h5{
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-bottom: 0;
+  padding: 1rem;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}

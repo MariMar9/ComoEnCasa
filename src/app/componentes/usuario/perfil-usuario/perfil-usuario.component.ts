@@ -91,8 +91,8 @@ export class PerfilUsuarioComponent implements OnInit {
       text: "No podrá deshacer los cambios",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
       cancelButtonText: 'Cancelar',
       confirmButtonText: 'Borrar'
     }).then((result) => {
