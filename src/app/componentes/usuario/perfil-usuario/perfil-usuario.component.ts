@@ -4,8 +4,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { RecetasService } from 'src/app/core/services/recetas.service';
-import { UploadFileService } from '../../recetas/upload/upload-file.service';
-import { FileUpload } from '../../recetas/upload/file-upload';
+import { UploadFileService } from '../../../core/services/upload-file.service';
+import { FileUpload } from '../../../core/models/file-upload';
 // ES6 Modules or TypeScript
 import Swal from 'sweetalert2';
 

@@ -4,8 +4,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { CargarScriptsService } from 'src/app/core/services/cargar-scripts.service';
 import { EMPTY, Observable } from 'rxjs';
 import { RecetasService } from 'src/app/core/services/recetas.service';
-import { UploadFileService } from '../upload/upload-file.service';
-import { FileUpload } from '../upload/file-upload';
+import { UploadFileService } from '../../../core/services/upload-file.service';
+import { FileUpload } from '../../../core/models/file-upload';
 import { isEmpty } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 
@@ -350,7 +350,7 @@ export class CrearRecetaComponent implements OnInit {
     for (let i = 0; i < ingredientes.length; i++) {
      
       if ((<HTMLInputElement>ingredientes[i].children[0].children[0].childNodes[0]).value == '') {
-        textoErrorSwap += "Debe poner el nombre del ingrediente<br><hr>";
+        textoErrorSwap += "Debe poner el nombre del ingrediente "+(i+1)+"<br><hr>";
         (<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = 'Falta ingrediente.';
 
         this.correcto = false;
@@ -365,7 +365,7 @@ export class CrearRecetaComponent implements OnInit {
     /*Cantidades vacías*/
     for (let i = 0; i < ingredientes.length; i++) {
       if ((<HTMLInputElement>ingredientes[i].children[0].children[1].childNodes[0]).value == '') {
-        textoErrorSwap += "Debe poner la cantidad del ingrediente<br><hr>";
+        textoErrorSwap += "Debe poner la cantidad del ingrediente "+(i+1)+"<br><hr>";
         (<HTMLInputElement>document.getElementsByClassName("faltaCantidad")[i]).innerText = 'Falta cantidad.';
         this.correcto = false;
       }else{
@@ -377,7 +377,7 @@ export class CrearRecetaComponent implements OnInit {
     var pasos = document.getElementsByClassName('paso');
     for (let i = 0; i < pasos.length; i++) {
       if ((((<HTMLInputElement>(pasos[i].children[0]).children[1]))).value == '') { 
-        textoErrorSwap += "No ha puesto la descripción del paso<br><hr>";
+        textoErrorSwap += "No ha puesto la descripción del paso "+(i+1)+"<br><hr>";
         (<HTMLInputElement>document.getElementsByClassName("faltaPaso")[i]).innerText = 'Falta paso.';
         this.correcto = false;
       }else{
@@ -593,7 +593,7 @@ setTimeout(() => {
     if (cont==48) {
       clearInterval(intervalo);
     }
-    }, 100);
+    }, 80);
     }, (tiempo+12000));
 
     setTimeout(() => {
@@ -605,7 +605,7 @@ setTimeout(() => {
         if (cont==0) {
           clearInterval(intervalo);
         }
-      }, 100);
+      }, 50);
     }, (tiempo+15000));
     
 

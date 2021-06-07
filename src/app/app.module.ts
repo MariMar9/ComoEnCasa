@@ -36,11 +36,6 @@ import { CrearRecetaComponent } from './componentes/recetas/crear-receta/crear-r
 import { CookieService } from 'ngx-cookie-service';
 import { CookiesComponent } from './core/cookies/cookies.component';
 import { BuscarRecetaComponent } from './componentes/recetas/buscar-receta/buscar-receta.component';
-import { PerfilUsuarioComponent } from './componentes/usuario/perfil-usuario/perfil-usuario.component';
-import { FormUploadComponent } from './componentes/recetas/upload/form-upload/form-upload.component';
-import { ListUploadComponent } from './componentes/recetas/upload/list-upload/list-upload.component';
-import { DetailsUploadComponent } from './componentes/recetas/upload/details-upload/details-upload.component';
-
 
 const routes: Routes = [];
 
@@ -60,9 +55,6 @@ const routes: Routes = [];
     CrearRecetaComponent,
     CookiesComponent,
     BuscarRecetaComponent,
-    FormUploadComponent,
-    ListUploadComponent,
-    DetailsUploadComponent
   ],
   imports: [
     BrowserModule,

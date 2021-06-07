@@ -1,7 +1,7 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { AngularFirestoreCollection,AngularFirestore } from '@angular/fire/firestore';
 import { distinctUntilChanged } from 'rxjs/operators';
-import { UploadFileService } from 'src/app/componentes/recetas/upload/upload-file.service';
+import { UploadFileService } from 'src/app/core/services/upload-file.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 
 @Injectable({
