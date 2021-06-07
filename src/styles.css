@@ -98,7 +98,7 @@ body {
 #contenedorCookie {
   position: fixed;
   bottom: 0;
-  z-index: 6;
+  z-index: 10;
   display: none;
 }
 /*fin cookies.html*/
