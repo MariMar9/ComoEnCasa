@@ -56,48 +56,33 @@ export class RegistroComponent implements OnInit {
   validarDatos() {
     /*Variable para cuando todos los campos estén rellenos y las contraseñas coincidan.*/
     let correcto = true;
+    /*Variable para los mensajes de error.*/
+    var textoErrorSwap ="";
     /*Comprobación de que todos los campos estén rellenos y las contraseñas coinciden.*/
     if (this.nombre == '') {
-      (<HTMLInputElement>document.getElementById('errorNombre')).innerText =
-        'Rellene este campo.';
+      textoErrorSwap += 'Debe poner un nombre.<br><hr>';
       correcto = false;
-    } else {
-      (<HTMLInputElement>document.getElementById('errorNombre')).innerText = '';
     }
     if (this.email == '') {
-      (<HTMLInputElement>document.getElementById('errorEmail')).innerText =
-        'Rellene este campo.';
+      textoErrorSwap += 'Debe poner un email.<br><hr>';
       correcto = false;
-    } else {
-      (<HTMLInputElement>document.getElementById('errorEmail')).innerText = '';
     }
     if (this.password == '') {
-      (<HTMLInputElement>document.getElementById('errorPassword')).innerText =
-        'Rellene este campo.';
+      textoErrorSwap += 'Debe poner una contraseña.<br><hr>';
       correcto = false;
-    } else {
-      (<HTMLInputElement>document.getElementById('errorPassword')).innerText =
-        '';
     }
     if (this.confirmPassword == '') {
-      (<HTMLInputElement>(
-        document.getElementById('errorConfirmPassword')
-      )).innerText = 'Rellene este campo.';
+      textoErrorSwap += 'Debe poner una confirmación de la contraseña.<br><hr>';
       correcto = false;
     } else {
-      if (this.password != this.confirmPassword) {
-        (<HTMLInputElement>(
-          document.getElementById('errorConfirmPassword')
-        )).innerText = 'Las contraseñas no coinciden.';
+      if (this.password != this.confirmPassword && this.password != '') {
+        textoErrorSwap += 'Las contraseñas no coinciden.';
         correcto = false;
-      } else {
-        (<HTMLInputElement>(
-          document.getElementById('errorConfirmPassword')
-        )).innerText = '';
       }
     }
     /*Crea la cuenta y si hay errores, los filtra y saca el mensaje correspondiente.*/
     if (correcto) {
+      textoErrorSwap='';
       this.auth
         .createUserWithEmailAndPassword(this.email, this.password)
         .then((resultado) => {
@@ -138,48 +123,32 @@ export class RegistroComponent implements OnInit {
             .catch((error) => {
               var errorCode = error.code;
               var errorMessage = error.message;
-              
               console.error(errorCode+"; "+errorMessage)
             });
         })
         .catch((error) => {
           if (error.message == 'The email address is badly formatted.') {
-            (<HTMLInputElement>(
-              document.getElementById('errorEmail')
-            )).innerText = 'Formato de correo electrónico erróneo.';
-            (<HTMLInputElement>(
-              document.getElementById('errorPassword')
-            )).innerText = '';
-            correcto = false;
-          } else if (
-            error.message == 'Password should be at least 6 characters'
-          ) {
-            (<HTMLInputElement>(
-              document.getElementById('errorPassword')
-            )).innerText = 'La contraseña debe tener al menos 6 caracteres.';
-            (<HTMLInputElement>(
-              document.getElementById('errorEmail')
-            )).innerText = '';
-            correcto = false;
-          } else if (
-            error.message ==
-            'The email address is already in use by another account.'
-          ) {
-            (<HTMLInputElement>(
-              document.getElementById('errorPassword')
-            )).innerText = 'Ya existe un usuario con esa cuenta.';
-            (<HTMLInputElement>(
-              document.getElementById('errorEmail')
-            )).innerText = '';
-            correcto = false;
-          } else {
+            textoErrorSwap += 'Formato de correo electrónico erróneo.';
+          }
+          if (error.message == 'Password should be at least 6 characters') {
+            textoErrorSwap += 'La contraseña debe tener al menos 6 caracteres.';
+          }
+          if (error.message == 'The email address is already in use by another account.') {
+            textoErrorSwap += 'Ya existe un usuario con esa cuenta.';
+          }
+          if (textoErrorSwap == '') {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
               text: 'Se ha producido un error. Introduzca sus credenciales de nuevo por favor.\nSi el error persiste, póngase en contacto con nosotras.',
             });
-
-            correcto = false;
+          }
+          if (textoErrorSwap != '') {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              html: textoErrorSwap
+            });
           }
           if (new firebase.auth.GoogleAuthProvider() == null) {
             Swal.fire({
@@ -189,6 +158,12 @@ export class RegistroComponent implements OnInit {
             });
           }
         });
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        html: textoErrorSwap
+      });
     }
   }
 }

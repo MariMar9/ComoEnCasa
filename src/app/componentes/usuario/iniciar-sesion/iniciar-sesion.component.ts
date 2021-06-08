@@ -53,6 +53,7 @@ export class IniciarSesionComponent implements OnInit {
   * @description Inicia sesión y si hay errores, los filtra y saca el mensaje correspondiente.
   */
   validarDatos() {
+    var textoErrorSwap ="";
     this.auth
       .signInWithEmailAndPassword(this.email, this.password)
       .then(() => {
@@ -70,65 +71,55 @@ export class IniciarSesionComponent implements OnInit {
         this.estaLogeado = false;
         localStorage.removeItem('usuario');
         if ((<HTMLInputElement>document.getElementById('email')).value == '') {
-          (<HTMLInputElement>document.getElementById('errorEmail')).innerText =
-            'Rellene el campo.';
-          (<HTMLInputElement>(
-            document.getElementById('errorPassword')
-          )).innerText = '';
-        } else if (error.message == 'The email address is badly formatted.') {
-          (<HTMLInputElement>document.getElementById('errorEmail')).innerText =
-            'Formato de correo electrónico erróneo.';
-          (<HTMLInputElement>(
-            document.getElementById('errorPassword')
-          )).innerText = '';
-        } else if (
-          error.message ==
-          'The password is invalid or the user does not have a password.'
-        ) {
-          (<HTMLInputElement>(
-            document.getElementById('errorPassword')
-          )).innerText =
-            'La contraseña es incorrecta.' +
+          textoErrorSwap += 'Debe poner un email.<br><hr>';
+        }
+        if (error.message == 'The email address is badly formatted.' && (<HTMLInputElement>document.getElementById('email')).value != '') {
+          textoErrorSwap += 'Formato de correo electrónico erróneo.<br><hr>';
+        }
+        if ((<HTMLInputElement>document.getElementById('password')).value == ''){
+          textoErrorSwap += 'Debe poner una contraseña.<br><hr>';
+        }
+        if (error.message == 'The password is invalid or the user does not have a password.' &&
+        (<HTMLInputElement>document.getElementById('password')).value != '') {
+          textoErrorSwap +=
+            'La contraseña es incorrecta. ' +
             (this.intentos > 0 && this.intentos <= 3
-              ? 'Le quedan ' + this.intentos + ' intentos'
+              ? 'Le quedan ' + this.intentos + ' intentos.<br><hr>'
               : '');
           this.intentos = this.intentos - 1;
-          (<HTMLInputElement>document.getElementById('errorEmail')).innerText =
-            '';
-        } else if (
+        }
+        if (
           error.message ==
           'There is no user record corresponding to this identifier. The user may have been deleted.'
         ) {
-          (<HTMLInputElement>(
-            document.getElementById('errorPassword')
-          )).innerText = 'El usuario no existe.';
-          (<HTMLInputElement>document.getElementById('errorEmail')).innerText =
-            '';
-        } else if (
+          textoErrorSwap += 'El usuario no existe.<br><hr>';
+        }
+        if (
           error.message ==
           'Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.'
         ) {
-          (<HTMLInputElement>(
-            document.getElementById('errorPassword')
-          )).innerText =
-            'Usuario bloqueado. Puede intentarlo de nuevo más tarde.';
-          (<HTMLInputElement>document.getElementById('errorEmail')).innerText =
-            '';
+          textoErrorSwap +=
+            'Usuario bloqueado. Puede intentarlo de nuevo más tarde.<br><hr>';
           this.intentos = 5;
-        } else if (
+        }
+        if (
           error.message ==
           'The user account has been disabled by an administrator.'
         ) {
-          (<HTMLInputElement>(
-            document.getElementById('errorPassword')
-          )).innerText = 'La cuenta ha sido inhabilitada.';
-          (<HTMLInputElement>document.getElementById('errorEmail')).innerText =
-            '';
-        } else {
+          textoErrorSwap += 'La cuenta ha sido inhabilitada.<br><hr>';
+        }
+        if (textoErrorSwap == '') {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'Se ha producido un error. Introduzca sus credenciales de nuevo por favor.\nSi el error persiste, póngase en contacto con nosotras.',
+          });
+        }
+        if (textoErrorSwap!='') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            html: textoErrorSwap,
           });
         }
         if (new firebase.auth.GoogleAuthProvider() == null) {

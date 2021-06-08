@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { CargarScriptsService } from 'src/app/core/services/cargar-scripts.service';
-import { EMPTY, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { RecetasService } from 'src/app/core/services/recetas.service';
 import { UploadFileService } from '../../../core/services/upload-file.service';
 import { FileUpload } from '../../../core/models/file-upload';
-import { isEmpty } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -53,7 +52,7 @@ export class CrearRecetaComponent implements OnInit {
   pararIntervalo: boolean=false;
   relleno: number=236;
 
-/**ejecutar script */
+  /**ejecutar script */
   cargaInput: string='';
 
   constructor(
@@ -281,24 +280,18 @@ export class CrearRecetaComponent implements OnInit {
     var textoErrorSwap =""
     this.correcto=true;
     if (this.tmp_files[0].name=="foo.txt") {
-      //document.getElementById("faltaImagen")!.innerText="Falta imagen.";
       this.correcto = false;
       textoErrorSwap +="La imagen del encabezado es obligatoria<br><hr>";
-    }/*else{
-      //document.getElementById("faltaImagen")!.innerText="";
-    }*/
+    }
     if (this.nombreReceta == '') {
-      //document.getElementById("faltaNombre")!.innerText="Falta nombre.";
       this.correcto = false;
       textoErrorSwap += "Debe poner un nombre<br><hr>";
     }else{
       /**formatea el texto para que siempre la promera letra sea mayúscula y el resto minúscula */
      var primeraLetra =(<HTMLInputElement>document.getElementById('nombre')).value.charAt(0).toUpperCase()
       this.nombreReceta = primeraLetra +(<HTMLInputElement>document.getElementById('nombre')).value.substring(1).toLocaleLowerCase();
-      //document.getElementById("faltaNombre")!.innerText="";
     }
     if (this.categoria == 'Seleccione una categoría') {
-      //document.getElementById("faltaCategoria")!.innerText="Falta categoría.";
       textoErrorSwap += "Debe elegir una categoría<br><hr>";
       this.correcto = false;
     }else{
@@ -306,33 +299,22 @@ export class CrearRecetaComponent implements OnInit {
     }
     if (!Number.isInteger(this.comensales)) {
       textoErrorSwap += "El campo de comensales sólo admite números<br><hr>";
-      //document.getElementById("faltaComensales")!.innerText="Debe introducir un número.";
       this.correcto = false;
     }else if (this.comensales < 1 || this.comensales > 50){
-      //document.getElementById("faltaComensales")!.innerText="Debe introducir un número entre el 1 y el 50.";
       textoErrorSwap += "El número de comensales debe estar entre 1 y 50<br><hr>";
       this.correcto = false;
     }else if (this.comensales == null){
       textoErrorSwap += "Debe rellenar el campo de comensales<br><hr>";
-      //document.getElementById("faltaComensales")!.innerText="Falta comensales.";
       this.correcto = false;
-    }/*else{
-      document.getElementById("faltaComensales")!.innerText="";
-    }*/
+    }
     if (this.dificultad == 'Dificultad') {
       textoErrorSwap += "Eliga una de las opciones de dificultad<br><hr>";
-      //document.getElementById("faltaDificultad")!.innerText="Falta dificultad.";
       this.correcto = false;
-    }/*else{
-      document.getElementById("faltaDificultad")!.innerText="";
-    }*/
+    }
     if (this.duracion == '') {
       textoErrorSwap += "Debe poner la duración<br><hr>";
-      //document.getElementById("faltaDuracion")!.innerText="Falta duración.";
       this.correcto = false;
-    }/*else{
-      document.getElementById("faltaDuracion")!.innerText="";
-    }*/
+    }
 
     /*Ingredientes vacíos*/
     var ingredientes = document.getElementsByClassName('ingrediente');
@@ -401,7 +383,6 @@ export class CrearRecetaComponent implements OnInit {
     tiempo=(tiempo+3)*1000;
 
     document.getElementById("mensajeLoading")!.innerText=this.frases[0];
-    var urlImagenPrincipal: string="";
     var array: FileUpload [] = []
     for (let i = 0; i < this.tmp_files.length; i++) {
       if (this.tmp_files[i] && this.tmp_files[i]!=null && this.tmp_files[i]!=undefined) {
@@ -425,130 +406,122 @@ export class CrearRecetaComponent implements OnInit {
       }
     }, 100);
 
-setTimeout(() => {
-  /*Añadir los nuevos ingredientes a firebase*/
-  document.getElementById("mensajeLoading")!.innerText=this.frases[1];
-    var ingredientes = document.getElementsByClassName('ingrediente');
-    for (let i = 0; i < ingredientes.length; i++) {
-      this.nombreIngrediente = (<HTMLInputElement>ingredientes[i].children[0].children[0].childNodes[0]).value
-      this.cantidad = (<HTMLInputElement>ingredientes[i].children[0].children[1].childNodes[0]).value;
-      this.firestore
-        .collection('ingredientes')
-        .add({
-          id: i+1,
-          nombre: this.nombreIngrediente,
-          cantidad: this.cantidad,
-          idReceta: this.idReceta,
-        })
-        .then((ingredienteCreado) => {
-        })
-        .catch((error) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Se ha producido un error al crear el ingrediente.',
-          });
-        });
-    }
-    var intervalo=setInterval(()=>{
-    this.rellenarImagen(this.relleno);
-    cont--;
-    if (cont==142) {
-      clearInterval(intervalo);
-    }
-    }, 100);
-}, tiempo);
-
-setTimeout(() => {
-  document.getElementById("mensajeLoading")!.innerText=this.frases[2];
-  /*Añadir los nuevos pasos a firebase*/
-    var pasos = document.getElementsByClassName('paso');
-    for (let i = 0; i < pasos.length/*this.numPaso-1*/; i++) {
-      if (this.tmp_files[i+1] && this.tmp_files[i+1]!=null && this.tmp_files[i+1]!=undefined) {
-        this.descripcion = (<HTMLInputElement>pasos[i].children[0].children[1]).value;
-        this.firestore
-          .collection('pasos')
-          .add({
-            id: i+1,
-            descripcion: this.descripcion,
-            idReceta: this.idReceta,
-            urlImagen: array[i+1].url
-          })
-          .then((pasoCreado) => {
-
-          })
-          .catch((error) => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Se ha producido un error al crear el paso.',
+    setTimeout(() => {
+      /*Añadir los nuevos ingredientes a firebase*/
+      document.getElementById("mensajeLoading")!.innerText=this.frases[1];
+        var ingredientes = document.getElementsByClassName('ingrediente');
+        for (let i = 0; i < ingredientes.length; i++) {
+          this.nombreIngrediente = (<HTMLInputElement>ingredientes[i].children[0].children[0].childNodes[0]).value
+          this.cantidad = (<HTMLInputElement>ingredientes[i].children[0].children[1].childNodes[0]).value;
+          this.firestore
+            .collection('ingredientes')
+            .add({
+              id: i+1,
+              nombre: this.nombreIngrediente,
+              cantidad: this.cantidad,
+              idReceta: this.idReceta,
+            })
+            .catch((error) => {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Se ha producido un error al crear el ingrediente.',
+              });
             });
-          });
-      }else{
-        this.descripcion = (<HTMLInputElement>pasos[i].children[0].children[1]).value;
-        this.firestore
-          .collection('pasos')
-          .add({
-            id: i+1,
-            descripcion: this.descripcion,
-            idReceta: this.idReceta,
-            urlImagen: ""
-          })
-          .then((pasoCreado) => {
+        }
+        var intervalo=setInterval(()=>{
+        this.rellenarImagen(this.relleno);
+        cont--;
+        if (cont==142) {
+          clearInterval(intervalo);
+        }
+        }, 100);
+    }, tiempo);
 
-          })
-          .catch((error) => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Se ha producido un error al crear el paso.',
-            });
-          });
-      }
-    }
-    var intervalo=setInterval(()=>{
-    this.rellenarImagen(this.relleno);
-    cont--;
-    if (cont==95) {
-      clearInterval(intervalo);
-    }
-    }, 100);
-}, (tiempo+6000));
+    setTimeout(() => {
+      document.getElementById("mensajeLoading")!.innerText=this.frases[2];
+      /*Añadir los nuevos pasos a firebase*/
+        var pasos = document.getElementsByClassName('paso');
+        for (let i = 0; i < pasos.length; i++) {
+          if (this.tmp_files[i+1] && this.tmp_files[i+1]!=null && this.tmp_files[i+1]!=undefined) {
+            this.descripcion = (<HTMLInputElement>pasos[i].children[0].children[1]).value;
+            this.firestore
+              .collection('pasos')
+              .add({
+                id: i+1,
+                descripcion: this.descripcion,
+                idReceta: this.idReceta,
+                urlImagen: array[i+1].url
+              })
+              .catch((error) => {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Se ha producido un error al crear el paso.',
+                });
+              });
+          }else{
+            this.descripcion = (<HTMLInputElement>pasos[i].children[0].children[1]).value;
+            this.firestore
+              .collection('pasos')
+              .add({
+                id: i+1,
+                descripcion: this.descripcion,
+                idReceta: this.idReceta,
+                urlImagen: ""
+              })
+              .catch((error) => {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Se ha producido un error al crear el paso.',
+                });
+              });
+          }
+        }
+        var intervalo=setInterval(()=>{
+        this.rellenarImagen(this.relleno);
+        cont--;
+        if (cont==95) {
+          clearInterval(intervalo);
+        }
+        }, 100);
+    }, (tiempo+6000));
 
     setTimeout(() => {
       /*Añadir la nueva receta a firebase*/
       document.getElementById("mensajeLoading")!.innerText=this.frases[3];
-    this.firestore
-    .collection('recetas')
-    .add({
-      id: this.idReceta,
-      correoUsuario: this.correo,
-      nombre: this.nombreReceta,
-      categoria: this.categoria,
-      comensales: this.comensales,
-      dificultad: this.dificultad,
-      duracion: this.duracion,
-      fecha: new Date(),
-      foto: array[0].url
-    })
-    .then((recetaCreada) => {
-      localStorage.removeItem("downloadURL");
-    })
-    .catch((error) => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Se ha producido un error al crear la receta.',
+      this.firestore
+      .collection('recetas')
+      .add({
+        id: this.idReceta,
+        correoUsuario: this.correo,
+        nombre: this.nombreReceta,
+        categoria: this.categoria,
+        comensales: this.comensales,
+        dificultad: this.dificultad,
+        duracion: this.duracion,
+        fecha: new Date(),
+        foto: array[0].url
+      })
+      .then((recetaCreada) => {
+        localStorage.removeItem("downloadURL");
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Se ha producido un error al crear la receta.',
+        });
+        localStorage.removeItem("downloadURL");
       });
-      localStorage.removeItem("downloadURL");
-    });
-    var intervalo=setInterval(()=>{
-    this.rellenarImagen(this.relleno);
-    cont--;
-    if (cont==48) {
-      clearInterval(intervalo);
-    }
-    }, 80);
+      var intervalo=setInterval(()=>{
+        this.rellenarImagen(this.relleno);
+        cont--;
+        if (cont==48) {
+          clearInterval(intervalo);
+        }
+      }, 80);
     }, (tiempo+12000));
 
     setTimeout(() => {
@@ -565,9 +538,10 @@ setTimeout(() => {
 
    setTimeout(() => {
       localStorage.setItem("toast", "true");
-       location.href="/perfilUsuario";
+      location.href="/perfilUsuario";
     }, (tiempo+20000));
   }
+
 /**
  * @description 
  * @param event evento change
