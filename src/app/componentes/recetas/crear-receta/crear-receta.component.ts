@@ -233,7 +233,6 @@ export class CrearRecetaComponent implements OnInit {
     botonImg.addEventListener('click', (event) => {
       this.quitarPaso(event, this.tmp_files);
     });
-    console.log("Longitud: "+this.tmp_files.length)
     /**permite cambiar el nombre del label del input */
     this._CargaScripts.carga(['js/javaScript']);
     (<HTMLScriptElement>document.querySelector('script[src="../assets/js/javaScript.js"]')).remove()
@@ -250,10 +249,8 @@ export class CrearRecetaComponent implements OnInit {
         ((<HTMLButtonElement>e.target).parentElement)?.parentElement?.remove();
         if (((((<HTMLButtonElement>e.target).parentElement!).parentElement!).firstElementChild!).children[1].id.length<6) {
           posicion=Number(((((<HTMLButtonElement>e.target).parentElement!).parentElement!).firstElementChild!).children[1].id.charAt(4));
-          console.log("Posición 1: "+posicion);
         } else {
           posicion=Number(((((<HTMLButtonElement>e.target).parentElement!).parentElement!).firstElementChild!).children[1].id.substring(4,6));
-          console.log("Posición 2: "+posicion);
         }
         
       }else if((<HTMLButtonElement>e.target).className=="btn btn-secondary quitarPaso ml-4"){
@@ -263,23 +260,17 @@ export class CrearRecetaComponent implements OnInit {
           
         } else {
           posicion=Number((((<HTMLButtonElement>e.target).parentElement!).firstElementChild!).children[1].id.substring(4,6));
-          console.log("Posición 4: "+posicion);
         }
       }
     }
-    console.log("Posición: "+posicion);
+
     this.tmp_files.splice(posicion, 1);
-    console.log("Array de imágenes:");
-    console.log(this.tmp_files);
     var longitud=document.getElementsByClassName("textoPaso").length;
     for (let i = 0; i < longitud; i++) {
-      console.log(i);
       (<HTMLInputElement>document.getElementsByClassName("textoPaso")[i]).innerText="Paso "+(i+2)+": ";
       (<HTMLInputElement>document.getElementsByClassName("textoPaso")[i]).setAttribute('id', 'paso' + (i+2));
       ((<HTMLInputElement>document.getElementsByClassName("textoPaso")[i]).nextElementSibling)!.setAttribute('id', 'paso' + (i+2));
-      console.log(((<HTMLInputElement>document.getElementsByClassName("textoPaso")[i]).nextElementSibling));
       (((((<HTMLInputElement>document.getElementsByClassName("textoPaso")[i]).nextElementSibling)!.nextElementSibling)!.nextElementSibling)!.children[0]).setAttribute('id', 'imagen' + (i+2));
-      console.log((((((<HTMLInputElement>document.getElementsByClassName("textoPaso")[i]).nextElementSibling)!.nextElementSibling)!.nextElementSibling)!.children[0]));
     }
     this.numPaso--;
   }
@@ -290,58 +281,58 @@ export class CrearRecetaComponent implements OnInit {
     var textoErrorSwap =""
     this.correcto=true;
     if (this.tmp_files[0].name=="foo.txt") {
-      document.getElementById("faltaImagen")!.innerText="Falta imagen.";
+      //document.getElementById("faltaImagen")!.innerText="Falta imagen.";
       this.correcto = false;
-      textoErrorSwap +="La imagen del emcabezado es obligatoria<br><hr>";
-    }else{
-      document.getElementById("faltaImagen")!.innerText="";
-    }
+      textoErrorSwap +="La imagen del encabezado es obligatoria<br><hr>";
+    }/*else{
+      //document.getElementById("faltaImagen")!.innerText="";
+    }*/
     if (this.nombreReceta == '') {
-      document.getElementById("faltaNombre")!.innerText="Falta nombre.";
+      //document.getElementById("faltaNombre")!.innerText="Falta nombre.";
       this.correcto = false;
       textoErrorSwap += "Debe poner un nombre<br><hr>";
     }else{
       /**formatea el texto para que siempre la promera letra sea mayúscula y el resto minúscula */
      var primeraLetra =(<HTMLInputElement>document.getElementById('nombre')).value.charAt(0).toUpperCase()
       this.nombreReceta = primeraLetra +(<HTMLInputElement>document.getElementById('nombre')).value.substring(1).toLocaleLowerCase();
-      document.getElementById("faltaNombre")!.innerText="";
+      //document.getElementById("faltaNombre")!.innerText="";
     }
     if (this.categoria == 'Seleccione una categoría') {
-      document.getElementById("faltaCategoria")!.innerText="Falta categoría.";
+      //document.getElementById("faltaCategoria")!.innerText="Falta categoría.";
       textoErrorSwap += "Debe elegir una categoría<br><hr>";
       this.correcto = false;
     }else{
       document.getElementById("faltaCategoria")!.innerText="";
     }
     if (!Number.isInteger(this.comensales)) {
-      textoErrorSwap += "El campo de comensales sólo admite números<br>";
-      document.getElementById("faltaComensales")!.innerText="Debe introducir un número.";
+      textoErrorSwap += "El campo de comensales sólo admite números<br><hr>";
+      //document.getElementById("faltaComensales")!.innerText="Debe introducir un número.";
       this.correcto = false;
     }else if (this.comensales < 1 || this.comensales > 50){
-      document.getElementById("faltaComensales")!.innerText="Debe introducir un número entre el 1 y el 50.";
+      //document.getElementById("faltaComensales")!.innerText="Debe introducir un número entre el 1 y el 50.";
       textoErrorSwap += "El número de comensales debe estar entre 1 y 50<br><hr>";
       this.correcto = false;
     }else if (this.comensales == null){
-      textoErrorSwap += "Debe rellenar el campo de comensales<br>";
-      document.getElementById("faltaComensales")!.innerText="Falta comensales.";
+      textoErrorSwap += "Debe rellenar el campo de comensales<br><hr>";
+      //document.getElementById("faltaComensales")!.innerText="Falta comensales.";
       this.correcto = false;
-    }else{
+    }/*else{
       document.getElementById("faltaComensales")!.innerText="";
-    }
+    }*/
     if (this.dificultad == 'Dificultad') {
       textoErrorSwap += "Eliga una de las opciones de dificultad<br><hr>";
-      document.getElementById("faltaDificultad")!.innerText="Falta dificultad.";
+      //document.getElementById("faltaDificultad")!.innerText="Falta dificultad.";
       this.correcto = false;
-    }else{
+    }/*else{
       document.getElementById("faltaDificultad")!.innerText="";
-    }
+    }*/
     if (this.duracion == '') {
-      textoErrorSwap += "Debe poner la duración<br>";
-      document.getElementById("faltaDuracion")!.innerText="Falta duración.";
+      textoErrorSwap += "Debe poner la duración<br><hr>";
+      //document.getElementById("faltaDuracion")!.innerText="Falta duración.";
       this.correcto = false;
-    }else{
+    }/*else{
       document.getElementById("faltaDuracion")!.innerText="";
-    }
+    }*/
 
     /*Ingredientes vacíos*/
     var ingredientes = document.getElementsByClassName('ingrediente');
@@ -350,14 +341,14 @@ export class CrearRecetaComponent implements OnInit {
      
       if ((<HTMLInputElement>ingredientes[i].children[0].children[0].childNodes[0]).value == '') {
         textoErrorSwap += "Debe poner el nombre del ingrediente "+(i+1)+"<br><hr>";
-        (<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = 'Falta ingrediente.';
+        //(<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = 'Falta ingrediente.';
 
         this.correcto = false;
       }else{
         /**formatea el texto para que siempre la promera letra sea mayúscula y el resto minúscula */
         var primeraLetra =(<HTMLInputElement>document.getElementById('nombre')).value.charAt(0).toUpperCase()
         this.nombreIngrediente = primeraLetra +(<HTMLInputElement>document.getElementById('nombre')).value.substring(1).toLocaleLowerCase();
-        (<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = '';
+        //(<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = '';
       }
     }
 
@@ -365,11 +356,11 @@ export class CrearRecetaComponent implements OnInit {
     for (let i = 0; i < ingredientes.length; i++) {
       if ((<HTMLInputElement>ingredientes[i].children[0].children[1].childNodes[0]).value == '') {
         textoErrorSwap += "Debe poner la cantidad del ingrediente "+(i+1)+"<br><hr>";
-        (<HTMLInputElement>document.getElementsByClassName("faltaCantidad")[i]).innerText = 'Falta cantidad.';
+        //(<HTMLInputElement>document.getElementsByClassName("faltaCantidad")[i]).innerText = 'Falta cantidad.';
         this.correcto = false;
-      }else{
+      }/*else{
         (<HTMLInputElement>document.getElementsByClassName("faltaCantidad")[i]).innerText = '';
-      }
+      }*/
     }
 
     /*Pasos vacíos*/
@@ -377,11 +368,11 @@ export class CrearRecetaComponent implements OnInit {
     for (let i = 0; i < pasos.length; i++) {
       if ((((<HTMLInputElement>(pasos[i].children[0]).children[1]))).value == '') { 
         textoErrorSwap += "No ha puesto la descripción del paso "+(i+1)+"<br><hr>";
-        (<HTMLInputElement>document.getElementsByClassName("faltaPaso")[i]).innerText = 'Falta paso.';
+        //(<HTMLInputElement>document.getElementsByClassName("faltaPaso")[i]).innerText = 'Falta paso.';
         this.correcto = false;
-      }else{
+      }/*else{
         (<HTMLInputElement>document.getElementsByClassName("faltaPaso")[i]).innerText = '';
-      }
+      }*/
     }
 
     if (this.correcto) {
@@ -415,15 +406,11 @@ export class CrearRecetaComponent implements OnInit {
     for (let i = 0; i < this.tmp_files.length; i++) {
       if (this.tmp_files[i] && this.tmp_files[i]!=null && this.tmp_files[i]!=undefined) {
         this.currentFileUpload = new FileUpload(this.tmp_files[i]!);
-        console.log( this.currentFileUpload)
- 
-        array[i] = this.currentFileUpload
-        console.log(array[i].url)
+        array[i] = this.currentFileUpload;
  
         this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
           percentage => {
             this.percentage = Math.round(percentage);
-            //console.log(this.percentage);
           }
         );
       }
@@ -440,13 +427,11 @@ export class CrearRecetaComponent implements OnInit {
 
 setTimeout(() => {
   /*Añadir los nuevos ingredientes a firebase*/
-  console.log("Id receta ingredientes: "+this.idReceta);
   document.getElementById("mensajeLoading")!.innerText=this.frases[1];
     var ingredientes = document.getElementsByClassName('ingrediente');
     for (let i = 0; i < ingredientes.length; i++) {
       this.nombreIngrediente = (<HTMLInputElement>ingredientes[i].children[0].children[0].childNodes[0]).value
       this.cantidad = (<HTMLInputElement>ingredientes[i].children[0].children[1].childNodes[0]).value;
-      console.log(this.cantidad)
       this.firestore
         .collection('ingredientes')
         .add({
@@ -456,10 +441,13 @@ setTimeout(() => {
           idReceta: this.idReceta,
         })
         .then((ingredienteCreado) => {
-          console.log('Se ha creado el ingrediente.');
         })
         .catch((error) => {
-          console.error('Se ha producido un error al crear el ingrediente.');
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Se ha producido un error al crear el ingrediente.',
+          });
         });
     }
     var intervalo=setInterval(()=>{
@@ -470,54 +458,11 @@ setTimeout(() => {
     }
     }, 100);
 }, tiempo);
-    
-/*setTimeout(() => {
-  Añadir las imágenes de los pasos a firebase*/
-    /*for (let i = 1; i < this.tmp_files.length; i++) {
-      if (this.tmp_files[i] && this.tmp_files[i]!=null && this.tmp_files[i]!=undefined) {
-        this.currentFileUpload = new FileUpload(this.tmp_files[i]!);
-        this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
-          urlImagen => {
-            this.imagenesPasos[i]=localStorage.getItem("downloadURL")!;
-            console.log("imagenPaso "+i+": "+this.imagenesPasos[i]);   //¿Por qué entra tantas veces por aquí?
-          },
-          error => {
-            console.log(error);
-          }
-        );
-      }
-    }*/
-    /*var i=0;
-    this.tmp_files.forEach(file => {
-      if (file && file!=null && file!=undefined) {
-        this.currentFileUpload = new FileUpload(file);
-        this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
-          urlImagen => {
-            this.imagenesPasos[i]=localStorage.getItem("downloadURL")!;
-            console.log("imagenPaso "+i+": "+this.imagenesPasos[i]);
-          },
-          error => {
-            console.log(error);
-          }
-        );
-      }
-      i++;
-    });
-}, 6000);*/
- /* var arrayImagenesLocalStorage=new Array();
-  setTimeout(() => {
-      arrayImagenesLocalStorage=localStorage.getItem("imagenesLocalStorage")!.split(";");
-      console.log(arrayImagenesLocalStorage);
-  }, 8000);
-*/
 
 setTimeout(() => {
-  console.log("Id receta pasos: "+this.idReceta);
   document.getElementById("mensajeLoading")!.innerText=this.frases[2];
   /*Añadir los nuevos pasos a firebase*/
     var pasos = document.getElementsByClassName('paso');
-    console.log("Longitud pasos: "+pasos.length);
-    console.log("Número de pasos: "+(this.numPaso-1));
     for (let i = 0; i < pasos.length/*this.numPaso-1*/; i++) {
       if (this.tmp_files[i+1] && this.tmp_files[i+1]!=null && this.tmp_files[i+1]!=undefined) {
         this.descripcion = (<HTMLInputElement>pasos[i].children[0].children[1]).value;
@@ -530,10 +475,14 @@ setTimeout(() => {
             urlImagen: array[i+1].url
           })
           .then((pasoCreado) => {
-            console.log("número de paso: "+i+", número de imagen: "+(i+1)+", url: "+this.imagenesPasos[i+1]);
+
           })
           .catch((error) => {
-            console.error('Se ha producido un error al crear el paso.');
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Se ha producido un error al crear el paso.',
+            });
           });
       }else{
         this.descripcion = (<HTMLInputElement>pasos[i].children[0].children[1]).value;
@@ -546,10 +495,14 @@ setTimeout(() => {
             urlImagen: ""
           })
           .then((pasoCreado) => {
-            console.log("número de paso: "+i+", número de imagen: "+(i+1));
+
           })
           .catch((error) => {
-            console.error('Se ha producido un error al crear el paso.');
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Se ha producido un error al crear el paso.',
+            });
           });
       }
     }
@@ -564,7 +517,6 @@ setTimeout(() => {
 
     setTimeout(() => {
       /*Añadir la nueva receta a firebase*/
-      console.log("Id receta: "+this.idReceta);
       document.getElementById("mensajeLoading")!.innerText=this.frases[3];
     this.firestore
     .collection('recetas')
@@ -583,7 +535,11 @@ setTimeout(() => {
       localStorage.removeItem("downloadURL");
     })
     .catch((error) => {
-      console.error('Se ha producido un error al crear la receta.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Se ha producido un error al crear la receta.',
+      });
       localStorage.removeItem("downloadURL");
     });
     var intervalo=setInterval(()=>{
@@ -596,7 +552,6 @@ setTimeout(() => {
     }, (tiempo+12000));
 
     setTimeout(() => {
-      console.log(this.imagenesPasos);
       document.getElementById("mensajeLoading")!.innerText=this.frases[4];
       var intervalo=setInterval(()=>{
         this.rellenarImagen(this.relleno);
@@ -631,7 +586,6 @@ setTimeout(() => {
  */
   rellenarImagen(num: number){
     document.getElementById("imagenLoadingColor")!.setAttribute("style", "clip-path: inset("+num+"px 0px 0px 0px)");
-    //console.log(num);
     num--;
     this.relleno=num;
   }

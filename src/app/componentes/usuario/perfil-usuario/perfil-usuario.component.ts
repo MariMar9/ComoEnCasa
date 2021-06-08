@@ -105,15 +105,6 @@ export class PerfilUsuarioComponent implements OnInit {
         )
       }
     })
-    /*
-    var confirmarBorrado = confirm(
-      '¿Estás seguro de que quieres eliminar la receta?'
-    );
-    if (confirmarBorrado) {
-      this._pasarReceta.eliminarReceta('pasos', idReceta);
-    } else {
-      console.log('No borrar.');
-    }*/
   }
 
   /**

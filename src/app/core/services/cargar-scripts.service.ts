@@ -42,7 +42,6 @@ export class CargarScriptsService {
     /**usuarios con inicio de sesión en google*/
     }else if(localStorage.usuarioGoogle!=null){
       this.usuarioConectado=true;
-      console.log("Hay usuarios conectados");
       return this.usuarioConectado;
     }else{
       this.usuarioConectado=false;
@@ -57,7 +56,6 @@ export class CargarScriptsService {
   quitarCabFoot() {
     if(this.url=="/iniciarSesion" || this.url=="/registro" || this.url=="/crearReceta"){
       this.quitar=true;
-      console.log("si url"+this.quitar)
       return this.quitar;
     }else{
       this.quitar=false;

@@ -4,6 +4,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import Swal from 'sweetalert2';
+
 /*import { userInfo } from 'node:os';*/
 
 @Component({
@@ -134,9 +136,10 @@ export class RegistroComponent implements OnInit {
               });
             })
             .catch((error) => {
-              console.log(error);
               var errorCode = error.code;
               var errorMessage = error.message;
+              
+              console.error(errorCode+"; "+errorMessage)
             });
         })
         .catch((error) => {
@@ -170,13 +173,20 @@ export class RegistroComponent implements OnInit {
             )).innerText = '';
             correcto = false;
           } else {
-            alert(
-              'Se ha producido un error. Introduzca sus credenciales de nuevo por favor.\nSi el error persiste, póngase en contacto con nosotras.'
-            );
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Se ha producido un error. Introduzca sus credenciales de nuevo por favor.\nSi el error persiste, póngase en contacto con nosotras.',
+            });
+
             correcto = false;
           }
           if (new firebase.auth.GoogleAuthProvider() == null) {
-            console.log('error');
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Se ha producido un error al registrar su cuenta de gmail.\nSi el error persiste, póngase en contacto con nosotras.',
+            });
           }
         });
     }

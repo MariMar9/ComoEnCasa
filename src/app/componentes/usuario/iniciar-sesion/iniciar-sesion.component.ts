@@ -2,6 +2,7 @@ import { Validators } from '@angular/forms';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-iniciar-sesion',
@@ -124,12 +125,18 @@ export class IniciarSesionComponent implements OnInit {
           (<HTMLInputElement>document.getElementById('errorEmail')).innerText =
             '';
         } else {
-          alert(
-            'Se ha producido un error. Introduzca sus credenciales de nuevo por favor.\nSi el error persiste, póngase en contacto con nosotras.'
-          );
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Se ha producido un error. Introduzca sus credenciales de nuevo por favor.\nSi el error persiste, póngase en contacto con nosotras.',
+          });
         }
         if (new firebase.auth.GoogleAuthProvider() == null) {
-          console.log('error');
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Ha ocurrido un error, al iniciar su cuenta de gmail.',
+          });
         }
       });
   }

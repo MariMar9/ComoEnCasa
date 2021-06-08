@@ -35,7 +35,7 @@ export class InicioComponent implements OnInit {
       this.nombreReceta = nombre;
     });
     if (localStorage.getItem('toastRegistro')) {
-      this._toast.success('Registro completado.');
+      this._toast.success('Registro completado. No olvide revisar su correo');
       localStorage.removeItem('toastRegistro');
     }
   }
