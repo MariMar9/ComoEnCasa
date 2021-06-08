@@ -341,14 +341,14 @@ export class CrearRecetaComponent implements OnInit {
      
       if ((<HTMLInputElement>ingredientes[i].children[0].children[0].childNodes[0]).value == '') {
         textoErrorSwap += "Debe poner el nombre del ingrediente "+(i+1)+"<br><hr>";
-        //(<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = 'Falta ingrediente.';
+        (<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = 'Falta ingrediente.';
 
         this.correcto = false;
       }else{
         /**formatea el texto para que siempre la promera letra sea mayúscula y el resto minúscula */
         var primeraLetra =(<HTMLInputElement>document.getElementById('nombre')).value.charAt(0).toUpperCase()
         this.nombreIngrediente = primeraLetra +(<HTMLInputElement>document.getElementById('nombre')).value.substring(1).toLocaleLowerCase();
-        //(<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = '';
+        (<HTMLInputElement>document.getElementsByClassName("faltaIngrediente")[i]).innerText = '';
       }
     }
 
@@ -356,11 +356,11 @@ export class CrearRecetaComponent implements OnInit {
     for (let i = 0; i < ingredientes.length; i++) {
       if ((<HTMLInputElement>ingredientes[i].children[0].children[1].childNodes[0]).value == '') {
         textoErrorSwap += "Debe poner la cantidad del ingrediente "+(i+1)+"<br><hr>";
-        //(<HTMLInputElement>document.getElementsByClassName("faltaCantidad")[i]).innerText = 'Falta cantidad.';
+        (<HTMLInputElement>document.getElementsByClassName("faltaCantidad")[i]).innerText = 'Falta cantidad.';
         this.correcto = false;
-      }/*else{
+      }else{
         (<HTMLInputElement>document.getElementsByClassName("faltaCantidad")[i]).innerText = '';
-      }*/
+      }
     }
 
     /*Pasos vacíos*/
@@ -368,11 +368,11 @@ export class CrearRecetaComponent implements OnInit {
     for (let i = 0; i < pasos.length; i++) {
       if ((((<HTMLInputElement>(pasos[i].children[0]).children[1]))).value == '') { 
         textoErrorSwap += "No ha puesto la descripción del paso "+(i+1)+"<br><hr>";
-        //(<HTMLInputElement>document.getElementsByClassName("faltaPaso")[i]).innerText = 'Falta paso.';
+        (<HTMLInputElement>document.getElementsByClassName("faltaPaso")[i]).innerText = 'Falta paso.';
         this.correcto = false;
-      }/*else{
+      }else{
         (<HTMLInputElement>document.getElementsByClassName("faltaPaso")[i]).innerText = '';
-      }*/
+      }
     }
 
     if (this.correcto) {
